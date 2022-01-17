@@ -1,0 +1,41 @@
+version: "3"
+services:
+  frontend:
+    env_file:
+      - ./.env
+    build: frontend
+    ports:
+      - $FRONTEND_LOCAL_PORT:$FRONTEND_DOCKER_PORT
+      - 49153:49153
+    container_name: frontend
+    volumes:
+      - ./frontend:/frontend
+      - ./frontend/node_modules:/frontend/node_modules
+
+  backend:
+    depends_on:
+      - mariadb
+    build: backend
+    ports:
+      - $BACKEND_LOCAL_PORT:$BACKEND_DOCKER_PORT
+    container_name: backend
+    volumes:
+      - ./backend:/backend
+    command: >
+        sh -c "python manage.py migrate && 
+               python manage.py runserver 0.0.0.0:8000"
+
+  mariadb:
+    env_file:
+      - ./.env
+    image: mariadb:10.6
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=tokioghoul1
+      - MYSQL_DATABASE=caysool
+    ports:
+      - 3309:3306
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    
+    
