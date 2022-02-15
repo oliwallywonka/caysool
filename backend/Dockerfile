@@ -1,19 +1,13 @@
-FROM python:3.9
-
-ENV PYTHONUNBUFFERED 1
+FROM node:14-alpine as develoment
 
 WORKDIR /backend
 
-RUN pip install --upgrade pip
+COPY package*.json /backend
 
-COPY requerimientos.txt /backend/requerimientos.txt
-
-RUN pip install -r requerimientos.txt
+RUN npm cache clean --force && rm -rf node_modules && npm install
 
 COPY . /backend
 
-EXPOSE 8000
+EXPOSE 3000
 
-#CMD ["python", "manage.py", "migrate"]
-
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["npm", "run", "start:dev"]

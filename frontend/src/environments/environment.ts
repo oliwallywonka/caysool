@@ -4,7 +4,14 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'http://localhost:3000/api',
+  pictureUrl: 'http://localhost:3000/',
+  publicUrl: 'http://localhost:3000'
+  //baseUrl: 'https://api.kevinmotors.com/api',
+  //pictureUrl: 'https://api.kevinmotors.com/',
+  //publicUrl: 'https://api.kevinmotors.com'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -1,1 +1,20 @@
-<p>input works!</p>
+
+<label
+  class="block uppercase text-gray-500 text-xs font-bold mb-2"
+  htmlFor="grid-password"
+>
+  {{ inputLabel }}
+</label>
+<input
+  type="{{ inputType }}"
+  class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-lime-300  w-full ease-linear transition-all duration-150"
+  placeholder="{{ inputPlaceholder }}"
+  (input)="onInput($event.target.value)"
+  [value]="value"
+/>
+<span
+  class="text-red-500"
+  *ngFor="let error of inputForm.controls[inputFormName]['errorMessages']"
+>
+  {{ error }}
+</span>

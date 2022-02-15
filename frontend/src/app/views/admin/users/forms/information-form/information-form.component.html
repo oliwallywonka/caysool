@@ -1,0 +1,80 @@
+
+  <div class="w-full relative w-auto my-6 mx-auto">
+    <!--content-->
+    <div class="relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <!--header-->
+      <form
+        [formGroup]="informationForm"
+        (ngSubmit)="sendForm"
+      >
+        <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+          <h3 class="text-3xl font-semibold">
+            Información de la Empresa
+          </h3>
+        </div>
+        <!--body-->
+        <div class="my-4 relative p-6 flex flex-wrap">
+
+
+          <div class="w-full lg:w-6/12 px-4 pb-4">
+            <app-input
+              inputLabel="Nombre de la Empresa"
+              inputPlaceholder="Ingrese el nombre de la empresa..."
+              inputFormName='name'
+              inputcontrolName='name'
+              [inputForm]="informationForm"
+            ></app-input>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 pb-4">
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 pb-4">
+            <app-input
+              inputLabel="NIT"
+              inputPlaceholder="Ingrese el nit de la empresa..."
+              inputFormName='name'
+              inputcontrolName='name'
+              [inputForm]="informationForm"
+            ></app-input>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4">
+
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 pb-4">
+            <app-input
+              inputLabel="Teléfono"
+              inputPlaceholder="Ingrese el Nº de contacto de la empresa..."
+              inputFormName='name'
+              inputcontrolName='name'
+              [inputForm]="informationForm"
+            ></app-input>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4">
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 pb-4">
+            <app-input
+              inputLabel="Dirección"
+              inputPlaceholder="Ingrese la dirección de la empresa..."
+              inputFormName='name'
+              inputcontrolName='name'
+              [inputForm]="informationForm"
+            ></app-input>
+          </div>
+        </div>
+        <!--footer-->
+        <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+          <app-button
+            btnType="submit"
+            btnText="Guardar cambios"
+            [loading]="loading"
+          >
+          </app-button>
+        </div>
+      </form>
+    </div>
+  </div>

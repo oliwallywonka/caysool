@@ -1,1 +1,50 @@
-<p>pagination works!</p>
+<div class="p-2">
+  <nav class="block">
+    <ul class="flex pl-0 rounded list-none flex-wrap">
+
+      <button
+        class="w-8 h-8 mx-1 text-center text-lime-500 bg-transparent border border-solid border-lime-500 hover:bg-lime-500 hover:text-white active:bg-lime-600 font-bold uppercase text-xs rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
+        [ngClass]="{'text-gray-300 border-gray-300' : !pageController.prev_page }"
+        [disabled]="!pageController.prev_page"
+        type="button"
+        (click)="clickPagination(pageController.prev_page)"
+      >
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <li>
+        <a
+          class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lime-500 bg-white text-lime-500 hover:bg-lime-500 hover:text-white active:bg-lime-600 cursor-pointer"
+          [ngClass]="{'text-gray-300 border-gray-300 pointer-none' : !pageController.prev_page }"
+          [class.disabled]="!pageController.prev_page"
+          (click)="clickPagination(1)"
+        >
+          {{1}}
+        </a>
+      </li>
+      <li>
+        <a class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lime-500 bg-white text-lime-500">
+          {{response.currentPage}}
+        </a>
+      </li>
+      <li>
+        <a
+          class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lime-500 bg-white text-lime-500 hover:bg-lime-500 hover:text-white active:bg-lime-600 cursor-pointer"
+          [ngClass]="{'text-gray-300 border-gray-300' : !pageController.next_page }"
+          [class.disabled]="!pageController.next_page"
+          (click)="clickPagination(pageController.last_page)"
+        >
+          {{pageController.last_page}}
+        </a>
+      </li>
+      <button
+        class="w-8 h-8 mx-1 text-center text-lime-500 bg-transparent border border-solid border-lime-500 hover:bg-lime-500 hover:text-white active:bg-lime-600 font-bold uppercase text-xs rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
+        [ngClass]="{'text-gray-300 border-gray-300' : !pageController.next_page }"
+        [disabled]="!pageController.next_page"
+        type="button"
+        (click)="clickPagination(pageController.next_page)"
+        >
+        <i class="fa fa-arrow-right"></i>
+      </button>
+    </ul>
+  </nav>
+</div>

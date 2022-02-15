@@ -21,7 +21,7 @@ import { CardStatsComponent } from './components/cards/card-stats/card-stats.com
     SidebarComponent,
     HeaderStatsComponent,
     CardStatsComponent,
-    NotificationDropdownComponent
+    NotificationDropdownComponent,
   ],
   imports: [
     CommonModule,

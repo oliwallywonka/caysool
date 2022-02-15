@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -8,17 +8,29 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ButtonComponent implements OnInit {
 
   @Input()
+  btnFunction: Function = () => {};
+
+  @Input()
   loading = false;
 
   @Input()
-  clickButton: any;
+  btnType = 'button';
+
+  @Input()
+  btnText = 'Ingresar';
+
+  @Input()
+  btnTheme = 'lime';
+
+  theme = `bg-${ this.btnTheme }-400 active:bg-${ this.btnTheme }-500`;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  fn() {
-    this.clickButton();
+  btnClicked (): void {
+    this.btnFunction();
   }
 
 }

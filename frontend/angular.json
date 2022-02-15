@@ -25,8 +25,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/styles.css",
               "src/assets/styles/tailwind.css"
             ],
             "scripts": []
@@ -69,8 +69,8 @@
             "browserTarget": "notus-angular:build"
           },
           "styles": [
-            "src/styles.css",
             "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+            "src/styles.css",
             "src/assets/styles/tailwind.css"
           ],
           "configurations": {
@@ -97,6 +97,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
             ],
             "scripts": []

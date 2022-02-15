@@ -1,0 +1,47 @@
+<div class="relative flex flex-col min-w-0 break-words  w-full mb-6  rounded">
+  <div class="w-full">
+    <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+      <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+        <a
+          class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+          (click)="toggleTabs(1)"
+          [ngClass]="{'text-blue-500 bg-white': openTab !== 1, 'text-white bg-blue-500': openTab === 1}">
+          Información
+        </a>
+      </li>
+
+      <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+        <a
+          class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+          (click)="toggleTabs(2)"
+          [ngClass]="{'text-blue-500 bg-white': openTab !== 2, 'text-white bg-blue-500': openTab === 2}">
+          Interés
+        </a>
+      </li>
+
+      <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+        <a
+          class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+          (click)="toggleTabs(3)"
+          [ngClass]="{'text-blue-500 bg-white': openTab !== 3, 'text-white bg-blue-500': openTab === 3}">
+          Usuarios
+        </a>
+      </li>
+
+    </ul>
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+      <div class="px-4 py-5 flex-auto">
+        <div class="tab-content tab-space">
+          <div *ngIf="openTab === 1">
+            <app-information-form></app-information-form>
+          </div>
+          <div *ngIf="openTab === 2">
+          </div>
+          <div *ngIf="openTab === 3">
+            <app-card-user></app-card-user>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

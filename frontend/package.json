@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@angular/animations": "11.2.5",
+    "@angular/cdk": "^12.2.11",
     "@angular/common": "11.2.5",
     "@angular/compiler": "11.2.5",
     "@angular/core": "11.2.5",
@@ -25,9 +26,15 @@
     "@angular/router": "11.2.5",
     "@fortawesome/fontawesome-free": "5.15.3",
     "@popperjs/core": "2.9.1",
+    "@rxweb/reactive-form-validators": "^2.1.6",
     "@tailwindcss/forms": "0.2.1",
     "chart.js": "2.9.4",
+    "ng2-img-max": "^2.2.4",
+    "ngx-popperjs": "^13.0.0",
+    "ngx-socket-io": "^4.1.0",
+    "pdfmake": "^0.2.4",
     "rxjs": "6.6.6",
+    "sweetalert2": "^11.3.10",
     "tailwindcss": "2.0.4",
     "tslib": "2.1.0",
     "zone.js": "0.11.4"

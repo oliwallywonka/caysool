@@ -1,9 +1,13 @@
 <button
-  class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-  [ngClass]="{ 'cursor-wait': loading }"
+  class="text-white text-sm font-bold uppercase px-3 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150 {{theme}}"
+  [ngClass]="{
+    'cursor-wait': loading,
+    'bg-lime-400 active:bg-lime-500' : btnTheme==='lime',
+    'bg-blue-500 active:bg-blue-600' : btnTheme==='blue'
+  }"
   [disabled]="loading"
-  (click)="fn()"
-  type="submit"
+  (click)="btnClicked()"
+  [type]="btnType"
 >
-  <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Ingresar
+  <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> {{ btnText }}
 </button>

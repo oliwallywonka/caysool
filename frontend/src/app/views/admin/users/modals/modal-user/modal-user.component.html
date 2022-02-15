@@ -1,0 +1,129 @@
+<button
+  class="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+  (click)="toggleModal()"
+  type="button">
+  <i class="fas fa-plus"></i>Nuevo
+</button>
+<div *ngIf="modal.visible&&modal.modalName==='userModal'" class="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+  <div class="relative w-auto my-6 mx-auto max-w-580-px">
+
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+
+      <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+        <h4 class="text-2xl font-semibold">
+           USUARIO
+        </h4>
+        <button
+          class="p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+          (click)="closeModal()"
+          type="button"
+        >
+          <span class="opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+            x
+          </span>
+        </button>
+      </div>
+
+      <form
+        autocomplete="off"
+        [formGroup]="userForm"
+        (ngSubmit)="save()"
+      >
+        <div class="my-4 relative p-6 flex flex-wrap">
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-input
+              [inputForm]="userForm"
+              inputLabel="NOMBRE"
+              inputType="text"
+              inputPlaceholder="Ingrese su nombre..."
+              inputFormName="name"
+              formControlName="name"
+              [value]="userForm.value.name">
+            </app-input>
+          </div>
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-input
+                [inputForm]="userForm"
+                inputLabel="CI"
+                inputType="text"
+                inputPlaceholder="Ingrese su CI..."
+                inputFormName="ci"
+                formControlName="ci"
+                [value]="userForm.value.ci">
+            </app-input>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-input
+                [inputForm]="userForm"
+                inputLabel="CONTRASEÑA"
+                inputType="password"
+                inputPlaceholder="Ingrese su Contraseña..."
+                inputFormName="password"
+                formControlName="password"
+                [value]="userForm.value.password">
+            </app-input>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-input
+                [inputForm]="userForm"
+                inputLabel="CEL/TEL"
+                inputType="text"
+                inputPlaceholder="Ingrese su cel..."
+                inputFormName="phone"
+                formControlName="phone"
+                [value]="userForm.value.phone">
+            </app-input>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <!--<div class="flex flex-col items-baseline  w-full mb-3">
+              <label
+                for="image"
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                Fotografia
+              </label>
+              <h4 *ngIf="!comprimido" class="text-xs font-semibold">
+                Comprimiendo archivo espere porfavor...
+              </h4>
+              <input
+                type="file"
+                class="border-0 px-3 py-3  text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                formControlName="foto"
+                (change)="onFileChange($event)">
+            </div>-->
+          </div>
+
+        </div>
+
+      <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+        <button
+          class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          (click)="closeModal()"
+          type="button"
+        >
+          Cancelar
+        </button>
+        <button
+          class="mx-4 bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button"
+          (click)="refreshForm()"
+        >
+          Limpiar
+        </button>
+        <button
+          [disabled]="!userForm.valid || loading"
+          class="mx-4 bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="submit"
+        >
+        <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
+        </button>
+      </div>
+
+    </form>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="modal.visible&&modal.modalName==='userModal'" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
