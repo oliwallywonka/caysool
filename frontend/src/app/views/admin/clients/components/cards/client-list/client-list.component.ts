@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RxFormBuilder } from '@rxweb/reactive-form-validators';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -10,8 +11,7 @@ import { Client, ClientResponse } from 'src/app/interfaces/client';
 @Component({
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ClientListComponent implements OnInit, OnDestroy {
   response: ClientResponse;
@@ -19,14 +19,15 @@ export class ClientListComponent implements OnInit, OnDestroy {
   modal = this.modalService.modal;
   subscriptions: Subscription;
   ciForm: FormGroup = this.fb.group({
-    ci: ['']
+    ci: [''],
   });
   constructor(
     private clientService: ClientService,
     private alertService: AlertService,
     private modalService: ModalService,
+    private router: Router,
     private fb: RxFormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions = new Subscription();
@@ -40,25 +41,21 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
   getClients(force = false) {
     this.subscriptions.add(
-      this.clientService.getClients({ force }).subscribe(
-        response => {
-          this.response = response;
-          this.loading = false;
-        }
-      )
+      this.clientService.getClients({ force }).subscribe((response) => {
+        this.response = response;
+        this.loading = false;
+      })
     );
   }
 
   subscriptionClients() {
     this.subscriptions.add(
-      this.clientService.response.subscribe(
-        response =>{
-          if (response.items.length > 0) {
-            this.response = response;
-            this.loading = false;
-          }
+      this.clientService.response.subscribe((response) => {
+        if (response.items.length > 0) {
+          this.response = response;
+          this.loading = false;
         }
-      )
+      })
     );
   }
 
@@ -70,39 +67,39 @@ export class ClientListComponent implements OnInit, OnDestroy {
   search(event) {
     this.loading = true;
     this.subscriptions.add(
-      this.clientService.getClients({
-        ci: this.ciForm.value.ci,
-        force: true
-      }).subscribe(
-        response => {
+      this.clientService
+        .getClients({
+          ci: this.ciForm.value.ci,
+          force: true,
+        })
+        .subscribe((response) => {
           this.loading = false;
-          if ( response.items.length === 0 ) {
+          if (response.items.length === 0) {
             this.alertService.alert.fire({
               title: 'No hay datos relacionados con la busqueda',
-              icon: 'error'
-            })
+              icon: 'error',
+            });
           } else {
             this.response = response;
           }
-        }
-      )
-    )
+        })
+    );
   }
 
   getOnPageResponse(page: number) {
     this.response = null;
-    this.clientService.getClients({
-      ci: this.ciForm.value.ci,
-      page,
-      force: true
-    }).subscribe(
-      response => {
+    this.clientService
+      .getClients({
+        ci: this.ciForm.value.ci,
+        page,
+        force: true,
+      })
+      .subscribe((response) => {
         this.clientService.response.emit(response);
-      }
-    )
+      });
   }
 
-  showClientModal (client) {
+  showClientModal(client) {
     console.log('modalEdit');
     this.modal.modalName = 'clientModal';
     this.modal.visible = true;
@@ -110,9 +107,11 @@ export class ClientListComponent implements OnInit, OnDestroy {
   }
 
   showInformationClient(client) {
-    console.log(client)
+    console.log(client);
   }
 
-
-
+  goToClientInformation(client: Client) {
+    this.clientService.client.emit(client);
+    this.router.navigate(['/admin/clientes', client.id]);
+  }
 }

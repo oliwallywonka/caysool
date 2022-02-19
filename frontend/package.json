@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node --max_old_space_size=10024 ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --disable-host-check --poll",
+    "start": "node --max_old_space_size=20024 ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --disable-host-check --poll",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -29,15 +29,14 @@
     "@rxweb/reactive-form-validators": "^2.1.6",
     "@tailwindcss/forms": "0.2.1",
     "chart.js": "2.9.4",
-    "ng2-img-max": "^2.2.4",
-    "ngx-popperjs": "^13.0.0",
-    "ngx-socket-io": "^4.1.0",
+    "ng2-img-max": "2.2.4",
+    "ngx-popperjs": "12.0.0",
     "pdfmake": "^0.2.4",
     "rxjs": "6.6.6",
     "sweetalert2": "^11.3.10",
     "tailwindcss": "2.0.4",
-    "tslib": "2.1.0",
-    "zone.js": "0.11.4"
+    "tslib": "^2.1.0",
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1102.4",

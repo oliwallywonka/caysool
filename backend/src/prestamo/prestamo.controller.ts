@@ -33,8 +33,13 @@ export class PrestamoController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
     @Query('clientCi') clientCi = '',
+    @Query('estadoPrestamo') estadoPrestamo = '',
   ) {
-    return this.prestamoService.findAll({ page, limit }, clientCi);
+    return this.prestamoService.findAll(
+      { page, limit },
+      clientCi,
+      estadoPrestamo,
+    );
   }
 
   @Get(':id')
@@ -50,6 +55,11 @@ export class PrestamoController {
     @Body() updatePrestamoDto: UpdatePrestamoDto,
   ) {
     return this.prestamoService.update(+id, updatePrestamoDto, req.user);
+  }
+
+  @Get('client/:clientId')
+  findPrestamoByClient(@Param('clientId') clientId: string) {
+    return this.prestamoService.getPrestamosByClientId(+clientId);
   }
 
   @Delete(':id')

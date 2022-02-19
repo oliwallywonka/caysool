@@ -27,7 +27,7 @@ export class CreatePrestamoDto {
   @IsString()
   fechaInicio: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   fechaLimite: string;
 

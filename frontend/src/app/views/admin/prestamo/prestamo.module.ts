@@ -3,13 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { PrestamoRoutingModule } from './prestamo-routing.module';
 import { PrestamoComponent } from './prestamo.component';
+import { TabPrestamoComponent } from './components/tabs/tab-prestamo/tab-prestamo.component';
+import { CardPrestamosComponent } from './components/cards/card-prestamos/card-prestamos.component';
+import { CardPrestamoDetalleComponent } from './components/cards/card-prestamo-detalle/card-prestamo-detalle.component';
+import { ModalPagoComponent } from './components/modals/modal-pago/modal-pago.component';
+import { ModalAmortiguarComponent } from './components/modals/modal-amortiguar/modal-amortiguar.component';
+import { ModalImpresionReciboComponent } from './components/modals/modal-impresion-recibo/modal-impresion-recibo.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
-  declarations: [PrestamoComponent],
+  declarations: [PrestamoComponent, TabPrestamoComponent, CardPrestamosComponent, CardPrestamoDetalleComponent, ModalPagoComponent, ModalAmortiguarComponent, ModalImpresionReciboComponent],
   imports: [
-    CommonModule,
-    PrestamoRoutingModule
+    PrestamoRoutingModule,
+    SharedModule
   ]
 })
 export class PrestamoModule { }

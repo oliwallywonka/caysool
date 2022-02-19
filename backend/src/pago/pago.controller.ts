@@ -1,20 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { PagoService } from './pago.service';
 import { CreatePagoDto } from './dto/create-pago.dto';
 import { UpdatePagoDto } from './dto/update-pago.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@Controller('pago')
+@Controller('api/pago')
 export class PagoController {
   constructor(private readonly pagoService: PagoService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createPagoDto: CreatePagoDto) {
-    return this.pagoService.create(createPagoDto);
+  create(@Req() req, @Body() createPagoDto: CreatePagoDto) {
+    return this.pagoService.create(createPagoDto, req.user);
   }
 
-  @Get()
-  findAll() {
-    return this.pagoService.findAll();
+  @Get('/prestamo/:prestamoId')
+  findAll(@Param('prestamoId') prestamoId: string) {
+    return this.pagoService.findByPrestamoId(+prestamoId);
   }
 
   @Get(':id')

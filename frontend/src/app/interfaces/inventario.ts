@@ -3,8 +3,9 @@ export interface Inventario {
   prestamo: number;
   estado?: string;
   tipo: string;
-  precioVenta: number;
+  precioVenta?: number;
   precioAvaluo?: number;
+  costoPrestamo?: number;
   observacion?: string;
   marca?: string;
   modelo?: string;

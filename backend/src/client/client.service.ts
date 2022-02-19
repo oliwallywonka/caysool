@@ -30,8 +30,11 @@ export class ClientService {
     return await paginate<Client>(clients, options);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} client`;
+  async findOne(id: number) {
+    const client = await Client.findOne(id);
+    if (!client)
+      throw new BadRequestException({ message: 'Cliente no encontrado' });
+    return client;
   }
 
   async update(id: number, updateClientDto: UpdateClientDto, user) {

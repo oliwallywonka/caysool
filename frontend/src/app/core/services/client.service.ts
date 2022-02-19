@@ -36,6 +36,12 @@ export class ClientService {
     return this.cacheResponse$;
   }
 
+  getClient(id: number):Observable<any>{
+    const headers = new HttpHeaders()
+      .set('x-access-token',sessionStorage.getItem('token')||'');
+    return this.http.get(`${this.baseUrl}/clients/${id}`,{headers})
+  }
+
   postClient(body):Observable<any>{
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');

@@ -14,9 +14,11 @@ import {
   ManyToOne,
   BeforeUpdate,
   Index,
+  OneToMany,
 } from 'typeorm';
 
 import moment = require('moment');
+import { Amortizacion } from 'src/amortizacion/entities/amortizacion.entity';
 @Entity()
 export class Prestamo extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -27,6 +29,9 @@ export class Prestamo extends BaseEntity {
 
   @ManyToOne(() => Client, (client) => client.id)
   client: Client;
+
+  @OneToMany(() => Inventario, (inventario) => inventario.prestamo)
+  inventario: Inventario[];
 
   @Column({ type: 'date', nullable: true })
   fechaInicio: Date;
@@ -86,8 +91,9 @@ export class Prestamo extends BaseEntity {
       } else {
         this.estado = 'VENCIDO';
       }
-    } else if (this.costoCancelado >= this.costoTotal)
+    } else if (this.costoCancelado >= this.costoTotal) {
       this.estado = 'CANCELADO';
+    }
   }
 
   async calculateCostoPrestamo() {
@@ -99,9 +105,31 @@ export class Prestamo extends BaseEntity {
   }
 
   async calculateCostoCancelado() {
-    /*const costoCancelado = await Pago.createQueryBuilder('pago')
-      .addSelect('SUM(pago.costoTotal)','costo')
-      .where('pago.')*/
+    const costoPago = await Pago.createQueryBuilder('pago')
+      .select('SUM(pago.costoPago)', 'costoCancelado')
+      .where('pago.prestamo = :prestamo', { prestamo: this.id })
+      .getRawOne();
+
+    const costoAmortizacion = await Amortizacion.createQueryBuilder(
+      'amortizacion',
+    )
+      .select('SUM(amortizacion.costoPago)', 'costoCancelado')
+      .where('amortizacion.prestamo = :prestamo', { prestamo: this.id })
+      .getRawOne();
+    this.costoCancelado =
+      costoPago.costoCancelado + costoAmortizacion.costoCancelado;
+    const diaFinal = moment(this.fechaFinal);
+    const day = moment(Date.now());
+    const today = moment.duration(day.diff(diaFinal)).asDays();
+    if (this.costoCancelado < this.costoTotal && today > 0) {
+      if (today > 0) {
+        this.estado = 'ACTIVO';
+      } else {
+        this.estado = 'VENCIDO';
+      }
+    } else if (this.costoCancelado >= this.costoTotal) {
+      this.estado = 'CANCELADO';
+    }
   }
 
   async calculateCostoImpresion() {

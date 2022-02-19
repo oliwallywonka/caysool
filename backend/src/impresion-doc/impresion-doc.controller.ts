@@ -25,9 +25,9 @@ export class ImpresionDocController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get(':idPrestamo')
-  findAll(@Param('idPrestamo') idPrestamo: string) {
-    return this.impresionDocService.findAll(+idPrestamo);
+  @Get('prestamo/:prestamoId')
+  findAll(@Param('prestamoId') prestamoId: string) {
+    return this.impresionDocService.findImpresionById(+prestamoId);
   }
 
   @UseGuards(JwtAuthGuard)

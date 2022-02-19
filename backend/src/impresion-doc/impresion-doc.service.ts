@@ -27,9 +27,9 @@ export class ImpresionDocService {
     return impresion;
   }
 
-  async findAll(idPrestamo: number) {
+  async findByPrestamoId(prestamoId: number) {
     const impresiones = await ImpresionDoc.createQueryBuilder('impresion')
-      .where('impresion.prestamo = :idPrestamo', { idPrestamo })
+      .where('impresion.prestamo = :prestamoId', { prestamoId })
       .getMany();
     return impresiones;
   }

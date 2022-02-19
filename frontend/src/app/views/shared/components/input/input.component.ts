@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -24,6 +24,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   inputType: string = 'Text';
   @Input()
   inputForm: FormGroup;
+
+  @Output() inputEvent = new EventEmitter();
 
   // CONTROL VALUE ACCESSOR INTERFACE
   // Nos conecta nuestro custom input con forms, reactive forms etc
@@ -54,6 +56,10 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  clickInput(value) {
+    if (value) this.inputEvent.emit(value);
   }
 
 

@@ -44,16 +44,23 @@ export class PrestamoService {
     return prestamoSaved;
   }
 
-  async findAll(options: IPaginationOptions, clientCi: string) {
+  async findAll(options: IPaginationOptions, clientCi: string, estado: string) {
     const prestamos = Prestamo.createQueryBuilder('prestamo')
       .leftJoinAndSelect('prestamo.client', 'client')
+      .leftJoinAndSelect('prestamo.inventario', 'invnetario')
       .where(`client.ci LIKE '%${clientCi ? clientCi : ''}%'`)
+      .andWhere(`prestamo.estado LIKE '%${estado ? estado : ''}%'`)
       .orderBy('prestamo.id', 'DESC');
     return await paginate<Prestamo>(prestamos, options);
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} prestamo`;
+    const prestamo = Prestamo.createQueryBuilder('prestamo')
+      .leftJoinAndSelect('prestamo.client', 'client')
+      .leftJoinAndSelect('prestamo.inventario', 'inventario')
+      .where('prestamo.id = :id', { id })
+      .getOne();
+    return prestamo;
   }
 
   async update(id: number, updatePrestamoDto: UpdatePrestamoDto, user) {
@@ -80,6 +87,28 @@ export class PrestamoService {
 
   remove(id: number) {
     return `This action removes a #${id} prestamo`;
+  }
+
+  async getPrestamosByClientId(clientId: number) {
+    const activos = await Prestamo.createQueryBuilder('prestamo')
+      .leftJoinAndSelect('prestamo.client', 'client')
+      .select('COUNT(prestamo.estado)', 'cantidad')
+      .where('client.id = :clientId', { clientId })
+      .andWhere('prestamo.estado = :estado', { estado: 'ACTIVO' })
+      .getRawOne();
+    const vencidos = await Prestamo.createQueryBuilder('prestamo')
+      .leftJoinAndSelect('prestamo.client', 'client')
+      .select('COUNT(prestamo.estado)', 'cantidad')
+      .where('client.id = :clientId', { clientId })
+      .andWhere('prestamo.estado = :estado', { estado: 'VENCIDO' })
+      .getRawOne();
+    const cancelados = await Prestamo.createQueryBuilder('prestamo')
+      .leftJoinAndSelect('prestamo.client', 'client')
+      .select('COUNT(prestamo.estado)', 'cantidad')
+      .where('client.id = :clientId', { clientId })
+      .andWhere('prestamo.estado = :estado', { estado: 'CANCELADO' })
+      .getRawOne();
+    return { activos, vencidos, cancelados };
   }
 
   private addCronJob(name: string, dias: string) {

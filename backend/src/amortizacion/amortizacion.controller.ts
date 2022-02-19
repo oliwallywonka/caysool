@@ -1,20 +1,33 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AmortizacionService } from './amortizacion.service';
 import { CreateAmortizacionDto } from './dto/create-amortizacion.dto';
 import { UpdateAmortizacionDto } from './dto/update-amortizacion.dto';
 
-@Controller('amortizacion')
+@Controller('api/amortizacion')
 export class AmortizacionController {
   constructor(private readonly amortizacionService: AmortizacionService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createAmortizacionDto: CreateAmortizacionDto) {
-    return this.amortizacionService.create(createAmortizacionDto);
+  create(@Req() req, @Body() createAmortizacionDto: CreateAmortizacionDto) {
+    return this.amortizacionService.create(createAmortizacionDto, req.user);
   }
 
-  @Get()
-  findAll() {
-    return this.amortizacionService.findAll();
+  @UseGuards(JwtAuthGuard)
+  @Get('prestamo/:prestamoId')
+  findAll(@Param('prestamoId') prestamoId: string) {
+    return this.amortizacionService.findByPrestamoId(+prestamoId);
   }
 
   @Get(':id')
@@ -23,7 +36,10 @@ export class AmortizacionController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAmortizacionDto: UpdateAmortizacionDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateAmortizacionDto: UpdateAmortizacionDto,
+  ) {
     return this.amortizacionService.update(+id, updateAmortizacionDto);
   }
 

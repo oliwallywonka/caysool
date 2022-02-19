@@ -1,5 +1,4 @@
-import { Amortizacion } from 'src/amortizacion/entities/amortizacion.entity';
-import { Client } from 'src/client/entities/client.entity';
+import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 import {
   Entity,
   Column,
@@ -8,6 +7,10 @@ import {
   UpdateDateColumn,
   BaseEntity,
   ManyToOne,
+  BeforeUpdate,
+  BeforeInsert,
+  AfterUpdate,
+  AfterInsert,
 } from 'typeorm';
 
 @Entity()
@@ -15,24 +18,35 @@ export class Pago extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Amortizacion, (amortizacion) => amortizacion.id)
-  amortizacion: Amortizacion;
+  @ManyToOne(() => Prestamo, (prestamo) => prestamo.id)
+  prestamo: Prestamo;
+
+  //INTERES o PRESTAMO
+  @Column({ type: 'varchar', length: 10, default: 'PRESTAMO' })
+  tipoPago: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
-  costoAdministracion: string;
+  costoAdministracion: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
-  costoPiso: string;
+  costoPiso: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
-  costoPago: string;
+  costoPago: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
-  costoTotal: string;
+  costoTotal: number;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @AfterUpdate()
+  @AfterInsert()
+  calculateCostoTotal() {
+    this.costoTotal =
+      this.costoAdministracion + this.costoPiso + this.costoPago;
+  }
 }

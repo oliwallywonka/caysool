@@ -44,6 +44,11 @@ export class InventarioController {
     return this.inventarioService.findOne(+id);
   }
 
+  @Get('client/:clientId')
+  getByClient(@Param('clientId') clientId: string) {
+    return this.inventarioService.getByClientId(+clientId);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(

@@ -124,10 +124,6 @@ export class ModalUserComponent implements OnInit {
     (<FormGroupExtension>this.userForm).resetForm();
   }
 
-  patchUser() {
-    return this.userService.patchUser(this.userForm.value, this.user.id);
-  }
-
   save() {
     this.loading = true;
     const formData = (<FormGroupExtension>this.pictureForm).toFormData();

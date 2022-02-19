@@ -1,28 +1,11 @@
-import {
-  IsBoolean,
-  IsInt,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-} from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber } from 'class-validator';
+import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 export class CreateAmortizacionDto {
   @IsNotEmpty({ message: 'El campo nombre no puede ir vacio' })
   @IsInt()
-  prestamo: number;
+  prestamo: Prestamo;
 
   @IsNotEmpty()
   @IsNumber()
-  pagoInicial: number;
-
-  @IsOptional()
-  @IsNumber()
-  costoPrestamo: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  interes: number;
-
-  @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
+  costoPago: number;
 }

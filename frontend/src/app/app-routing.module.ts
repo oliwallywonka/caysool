@@ -6,21 +6,22 @@ const routes: Routes = [
   // admin views
   {
     path: 'admin',
-    loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule),
-    canActivate: [ ValidateTokenGuard ],
-    canLoad: [ ValidateTokenGuard ]
+    loadChildren: () =>
+      import('./views/admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [ValidateTokenGuard],
+    canLoad: [ValidateTokenGuard],
   },
   // auth views
   {
     path: 'auth',
-    loadChildren: () => import('./views/auth/auth.module').then(m => m.AuthModule),
+    loadChildren: () =>
+      import('./views/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '**',
-    redirectTo: 'auth'
-  }
+    redirectTo: 'auth',
+  },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

@@ -1,1 +1,355 @@
-<p>new-prestamo-modal works!</p>
+
+<div *ngIf="modal.visible&&modal.modalName==='prestamoModal'" class="justify-center items-center overflow-x-hidden overflow-y-auto fixed right-0 left-0 top-4 inset-0 z-50 grid">
+  <div class="relative px-4 w-full max-w-6xl h-full md:h-auto">
+
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+
+      <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+        <h4 class="text-2xl font-semibold">
+           PRESTAMO
+        </h4>
+        <button
+          class="p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+          (click)="closeModal()"
+          type="button"
+        >
+          <span class="opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+            x
+          </span>
+        </button>
+      </div>
+      <div class="flex w-full">
+
+        <form
+          autocomplete="off"
+          [formGroup]="prestamoForm"
+          (ngSubmit)="save()"
+          class="w-full md:w-1/2"
+        >
+          <div class="my-4 relative p-6 flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4 mb-2">
+              <app-input
+                [inputForm]="prestamoForm"
+                inputLabel="INICIO PRESTAMO"
+                inputType="date"
+                inputFormName="fechaInicio"
+                formControlName="fechaInicio"
+                [value]="prestamoForm.value.fechaInicio"
+                (inputEvent)="calculateCostoTotal($event)">
+              </app-input>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4 mb-2">
+              <app-input
+                [inputForm]="prestamoForm"
+                inputLabel="FINAL del PRESTAMO"
+                inputType="date"
+                inputFormName="fechaFinal"
+                formControlName="fechaFinal"
+                (inputEvent)="calculateCostoTotal()"
+                [value]="prestamoForm.value.fechaFinal">
+              </app-input>
+            </div>
+
+            <form
+              autocomplete="off"
+              [formGroup]="inventarioForm"
+              (ngSubmit)="addInventory()"
+              class="w-full"
+            >
+              <div class="w-full px-4 mb-2">
+                <app-input
+                  [inputForm]="inventarioForm"
+                  inputLabel="OBSERVACIONES"
+                  inputType="text"
+                  inputFormName="observacion"
+                  formControlName="observacion"
+                  inputPlaceholder="Estado actual, marcas de deterioro, defectos"
+                  [value]="inventarioForm.value.observacion">
+                </app-input>
+              </div>
+
+              <div class="w-full px-4 mb-2">
+                <app-input
+                  [inputForm]="inventarioForm"
+                  inputLabel="AVALÚO"
+                  inputType="number"
+                  inputFormName="precioAvaluo"
+                  formControlName="precioAvaluo"
+                  inputPlaceholder="Valor de apreciacion de la prenda"
+                  [value]="inventarioForm.value.precioAvaluo">
+                </app-input>
+              </div>
+
+              <div class="w-full px-4 mb-2">
+                <app-input
+                  [inputForm]="inventarioForm"
+                  inputLabel="PRESTAMO"
+                  inputType="number"
+                  inputFormName="costoPrestamo"
+                  formControlName="costoPrestamo"
+                  inputPlaceholder="Cantidad a prestar por esta prenda"
+                  [value]="inventarioForm.value.costoPrestamo">
+                </app-input>
+              </div>
+              <div class="w-full px-4 mb-2">
+                <app-select
+                  [options]="inventarioOption"
+                  inputLabel="PRENDAS EN GARANTIA"
+                  inputFormName="tipo"
+                  formControlName="tipo"
+                  [inputForm]="inventarioForm"
+                  [value]="inventarioForm.value.tipo">
+                </app-select>
+              </div>
+              <div
+                *ngIf="inventarioForm.value.tipo==='VEHICULO'"
+                class="w-full px-4 mb-2">
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="MARCA"
+                    inputType="text"
+                    inputFormName="marca"
+                    formControlName="marca"
+                    inputPlaceholder="Toyota, Nissan, Susuki"
+                    [value]="inventarioForm.value.marca">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="MODELO"
+                    inputType="text"
+                    inputFormName="modelo"
+                    formControlName="modelo"
+                    inputPlaceholder="Ingrese el año"
+                    [value]="inventarioForm.value.modelo">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="LINEA"
+                    inputType="text"
+                    inputFormName="linea"
+                    formControlName="linea"
+                    inputPlaceholder="Corolla, Ipsun, Caldina"
+                    [value]="inventarioForm.value.linea">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="PLACA"
+                    inputType="text"
+                    inputFormName="placa"
+                    formControlName="placa"
+                    inputPlaceholder="Placa del vehiculo"
+                    [value]="inventarioForm.value.placa">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="NÚMERO DE CHASIS"
+                    inputType="text"
+                    inputFormName="chasis"
+                    formControlName="chasis"
+                    inputPlaceholder="Número de serie"
+                    [value]="inventarioForm.value.chasis">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="DEUDAS RUAT"
+                    inputType="text"
+                    inputFormName="ruat"
+                    formControlName="ruat"
+                    inputPlaceholder="Deudas de vehiculo"
+                    [value]="inventarioForm.value.ruat">
+                  </app-input>
+                </div>
+
+              </div>
+
+              <div
+                *ngIf="inventarioForm.value.tipo==='JOYA'"
+                class="w-full px-4 mb-2">
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="METAL"
+                    inputType="text"
+                    inputFormName="metal"
+                    formControlName="metal"
+                    inputPlaceholder="Oro, Plata, Fantasia"
+                    [value]="inventarioForm.value.metal">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="PESO EN GRAMOS"
+                    inputType="text"
+                    inputFormName="peso"
+                    formControlName="peso"
+                    inputPlaceholder="100 gr"
+                    [value]="inventarioForm.value.peso">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="PUREZA"
+                    inputType="text"
+                    inputFormName="pureza"
+                    formControlName="pureza"
+                    inputPlaceholder="Grado de pureza"
+                    [value]="inventarioForm.value.pureza">
+                  </app-input>
+                </div>
+              </div>
+
+              <div
+                *ngIf="inventarioForm.value.tipo==='ARTICULO'"
+                class="w-full px-4 mb-2">
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="MARCA"
+                    inputType="text"
+                    inputFormName="marca"
+                    formControlName="marca"
+                    inputPlaceholder="Nombre del fabricante"
+                    [value]="inventarioForm.value.marca">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="MODELO"
+                    inputType="text"
+                    inputFormName="modelo"
+                    formControlName="modelo"
+                    inputPlaceholder="Nombre del producto"
+                    [value]="inventarioForm.value.modelo">
+                  </app-input>
+                </div>
+
+                <div class="w-full mb-2">
+                  <app-input
+                    [inputForm]="inventarioForm"
+                    inputLabel="SERIE"
+                    inputType="text"
+                    inputFormName="serie"
+                    formControlName="serie"
+                    inputPlaceholder="Número de serie"
+                    [value]="inventarioForm.value.serie">
+                  </app-input>
+                </div>
+              </div>
+              <button
+                class="mx-4 bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                [disabled]="!inventarioForm.valid ||!prestamoForm.valid"
+                (click)="addInventory()"
+              >
+                Agregar Prenda
+              </button>
+            </form>
+          </div>
+
+        <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+          <button
+            class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            (click)="closeModal()"
+            type="button"
+          >
+            Cancelar
+          </button>
+          <button
+            class="mx-4 bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            (click)="refreshForm()"
+          >
+            Limpiar
+          </button>
+          <button
+            [disabled]="!prestamoForm.valid || loading"
+            class="mx-4 bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="submit"
+          >
+          <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
+          </button>
+        </div>
+
+        </form>
+
+        <div class="w-full md:w-1/2 my-4 relative p-6">
+          <div>
+            <p> Cantidad de dias: {{this.diasPrestamo}}</p>
+            <p> Prestamo total: Bol. {{this.costoPrestamo}}</p>
+            <p> Interes al finalizar el plazo: Bol. {{(this.costoTotal - this.costoPrestamo).toFixed(1)}}</p>
+            <p> Total a pagar al finalizar el plazo: Bol. {{this.costoTotal}}</p>
+          </div>
+          <div class="mr-4">
+            <ul role="list" >
+              <li *ngFor="let inv of inventarioArray; let i=index;"
+                  class="cursor-pointer m-2 w-full border-2 border-lime-300 hover:border-lime-500 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+                  <div class="flex items-center">
+                      <div class="text-3xl p-4 bg-lime-300">
+                        {{i+1}}
+                      </div>
+                      <div  class="flex-1 min-w-0 mx-6">
+                        <p
+                          *ngIf="inv.tipo === 'JOYA'"
+                          class="text-xs font-medium text-gray-900 truncate dark:text-white">
+                            {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
+                        </p>
+                        <p
+                          *ngIf="inv.tipo === 'ARTICULO'"
+                          class="text-xs font-medium text-gray-900 truncate dark:text-white">
+                            {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
+                        </p>
+                        <p
+                          *ngIf="inv.tipo === 'VEHICULO'"
+                          class="text-xs font-medium text-gray-900 truncate dark:text-white">
+                            {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                        </p>
+                        <p class="text-xs font-medium text-gray-500 truncate dark:text-gray-400">
+                            Préstamo: Bol. {{ inv.costoPrestamo }}
+                        </p>
+                        <p class="text-xs font-medium text-gray-500 truncate dark:text-gray-400">
+                            Avalúo: Bol. {{ inv.costoAvaluo }}
+                        </p>
+                      </div>
+                      <div class="text-gray-500 text-xl font-bold mr-8">
+                        <button
+                          class="mx-4 bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                          type="button"
+                          (click)="deleteInventario(i)"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="modal.visible&&modal.modalName==='prestamoModal'" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

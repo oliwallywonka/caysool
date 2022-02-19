@@ -1,3 +1,4 @@
+import { Picture } from 'src/picture/entities/picture.entity';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 import {
   Entity,
@@ -7,6 +8,7 @@ import {
   UpdateDateColumn,
   BaseEntity,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -16,6 +18,9 @@ export class Inventario extends BaseEntity {
 
   @ManyToOne(() => Prestamo, (prestamo) => prestamo.id)
   prestamo: Prestamo;
+
+  @OneToMany(() => Picture, (picture) => picture.inventario)
+  pictures: Picture[];
 
   @Column({ type: 'varchar', length: 12, default: 'EMPENADO' })
   estado: string;
@@ -49,6 +54,15 @@ export class Inventario extends BaseEntity {
 
   @Column({ type: 'varchar', length: 20, nullable: true })
   ruat: string;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  metal: string;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  peso: string;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  pureza: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
   precioVenta: number;

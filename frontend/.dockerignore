@@ -25,3 +25,5 @@ commit.sh
 
 #GitHub
 *.github
+
+.angular

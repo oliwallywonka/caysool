@@ -48,7 +48,7 @@ export class InventarioService {
   async findOne(id: number) {
     const inventario = await Inventario.createQueryBuilder('inventario')
       .leftJoinAndSelect('inventario.picture', 'picture')
-      .leftJoinAndSelect('inventario.pretamo', 'prestamo')
+      .leftJoinAndSelect('inventario.prestamo', 'prestamo')
       .leftJoinAndSelect('prestamo.client', 'client')
       .where('inventario.id = :id', { id })
       .getOne();
@@ -82,5 +82,16 @@ export class InventarioService {
 
   remove(id: number) {
     return `This action removes a #${id} inventario`;
+  }
+
+  async getByClientId(clientId: number) {
+    const inventario = await Inventario.createQueryBuilder('inventario')
+      .leftJoinAndSelect('inventario.prestamo', 'prestamo')
+      .leftJoinAndSelect('prestamo.client', 'client')
+      .select('inventario')
+      .where('client.id = :clientId', { clientId })
+      .orderBy('client.id', 'DESC')
+      .getMany();
+    return inventario;
   }
 }

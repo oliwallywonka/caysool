@@ -1,0 +1,187 @@
+
+<div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+  <div class="p-4 w-full ">
+    <div class="items-center mb-4">
+      <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+        <button
+            (click)="goToBackPage()"
+            class="mx-4 bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xl px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="submit"
+          >
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        Información del Cliente
+      </h3>
+      <div class="flex items-center justify-start pt-2">
+
+
+      </div>
+      <div class="w-full ">
+        <div class="flex flex-col pt-4 items-baseline w-full">
+
+        </div>
+      </div>
+    </div>
+    <div class="flow-root w-auto flex flex-col justify-center">
+      <div *ngIf="prestamo" class="cursor-pointer m-2 w-1/2 border-2 border-lime-300 hover:border-lime-500 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+        <div class="flex items-center space-x-4 px-4 py-2 bg-blueGray-600 ">
+            <div class="flex-1 min-w-0">
+              <p class="text-xl font-medium text-white truncate dark:text-white">
+                  Cliente: {{ prestamo.client.name }}
+              </p>
+              <p class="text-xl font-medium text-gray-200 truncate dark:text-gray-400">
+                  Prestamo ID: {{ prestamo.id }}
+              </p>
+            </div>
+            <button
+              [popper]="clientModal"
+              [popperTrigger]="'hover'"
+              [popperPlacement]="'top'"
+              [popperPositionFixed]="true"
+              class="text-lime-300 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button"
+              (click)="showPagoModal()">
+              <i class="fas fa-edit"></i>
+            </button>
+            <popper-content #clientModal>
+              <p class="bold">Editar cliente</p>
+            </popper-content>
+
+            <button
+              [popper]="prestamoModal"
+              [popperTrigger]="'hover'"
+              [popperPlacement]="'top'"
+              [popperPositionFixed]="true"
+              class="text-lime-300 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button"
+              (click)="showPagoModal()">
+              <i class="fas fa-plus-square"></i>
+            </button>
+            <popper-content #prestamoModal>
+              <p class="bold">Nuevo Prestamo</p>
+            </popper-content>
+        </div>
+
+        <div class="flex items-center space-x-4 px-4 ">
+          <div class="flex-1 min-w-0 py-8">
+            <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
+              MontoPrestamo: {{ prestamo.costoPrestamo }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Fecha de prestamo: {{ prestamo.fechaInicio | date:'medium' }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Fecha de vencimiento: {{ prestamo.fechaFinal | date:'medium' }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Interés al finalizar el Plazo: {{ prestamo.costoTotal - prestamo.costoPrestamo }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Estado: {{ prestamo.estado }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Dias restantes: {{ diasRestantes }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-center mb-4 ml-2 mt-4">
+        <h3 class="text-xl font-bold leading-none text-gray-500 dark:text-white">
+          HISTORIAL
+        </h3>
+      </div>
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Fecha
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Operación
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Cargo
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Comision
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Cargos Generados
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Amortiguado
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Saldo
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Product 1 -->
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Apple MacBook Pro 17"
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Sliver
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Laptop
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    $2999
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                            <!-- Product 2 -->
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Apple Imac 27"
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    White
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Desktop Pc
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    $1999
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                            <!-- Product 2 -->
+                            <tr class="bg-white dark:bg-gray-800">
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Apple Magic Mouse 2
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    White
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Accessories
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    $99
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="p-4 w-full ">
+  <div class="items-center mb-4">
+    <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lista de Prestamos</h3>
+    <div class="flex items-center justify-start pt-2">.
+
+    </div>
+    <div class="w-full ">
+      <div class="flex flex-col pt-4 items-baseline w-full ">
+        <form
+          [formGroup]="ciForm"
+        >
+          <input
+            type="text"
+            placeholder="Buscar por CI Ej: 836378..."
+            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-lime-300  w-full ease-linear transition-all duration-150"
+            formControlName="ci"
+            (ngModelChange)="search($event)"
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="flow-root w-auto">
+    <ul *ngIf="response" role="list" class="relative">
+      <li *ngFor="let prestamo of response.items; let i=index;"
+          class="cursor-pointer m-2 w-1/2 border-2 border-lime-300 hover:border-lime-500 transform hover:-translate-y-1 ease-linear transition-all duration-150"
+          (click)="goToPrestamoInformation(prestamo)">
+          <div class="flex items-center">
+              <div class="text-3xl p-4 bg-lime-300">
+                {{prestamo.id}}
+              </div>
+              <div  class="flex-1 min-w-0 mx-6 flex flex-col">
+                <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                   {{ prestamo.client.name }}
+                </p>
+                <div
+                  *ngFor="let inv of prestamo.inventario"
+                  class="text-xl font-medium text-gray-500 truncate dark:text-white">
+
+                  <p *ngIf="inv.tipo === 'JOYA'">
+                      {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
+                  </p>
+                  <p *ngIf="inv.tipo === 'ARTICULO'">
+                      {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
+                  </p>
+                  <p *ngIf="inv.tipo === 'VEHICULO'">
+                      {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                  </p>
+                </div>
+                <p class="text-xl font-medium text-gray-500 truncate dark:text-white">
+                  {{ prestamo.fechaInicio | date:'mediumDate' }} - {{ prestamo.fechaFinal | date:'mediumDate' }}
+                </p>
+              </div>
+              <div class="text-gray-500 text-xl font-bold mr-8">
+                <p>
+                  BOL. {{ prestamo.costoTotal }}
+                </p>
+                <p class="text-sm">
+                  {{ prestamo.estado }}
+                </p>
+              </div>
+          </div>
+      </li>
+  </ul>
+  </div>
+</div>
+
+<app-pagination
+  *ngIf="response"
+  [response]="response.meta"
+  (pageEvent)="getOnPageResponse($event)"
+></app-pagination>

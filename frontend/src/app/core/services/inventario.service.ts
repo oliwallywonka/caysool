@@ -21,7 +21,7 @@ export class InventarioService {
 
   constructor( private http: HttpClient ) { }
 
-  getInventarios({
+  getInventario({
     clientCi = '',
     page = 1,
     force = false
@@ -35,6 +35,14 @@ export class InventarioService {
     }
     return this.cacheResponse$;
   }
+
+  getInventarioByClientId(clientId: number):Observable<any>{
+    const headers = new HttpHeaders()
+      .set('x-access-token',sessionStorage.getItem('token')||'');
+    return this.cacheResponse$ = this.http.get(`${this.baseUrl}/inventario/client/${clientId}`,{headers});
+
+  }
+
 
   postInventario(body):Observable<any>{
     const headers = new HttpHeaders()

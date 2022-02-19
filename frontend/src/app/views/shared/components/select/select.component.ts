@@ -26,13 +26,12 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     value: false,
     name: ''
   }];
-  @Output()
-  selectEvent = new EventEmitter();
+  @Output() selectEvent = new EventEmitter();
 
   // CONTROL VALUE ACCESSOR INTERFACE
   // Nos conecta nuestro custom input con forms, reactive forms etc
   @Input()
-  value: any;
+  value: string = '';
   isDisabled: boolean;
   onChange = (_:any) => {}
   onTouch = () => {}
@@ -62,7 +61,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   }
 
   clickSelect(value) {
-    this.selectEvent.emit(value);
+    if (value) this.selectEvent.emit(value);
   }
 
 }

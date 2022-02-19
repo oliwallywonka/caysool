@@ -9,6 +9,8 @@ import { NewPrestamoModalComponent } from "./components/modals/new-prestamo-moda
 import { InventarioListComponent } from "./components/cards/inventario-list/inventario-list.component";
 import { TabClientComponent } from './components/tabs/tab-client/tab-client.component';
 import { SharedModule } from "../../shared/shared.module";
+import { ClientInformationComponent } from './components/cards/client-information/client-information.component';
+import { ClientModalComponent } from "./components/modals/client-modal/client-modal.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { SharedModule } from "../../shared/shared.module";
     NewPrestamoModalComponent,
     InventarioListComponent,
     TabClientComponent,
+    ClientInformationComponent,
+    ClientModalComponent
   ],
   imports: [ClientsRoutingModule, SharedModule],
 })

@@ -7,7 +7,7 @@ import { InputComponent } from './components/input/input.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from './components/select/select.component';
-
+import { NgxPopperjsModule } from 'ngx-popperjs';
 @NgModule({
   declarations: [ButtonComponent, InputComponent, PaginationComponent, SelectComponent],
   imports: [
@@ -25,6 +25,7 @@ import { SelectComponent } from './components/select/select.component';
     FormsModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
+    NgxPopperjsModule
   ],
 })
 export class SharedModule {}
