@@ -33,9 +33,9 @@ export class InventarioController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
     @Query('clientCi') clientCi = '',
-    @Query('estado') estado = 'EMPENADO',
+    @Query('estadoInv') estadoInv = 'EMPENADO',
   ) {
-    return this.inventarioService.findAll({ page, limit }, clientCi, estado);
+    return this.inventarioService.findAll({ page, limit }, clientCi, estadoInv);
   }
 
   @UseGuards(JwtAuthGuard)

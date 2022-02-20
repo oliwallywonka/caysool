@@ -3,6 +3,7 @@ export interface Impresion {
   prestamo: number;
   costoImpresion: number;
   tipoDocumento: string;
+  createdAt: string;
 }
 
 export interface ImpresionResponse {

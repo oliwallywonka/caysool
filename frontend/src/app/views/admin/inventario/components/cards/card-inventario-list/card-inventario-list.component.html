@@ -1,0 +1,70 @@
+<div class="p-4 w-full ">
+  <div class="items-center mb-4">
+    <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lista de Prestamos</h3>
+    <div class="flex items-center justify-start pt-2">.
+
+    </div>
+    <div class="w-full ">
+      <div class="flex flex-col pt-4 items-baseline w-full ">
+        <form
+          [formGroup]="ciForm"
+        >
+          <input
+            type="text"
+            placeholder="Buscar por CI Ej: 836378..."
+            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-300  w-full ease-linear transition-all duration-150"
+            formControlName="ci"
+            (ngModelChange)="search($event)"
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="flow-root w-auto">
+    <ul *ngIf="response" role="list" class="relative">
+      <li *ngFor="let inventario of response.items; let i=index;"
+          class="cursor-pointer m-2 w-1/2 border-2 border-green-300 hover:border-green-500 transform hover:-translate-y-1 ease-linear transition-all duration-150"
+          (click)="goToInventarioInformation(inventario)">
+          <div class="flex items-center">
+              <div class="text-3xl p-4 bg-green-300">
+                {{inventario.id}}
+              </div>
+              <div  class="flex-1 min-w-0 mx-6 flex flex-col">
+                <p *ngIf="inventario.tipo === 'JOYA'">
+                  {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}
+                </p>
+                <p *ngIf="inventario.tipo === 'ARTICULO'">
+                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}
+                </p>
+                <p *ngIf="inventario.tipo === 'VEHICULO'">
+                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}
+                </p>
+                  <div
+                  *ngFor="let inv of inventario.inventario"
+                  class="text-xl font-medium text-gray-500 truncate dark:text-white">
+
+
+                </div>
+                <p class="text-xl font-medium text-gray-500 truncate dark:text-white">
+                  {{ inventario.fechaInicio | date:'mediumDate' }} - {{ inventario.fechaFinal | date:'mediumDate' }}
+                </p>
+              </div>
+              <div class="text-gray-500 text-xl font-bold mr-8">
+                <p>
+                  BOL. {{ inventario.costoTotal }}
+                </p>
+                <p class="text-sm">
+                  {{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}
+                </p>
+              </div>
+          </div>
+      </li>
+  </ul>
+  </div>
+</div>
+
+<app-pagination
+  *ngIf="response"
+  [response]="response.meta"
+  (pageEvent)="getOnPageResponse($event)"
+></app-pagination>

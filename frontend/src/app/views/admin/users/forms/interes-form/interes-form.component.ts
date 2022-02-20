@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-interes-form',
@@ -7,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class InteresFormComponent implements OnInit {
-
-  constructor() { }
+  loading: boolean = false;
+  informationForm: FormGroup = this.fb.group({
+    interest: [''],
+    comission: [''],
+    cambioDolar: [''],
+    direction: ['']
+  });
+  constructor(
+    private fb: RxFormBuilder
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  save() {
+
   }
 
 }

@@ -1,4 +1,5 @@
 import { Client } from "./client";
+import { Inventario } from "./inventario";
 
 export interface Prestamo {
   id?: number;
@@ -12,6 +13,7 @@ export interface Prestamo {
   costoCancelado?: number;
   costoTotal?: number;
   costoDoc?: string;
+  inventario?: Inventario []
   isActive?: string;
   createdAt?: string;
   updatedAt?: string;

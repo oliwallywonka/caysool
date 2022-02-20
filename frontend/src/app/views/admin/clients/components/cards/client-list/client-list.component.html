@@ -2,13 +2,7 @@
   <div class="items-center mb-4">
     <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lista de Usuarios</h3>
     <div class="flex items-center justify-start pt-2">
-
-      <app-button
-        btnText="Nuevo Usuario"
-        btnTheme="blue"
-      ></app-button>
-
-      <app-client-information-modal></app-client-information-modal>
+      <app-client-modal></app-client-modal>
     </div>
     <div class="w-full ">
       <div class="flex flex-col pt-4 items-baseline w-full ">
@@ -18,7 +12,7 @@
           <input
             type="text"
             placeholder="Buscar por CI Ej: 836378..."
-            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-lime-300  w-full ease-linear transition-all duration-150"
+            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-500  w-full ease-linear transition-all duration-150"
             formControlName="ci"
             (ngModelChange)="search($event)"
           >
@@ -29,7 +23,8 @@
   <div class="flow-root w-auto">
       <ul *ngIf="response" role="list" >
           <li *ngFor="let client of response.items"
-              class="cursor-pointer m-2 w-1/2 py-3 sm:py-4 border-2 border-lime-300 hover:border-lime-500 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+              class="cursor-pointer m-2 w-1/2 py-3 sm:py-4 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150"
+              (click)="goToClientInformation(client)">
               <div class="flex items-center space-x-4 px-4">
                   <div class="flex-shrink-0">
                     <i class="fas fa-user-circle text-center text-6xl"></i>
@@ -42,35 +37,6 @@
                         CI: {{ client.ci }}
                     </p>
                   </div>
-                  <button
-                    [popper]="popperInformation"
-                    [popperTrigger]="'hover'"
-                    [popperPlacement]="'top'"
-                    [popperPositionFixed]="true"
-                    class="text-gray-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-                    type="button"
-                    (click)="goToClientInformation(client)">
-                    <i class="fas fa-eye"></i>
-                  </button>
-                  <popper-content #popperInformation>
-                    <p class="bold">Información Usuario</p>
-                  </popper-content>
-
-                  <button
-                    [popper]="popperEdit"
-                    [popperTrigger]="'hover'"
-                    [popperPlacement]="'top'"
-                    [popperPositionFixed]="true"
-                    class="text-blue-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-                    type="button"
-                    (click)="showClientModal(client)">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <popper-content #popperEdit>
-                    <p class="bold">Editar Usuario</p>
-                  </popper-content>
-
-
               </div>
           </li>
       </ul>

@@ -1,1 +1,27 @@
-export class CreateBusinessDto {}
+import { IsNumber, IsOptional, IsString } from 'class-validator';
+
+export class CreateBusinessDto {
+  @IsOptional()
+  @IsString()
+  name: string;
+
+  @IsOptional()
+  @IsString()
+  nit: string;
+
+  @IsOptional()
+  @IsString()
+  phone: string;
+
+  @IsOptional()
+  @IsString()
+  direction: string;
+
+  @IsOptional()
+  @IsNumber()
+  interest: number;
+
+  @IsOptional()
+  @IsNumber()
+  cambioDolar: number;
+}

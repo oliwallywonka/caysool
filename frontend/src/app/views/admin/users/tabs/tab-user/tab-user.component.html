@@ -5,7 +5,7 @@
         <a
           class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
           (click)="toggleTabs(1)"
-          [ngClass]="{'text-blue-500 bg-white': openTab !== 1, 'text-white bg-blue-500': openTab === 1}">
+          [ngClass]="{'text-sky-600 bg-white': openTab !== 1, 'text-white bg-sky-600': openTab === 1}">
           Información
         </a>
       </li>
@@ -14,7 +14,7 @@
         <a
           class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
           (click)="toggleTabs(2)"
-          [ngClass]="{'text-blue-500 bg-white': openTab !== 2, 'text-white bg-blue-500': openTab === 2}">
+          [ngClass]="{'text-sky-600 bg-white': openTab !== 2, 'text-white bg-sky-600': openTab === 2}">
           Interés
         </a>
       </li>
@@ -23,7 +23,7 @@
         <a
           class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
           (click)="toggleTabs(3)"
-          [ngClass]="{'text-blue-500 bg-white': openTab !== 3, 'text-white bg-blue-500': openTab === 3}">
+          [ngClass]="{'text-sky-600 bg-white': openTab !== 3, 'text-white bg-sky-600': openTab === 3}">
           Usuarios
         </a>
       </li>
@@ -36,6 +36,7 @@
             <app-information-form></app-information-form>
           </div>
           <div *ngIf="openTab === 2">
+            <app-interes-form></app-interes-form>
           </div>
           <div *ngIf="openTab === 3">
             <app-card-user></app-card-user>

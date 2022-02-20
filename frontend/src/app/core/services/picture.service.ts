@@ -21,24 +21,16 @@ export class PictureService {
 
   constructor( private http: HttpClient ) { }
 
-  getPictures({
-    idInventario,
-    force = false
-  }):Observable<any>{
+  getPictures(idInventario):Observable<any>{
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');
-    if (force || !this.cacheResponse$) {
-      return this.cacheResponse$ = this.http
-        .get(`${this.baseUrl}/picture/${idInventario}`,{ headers })
-        .pipe( shareReplay(1));
-    }
-    return this.cacheResponse$;
+    return this.cacheResponse$ = this.http.get(`${this.baseUrl}/picture/${idInventario}`,{ headers })
   }
 
-  postPicture(body):Observable<any>{
+  postPicture(body, idInventario:number):Observable<any>{
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');
-    return this.http.post(`${this.baseUrl}/picture`,body, { headers });
+    return this.http.post(`${this.baseUrl}/picture/${idInventario}`,body, { headers });
   }
 
   deletePicture(id:number):Observable<any>{

@@ -20,8 +20,4 @@ export class CreatePagoDto {
   @IsNotEmpty()
   @IsNumber()
   costoPago: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  costoTotal: number;
 }

@@ -1,0 +1,119 @@
+
+<div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+  <div class="p-4 w-full ">
+    <div class="items-center mb-4">
+      <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+        <button
+            (click)="goToBackPage()"
+            class="mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1"
+            type="submit"
+          >
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        Información Inventario Nº {{ inventario?.id }}
+      </h3>
+      <div class="flex items-center justify-start pt-2">
+
+      </div>
+      <div class="w-full ">
+        <div class="flex flex-col pt-4 items-baseline w-full">
+
+        </div>
+      </div>
+    </div>
+    <div class="flow-root w-auto flex flex-col justify-center">
+      <div *ngIf="inventario" class="cursor-pointer m-2 w-1/2 border-2 border-green-300 hover:border-green-500 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+        <div class="flex items-center space-x-4 px-4 py-2 bg-blueGray-600 ">
+            <div class="flex-1 min-w-0">
+              <p
+                *ngIf="inventario.tipo === 'JOYA'"
+                class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                  {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}
+              </p>
+              <p
+                *ngIf="inventario.tipo === 'ARTICULO'"
+                class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                  {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}
+              </p>
+              <p
+                *ngIf="inventario.tipo === 'VEHICULO'"
+                class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                  {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}
+              </p>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-4 px-4 ">
+          <div class="flex-1 min-w-0 py-8">
+
+            <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
+              Dueño original: {{ inventario.prestamo.client.name }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Descripción: {{ inventario.descripcion }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Observaciones: {{ inventario.observacion }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Avalúo: {{ inventario.precioAvaluo }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Prestamo: Bol. {{ inventario.costoPrestamo }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Estado: Bol. {{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}
+            </p>
+          </div>
+        </div>
+      </div>
+   </div>
+  </div>
+
+  <form
+    [formGroup]="pictureForm"
+    (ngSubmit)="savePicture()"
+  >
+
+    <div class="my-4 relative p-6 flex flex-wrap">
+
+      <div class="w-full lg:w-6/12 px-4 mb-2">
+        <label
+          for="image"
+          class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+          Fotografia
+        </label>
+        <h4 *ngIf="!comprimido" class="text-xs font-semibold">
+          Comprimiendo archivo espere porfavor...
+        </h4>
+        <input
+          type="file"
+          class="border-0 px-3 py-3  text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          formControlName="picture"
+          (change)="onFileChange($event)">
+        <button
+          [disabled]="!pictureForm.valid || loading"
+          class="mx-4 bg-sky-600 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="submit"
+        >
+          <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar
+        </button>
+      </div>
+    </div>
+  </form>
+<div *ngIf="pictures">
+
+  <div  class="grid lg:grid-cols-4 sm:grid-cols-2 gap-4 flex items-center ml-6 w-auto">
+    <div *ngFor="let picture of pictures" class="mb-4 relative ">
+        <button
+          (click)="openDeleteModal()"
+          class="absolute top-0 right-0 mx-4 bg-none text-red-600 active:text-red-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1"
+          type="button"
+          >
+          <i class="fas fa-trash"></i>
+        </button>
+        <img src="{{picture.path?baseUrl+'/'+picture.path:'assets/img/image-not-found.png'}}" class="w-96 h-auto object-fit rounded-lg" alt="">
+      </div>
+    </div>
+  </div>
+</div>

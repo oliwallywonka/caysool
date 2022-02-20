@@ -21,14 +21,17 @@ export class Business extends BaseEntity {
   @Column({ type: 'varchar', length: 20, default: '' })
   phone: string;
 
-  @Column({ type: 'varchar', length: 12 })
+  @Column({ type: 'varchar', length: 12, default: '' })
   direction: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
   commission: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.15 })
   interest: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  cambioDolar: number;
 
   @CreateDateColumn()
   createdAt: Date;

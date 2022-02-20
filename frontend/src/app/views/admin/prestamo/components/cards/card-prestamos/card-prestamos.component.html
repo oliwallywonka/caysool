@@ -12,7 +12,7 @@
           <input
             type="text"
             placeholder="Buscar por CI Ej: 836378..."
-            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-lime-300  w-full ease-linear transition-all duration-150"
+            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-500  w-full ease-linear transition-all duration-150"
             formControlName="ci"
             (ngModelChange)="search($event)"
           >
@@ -23,10 +23,10 @@
   <div class="flow-root w-auto">
     <ul *ngIf="response" role="list" class="relative">
       <li *ngFor="let prestamo of response.items; let i=index;"
-          class="cursor-pointer m-2 w-1/2 border-2 border-lime-300 hover:border-lime-500 transform hover:-translate-y-1 ease-linear transition-all duration-150"
+          class="cursor-pointer m-2 w-1/2 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150"
           (click)="goToPrestamoInformation(prestamo)">
           <div class="flex items-center">
-              <div class="text-3xl p-4 bg-lime-300">
+              <div class="text-3xl p-4 bg-green-500">
                 {{prestamo.id}}
               </div>
               <div  class="flex-1 min-w-0 mx-6 flex flex-col">

@@ -85,13 +85,14 @@ export class Prestamo extends BaseEntity {
     const costoInteres = costoTotal - this.costoPrestamo;
     this.costoTotal = costoTotal;
     this.costoInteres = costoInteres;
-    if (this.costoCancelado < this.costoTotal && today > 0) {
-      if (today > 0) {
+    if (this.costoCancelado < this.costoTotal) {
+      if (today > 1) {
         this.estado = 'ACTIVO';
       } else {
         this.estado = 'VENCIDO';
       }
-    } else if (this.costoCancelado >= this.costoTotal) {
+    }
+    if (this.costoCancelado >= this.costoTotal) {
       this.estado = 'CANCELADO';
     }
   }
@@ -101,7 +102,7 @@ export class Prestamo extends BaseEntity {
       .select('SUM(inventario.costoPrestamo)', 'costo')
       .where('inventario.prestamo = :prestamo', { prestamo: this.id })
       .getRawOne();
-    this.costoPrestamo = costoPrestamo.costo;
+    this.costoPrestamo = +costoPrestamo.costo;
   }
 
   async calculateCostoCancelado() {
@@ -110,24 +111,22 @@ export class Prestamo extends BaseEntity {
       .where('pago.prestamo = :prestamo', { prestamo: this.id })
       .getRawOne();
 
-    const costoAmortizacion = await Amortizacion.createQueryBuilder(
-      'amortizacion',
-    )
-      .select('SUM(amortizacion.costoPago)', 'costoCancelado')
-      .where('amortizacion.prestamo = :prestamo', { prestamo: this.id })
-      .getRawOne();
-    this.costoCancelado =
-      costoPago.costoCancelado + costoAmortizacion.costoCancelado;
+    if (!costoPago) {
+      this.costoCancelado = 0.0;
+    } else {
+      this.costoCancelado = +costoPago.costoCancelado;
+    }
     const diaFinal = moment(this.fechaFinal);
     const day = moment(Date.now());
     const today = moment.duration(day.diff(diaFinal)).asDays();
-    if (this.costoCancelado < this.costoTotal && today > 0) {
-      if (today > 0) {
+    if (this.costoCancelado < this.costoTotal) {
+      if (today > 1) {
         this.estado = 'ACTIVO';
       } else {
         this.estado = 'VENCIDO';
       }
-    } else if (this.costoCancelado >= this.costoTotal) {
+    }
+    if (this.costoCancelado >= this.costoTotal) {
       this.estado = 'CANCELADO';
     }
   }
@@ -137,6 +136,6 @@ export class Prestamo extends BaseEntity {
       .select('SUM(impresion.costoImpresion)', 'costo')
       .where('impresion.prestamo = :prestamo', { prestamo: this.id })
       .getRawOne();
-    this.costoImpresion = costoImpresion.costo;
+    this.costoImpresion = +costoImpresion.costo;
   }
 }

@@ -15,18 +15,18 @@
     <!-- Brand -->
     <a
       [routerLink]="['/']"
-      class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-xl uppercase font-bold p-4 px-0"
+      class=" text-center md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-xl uppercase font-bold p-4 px-0 flex"
     >
-      <span class="hidden sm:block"> SISTEMA CAYSOOL </span>
+      <img class="w-16 h-auto" src="assets/img/logo.png" alt="">
+      <div class="ml-2">
+
+        <span class="hidden sm:block"> SISTEMA </span>
+        <span class="hidden sm:block"> CAYSOOL </span>
+      </div>
     </a>
     <!-- User -->
     <ul class="md:hidden items-center flex flex-wrap list-none">
-      <li class="inline-block relative">
-        <app-notification-dropdown class="block"></app-notification-dropdown>
-      </li>
-      <li class="inline-block relative">
-        <app-user-dropdown class="block"></app-user-dropdown>
-      </li>
+
     </ul>
     <!-- Collapse -->
     <div
@@ -79,7 +79,7 @@
             #panelControl="routerLinkActive"
             [ngClass]="
               panelControl.isActive
-                ? 'bg-gradient-to-r from-lime-400 to-lime-300 rounded-md text-white hover:text-lime-700'
+                ? 'bg-gradient-to-r from-green-400 to-green-300 rounded-md text-white hover:text-green-700'
                 : 'text-blueGray-500 hover:text-blueGray-700'
             "
           >
@@ -101,12 +101,12 @@
             #cliente="routerLinkActive"
             [ngClass]="
               cliente.isActive
-                ? 'bg-gradient-to-r from-lime-400 to-lime-300 rounded-md text-white hover:text-lime-700'
+                ? 'bg-gradient-to-r from-green-400 to-green-300 rounded-md text-white hover:text-green-700'
                 : 'text-blueGray-500 hover:text-blueGray-700'
             "
           >
             <i
-              class="fas fa-tv mr-2 text-sm"
+              class="fas fa-users mr-2 text-sm"
               [ngClass]="
                 cliente.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
@@ -123,12 +123,12 @@
             #prestamos="routerLinkActive"
             [ngClass]="
               prestamos.isActive
-                ? 'bg-gradient-to-r from-lime-400 to-lime-300 rounded-md text-white hover:text-lime-700'
+                ? 'bg-gradient-to-r from-green-400 to-green-300 rounded-md text-white hover:text-green-700'
                 : 'text-blueGray-500 hover:text-blueGray-700'
             "
           >
             <i
-              class="fas fa-tv mr-2 text-sm"
+              class="fas fa-piggy-bank mr-2 text-sm"
               [ngClass]="
                 prestamos.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
@@ -145,12 +145,12 @@
             #inventario="routerLinkActive"
             [ngClass]="
               inventario.isActive
-                ? 'bg-gradient-to-r from-lime-400 to-lime-300 rounded-md text-white hover:text-lime-700'
+                ? 'bg-gradient-to-r from-green-400 to-green-300 rounded-md text-white hover:text-green-700'
                 : 'text-blueGray-500 hover:text-blueGray-700'
             "
           >
             <i
-              class="fas fa-tv mr-2 text-sm"
+              class="fas fa-boxes mr-2 text-sm"
               [ngClass]="
                 inventario.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
@@ -161,18 +161,64 @@
 
         <li class="items-center">
           <a
+            [routerLink]="['/admin/ingresos-salidas']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #historial="routerLinkActive"
+            [ngClass]="
+              historial.isActive
+                ? 'bg-gradient-to-r from-green-400 to-green-300 rounded-md text-white hover:text-green-700'
+                : 'text-blueGray-500 hover:text-blueGray-700'
+            "
+          >
+            <i
+              class="fas fa-arrow-right mr-2 text-sm"
+              [ngClass]="
+                historial.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "
+            ></i>
+            Ingresos y salidas
+          </a>
+        </li>
+
+        <li class="items-center">
+          <a
+            [routerLink]="['/admin/reportes']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #historial="routerLinkActive"
+            [ngClass]="
+              historial.isActive
+                ? 'bg-gradient-to-r from-green-400 to-green-300 rounded-md text-white hover:text-green-700'
+                : 'text-blueGray-500 hover:text-blueGray-700'
+            "
+          >
+            <i
+              class="fas fa-chart-line mr-2 text-sm"
+              [ngClass]="
+                historial.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "
+            ></i>
+            Reportes
+          </a>
+        </li>
+
+
+
+        <li class="items-center">
+          <a
             [routerLink]="['/admin/historial']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
             #historial="routerLinkActive"
             [ngClass]="
               historial.isActive
-                ? 'bg-gradient-to-r from-lime-400 to-lime-300 rounded-md text-white hover:text-lime-700'
+                ? 'bg-gradient-to-r from-green-400 to-green-300 rounded-md text-white hover:text-green-700'
                 : 'text-blueGray-500 hover:text-blueGray-700'
             "
           >
             <i
-              class="fas fa-tv mr-2 text-sm"
+              class="fas fa-clock mr-2 text-sm"
               [ngClass]="
                 historial.isActive ? 'opacity-75' : 'text-blueGray-300'
               "

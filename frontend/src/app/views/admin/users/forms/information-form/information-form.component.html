@@ -4,8 +4,8 @@
     <div class="relative flex flex-col w-full bg-white outline-none focus:outline-none">
       <!--header-->
       <form
-        [formGroup]="informationForm"
-        (ngSubmit)="sendForm"
+        [formGroup]="businessForm"
+        (ngSubmit)="save()"
       >
         <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
           <h3 class="text-3xl font-semibold">
@@ -18,11 +18,12 @@
 
           <div class="w-full lg:w-6/12 px-4 pb-4">
             <app-input
+              [inputForm]="businessForm"
               inputLabel="Nombre de la Empresa"
               inputPlaceholder="Ingrese el nombre de la empresa..."
               inputFormName='name'
               inputcontrolName='name'
-              [inputForm]="informationForm"
+              [value]="businessForm.value.name"
             ></app-input>
           </div>
 
@@ -31,11 +32,12 @@
 
           <div class="w-full lg:w-6/12 px-4 pb-4">
             <app-input
+              [inputForm]="businessForm"
               inputLabel="NIT"
               inputPlaceholder="Ingrese el nit de la empresa..."
-              inputFormName='name'
-              inputcontrolName='name'
-              [inputForm]="informationForm"
+              inputFormName='nit'
+              inputcontrolName='nit'
+              [value]="businessForm.value.nit"
             ></app-input>
           </div>
 
@@ -45,11 +47,12 @@
 
           <div class="w-full lg:w-6/12 px-4 pb-4">
             <app-input
-              inputLabel="Teléfono"
+              [inputForm]="businessForm"
+              inputLabel="Teléfono/celular"
               inputPlaceholder="Ingrese el Nº de contacto de la empresa..."
-              inputFormName='name'
-              inputcontrolName='name'
-              [inputForm]="informationForm"
+              inputFormName='phone'
+              inputcontrolName='phone'
+              [value]="businessForm.value.phone"
             ></app-input>
           </div>
 
@@ -58,11 +61,12 @@
 
           <div class="w-full lg:w-6/12 px-4 pb-4">
             <app-input
+              [inputForm]="businessForm"
               inputLabel="Dirección"
               inputPlaceholder="Ingrese la dirección de la empresa..."
-              inputFormName='name'
-              inputcontrolName='name'
-              [inputForm]="informationForm"
+              inputFormName='direction'
+              inputcontrolName='direction'
+              [value]="businessForm.value.direction"
             ></app-input>
           </div>
         </div>
@@ -76,5 +80,6 @@
           </app-button>
         </div>
       </form>
+      {{ businessForm.value | json }}
     </div>
   </div>

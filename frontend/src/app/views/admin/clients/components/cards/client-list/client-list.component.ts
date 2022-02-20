@@ -103,7 +103,7 @@ export class ClientListComponent implements OnInit, OnDestroy {
     console.log('modalEdit');
     this.modal.modalName = 'clientModal';
     this.modal.visible = true;
-    this.clientService.client.emit(client);
+    this.clientService.client.emit(null);
   }
 
   showInformationClient(client) {

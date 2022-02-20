@@ -29,6 +29,9 @@ export class Inventario extends BaseEntity {
   tipo: string;
 
   @Column({ type: 'varchar', length: 70, default: 'NINGUNO' })
+  descripcion: string;
+
+  @Column({ type: 'varchar', length: 70, default: 'NINGUNO' })
   observacion: string;
 
   @Column({ type: 'varchar', length: 15, nullable: true })

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,4 +25,11 @@ export class AlertService {
     return this._alert;
   }
   constructor( ) { }
+
+  triggerMessage(message = 'Acción realizada correctamente', icon: SweetAlertIcon) {
+    this._alert.fire({
+      title: message,
+      icon,
+    })
+  }
 }

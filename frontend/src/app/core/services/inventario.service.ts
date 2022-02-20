@@ -24,16 +24,24 @@ export class InventarioService {
   getInventario({
     clientCi = '',
     page = 1,
-    force = false
+    force = false,
+    estadoInv = ''
   }):Observable<any>{
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');
     if (force || !this.cacheResponse$) {
       return this.cacheResponse$ = this.http
-        .get(`${this.baseUrl}/inventario?ci=${clientCi}&page=${page}`,{headers})
+        .get(`${this.baseUrl}/inventario?ci=${clientCi}&estadoInv=${estadoInv}&page=${page}`,{headers})
         .pipe( shareReplay(1));
     }
     return this.cacheResponse$;
+  }
+
+  getInventarioById(id: number):Observable<any>{
+    const headers = new HttpHeaders()
+      .set('x-access-token',sessionStorage.getItem('token')||'');
+    return this.cacheResponse$ = this.http.get(`${this.baseUrl}/inventario/${id}`,{headers});
+
   }
 
   getInventarioByClientId(clientId: number):Observable<any>{

@@ -20,7 +20,7 @@ export class ButtonComponent implements OnInit {
   btnText = 'Ingresar';
 
   @Input()
-  btnTheme = 'lime';
+  btnTheme = 'green';
 
   theme = `bg-${ this.btnTheme }-400 active:bg-${ this.btnTheme }-500`;
 

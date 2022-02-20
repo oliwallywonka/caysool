@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ClientService } from 'src/app/core/services/client.service';
 import { Client } from 'src/app/interfaces/client';
@@ -29,6 +29,7 @@ export class ClientInformationComponent implements OnInit, OnDestroy {
     private prestamoService: PrestamoService,
     private inventarioService: InventarioService,
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location,
     private modalService: ModalService
   ) { }
@@ -94,6 +95,10 @@ export class ClientInformationComponent implements OnInit, OnDestroy {
   goToBackPage() {
     this.clientService.client.emit(null);
     this.location.back();
+  }
+
+  goToInventarioPage(inv) {
+    this.router.navigate(['/admin/inventario', inv.id]);
   }
 
   showPrestamoModal(client) {

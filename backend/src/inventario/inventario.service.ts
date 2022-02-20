@@ -47,7 +47,7 @@ export class InventarioService {
 
   async findOne(id: number) {
     const inventario = await Inventario.createQueryBuilder('inventario')
-      .leftJoinAndSelect('inventario.picture', 'picture')
+      .leftJoinAndSelect('inventario.pictures', 'pictures')
       .leftJoinAndSelect('inventario.prestamo', 'prestamo')
       .leftJoinAndSelect('prestamo.client', 'client')
       .where('inventario.id = :id', { id })

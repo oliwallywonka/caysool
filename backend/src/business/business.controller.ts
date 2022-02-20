@@ -6,28 +6,28 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { BusinessService } from './business.service';
 import { CreateBusinessDto } from './dto/create-business.dto';
 import { UpdateBusinessDto } from './dto/update-business.dto';
 
-@Controller('business')
+@Controller('api/business')
 export class BusinessController {
   constructor(private readonly businessService: BusinessService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createBusinessDto: CreateBusinessDto) {
-    return this.businessService.create(createBusinessDto);
+  create(@Req() req, @Body() createBusinessDto: CreateBusinessDto) {
+    return this.businessService.create(createBusinessDto, req.user);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.businessService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.businessService.findOne(+id);
+  findOne() {
+    return this.businessService.findOne();
   }
 
   @Patch(':id')

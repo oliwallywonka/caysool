@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 import { ButtonComponent } from './components/button/button.component';
@@ -27,5 +27,6 @@ import { NgxPopperjsModule } from 'ngx-popperjs';
     RxReactiveFormsModule,
     NgxPopperjsModule
   ],
+  providers: [DatePipe]
 })
 export class SharedModule {}

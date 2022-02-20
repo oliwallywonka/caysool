@@ -33,7 +33,13 @@ export class CreateInventarioDto {
   @IsOptional()
   @IsString()
   @Min(2)
-  @Max(3)
+  @Max(70)
+  descripcion: string;
+
+  @IsOptional()
+  @IsString()
+  @Min(2)
+  @Max(70)
   observacion: string;
 
   //Articulo

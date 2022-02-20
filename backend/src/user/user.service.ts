@@ -5,9 +5,29 @@ import { User } from './entities/user.entity';
 import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 import { AuditService } from 'src/audit/audit.service';
 import fs = require('fs');
+import { Connection } from 'typeorm';
 @Injectable()
 export class UserService {
-  constructor(private readonly auditService: AuditService) {}
+  constructor(
+    private readonly auditService: AuditService,
+    private connection: Connection,
+  ) {
+    this.createDefaultUser();
+  }
+
+  async createDefaultUser() {
+    const queryRunner = this.connection.createQueryRunner();
+    const user = await User.find();
+    if (user.length === 0) {
+      const newUser = new User();
+      newUser.ci = '123456';
+      newUser.password = '123456';
+      newUser.name = 'Usuario Admin Prueba';
+      newUser.phone = '12345678';
+      await newUser.save();
+    }
+    await queryRunner.release();
+  }
 
   async uploadImage(id: number, file: Express.Multer.File) {
     const userFound = await this.findOne(id);

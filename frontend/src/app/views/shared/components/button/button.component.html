@@ -2,8 +2,8 @@
   class="text-white text-sm font-bold uppercase px-3 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150 {{theme}}"
   [ngClass]="{
     'cursor-wait': loading,
-    'bg-lime-400 active:bg-lime-500' : btnTheme==='lime',
-    'bg-blue-500 active:bg-blue-600' : btnTheme==='blue'
+    'bg-green-400 active:bg-green-700' : btnTheme==='green',
+    'bg-sky-600 active:bg-sky-700' : btnTheme==='sky'
   }"
   [disabled]="loading"
   (click)="btnClicked()"

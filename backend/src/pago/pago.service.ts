@@ -10,7 +10,7 @@ export class PagoService {
   constructor(private auditService: AuditService) {}
   async create(createPagoDto: CreatePagoDto, user) {
     const prestamo = await Prestamo.findOne(createPagoDto.prestamo.id);
-    if (prestamo)
+    if (!prestamo)
       throw new BadRequestException({ message: 'Prestamo no encontrado' });
     const pago = Pago.create(createPagoDto);
     await pago.save();

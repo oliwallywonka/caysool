@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { InventarioService } from 'src/inventario/inventario.service';
 import moment = require('moment');
 import { Connection } from 'typeorm';
+import { Inventario } from 'src/inventario/entities/inventario.entity';
 @Injectable()
 export class PrestamoService {
   constructor(
@@ -158,6 +159,15 @@ export class PrestamoService {
       for (const prestamo of prestamos) {
         prestamo.estado = 'VENCIDO';
         await prestamo.save();
+        const inventario = await Inventario.createQueryBuilder('inventario')
+          .where('inventario.prestamo = :prestamo', { prestamo: prestamo.id })
+          .getMany();
+        if (inventario.length > 0) {
+          for (const inv of inventario) {
+            inv.estado = 'EN VENTA';
+            await inv.save();
+          }
+        }
       }
     }
     await queryRunner.release();

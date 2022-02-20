@@ -83,6 +83,7 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
         RxwebValidators.required({ message: this.errorMessages.required }),
       ]
     ],
+    descripcion: [''],
     observacion: [''],
     marca: [''],
     modelo: [''],

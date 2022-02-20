@@ -5,15 +5,16 @@
       <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
         <button
             (click)="goToBackPage()"
-            class="mx-4 bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xl px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            class="mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1"
             type="submit"
           >
           <i class="fas fa-arrow-left"></i>
         </button>
-        Información del Cliente
+        Información del Prestamo
       </h3>
       <div class="flex items-center justify-start pt-2">
-
+        <app-modal-pago></app-modal-pago>
+        <app-modal-amortiguar></app-modal-amortiguar>
 
       </div>
       <div class="w-full ">
@@ -23,7 +24,7 @@
       </div>
     </div>
     <div class="flow-root w-auto flex flex-col justify-center">
-      <div *ngIf="prestamo" class="cursor-pointer m-2 w-1/2 border-2 border-lime-300 hover:border-lime-500 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+      <div *ngIf="prestamo" class="cursor-pointer m-2 w-1/2 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
         <div class="flex items-center space-x-4 px-4 py-2 bg-blueGray-600 ">
             <div class="flex-1 min-w-0">
               <p class="text-xl font-medium text-white truncate dark:text-white">
@@ -33,37 +34,87 @@
                   Prestamo ID: {{ prestamo.id }}
               </p>
             </div>
+
             <button
-              [popper]="clientModal"
+              [popper]="imprimirRecibo"
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
-              class="text-lime-300 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button"
               (click)="showPagoModal()">
-              <i class="fas fa-edit"></i>
+              <i class="fas fa-file-invoice-dollar"></i>
             </button>
-            <popper-content #clientModal>
-              <p class="bold">Editar cliente</p>
+            <popper-content #imprimirRecibo>
+              <p class="bold">Imprimir recibo</p>
             </popper-content>
 
             <button
-              [popper]="prestamoModal"
+              [popper]="imprimirContrato"
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
-              class="text-lime-300 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button"
               (click)="showPagoModal()">
-              <i class="fas fa-plus-square"></i>
+              <i class="fas fa-file-invoice"></i>
             </button>
-            <popper-content #prestamoModal>
-              <p class="bold">Nuevo Prestamo</p>
+            <popper-content #imprimirContrato>
+              <p class="bold">Imprimir contrato</p>
+            </popper-content>
+
+            <button
+              [popper]="pagoModal"
+              [popperTrigger]="'hover'"
+              [popperPlacement]="'top'"
+              [popperPositionFixed]="true"
+              class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button"
+              (click)="showPagoModal()">
+              <i class="fas fa-money-bill"></i>
+            </button>
+            <popper-content #pagoModal>
+              <p class="bold">Añadir pago</p>
+            </popper-content>
+
+            <button
+              [popper]="amortizacionModal"
+              [popperTrigger]="'hover'"
+              [popperPlacement]="'top'"
+              [popperPositionFixed]="true"
+              class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button"
+              (click)="showPagoModal()">
+              <i class="fas fa-wallet"></i>
+            </button>
+            <popper-content #amortizacionModal>
+              <p class="bold">Pago Amortización</p>
             </popper-content>
         </div>
 
         <div class="flex items-center space-x-4 px-4 ">
           <div class="flex-1 min-w-0 py-8">
+            <div class="text-xl font-medium text-gray-900 truncate dark:text-white flex flex-column">
+              Prenda(s)
+              <div *ngFor="let inv of prestamo.inventario">
+                <p
+                  *ngIf="inv.tipo === 'JOYA'"
+                  class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                    {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
+                </p>
+                <p
+                  *ngIf="inv.tipo === 'ARTICULO'"
+                  class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                    {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
+                </p>
+                <p
+                  *ngIf="inv.tipo === 'VEHICULO'"
+                  class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                    {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                </p>
+              </div>
+            </div>
+
             <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
               MontoPrestamo: {{ prestamo.costoPrestamo }}
             </p>
@@ -74,7 +125,7 @@
               Fecha de vencimiento: {{ prestamo.fechaFinal | date:'medium' }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
-              Interés al finalizar el Plazo: {{ prestamo.costoTotal - prestamo.costoPrestamo }}
+              Interés al finalizar el Plazo: {{ (prestamo.costoTotal - prestamo.costoPrestamo).toFixed(1) }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
               Estado: {{ prestamo.estado }}
@@ -108,7 +159,7 @@
                                   Cargo
                                 </th>
                                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                  Comision
+                                  Comisión
                                 </th>
                                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                   Cargos Generados
@@ -121,61 +172,31 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Product 1 -->
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <tbody *ngIf="prestamo" >
+                            <tr *ngFor="let historial of historialArray" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Apple MacBook Pro 17"
+                                    {{ historial.fecha }}
                                 </td>
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    Sliver
+                                    {{ historial.operacion }}
                                 </td>
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    Laptop
+                                    Bol. {{ historial.cargo }}
                                 </td>
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    $2999
+                                    Bol. {{ historial.comision }}
                                 </td>
-                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.cargoExtra }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.amortiguado }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol.
                                 </td>
                             </tr>
-                            <!-- Product 2 -->
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Apple Imac 27"
-                                </td>
-                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    White
-                                </td>
-                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    Desktop Pc
-                                </td>
-                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    $1999
-                                </td>
-                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
-                            <!-- Product 2 -->
-                            <tr class="bg-white dark:bg-gray-800">
-                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Apple Magic Mouse 2
-                                </td>
-                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    White
-                                </td>
-                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    Accessories
-                                </td>
-                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    $99
-                                </td>
-                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>

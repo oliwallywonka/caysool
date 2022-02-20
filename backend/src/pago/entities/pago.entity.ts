@@ -22,7 +22,7 @@ export class Pago extends BaseEntity {
   prestamo: Prestamo;
 
   //INTERES o PRESTAMO
-  @Column({ type: 'varchar', length: 10, default: 'PRESTAMO' })
+  @Column({ type: 'varchar', length: 12, default: 'PRESTAMO' })
   tipoPago: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
@@ -43,8 +43,8 @@ export class Pago extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @AfterUpdate()
-  @AfterInsert()
+  @BeforeUpdate()
+  @BeforeInsert()
   calculateCostoTotal() {
     this.costoTotal =
       this.costoAdministracion + this.costoPiso + this.costoPago;

@@ -3,7 +3,7 @@
     <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
       <button
           (click)="goToBackPage()"
-          class="mx-4 bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          class="mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1"
           type="submit"
         >
         <i class="fas fa-arrow-left"></i>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="flow-root w-auto flex flex-col justify-center">
-    <div *ngIf="prestamoEstado" class="cursor-pointer m-2 w-1/2 border-2 border-lime-300 hover:border-lime-500 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+    <div *ngIf="prestamoEstado" class="cursor-pointer m-2 w-1/2 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
       <div class="flex items-center space-x-4 px-4 py-2 bg-blueGray-600 ">
           <div class="flex-shrink-0">
             <i class="fas fa-user-circle text-center text-6xl text-white"></i>
@@ -39,7 +39,7 @@
             [popperTrigger]="'hover'"
             [popperPlacement]="'top'"
             [popperPositionFixed]="true"
-            class="text-lime-300 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+            class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
             type="button"
             (click)="showClientModal(client)">
             <i class="fas fa-edit"></i>
@@ -53,7 +53,7 @@
             [popperTrigger]="'hover'"
             [popperPlacement]="'top'"
             [popperPositionFixed]="true"
-            class="text-lime-300 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+            class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
             type="button"
             (click)="showPrestamoModal(client)">
             <i class="fas fa-plus-square"></i>
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <div class="my-4 mx-2 flex text-center content-center text-2xl w-1/2 bg-lime-300">
+    <div class="my-4 mx-2 flex text-center content-center text-2xl w-1/2 bg-green-500">
       <div class="p-14 bold">
         <div>ACTIVOS</div>
         <div class="text-4xl">{{ prestamoEstado?.activos.cantidad }}</div>
@@ -103,9 +103,11 @@
     <div class="flow-root w-auto">
       <ul *ngIf="inventario" role="list" >
           <li *ngFor="let inv of inventario; let i=index;"
-              class="cursor-pointer m-2 w-1/2 border-2 border-lime-300 hover:border-lime-500 transform hover:-translate-y-1 ease-linear transition-all duration-150">
-              <div class="flex items-center">
-                  <div class="text-3xl p-4 bg-lime-300">
+              class="cursor-pointer m-2 w-1/2 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+              <div
+                class="flex items-center"
+                (click)="goToInventarioPage(inv)">
+                  <div class="text-3xl p-4 bg-green-500">
                     {{i+1}}
                   </div>
                   <div  class="flex-1 min-w-0 mx-6">
