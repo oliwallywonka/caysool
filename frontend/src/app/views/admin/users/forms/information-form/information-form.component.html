@@ -3,83 +3,85 @@
     <!--content-->
     <div class="relative flex flex-col w-full bg-white outline-none focus:outline-none">
       <!--header-->
+      <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+        <h4 class="text-2xl font-semibold">
+           Información De la empresa
+        </h4>
+      </div>
       <form
-        [formGroup]="businessForm"
+        autocomplete="off"
+        [formGroup]="loginForm"
         (ngSubmit)="save()"
       >
-        <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-          <h3 class="text-3xl font-semibold">
-            Información de la Empresa
-          </h3>
-        </div>
-        <!--body-->
         <div class="my-4 relative p-6 flex flex-wrap">
-
-
-          <div class="w-full lg:w-6/12 px-4 pb-4">
+          <div class="w-full lg:w-6/12 px-4 mb-2">
             <app-input
-              [inputForm]="businessForm"
-              inputLabel="Nombre de la Empresa"
-              inputPlaceholder="Ingrese el nombre de la empresa..."
-              inputFormName='name'
-              inputcontrolName='name'
-              [value]="businessForm.value.name"
-            ></app-input>
+              [inputForm]="loginForm"
+              inputLabel="NOMBRE"
+              inputType="text"
+              inputPlaceholder="Ingrese su nombre..."
+              inputFormName="name"
+              formControlName="name"
+              [value]="loginForm.value.name">
+            </app-input>
           </div>
 
-          <div class="w-full lg:w-6/12 px-4 pb-4">
+          <div class="w-full lg:w-6/12 px-4 mb-2">
           </div>
 
-          <div class="w-full lg:w-6/12 px-4 pb-4">
+          <div class="w-full lg:w-6/12 px-4 mb-2">
             <app-input
-              [inputForm]="businessForm"
-              inputLabel="NIT"
-              inputPlaceholder="Ingrese el nit de la empresa..."
-              inputFormName='nit'
-              inputcontrolName='nit'
-              [value]="businessForm.value.nit"
-            ></app-input>
+                [inputForm]="loginForm"
+                inputLabel="NIT"
+                inputType="text"
+                inputPlaceholder="Ingrese su CI..."
+                inputFormName="nit"
+                formControlName="nit"
+                [value]="loginForm.value.nit">
+            </app-input>
           </div>
 
-          <div class="w-full lg:w-6/12 px-4">
-
+          <div class="w-full lg:w-6/12 px-4 mb-2">
           </div>
 
-          <div class="w-full lg:w-6/12 px-4 pb-4">
+          <div class="w-full lg:w-6/12 px-4 mb-2">
             <app-input
-              [inputForm]="businessForm"
-              inputLabel="Teléfono/celular"
-              inputPlaceholder="Ingrese el Nº de contacto de la empresa..."
-              inputFormName='phone'
-              inputcontrolName='phone'
-              [value]="businessForm.value.phone"
-            ></app-input>
+                [inputForm]="loginForm"
+                inputLabel="TEL/CEL"
+                inputType="text"
+                inputPlaceholder="Ingrese su Contraseña..."
+                inputFormName="phone"
+                formControlName="phone"
+                [value]="loginForm.value.phone">
+            </app-input>
           </div>
 
-          <div class="w-full lg:w-6/12 px-4">
+          <div class="w-full lg:w-6/12 px-4 mb-2">
           </div>
 
-          <div class="w-full lg:w-6/12 px-4 pb-4">
+          <div class="w-full lg:w-6/12 px-4 mb-2">
             <app-input
-              [inputForm]="businessForm"
-              inputLabel="Dirección"
-              inputPlaceholder="Ingrese la dirección de la empresa..."
-              inputFormName='direction'
-              inputcontrolName='direction'
-              [value]="businessForm.value.direction"
-            ></app-input>
+                [inputForm]="loginForm"
+                inputLabel="Dirección"
+                inputType="text"
+                inputPlaceholder="Ingrese su cel..."
+                inputFormName="direction"
+                formControlName="direction"
+                [value]="loginForm.value.direction">
+            </app-input>
           </div>
         </div>
-        <!--footer-->
-        <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-          <app-button
-            btnType="submit"
-            btnText="Guardar cambios"
-            [loading]="loading"
-          >
-          </app-button>
-        </div>
-      </form>
-      {{ businessForm.value | json }}
+
+      <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+        <button
+          [disabled]="!loginForm.valid || loading"
+          class="mx-4 bg-sky-700 text-white active:bg-sky-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="submit"
+        >
+        <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
+        </button>
+      </div>
+
+    </form>
     </div>
   </div>

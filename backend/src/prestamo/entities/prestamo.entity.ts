@@ -18,7 +18,6 @@ import {
 } from 'typeorm';
 
 import moment = require('moment');
-import { Amortizacion } from 'src/amortizacion/entities/amortizacion.entity';
 @Entity()
 export class Prestamo extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -77,16 +76,16 @@ export class Prestamo extends BaseEntity {
     //DIAS MINIMO 5
     const diaInicio = moment(this.fechaInicio);
     const diaFinal = moment(this.fechaFinal);
-    const day = moment(Date.now());
-    const today = moment.duration(day.diff(diaFinal)).asDays();
-    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
+    const day = moment(Date.now()).startOf('day');
+    const today = moment.duration(diaFinal.diff(day)).asDays();
+    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays() + 1;
     const costoTotal =
       this.costoPrestamo * (1 + interes / 30) ** (dias < 5 ? 5 : dias);
     const costoInteres = costoTotal - this.costoPrestamo;
     this.costoTotal = costoTotal;
     this.costoInteres = costoInteres;
     if (this.costoCancelado < this.costoTotal) {
-      if (today > 1) {
+      if (today > 0) {
         this.estado = 'ACTIVO';
       } else {
         this.estado = 'VENCIDO';
@@ -117,10 +116,10 @@ export class Prestamo extends BaseEntity {
       this.costoCancelado = +costoPago.costoCancelado;
     }
     const diaFinal = moment(this.fechaFinal);
-    const day = moment(Date.now());
-    const today = moment.duration(day.diff(diaFinal)).asDays();
+    const day = moment(Date.now()).startOf('day');
+    const today = moment.duration(diaFinal.diff(day)).asDays();
     if (this.costoCancelado < this.costoTotal) {
-      if (today > 1) {
+      if (today > 0) {
         this.estado = 'ACTIVO';
       } else {
         this.estado = 'VENCIDO';

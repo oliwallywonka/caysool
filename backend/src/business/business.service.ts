@@ -20,7 +20,7 @@ export class BusinessService {
       newBusiness.nit = '123456879';
       newBusiness.phone = '123456/12345';
       newBusiness.direction = 'fake Direction street 11';
-      newBusiness.commission = 5;
+      newBusiness.comission = 5;
       newBusiness.interest = 15;
       newBusiness.cambioDolar = 6.96;
       await newBusiness.save();
@@ -43,7 +43,6 @@ export class BusinessService {
       return { message: 'DATOS DE LA EMPRESA INGRESADOS CORRECTAMENTE' };
     } else {
       const newBusiness = Business.create(createBusinessDto);
-      console.log(createBusinessDto);
       Business.merge(business, createBusinessDto);
       await business.save();
       this.auditService.audit({

@@ -8,6 +8,7 @@ import { Pago } from './entities/pago.entity';
 @Injectable()
 export class PagoService {
   constructor(private auditService: AuditService) {}
+
   async create(createPagoDto: CreatePagoDto, user) {
     const prestamo = await Prestamo.findOne(createPagoDto.prestamo.id);
     if (!prestamo)

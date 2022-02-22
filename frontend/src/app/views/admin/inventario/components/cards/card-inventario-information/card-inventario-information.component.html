@@ -13,7 +13,7 @@
         Información Inventario Nº {{ inventario?.id }}
       </h3>
       <div class="flex items-center justify-start pt-2">
-
+        <app-modal-delete-picture></app-modal-delete-picture>
       </div>
       <div class="w-full ">
         <div class="flex flex-col pt-4 items-baseline w-full">
@@ -22,22 +22,26 @@
       </div>
     </div>
     <div class="flow-root w-auto flex flex-col justify-center">
-      <div *ngIf="inventario" class="cursor-pointer m-2 w-1/2 border-2 border-green-300 hover:border-green-500 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+      <div *ngIf="inventario" class="cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-600 transform hover:-translate-y-1 ease-linear transition-all duration-150">
         <div class="flex items-center space-x-4 px-4 py-2 bg-blueGray-600 ">
-            <div class="flex-1 min-w-0">
+            <div class="flex-1 min-w-0 text-white">
+              <p
+                class="text-xl font-medium truncate dark:text-white">
+                  {{ inventario.descripcion }}
+              </p>
               <p
                 *ngIf="inventario.tipo === 'JOYA'"
-                class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                class="text-xl font-medium truncate dark:text-white">
                   {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}
               </p>
               <p
                 *ngIf="inventario.tipo === 'ARTICULO'"
-                class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                class="text-xl font-medium truncate dark:text-white">
                   {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}
               </p>
               <p
                 *ngIf="inventario.tipo === 'VEHICULO'"
-                class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                class="text-xl font-medium truncate dark:text-white">
                   {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}
               </p>
             </div>
@@ -93,7 +97,7 @@
           (change)="onFileChange($event)">
         <button
           [disabled]="!pictureForm.valid || loading"
-          class="mx-4 bg-sky-600 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          class="mx-4 bg-sky-700 text-white active:bg-sky-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="submit"
         >
           <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar
@@ -106,7 +110,7 @@
   <div  class="grid lg:grid-cols-4 sm:grid-cols-2 gap-4 flex items-center ml-6 w-auto">
     <div *ngFor="let picture of pictures" class="mb-4 relative ">
         <button
-          (click)="openDeleteModal()"
+          (click)="openDeleteModal(picture)"
           class="absolute top-0 right-0 mx-4 bg-none text-red-600 active:text-red-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1"
           type="button"
           >

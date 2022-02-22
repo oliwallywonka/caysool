@@ -15,7 +15,7 @@ import { shareReplay } from 'rxjs/operators';
 export class PictureService {
 
   @Output() picture:EventEmitter<Picture> = new EventEmitter();
-  @Output() response:EventEmitter<PictureResponse> = new EventEmitter();
+  @Output() pictures:EventEmitter<Picture[]> = new EventEmitter();
   cacheResponse$: Observable<any>;
   private baseUrl: string = environment.baseUrl;
 

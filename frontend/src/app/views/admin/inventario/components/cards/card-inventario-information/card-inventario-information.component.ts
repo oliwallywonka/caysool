@@ -51,6 +51,7 @@ export class CardInventarioInformationComponent implements OnInit, OnDestroy {
     this.inventarioId = this.route.snapshot.paramMap.get('inventarioId');
     this.getInventarioById();
     this.getPicturesByInventarioId();
+    this.subscribePictures();
   }
 
   ngOnDestroy(): void {
@@ -65,7 +66,6 @@ export class CardInventarioInformationComponent implements OnInit, OnDestroy {
           this.inventario = inventario;
         }
       )
-
     );
   }
 
@@ -79,8 +79,22 @@ export class CardInventarioInformationComponent implements OnInit, OnDestroy {
     );
   }
 
-  openDeleteModal() {
+  subscribePictures() {
+    this.sub.add(
+      this.pictureService.pictures.subscribe(
+        pictures => {
+          if (pictures) {
+            this.pictures = pictures;
+          }
+        }
+      )
+    );
+  }
 
+  openDeleteModal(picture: Picture) {
+    this.modal.modalName = 'pictureDeleteModal';
+    this.modal.visible = true;
+    this.pictureService.picture.emit(picture);
   }
 
   goToBackPage() {

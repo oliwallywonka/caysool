@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormGroupExtension, RxFormBuilder, RxwebValidators } from '@rxweb/reactive-form-validators';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ import { Client } from 'src/app/interfaces/client';
   ]
 })
 export class ClientModalComponent implements OnInit, OnDestroy {
+  @Input() modalButton = true;
   sub: Subscription;
   loading: boolean = false;
   client: Client;
@@ -149,6 +150,11 @@ export class ClientModalComponent implements OnInit, OnDestroy {
     this.modal.visible = false;
     this.modal.modalName = '';
     this.clientService.client.emit(null);
+  }
+
+  toggleModal() {
+    this.modal.visible = true;
+    this.modal.modalName = 'clientModal';
   }
 
   refreshForm() {

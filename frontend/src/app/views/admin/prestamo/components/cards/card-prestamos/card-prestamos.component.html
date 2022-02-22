@@ -12,7 +12,7 @@
           <input
             type="text"
             placeholder="Buscar por CI Ej: 836378..."
-            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-500  w-full ease-linear transition-all duration-150"
+            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150"
             formControlName="ci"
             (ngModelChange)="search($event)"
           >
@@ -23,10 +23,10 @@
   <div class="flow-root w-auto">
     <ul *ngIf="response" role="list" class="relative">
       <li *ngFor="let prestamo of response.items; let i=index;"
-          class="cursor-pointer m-2 w-1/2 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150"
+          class="cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150"
           (click)="goToPrestamoInformation(prestamo)">
           <div class="flex items-center">
-              <div class="text-3xl p-4 bg-green-500">
+              <div class="text-3xl p-4 bg-green-600">
                 {{prestamo.id}}
               </div>
               <div  class="flex-1 min-w-0 mx-6 flex flex-col">
@@ -38,13 +38,13 @@
                   class="text-xl font-medium text-gray-500 truncate dark:text-white">
 
                   <p *ngIf="inv.tipo === 'JOYA'">
-                      {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
+                      {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
                   </p>
                   <p *ngIf="inv.tipo === 'ARTICULO'">
-                      {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
+                      {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
                   </p>
                   <p *ngIf="inv.tipo === 'VEHICULO'">
-                      {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                      {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
                   </p>
                 </div>
                 <p class="text-xl font-medium text-gray-500 truncate dark:text-white">

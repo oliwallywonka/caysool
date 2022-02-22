@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 import { RxFormBuilder, RxwebValidators } from '@rxweb/reactive-form-validators';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -22,8 +23,13 @@ export class InformationFormComponent implements OnInit, OnDestroy {
     maxLenght: 'El campo es muy largo',
     email: 'El email introducido no es valido',
   };
-  businessForm: FormGroup = this.fb.group({
-    name: ['', RxwebValidators.required({ message: this.errorMessages.required })],
+
+  loginForm: FormGroup = this.fb.group({
+    name: ['',
+      [
+        RxwebValidators.required({ message: this.errorMessages.required }),
+      ]
+    ],
     nit: [''],
     phone: [''],
     direction: ['']
@@ -31,7 +37,7 @@ export class InformationFormComponent implements OnInit, OnDestroy {
   constructor(
     private businessService: BusinessService,
     private alertService: AlertService,
-    private fb: RxFormBuilder
+    private  fb: RxFormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -49,12 +55,12 @@ export class InformationFormComponent implements OnInit, OnDestroy {
         business =>{
           this.business = business;
           console.log(business);
-          /*if (this.business){
-            this.businessForm.controls['name'].setValue(business.name);
-            this.businessForm.controls['nit'].setValue(business.nit);
-            this.businessForm.controls['phone'].setValue(business.phone);
-            this.businessForm.controls['direction'].setValue(business.direction);
-          }*/
+          if (this.business){
+            this.loginForm.controls['name'].setValue(business.name);
+            this.loginForm.controls['nit'].setValue(business.nit);
+            this.loginForm.controls['phone'].setValue(business.phone);
+            this.loginForm.controls['direction'].setValue(business.direction);
+          }
         },
         error =>{
           this.alertService.triggerMessage(error.error.message, 'error');
@@ -65,9 +71,9 @@ export class InformationFormComponent implements OnInit, OnDestroy {
 
 
   save() {
-    console.log(this.businessForm.value);
+    console.log(this.loginForm.value);
     this.loading = true;
-    this.businessService.postBusines(this.businessForm.value).subscribe(
+    this.businessService.postBusines(this.loginForm.value).subscribe(
       response => {
         this.loading = false;
         this.alertService.triggerMessage(response.message, 'success');

@@ -23,6 +23,18 @@ const routes: Routes = [{
       loadChildren: () => import('./inventario/inventario.module').then(m => m.InventarioModule)
     },
     {
+      path: 'ingresos-salidas',
+      loadChildren: () => import('./ingreso-salida/ingreso-salida.module').then(m => m.IngresoSalidaModule)
+    },
+    {
+      path: 'reportes',
+      loadChildren: () => import('./reporte/reporte.module').then(m => m.ReporteModule)
+    },
+    {
+      path: 'historial',
+      loadChildren: () => import('./historial/historial.module').then(m => m.HistorialModule)
+    },
+    {
       path: '**',
       redirectTo: 'panel-control'
     }

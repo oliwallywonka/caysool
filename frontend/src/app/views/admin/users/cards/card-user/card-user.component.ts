@@ -156,6 +156,9 @@ export class CardUserComponent implements OnInit, OnDestroy {
 
   showModal (user) {
     this.modalService.modal.modalName = 'userModal';
+
+
+    
     this.modalService.modal.visible = true;
     this.userService.user.emit(user);
   }

@@ -19,6 +19,7 @@ import { MovimientoModule } from './movimiento/movimiento.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { NotificationModule } from './notification/notification.module';
+import { TransaccionMonedaModule } from './transaccion-moneda/transaccion-moneda.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { NotificationModule } from './notification/notification.module';
     AperturaModule,
     MovimientoModule,
     NotificationModule,
+    TransaccionMonedaModule,
   ],
 })
 export class AppModule {}

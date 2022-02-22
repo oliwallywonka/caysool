@@ -1,4 +1,10 @@
-
+<button
+  *ngIf="modalButton"
+  class="bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+  (click)="toggleModal()"
+  type="button">
+  <i class="fas fa-plus"></i> Nuevo
+</button>
 <div *ngIf="modal.visible&&modal.modalName==='clientModal'" class="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
   <div class="relative w-auto my-6 mx-auto max-w-580-px">
 
@@ -106,7 +112,7 @@
           Cancelar
         </button>
         <button
-          class="mx-4 bg-sky-600 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          class="mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
           (click)="refreshForm()"
         >
@@ -114,7 +120,7 @@
         </button>
         <button
           [disabled]="!clientForm.valid || loading"
-          class="mx-4 bg-sky-600 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          class="mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="submit"
         >
           <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios

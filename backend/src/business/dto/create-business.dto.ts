@@ -19,6 +19,10 @@ export class CreateBusinessDto {
 
   @IsOptional()
   @IsNumber()
+  comission: number;
+
+  @IsOptional()
+  @IsNumber()
   interest: number;
 
   @IsOptional()

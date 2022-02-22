@@ -12,7 +12,7 @@
     </h3>
     <div class="flex items-center justify-start pt-2">
       <app-new-prestamo-modal></app-new-prestamo-modal>
-      <app-client-modal></app-client-modal>
+      <app-client-modal [modalButton]="false"></app-client-modal>
     </div>
     <div class="w-full ">
       <div class="flex flex-col pt-4 items-baseline w-full">
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="flow-root w-auto flex flex-col justify-center">
-    <div *ngIf="prestamoEstado" class="cursor-pointer m-2 w-1/2 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+    <div *ngIf="prestamoEstado" class="cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
       <div class="flex items-center space-x-4 px-4 py-2 bg-blueGray-600 ">
           <div class="flex-shrink-0">
             <i class="fas fa-user-circle text-center text-6xl text-white"></i>
@@ -39,7 +39,7 @@
             [popperTrigger]="'hover'"
             [popperPlacement]="'top'"
             [popperPositionFixed]="true"
-            class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+            class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
             type="button"
             (click)="showClientModal(client)">
             <i class="fas fa-edit"></i>
@@ -53,7 +53,7 @@
             [popperTrigger]="'hover'"
             [popperPlacement]="'top'"
             [popperPositionFixed]="true"
-            class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+            class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
             type="button"
             (click)="showPrestamoModal(client)">
             <i class="fas fa-plus-square"></i>
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <div class="my-4 mx-2 flex text-center content-center text-2xl w-1/2 bg-green-500">
+    <div class="my-4 mx-2 flex text-center content-center text-2xl w-1/2 bg-green-600">
       <div class="p-14 bold">
         <div>ACTIVOS</div>
         <div class="text-4xl">{{ prestamoEstado?.activos.cantidad }}</div>
@@ -103,28 +103,28 @@
     <div class="flow-root w-auto">
       <ul *ngIf="inventario" role="list" >
           <li *ngFor="let inv of inventario; let i=index;"
-              class="cursor-pointer m-2 w-1/2 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+              class="cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
               <div
                 class="flex items-center"
                 (click)="goToInventarioPage(inv)">
-                  <div class="text-3xl p-4 bg-green-500">
+                  <div class="text-3xl p-4 bg-green-600">
                     {{i+1}}
                   </div>
                   <div  class="flex-1 min-w-0 mx-6">
                     <p
                       *ngIf="inv.tipo === 'JOYA'"
                       class="text-xl font-medium text-gray-900 truncate dark:text-white">
-                        {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
+                        {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
                     </p>
                     <p
                       *ngIf="inv.tipo === 'ARTICULO'"
                       class="text-xl font-medium text-gray-900 truncate dark:text-white">
-                        {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
+                        {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
                     </p>
                     <p
                       *ngIf="inv.tipo === 'VEHICULO'"
                       class="text-xl font-medium text-gray-900 truncate dark:text-white">
-                        {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                        {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
                     </p>
                     <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
                         {{ inv.createdAt|date: 'medium' }}

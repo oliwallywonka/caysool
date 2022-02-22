@@ -6,6 +6,7 @@ export interface AuthResponse {
 
 export interface User {
   id?: number;
+  rol: boolean;
   name: string;
   ci: string;
   password: string;

@@ -153,16 +153,16 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
 
   successMessage(message = 'creado') {
     this.alertService.alert.fire({
-      title: `Cliente ${message} Exitosamente`,
+      title: `Prestamo ${message} Exitosamente`,
       icon: 'success',
-    })
+    });
   }
 
   errorMessage(message) {
     this.alertService.alert.fire({
       title: message,
       icon: 'error',
-    })
+    });
   }
 
   save() {
@@ -179,7 +179,7 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.successMessage();
         this.closeModal();
-        this.router.navigate(['/admin/clientes', this.client.id]);
+        this.router.navigate(['/admin/prestamos', response.id]);
       },
       error => {
         this.loading = false;
@@ -204,7 +204,7 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
     this.costoTotal = 0;
     const diaInicio = moment(this.prestamoForm.value.fechaInicio);
     const diaFinal = moment(this.prestamoForm.value.fechaFinal);
-    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
+    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays() + 1;
     this.diasPrestamo = dias < 5 ? 5 : dias;
     if (this.inventarioArray.length > 0) {
       for (const inventario of this.inventarioArray) {

@@ -2,80 +2,70 @@
   <!--content-->
   <div class="relative flex flex-col w-full bg-white outline-none focus:outline-none">
     <!--header-->
+    <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+      <h4 class="text-2xl font-semibold">
+         MONEDA
+      </h4>
+    </div>
     <form
-      [formGroup]="informationForm"
-      (ngSubmit)="save()"
-    >
-      <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-        <h3 class="text-3xl font-semibold">
-          Datos de moneda
-        </h3>
-      </div>
-      <!--body-->
-      <div class="my-4 relative p-6 flex flex-wrap">
+        autocomplete="off"
+        [formGroup]="loginForm"
+        (ngSubmit)="save()"
+      >
+        <div class="my-4 relative p-6 flex flex-wrap">
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-input
+              [inputForm]="loginForm"
+              inputLabel="comisión"
+              inputType="text"
+              inputPlaceholder="Ingrese su nombre..."
+              inputFormName="comission"
+              formControlName="comission"
+              [value]="loginForm.value.comission">
+            </app-input>
+          </div>
 
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+          </div>
 
-        <div class="w-full lg:w-6/12 px-4 pb-4">
-          <app-input
-            inputLabel="Comision Administrativa"
-            inputType="number"
-            inputPlaceholder=""
-            inputFormName='comission'
-            inputcontrolName='comission'
-            [inputForm]="informationForm"
-          ></app-input>
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-input
+                [inputForm]="loginForm"
+                inputLabel="INTERES"
+                inputType="text"
+                inputPlaceholder="Ingrese su CI..."
+                inputFormName="interest"
+                formControlName="interest"
+                [value]="loginForm.value.interest">
+            </app-input>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-input
+                [inputForm]="loginForm"
+                inputLabel="Cambio Dolar Oficial"
+                inputType="number"
+                inputPlaceholder="Ingrese su Contraseña..."
+                inputFormName="cambioDolar"
+                formControlName="cambioDolar"
+                [value]="loginForm.value.cambioDolar">
+            </app-input>
+          </div>
         </div>
 
-        <div class="w-full lg:w-6/12 px-4 pb-4">
-        </div>
-
-        <div class="w-full lg:w-6/12 px-4 pb-4">
-          <app-input
-            inputLabel="Interes %"
-            inputPlaceholder="ej: 0.15"
-            inputType="number"
-            inputFormName='interest'
-            inputcontrolName='interest'
-            [inputForm]="informationForm"
-          ></app-input>
-        </div>
-
-        <div class="w-full lg:w-6/12 px-4">
-
-        </div>
-
-        <div class="w-full lg:w-6/12 px-4 pb-4">
-          <app-input
-            inputLabel="Cambio oficial de dolar"
-            inputPlaceholder="Ingrese el Nº de contacto de la empresa..."
-            inputFormName='cambioDolar'
-            inputcontrolName='cambioDolar'
-            [inputForm]="informationForm"
-          ></app-input>
-        </div>
-
-        <div class="w-full lg:w-6/12 px-4">
-        </div>
-
-        <div class="w-full lg:w-6/12 px-4 pb-4">
-          <app-input
-            inputLabel="Dirección"
-            inputPlaceholder="Ingrese la dirección de la empresa..."
-            inputFormName='name'
-            inputcontrolName='name'
-            [inputForm]="informationForm"
-          ></app-input>
-        </div>
-      </div>
-      <!--footer-->
       <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-        <app-button
-          btnType="submit"
-          btnText="Guardar cambios"
-          [loading]="loading"
+        <button
+          [disabled]="!loginForm.valid || loading"
+          class="mx-4 bg-sky-700 text-white active:bg-sky-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="submit"
         >
-        </app-button>
+        <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
+        </button>
       </div>
+
     </form>
   </div>
 </div>

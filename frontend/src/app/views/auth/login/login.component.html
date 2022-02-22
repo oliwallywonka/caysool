@@ -26,8 +26,7 @@
                 inputType="text"
                 inputPlaceholder="Ingrese su CI..."
                 inputFormName="ci"
-                formControlName="ci"
-                [value]="loginForm.value.ci">
+                formControlName="ci">
               </app-input>
             </div>
 
@@ -38,11 +37,9 @@
                 inputType="password"
                 inputPlaceholder="Ingrese su contraseña..."
                 inputFormName="password"
-                formControlName="password"
-                >
+                formControlName="password">
               </app-input>
             </div>
-            {{loginForm.value|json}}
             <div class="text-center mt-6">
               <app-button
                 [loading]="loading"

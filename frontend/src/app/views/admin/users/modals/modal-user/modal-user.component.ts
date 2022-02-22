@@ -30,8 +30,23 @@ export class ModalUserComponent implements OnInit {
     email: 'El email introducido no es valido',
   };
 
+  options = [
+    {
+      value: true,
+      name: 'Administrador'
+    },
+    {
+      value: false,
+      name: 'Empleado'
+    }
+  ];
+
   userForm: FormGroup = this.fb.group({
-    id: [''],
+    rol: ['',
+      [
+        RxwebValidators.required({ message: this.errorMessages.required }),
+      ]
+    ],
     name: ['',
       [
         RxwebValidators.required({ message: this.errorMessages.required }),
@@ -98,13 +113,14 @@ export class ModalUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.user = null;
     this.userService.user.subscribe((user: User) => {
       this.user = user;
       if (user) {
-        this.userForm.controls['id'].setValue(user ? user.id : '');
         this.userForm.controls['name'].setValue(user ? user.name : '');
         this.userForm.controls['ci'].setValue(user ? user.ci : '');
         this.userForm.controls['phone'].setValue(user ? user.phone : '');
+        this.userForm.controls['rol'].setValue(user.rol);
       }
     });
   }
@@ -118,6 +134,7 @@ export class ModalUserComponent implements OnInit {
     this.modal.visible = false;
     this.modal.modalName = '';
     this.userService.user.emit(null);
+    this.refreshForm();
   }
 
   refreshForm() {
@@ -126,11 +143,15 @@ export class ModalUserComponent implements OnInit {
 
   save() {
     this.loading = true;
+    const body = {
+      ...this.userForm.value,
+      rol: JSON.parse(this.userForm.value.rol)
+    }
     const formData = (<FormGroupExtension>this.pictureForm).toFormData();
     if (this.user) {
       if (this.pictureForm.value.picture) {
         forkJoin([
-          this.userService.patchUser(this.userForm.value, this.user.id),
+          this.userService.patchUser(body, this.user.id),
           this.userService.patchImageUser(formData, this.user.id),
         ]).subscribe(([
           response1,
@@ -142,8 +163,9 @@ export class ModalUserComponent implements OnInit {
           this.closeModal();
         })
       } else {
-        this.userService.patchUser(this.userForm.value, this.user.id).subscribe(
+        this.userService.patchUser(body, this.user.id).subscribe(
           response => {
+
             this.loading = false;
             this.successMessage('editado');
             this.refreshUsers();
@@ -158,7 +180,7 @@ export class ModalUserComponent implements OnInit {
       }
     }else{
       if (this.pictureForm.value.picture) {
-        this.userService.postUser(this.userForm.value).subscribe(
+        this.userService.postUser(body).subscribe(
           response  => {
             this.userService.patchImageUser(formData, response.user.id).subscribe(
               response => {
@@ -179,8 +201,9 @@ export class ModalUserComponent implements OnInit {
           }
         );
       }else {
-        this.userService.postUser(this.userForm.value).subscribe(
+        this.userService.postUser(body).subscribe(
           response => {
+            console.log(this.userForm.value);
             this.loading = false;
             this.successMessage('creado');
             this.refreshUsers();

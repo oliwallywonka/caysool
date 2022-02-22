@@ -10,7 +10,7 @@
           >
           <i class="fas fa-arrow-left"></i>
         </button>
-        Información del Prestamo
+        Información del Prestamo Nº {{ prestamo.id }}
       </h3>
       <div class="flex items-center justify-start pt-2">
         <app-modal-pago></app-modal-pago>
@@ -24,14 +24,11 @@
       </div>
     </div>
     <div class="flow-root w-auto flex flex-col justify-center">
-      <div *ngIf="prestamo" class="cursor-pointer m-2 w-1/2 border-2 border-green-500 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
+      <div *ngIf="prestamo" class="cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150">
         <div class="flex items-center space-x-4 px-4 py-2 bg-blueGray-600 ">
             <div class="flex-1 min-w-0">
               <p class="text-xl font-medium text-white truncate dark:text-white">
                   Cliente: {{ prestamo.client.name }}
-              </p>
-              <p class="text-xl font-medium text-gray-200 truncate dark:text-gray-400">
-                  Prestamo ID: {{ prestamo.id }}
               </p>
             </div>
 
@@ -40,7 +37,7 @@
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
-              class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button"
               (click)="showPagoModal()">
               <i class="fas fa-file-invoice-dollar"></i>
@@ -54,7 +51,7 @@
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
-              class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button"
               (click)="showPagoModal()">
               <i class="fas fa-file-invoice"></i>
@@ -68,7 +65,7 @@
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
-              class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button"
               (click)="showPagoModal()">
               <i class="fas fa-money-bill"></i>
@@ -82,7 +79,7 @@
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
-              class="text-green-500 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button"
               (click)="showPagoModal()">
               <i class="fas fa-wallet"></i>
@@ -94,23 +91,29 @@
 
         <div class="flex items-center space-x-4 px-4 ">
           <div class="flex-1 min-w-0 py-8">
-            <div class="text-xl font-medium text-gray-900 truncate dark:text-white flex flex-column">
-              Prenda(s)
-              <div *ngFor="let inv of prestamo.inventario">
+            <div class="text-xl font-medium text-gray-900 truncate dark:text-white flex flex-col">
+              Prenda(s):
+              <div *ngFor="let inv of prestamo.inventario" class="flex flex-col">
                 <p
                   *ngIf="inv.tipo === 'JOYA'"
-                  class="text-xl font-medium text-gray-900 truncate dark:text-white">
-                    {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
+                  class="text-blue-600 dark:text-blue-500 hover:underline">
+                    <a [routerLink]="['/admin/inventario/'+inv.id]">
+                      {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
+                    </a>
                 </p>
                 <p
                   *ngIf="inv.tipo === 'ARTICULO'"
-                  class="text-xl font-medium text-gray-900 truncate dark:text-white">
-                    {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
+                  class="text-blue-600 dark:text-blue-500 hover:underline">
+                  <a [routerLink]="['/admin/inventario/'+inv.id]">
+                    {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
+                  </a>
                 </p>
                 <p
                   *ngIf="inv.tipo === 'VEHICULO'"
-                  class="text-xl font-medium text-gray-900 truncate dark:text-white">
-                    {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                  class="text-blue-600 dark:text-blue-500 hover:underline">
+                  <a [routerLink]="['/admin/inventario/'+inv.id]">
+                    {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                  </a>
                 </p>
               </div>
             </div>

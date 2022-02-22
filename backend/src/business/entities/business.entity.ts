@@ -25,7 +25,7 @@ export class Business extends BaseEntity {
   direction: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
-  commission: number;
+  comission: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.15 })
   interest: number;

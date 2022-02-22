@@ -1,5 +1,5 @@
 <button
-  class="bg-sky-600 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+  class="bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
   (click)="toggleModal()"
   type="button">
   <i class="fas fa-plus"></i>Nuevo
@@ -78,6 +78,17 @@
           </div>
 
           <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-select
+              [options]="options"
+              inputLabel="ROL"
+              formControlName="rol"
+              inputFormName="rol"
+              [inputForm]="userForm"
+              [value]="userForm.value.rol"
+            ></app-select>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4 mb-2">
             <!--<div class="flex flex-col items-baseline  w-full mb-3">
               <label
                 for="image"
@@ -106,7 +117,7 @@
           Cancelar
         </button>
         <button
-          class="mx-4 bg-sky-600 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          class="mx-4 bg-sky-700 text-white active:bg-sky-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
           (click)="refreshForm()"
         >
@@ -114,7 +125,7 @@
         </button>
         <button
           [disabled]="!userForm.valid || loading"
-          class="mx-4 bg-sky-600 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          class="mx-4 bg-sky-700 text-white active:bg-sky-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="submit"
         >
         <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios

@@ -1,6 +1,8 @@
+import { Inventario } from "./inventario";
+
 export interface Picture {
   id?: number;
-  inventario: number;
+  inventario: Inventario;
   name: string;
   path: string;
 }
