@@ -17,7 +17,7 @@ import { AperturaService } from './apertura.service';
 import { CreateAperturaDto } from './dto/create-apertura.dto';
 import { UpdateAperturaDto } from './dto/update-apertura.dto';
 
-@Controller('apertura')
+@Controller('api/apertura')
 export class AperturaController {
   constructor(private readonly aperturaService: AperturaService) {}
 
@@ -30,7 +30,7 @@ export class AperturaController {
   @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
-    @Query('limit', new DefaultValuePipe(2), ParseIntPipe) limit = 20,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
   ) {
     return this.aperturaService.findAll({ page, limit });
   }
@@ -38,6 +38,12 @@ export class AperturaController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.aperturaService.findOne(+id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('cerrar/:aperturaId')
+  updateEstadoApertura(@Req() req, @Param('aperturaId') aperturaId: string) {
+    return this.aperturaService.cerrarApertura(+aperturaId, req.user);
   }
 
   @Patch(':id')

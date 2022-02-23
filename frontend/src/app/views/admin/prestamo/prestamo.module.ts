@@ -10,10 +10,13 @@ import { ModalPagoComponent } from './components/modals/modal-pago/modal-pago.co
 import { ModalAmortiguarComponent } from './components/modals/modal-amortiguar/modal-amortiguar.component';
 import { ModalImpresionReciboComponent } from './components/modals/modal-impresion-recibo/modal-impresion-recibo.component';
 import { SharedModule } from '../../shared/shared.module';
+import { PdfPagoComponent } from './components/pdfs/pdf-pago/pdf-pago.component';
+import { PdfDocumentoComponent } from './components/pdfs/pdf-documento/pdf-documento.component';
+import { ModalImpresionContratoComponent } from './components/modals/modal-impresion-contrato/modal-impresion-contrato.component';
 
 
 @NgModule({
-  declarations: [PrestamoComponent, TabPrestamoComponent, CardPrestamosComponent, CardPrestamoDetalleComponent, ModalPagoComponent, ModalAmortiguarComponent, ModalImpresionReciboComponent],
+  declarations: [PrestamoComponent, TabPrestamoComponent, CardPrestamosComponent, CardPrestamoDetalleComponent, ModalPagoComponent, ModalAmortiguarComponent, ModalImpresionReciboComponent, PdfPagoComponent, PdfDocumentoComponent, ModalImpresionContratoComponent],
   imports: [
     PrestamoRoutingModule,
     SharedModule

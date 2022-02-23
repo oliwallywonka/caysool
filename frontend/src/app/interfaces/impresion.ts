@@ -2,8 +2,8 @@ export interface Impresion {
   id?: number;
   prestamo: number;
   costoImpresion: number;
-  tipoDocumento: string;
-  createdAt: string;
+  tipoDocumento: 'PAGO' | 'CONTRATO';
+  createdAt?: string;
 }
 
 export interface ImpresionResponse {

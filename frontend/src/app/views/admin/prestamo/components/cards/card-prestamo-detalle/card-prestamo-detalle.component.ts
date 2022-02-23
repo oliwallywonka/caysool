@@ -85,7 +85,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
             cargo: prestamo.costoPrestamo,
             comision: 0.00,
             cargoExtra: 0.00,
-            Amortiguado: 0.00,
+            amortiguado: 0.00,
           }
           const historialItem2 = {
             fecha: this.datePipe.transform(this.prestamo.createdAt, 'medium'),
@@ -114,7 +114,8 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
               cargo: pago.tipoPago === 'PAGO' || 'INTERES'? pago.costoPago : 0.00,
               comision: pago.costoAdministracion,
               cargoExtra: pago.costoAdministracion,
-              amortiguado: pago.tipoPago === 'AMORTIGUADO'? pago.costoPago: 0.00
+              amortiguado: pago.tipoPago === 'AMORTIGUADO'? pago.costoPago: 0.00,
+              ...pago
             };
             this.historialArray.push(historialItem);
           });
@@ -160,12 +161,20 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     this.prestamoService.prestamo.emit(this.prestamo);
   }
 
-  showImpresionContratomodal() {
-
+  showImpresionPagoModal(pago) {
+    if (pago.operacion === 'PAGO' || pago.operacion === 'PAGO INTERES' || pago.operacion === 'PAGO AMORTIZACION'){
+      this.modal.modalName = 'impresionContratoModal';
+      this.modal.visible = true;
+      this.pagoService.pago.emit(pago);
+      this.prestamoService.prestamo.emit(this.prestamo);
+    }
   }
 
-  showImpresionPagoModal() {
-
+  showImpresionContratoModal(pago: Pago) {
+    this.modal.modalName = 'impresionPagoModal';
+    this.modal.visible = true;
+    this.pagoService.pago.emit(pago);
+    this.prestamoService.prestamo.emit(this.prestamo);
   }
 
 }

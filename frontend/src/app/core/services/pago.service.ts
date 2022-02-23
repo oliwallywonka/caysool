@@ -25,6 +25,11 @@ export class PagoService {
     return this.http.get(`${this.baseUrl}/pago/prestamo/${prestamoId}`,{ headers })
   }
 
+  getById(id: number):Observable<any>{
+    const headers = new HttpHeaders().set('x-access-token',sessionStorage.getItem('token')||'');
+    return this.http.get(`${this.baseUrl}/pago/${id}`,{ headers })
+  }
+
   postPago(body):Observable<any>{
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');

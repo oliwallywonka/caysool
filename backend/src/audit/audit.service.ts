@@ -35,7 +35,7 @@ export class AuditService {
   async findAll(options: IPaginationOptions) {
     const audits = await Audit.createQueryBuilder('audit')
       .leftJoinAndSelect('audit.user', 'user')
-      .orderBy('user.id', 'DESC');
+      .orderBy('audit.id', 'DESC');
     return await paginate<Audit>(audits, options);
   }
 }

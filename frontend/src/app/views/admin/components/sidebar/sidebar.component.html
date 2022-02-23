@@ -80,7 +80,7 @@
         <h6
           class="md:min-w-full text-blueGray-800 text-xs uppercase font-bold block pt-1 pb-1 no-underline"
         >
-          CI: {{ business|json }}
+          <!--CI: {{ business|json }}-->
         </h6>
       </div>
        <!-- Divider -->
@@ -91,6 +91,7 @@
       <ul class="md:flex-col md:min-w-full flex flex-col list-none text-center">
         <li class="items-center">
           <a
+            *ngIf="user.rol"
             [routerLink]="['/admin/panel-control']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
@@ -199,7 +200,7 @@
           </a>
         </li>
 
-        <li class="items-center">
+        <!--<li class="items-center">
           <a
             [routerLink]="['/admin/reportes']"
             class="text-xs uppercase py-3 font-bold block"
@@ -219,12 +220,13 @@
             ></i>
             Reportes
           </a>
-        </li>
+        </li>-->
 
 
 
         <li class="items-center">
           <a
+            *ngIf="user.rol"
             [routerLink]="['/admin/historial']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive

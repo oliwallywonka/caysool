@@ -22,7 +22,7 @@ export class Movimiento extends BaseEntity {
   tipo: boolean;
 
   @Column({ type: 'varchar', length: 80, default: 'INGRESO DINERO' })
-  concepto: number;
+  concepto: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   cantidad: number;

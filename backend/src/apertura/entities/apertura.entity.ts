@@ -12,6 +12,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
+import moment = require('moment');
 @Entity()
 export class Apertura extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -44,4 +45,25 @@ export class Apertura extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  async calculateMontoCierre() {
+    const today = moment(Date.now()).toDate();
+    let montoCierre = 0;
+    const ingresos = await Movimiento.createQueryBuilder('movimiento')
+      .select('SUM(movimiento.cantidad)', 'cantidad')
+      .where('movimiento.apertura = :aperturaId', { aperturaId: this.id })
+      .andWhere('movimiento.tipo = :tipo', { tipo: true })
+      .getRawOne();
+    const salidas = await Movimiento.createQueryBuilder('movimiento')
+      .select('SUM(movimiento.cantidad)', 'cantidad')
+      .where('movimiento.apertura = :aperturaId', { aperturaId: this.id })
+      .andWhere('movimiento.tipo = :tipo', { tipo: false })
+      .getRawOne();
+
+    montoCierre += +ingresos.cantidad;
+    montoCierre -= +salidas.cantidad;
+    this.montoCierre = montoCierre;
+    this.fechaCierre = today;
+    this.estado = false;
+  }
 }

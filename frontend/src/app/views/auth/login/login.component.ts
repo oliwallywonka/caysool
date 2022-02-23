@@ -11,8 +11,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent implements OnInit {
   loading = false;
   loginForm: FormGroup = this.fb.group({
-    ci: ['123456'],
-    password: ['123456']
+    ci: [''],
+    password: ['']
   });
   constructor(
     private authService: AuthService,
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
             title:'Login Exitoso',
             icon:'success'
           })
-          this.router.navigateByUrl('/admin')
+          this.router.navigateByUrl('/admin/clientes')
         } else {
           this.loading = false;
           console.log('errir')

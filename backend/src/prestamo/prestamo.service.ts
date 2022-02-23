@@ -48,7 +48,7 @@ export class PrestamoService {
   async findAll(options: IPaginationOptions, clientCi: string, estado: string) {
     const prestamos = Prestamo.createQueryBuilder('prestamo')
       .leftJoinAndSelect('prestamo.client', 'client')
-      .leftJoinAndSelect('prestamo.inventario', 'invnetario')
+      .leftJoinAndSelect('prestamo.inventario', 'inventario')
       .where(`client.ci LIKE '%${clientCi ? clientCi : ''}%'`)
       .andWhere(`prestamo.estado LIKE '%${estado ? estado : ''}%'`)
       .orderBy('prestamo.id', 'DESC');
@@ -57,8 +57,9 @@ export class PrestamoService {
 
   findOne(id: number) {
     const prestamo = Prestamo.createQueryBuilder('prestamo')
-      .leftJoinAndSelect('prestamo.client', 'client')
       .leftJoinAndSelect('prestamo.inventario', 'inventario')
+      .leftJoinAndSelect('prestamo.user', 'user')
+      .leftJoinAndSelect('prestamo.client', 'client')
       .where('prestamo.id = :id', { id })
       .getOne();
     return prestamo;

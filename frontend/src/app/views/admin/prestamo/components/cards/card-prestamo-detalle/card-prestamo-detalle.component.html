@@ -10,12 +10,13 @@
           >
           <i class="fas fa-arrow-left"></i>
         </button>
-        Información del Prestamo Nº {{ prestamo.id }}
+        Información del Prestamo Nº {{ prestamo?.id }}
       </h3>
       <div class="flex items-center justify-start pt-2">
         <app-modal-pago></app-modal-pago>
         <app-modal-amortiguar></app-modal-amortiguar>
-
+        <app-modal-impresion-recibo></app-modal-impresion-recibo>
+        <app-modal-impresion-contrato></app-modal-impresion-contrato>
       </div>
       <div class="w-full ">
         <div class="flex flex-col pt-4 items-baseline w-full">
@@ -33,27 +34,13 @@
             </div>
 
             <button
-              [popper]="imprimirRecibo"
-              [popperTrigger]="'hover'"
-              [popperPlacement]="'top'"
-              [popperPositionFixed]="true"
-              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button"
-              (click)="showPagoModal()">
-              <i class="fas fa-file-invoice-dollar"></i>
-            </button>
-            <popper-content #imprimirRecibo>
-              <p class="bold">Imprimir recibo</p>
-            </popper-content>
-
-            <button
               [popper]="imprimirContrato"
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
               class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button"
-              (click)="showPagoModal()">
+              (click)="showImpresionContratoModal(null)">
               <i class="fas fa-file-invoice"></i>
             </button>
             <popper-content #imprimirContrato>
@@ -72,20 +59,6 @@
             </button>
             <popper-content #pagoModal>
               <p class="bold">Añadir pago</p>
-            </popper-content>
-
-            <button
-              [popper]="amortizacionModal"
-              [popperTrigger]="'hover'"
-              [popperPlacement]="'top'"
-              [popperPositionFixed]="true"
-              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button"
-              (click)="showPagoModal()">
-              <i class="fas fa-wallet"></i>
-            </button>
-            <popper-content #amortizacionModal>
-              <p class="bold">Pago Amortización</p>
             </popper-content>
         </div>
 
@@ -119,7 +92,10 @@
             </div>
 
             <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
-              MontoPrestamo: {{ prestamo.costoPrestamo }}
+              MontoPrestamo: Bol. {{ prestamo.costoPrestamo }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Monto cancelado: Bol. {{ prestamo.costoCancelado }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
               Fecha de prestamo: {{ prestamo.fechaInicio | date:'medium' }}
@@ -128,7 +104,7 @@
               Fecha de vencimiento: {{ prestamo.fechaFinal | date:'medium' }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
-              Interés al finalizar el Plazo: {{ (prestamo.costoTotal - prestamo.costoPrestamo).toFixed(1) }}
+              Interés al finalizar el Plazo: Bol. {{ (prestamo.costoTotal - prestamo.costoPrestamo).toFixed(1) }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
               Estado: {{ prestamo.estado }}
@@ -170,13 +146,13 @@
                                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                   Amortiguado
                                 </th>
-                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                  Saldo
-                                </th>
                             </tr>
                         </thead>
                         <tbody *ngIf="prestamo" >
-                            <tr *ngFor="let historial of historialArray" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr
+                              *ngFor="let historial of historialArray"
+                              class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
+                              (click)="showImpresionPagoModal(historial)">
                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ historial.fecha }}
                                 </td>
@@ -194,9 +170,6 @@
                                 </td>
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                     Bol. {{ historial.amortiguado }}
-                                </td>
-                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    Bol.
                                 </td>
                             </tr>
 

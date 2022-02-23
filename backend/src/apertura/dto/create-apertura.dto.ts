@@ -7,11 +7,10 @@ import {
 } from 'class-validator';
 import { Caja } from 'src/caja/entities/caja.entity';
 export class CreateAperturaDto {
-  @IsNotEmpty({ message: 'El campo nombre no puede ir vacio' })
-  @IsInt()
+  //@IsNotEmpty({ message: 'El campo caja no puede ir vacio' })
   caja: Caja;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   estado: boolean;
 
@@ -20,14 +19,6 @@ export class CreateAperturaDto {
   montoApertura: number;
 
   @IsNotEmpty()
-  @IsNumber()
-  montoCierre: number;
-
-  @IsNotEmpty()
   @IsString()
   fechaApertura: string;
-
-  @IsOptional()
-  @IsString()
-  fechaCierre: string;
 }

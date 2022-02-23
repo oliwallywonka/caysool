@@ -1,0 +1,69 @@
+<div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded">
+  <div class="p-4 w-full ">
+
+    <div class="items-center mb-4 ml-2 mt-4 flex justify-between">
+      <h3 class="text-xl font-bold leading-none text-gray-500 dark:text-white">
+        Historial
+      </h3>
+    </div>
+    <div class="flex flex-col">
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+              <div class="overflow-hidden sm:rounded-lg">
+                  <table class="min-w-full">
+                      <thead class="bg-gray-50 dark:bg-gray-700">
+                          <tr>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                Fecha
+                              </th>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                Usuario
+                              </th>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                Operación
+                              </th>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                Tabla
+                              </th>
+
+                          </tr>
+                      </thead>
+                      <tbody *ngIf="response" >
+                          <tr
+                            *ngFor="let historial of response.items"
+                            class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150"
+                            [popper]="hi"
+                            [popperTrigger]="'click'"
+                            [popperPlacement]="'top'"
+                            [popperPositionFixed]="true">
+                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ historial.createdAt | date:'medium' }}
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                              {{ historial.user.ci }}
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                {{ historial.action }}
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                {{ historial.auditTable }}
+                            </td>
+                            <popper-content #hi>
+                              <p class="bold">{{ historial.previousData | json }}</p>
+                              <p class="bold">{{ historial.actualData | json }}</p>
+                            </popper-content>
+                          </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<app-pagination
+  *ngIf="response"
+  [response]="response.meta"
+  (pageEvent)="getOnPageResponse($event)"
+></app-pagination>

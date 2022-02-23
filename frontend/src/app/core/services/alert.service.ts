@@ -26,7 +26,7 @@ export class AlertService {
   }
   constructor( ) { }
 
-  triggerMessage(message = 'Acción realizada correctamente', icon: SweetAlertIcon) {
+  triggerMessage(message = 'Acción sin destino', icon: SweetAlertIcon) {
     this._alert.fire({
       title: message,
       icon,

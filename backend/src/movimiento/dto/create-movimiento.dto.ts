@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsInt,
   IsNotEmpty,
   IsNumber,
@@ -14,22 +15,14 @@ export class CreateMovimientoDto {
   apertura: Apertura;
 
   @IsNotEmpty()
-  @IsString()
+  @IsBoolean()
   tipo: boolean;
 
   @IsNotEmpty()
-  @IsNumber()
-  concepto: number;
+  @IsString()
+  concepto: string;
 
   @IsNotEmpty()
   @IsNumber()
   cantidad: number;
-
-  @IsNotEmpty()
-  @IsString()
-  fechaApertura: string;
-
-  @IsOptional()
-  @IsString()
-  fechaCierre: string;
 }

@@ -34,8 +34,13 @@ export class PagoService {
     return pagos;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} pago`;
+  async findOne(id: number) {
+    const pago = await Pago.createQueryBuilder('pago')
+      .leftJoinAndSelect('pago.client', 'client')
+      .where('pago.id = :id', { id })
+      .getOne();
+    if (!pago) throw new BadRequestException({ message: 'Pago no encontrado' });
+    return pago;
   }
 
   update(id: number, updatePagoDto: UpdatePagoDto) {

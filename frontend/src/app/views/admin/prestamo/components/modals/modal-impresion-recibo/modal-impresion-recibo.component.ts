@@ -8,6 +8,8 @@ import { ModalService } from 'src/app/core/services/modal.service';
 import { Pago } from 'src/app/interfaces/pago';
 import { PrestamoService } from 'src/app/core/services/prestamo.service';
 import { Prestamo } from 'src/app/interfaces/prestamo';
+import { Impresion } from 'src/app/interfaces/impresion';
+import { ImpresionService } from 'src/app/core/services/impresion.service';
 @Component({
   selector: 'app-modal-impresion-recibo',
   templateUrl: './modal-impresion-recibo.component.html',
@@ -16,8 +18,8 @@ import { Prestamo } from 'src/app/interfaces/prestamo';
 })
 export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
   @Input()
-  tipoDocumento: string = 'PAGO';
-  
+  tipoDocumento: 'PAGO' | 'CONTRATO' = 'PAGO';
+
   sub: Subscription;
   loading: boolean = false;
   prestamo: Prestamo;
@@ -34,6 +36,10 @@ export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
 
   administracionOptions = [
     {
+      value: 20,
+      name: '20'
+    },
+    {
       value: 5,
       name: '5'
     },
@@ -45,39 +51,9 @@ export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
       value: 0,
       name: '0'
     }
-  ]
-
-  tipoPagoOptions = [
-    {
-      value: 'PAGO',
-      name: 'PAGO'
-    },
-    {
-      value: 'INTERES',
-      name: 'INTERÉS'
-    },
-    {
-      value: 'AMORTIZACION',
-      name: 'AMORTIZACIÓN'
-    }
-  ]
-  pagoForm: FormGroup = this.fb.group({
-    tipoPago: ['PAGO',
-      [
-        RxwebValidators.required({ message: this.errorMessages.required }),
-      ],
-    ],
-    costoAdministracion: [0,
-      [
-        RxwebValidators.required({ message: this.errorMessages.required }),
-      ],
-    ],
-    costoPiso: [0,
-      [
-        RxwebValidators.required({ message: this.errorMessages.required }),
-      ],
-    ],
-    costoPago: [0,
+  ];
+  impresionForm: FormGroup = this.fb.group({
+    costoImpresion: [0,
       [
         RxwebValidators.required({ message: this.errorMessages.required }),
       ],
@@ -87,6 +63,7 @@ export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
   constructor(
     private prestamoService: PrestamoService,
     private pagoService: PagoService,
+    private impresionService: ImpresionService,
     private alertService: AlertService,
     private modalService: ModalService,
     private fb: RxFormBuilder
@@ -95,12 +72,32 @@ export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.sub = new Subscription();
     this.subscribePrestamo();
+    this.subscribePago();
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
+  getPago() {
+    this.sub.add(
+      this.pagoService.getById(this.pago.id).subscribe(
+        pago => {
+          this.pago = pago;
+        }
+      )
+    );
+  }
+
+  subscribePago() {
+    this.sub.add(
+      this.pagoService.pago.subscribe(
+        (pago) => {
+          this.pago = pago;
+        }
+      )
+    );
+  }
 
   subscribePrestamo() {
     this.sub.add(
@@ -112,7 +109,6 @@ export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
     );
   }
 
-
   closeModal() {
     this.modal.visible = false;
     this.modal.modalName = '';
@@ -120,42 +116,26 @@ export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
   }
 
   refreshForm() {
-    (<FormGroupExtension>this.pagoForm).resetForm();
-  }
-
-  successMessage(message = 'creado') {
-    this.alertService.alert.fire({
-      title: `Pago ${message} Exitosamente`,
-      icon: 'success',
-    })
-  }
-
-  errorMessage(message) {
-    this.alertService.alert.fire({
-      title: message,
-      icon: 'error',
-    })
+    (<FormGroupExtension>this.impresionForm).resetForm();
   }
 
   save() {
     this.loading = true;
-    const body: Pago = {
+    const body: Impresion = {
       prestamo: this.prestamo.id,
-      tipoPago: this.pagoForm.value.tipoPago,
-      costoAdministracion: +this.pagoForm.value.costoAdministracion,
-      costoPiso: +this.pagoForm.value.costoPiso,
-      costoPago: +this.pagoForm.value.costoPago
+      costoImpresion: +this.impresionForm.value.costoImpresion,
+      tipoDocumento: this.tipoDocumento
     };
     console.log(body);
-    this.pagoService.postPago(body).subscribe(
+    this.impresionService.postImpresion(body).subscribe(
       response => {
         this.loading = false;
-        this.successMessage();
+        this.alertService.triggerMessage('Impresión registrada correctamente', 'success');
         this.closeModal();
       },
       error => {
         this.loading = false;
-        this.errorMessage(error.error.message);
+        this.alertService.triggerMessage(error.error.message, 'error');
       }
     )
   }

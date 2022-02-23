@@ -8,10 +8,11 @@ import { CardInventarioInformationComponent } from './components/cards/card-inve
 import { SharedModule } from '../../shared/shared.module';
 import { ModalDeletePictureComponent } from './components/modals/modal-delete-picture/modal-delete-picture.component';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { ModalVentaInventarioComponent } from './components/modals/modal-venta-inventario/modal-venta-inventario.component';
 
 
 @NgModule({
-  declarations: [InventarioComponent, TabInventarioComponent, CardInventarioListComponent, CardInventarioInformationComponent, ModalDeletePictureComponent],
+  declarations: [InventarioComponent, TabInventarioComponent, CardInventarioListComponent, CardInventarioInformationComponent, ModalDeletePictureComponent, ModalVentaInventarioComponent],
   imports: [
     SharedModule,
     InventarioRoutingModule,
