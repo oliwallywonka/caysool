@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -16,6 +17,7 @@ export class PdfPagoComponent implements OnInit {
   business: Business = this.businessService.businessInformation;
   constructor(
     private businessService: BusinessService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +59,7 @@ export class PdfPagoComponent implements OnInit {
                 headerRows: 3,
       //FEcha , numero de recibo id
             body: [
-              [{text:'FECHA:'},{text: `${this.pago.createdAt}`,alignment: 'center'}, {text:'N° de recibo'},{text:`${this.pago.id}`}],
+              [{text:'FECHA:'},{text: `${this.datePipe.transform(this.pago.createdAt, 'medium')}`,alignment: 'center'}, {text:'N° de recibo'},{text:`${this.pago.id}`}],
       // nombre cliente, ci
               [{text:'NOMBRE:'},{text: `${this.prestamo.client.name}`,alignment: 'center',colSpan: 3},{},{}],
               [{text:'NIT/CI:'}, {text: `${this.prestamo.client.ci}`,alignment: 'center',colSpan: 3},{},{}],
@@ -71,7 +73,7 @@ export class PdfPagoComponent implements OnInit {
       //cargos generados (derecho de piso)
               [{text:'4',alignment: 'center'}, {text:'CARGOS GENERADOS',alignment: 'left',colSpan: 2},{},{text:this.pago.costoPiso, alignment: 'right'}],
       //saldo restante actual
-              [{text:'5',alignment: 'center'}, {text:'SALDO POR COBRAR',alignment: 'left',colSpan: 2},{},{text:+this.prestamo.costoTotal - +this.prestamo.costoCancelado,alignment: 'right'}],
+              [{text:'5',alignment: 'center'}, {text:'SALDO POR COBRAR',alignment: 'left',colSpan: 2},{},{text:(+this.prestamo.costoTotal - +this.prestamo.costoCancelado).toFixed(1),alignment: 'right'}],
       //prenda empeñada
               [{text:'PRENDA',alignment: 'center'}, {text:`${this.prestamo.inventario.map(i => (i.descripcion +' '))}`,alignment: 'left',colSpan: 2},{},{text:'',alignment: 'right'}],
       //total a pagar lo que se cobra interes + el capital +comision adminstrativa
@@ -105,7 +107,7 @@ export class PdfPagoComponent implements OnInit {
               widths: [80, '*', '*', 60],
                 headerRows: 3,
                 body: [
-                  [{text:'FECHA:'},{text: `${this.pago.createdAt}`,alignment: 'center'}, {text:'N° de recibo'},{text:`${this.pago.id}`}],
+                  [{text:'FECHA:'},{text: `${this.datePipe.transform(this.pago.createdAt, 'medium')}`,alignment: 'center'}, {text:'N° de recibo'},{text:`${this.pago.id}`}],
           // nombre cliente, ci
                   [{text:'NOMBRE:'},{text: `${this.prestamo.client.name}`,alignment: 'center',colSpan: 3},{},{}],
                   [{text:'NIT/CI:'}, {text: `${this.prestamo.client.ci}`,alignment: 'center',colSpan: 3},{},{}],
@@ -119,7 +121,7 @@ export class PdfPagoComponent implements OnInit {
           //cargos generados (derecho de piso)
                   [{text:'4',alignment: 'center'}, {text:'CARGOS GENERADOS',alignment: 'left',colSpan: 2},{},{text:this.pago.costoPiso, alignment: 'right'}],
           //saldo restante actual
-                  [{text:'5',alignment: 'center'}, {text:'SALDO POR COBRAR',alignment: 'left',colSpan: 2},{},{text:+this.prestamo.costoTotal - +this.prestamo.costoCancelado,alignment: 'right'}],
+                  [{text:'5',alignment: 'center'}, {text:'SALDO POR COBRAR',alignment: 'left',colSpan: 2},{},{text:(+this.prestamo.costoTotal - +this.prestamo.costoCancelado).toFixed(1),alignment: 'right'}],
           //prenda empeñada
                   [{text:'PRENDA',alignment: 'center'}, {text:`${this.prestamo.inventario.map(i => (i.descripcion +' '))}`,alignment: 'left',colSpan: 2},{},{text:'',alignment: 'right'}],
           //total a pagar lo que se cobra interes + el capital +comision adminstrativa

@@ -14,6 +14,7 @@ services:
     volumes:
       - ./frontend:/frontend
       - /frontend/node_modules
+    restart: always
 
   backend:
     env_file:
@@ -27,6 +28,7 @@ services:
     volumes:
       - ./backend:/backend
       - /backend/node_modules
+    restart: always
     links:
       - mysql
 

@@ -6,7 +6,9 @@ COPY package*.json /backend
 
 RUN npm cache clean --force && rm -rf node_modules && npm install
 
-COPY . /backend
+COPY . .
+
+RUN npm run build
 
 EXPOSE 3000
 

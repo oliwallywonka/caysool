@@ -79530,22 +79530,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PdfPagoComponent", function() { return PdfPagoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_pdf_pago_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./pdf-pago.component.html */ "ruDw");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "5JmO");
-/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ "TruH");
-/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/core/services/business.service */ "cwzI");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "5JmO");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ "TruH");
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/business.service */ "cwzI");
 
 
 
 
 
 
-pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_4___default.a.pdfMake.vfs;
+
+pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_5___default.a.pdfMake.vfs;
 let PdfPagoComponent = class PdfPagoComponent {
-    constructor(businessService) {
+    constructor(businessService, datePipe) {
         this.businessService = businessService;
+        this.datePipe = datePipe;
         this.business = this.businessService.businessInformation;
     }
     ngOnInit() {
@@ -79581,7 +79584,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                         headerRows: 3,
                         //FEcha , numero de recibo id
                         body: [
-                            [{ text: 'FECHA:' }, { text: `${this.pago.createdAt}`, alignment: 'center' }, { text: 'N° de recibo' }, { text: `${this.pago.id}` }],
+                            [{ text: 'FECHA:' }, { text: `${this.datePipe.transform(this.pago.createdAt, 'medium')}`, alignment: 'center' }, { text: 'N° de recibo' }, { text: `${this.pago.id}` }],
                             // nombre cliente, ci
                             [{ text: 'NOMBRE:' }, { text: `${this.prestamo.client.name}`, alignment: 'center', colSpan: 3 }, {}, {}],
                             [{ text: 'NIT/CI:' }, { text: `${this.prestamo.client.ci}`, alignment: 'center', colSpan: 3 }, {}, {}],
@@ -79595,7 +79598,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                             //cargos generados (derecho de piso)
                             [{ text: '4', alignment: 'center' }, { text: 'CARGOS GENERADOS', alignment: 'left', colSpan: 2 }, {}, { text: this.pago.costoPiso, alignment: 'right' }],
                             //saldo restante actual
-                            [{ text: '5', alignment: 'center' }, { text: 'SALDO POR COBRAR', alignment: 'left', colSpan: 2 }, {}, { text: +this.prestamo.costoTotal - +this.prestamo.costoCancelado, alignment: 'right' }],
+                            [{ text: '5', alignment: 'center' }, { text: 'SALDO POR COBRAR', alignment: 'left', colSpan: 2 }, {}, { text: (+this.prestamo.costoTotal - +this.prestamo.costoCancelado).toFixed(1), alignment: 'right' }],
                             //prenda empeñada
                             [{ text: 'PRENDA', alignment: 'center' }, { text: `${this.prestamo.inventario.map(i => (i.descripcion + ' '))}`, alignment: 'left', colSpan: 2 }, {}, { text: '', alignment: 'right' }],
                             //total a pagar lo que se cobra interes + el capital +comision adminstrativa
@@ -79628,7 +79631,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                         widths: [80, '*', '*', 60],
                         headerRows: 3,
                         body: [
-                            [{ text: 'FECHA:' }, { text: `${this.pago.createdAt}`, alignment: 'center' }, { text: 'N° de recibo' }, { text: `${this.pago.id}` }],
+                            [{ text: 'FECHA:' }, { text: `${this.datePipe.transform(this.pago.createdAt, 'medium')}`, alignment: 'center' }, { text: 'N° de recibo' }, { text: `${this.pago.id}` }],
                             // nombre cliente, ci
                             [{ text: 'NOMBRE:' }, { text: `${this.prestamo.client.name}`, alignment: 'center', colSpan: 3 }, {}, {}],
                             [{ text: 'NIT/CI:' }, { text: `${this.prestamo.client.ci}`, alignment: 'center', colSpan: 3 }, {}, {}],
@@ -79642,7 +79645,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                             //cargos generados (derecho de piso)
                             [{ text: '4', alignment: 'center' }, { text: 'CARGOS GENERADOS', alignment: 'left', colSpan: 2 }, {}, { text: this.pago.costoPiso, alignment: 'right' }],
                             //saldo restante actual
-                            [{ text: '5', alignment: 'center' }, { text: 'SALDO POR COBRAR', alignment: 'left', colSpan: 2 }, {}, { text: +this.prestamo.costoTotal - +this.prestamo.costoCancelado, alignment: 'right' }],
+                            [{ text: '5', alignment: 'center' }, { text: 'SALDO POR COBRAR', alignment: 'left', colSpan: 2 }, {}, { text: (+this.prestamo.costoTotal - +this.prestamo.costoCancelado).toFixed(1), alignment: 'right' }],
                             //prenda empeñada
                             [{ text: 'PRENDA', alignment: 'center' }, { text: `${this.prestamo.inventario.map(i => (i.descripcion + ' '))}`, alignment: 'left', colSpan: 2 }, {}, { text: '', alignment: 'right' }],
                             //total a pagar lo que se cobra interes + el capital +comision adminstrativa
@@ -79669,18 +79672,19 @@ let PdfPagoComponent = class PdfPagoComponent {
                 }
             }
         };
-        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3___default.a.createPdf(pago).open();
+        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4___default.a.createPdf(pago).open();
     }
 };
 PdfPagoComponent.ctorParameters = () => [
-    { type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_5__["BusinessService"] }
+    { type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_6__["BusinessService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"] }
 ];
 PdfPagoComponent.propDecorators = {
-    pago: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
-    prestamo: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }]
+    pago: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    prestamo: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
 };
 PdfPagoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-pdf-pago',
         template: _raw_loader_pdf_pago_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
     })
