@@ -1,11 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { Apertura } from 'src/apertura/entities/apertura.entity';
+import { AuditService } from 'src/audit/audit.service';
 import { CreateMovimientoDto } from './dto/create-movimiento.dto';
 import { UpdateMovimientoDto } from './dto/update-movimiento.dto';
+import { Movimiento } from './entities/movimiento.entity';
 
 @Injectable()
 export class MovimientoService {
-  create(createMovimientoDto: CreateMovimientoDto) {
-    return 'This action adds a new movimiento';
+  constructor(private readonly auditService: AuditService) {}
+  async create(createMovimientoDto: CreateMovimientoDto) {
+    const apertura = await Apertura.findOne(createMovimientoDto.apertura);
+    if (!apertura)
+      throw new BadRequestException({
+        message: 'Apertura y cierre de caja no encontrada',
+      });
+    const movimiento = Movimiento.create(createMovimientoDto);
+    const movimientoSaved = await movimiento.save();
   }
 
   findAll() {

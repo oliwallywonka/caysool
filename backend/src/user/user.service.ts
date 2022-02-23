@@ -6,10 +6,12 @@ import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 import { AuditService } from 'src/audit/audit.service';
 import fs = require('fs');
 import { Connection } from 'typeorm';
+import { CajaService } from 'src/caja/caja.service';
 @Injectable()
 export class UserService {
   constructor(
     private readonly auditService: AuditService,
+    private readonly cajaService: CajaService,
     private connection: Connection,
   ) {
     this.createDefaultUser();
@@ -25,6 +27,7 @@ export class UserService {
       newUser.name = 'Usuario Admin Prueba';
       newUser.phone = '12345678';
       await newUser.save();
+      await this.cajaService.createDefaulCaja();
     }
     await queryRunner.release();
   }

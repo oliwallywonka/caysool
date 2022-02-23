@@ -53,6 +53,8 @@ export class InteresFormComponent implements OnInit {
             this.loginForm.controls['comission'].setValue(business.comission);
             this.loginForm.controls['interest'].setValue(business.interest);
             this.loginForm.controls['cambioDolar'].setValue(business.cambioDolar);
+            this.businessService.business.emit(this.business);
+            this.businessService.businessInformation = this.business;
           }
         },
         error =>{
@@ -65,8 +67,13 @@ export class InteresFormComponent implements OnInit {
 
   save() {
     console.log(this.loginForm.value);
+    const body = {
+      comission: +this.loginForm.value.comission,
+      interest: +this.loginForm.value.interest,
+      cambioDolar: +this.loginForm.value.cambioDolar,
+    }
     this.loading = true;
-    this.businessService.postBusines(this.loginForm.value).subscribe(
+    this.businessService.postBusines(body).subscribe(
       response => {
         this.loading = false;
         this.alertService.triggerMessage(response.message, 'success');

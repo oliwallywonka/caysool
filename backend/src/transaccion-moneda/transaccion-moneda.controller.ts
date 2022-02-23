@@ -17,7 +17,7 @@ import { CreateTransaccionMonedaDto } from './dto/create-transaccion-moneda.dto'
 import { UpdateTransaccionMonedaDto } from './dto/update-transaccion-moneda.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@Controller('transaccion-moneda')
+@Controller('api/transaccion-moneda')
 export class TransaccionMonedaController {
   constructor(
     private readonly transaccionMonedaService: TransaccionMonedaService,

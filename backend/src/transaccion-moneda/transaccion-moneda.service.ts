@@ -14,7 +14,7 @@ export class TransaccionMonedaService {
     await transaccion.save();
     this.auditService.audit({
       action: 'Se creó un nuevo registro ',
-      auditTable: 'PAGOS',
+      auditTable: 'CVDOLAR',
       previusData: {},
       actualData: transaccion,
       user: user,

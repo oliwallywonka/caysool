@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 import { User } from 'src/user/entities/user.entity';
 import { CreateAuditDto } from './dto/create-audit.dto';
 import { Audit } from './entities/audit.entity';
@@ -29,5 +30,12 @@ export class AuditService {
       .delete()
       .where('audit.createdAt < now() - interval 60 DAY')
       .execute();
+  }
+
+  async findAll(options: IPaginationOptions) {
+    const audits = await Audit.createQueryBuilder('audit')
+      .leftJoinAndSelect('audit.user', 'user')
+      .orderBy('user.id', 'DESC');
+    return await paginate<Audit>(audits, options);
   }
 }

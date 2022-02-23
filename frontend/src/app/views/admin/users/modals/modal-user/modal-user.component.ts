@@ -8,6 +8,7 @@ import {
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import { concat, forkJoin, Observable } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/interfaces/auth';
@@ -20,6 +21,7 @@ import { User } from 'src/app/interfaces/auth';
 export class ModalUserComponent implements OnInit {
   loading: boolean = false;
   user: User;
+  userAuth: User = this.authService.user;
   modal = this.modalService.modal;
   compressed = true;
   submitted = false;
@@ -107,6 +109,7 @@ export class ModalUserComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private userService: UserService,
+    private authService: AuthService,
     private ng2ImgMax: Ng2ImgMaxService,
     private alertService: AlertService,
     private fb: RxFormBuilder
@@ -158,15 +161,22 @@ export class ModalUserComponent implements OnInit {
           response2,
         ])=>{
           this.loading = false;
+          if (this.userAuth.id === this.user.id){
+            this.authService.user$.emit(response1);
+          }
           this.successMessage('editado');
           this.refreshUsers();
           this.closeModal();
+        }, ([error1, error2]) => {
+          this.alertService.triggerMessage(error1.message, 'error');
         })
       } else {
         this.userService.patchUser(body, this.user.id).subscribe(
           response => {
-
             this.loading = false;
+            if (this.userAuth.id === this.user.id){
+              this.authService.user$.emit(response);
+            }
             this.successMessage('editado');
             this.refreshUsers();
             this.closeModal();

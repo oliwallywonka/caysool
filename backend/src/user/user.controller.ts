@@ -37,7 +37,7 @@ export class UserController {
   findAll(
     @Req() req: any,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
-    @Query('limit', new DefaultValuePipe(2), ParseIntPipe) limit = 2,
+    @Query('limit', new DefaultValuePipe(2), ParseIntPipe) limit = 6,
     @Query('ci') ci = '',
   ) {
     return this.userService.findAll({ page, limit }, ci);

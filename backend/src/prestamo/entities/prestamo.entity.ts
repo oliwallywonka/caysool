@@ -12,7 +12,6 @@ import {
   UpdateDateColumn,
   BaseEntity,
   ManyToOne,
-  BeforeUpdate,
   Index,
   OneToMany,
 } from 'typeorm';

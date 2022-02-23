@@ -1,4 +1,5 @@
 import { Caja } from 'src/caja/entities/caja.entity';
+import { Movimiento } from 'src/movimiento/entities/movimiento.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
   Entity,
@@ -8,6 +9,7 @@ import {
   UpdateDateColumn,
   BaseEntity,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -17,6 +19,9 @@ export class Apertura extends BaseEntity {
 
   @ManyToOne(() => Caja, (caja) => caja.id)
   caja: Caja;
+
+  @OneToMany(() => Movimiento, (movimiento) => movimiento.apertura)
+  movimientos: Movimiento[];
 
   //ESTADO: 1 = ACTIVO  0 = CERRADO
   @Column({ type: 'boolean', default: true })

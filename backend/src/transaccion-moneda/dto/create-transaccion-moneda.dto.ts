@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { User } from 'src/user/entities/user.entity';
 
 export class CreateTransaccionMonedaDto {
@@ -7,7 +7,7 @@ export class CreateTransaccionMonedaDto {
   user: User;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsString()
   operacion: string;
 
   @IsNotEmpty()

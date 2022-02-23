@@ -1,4 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Req,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
+} from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AperturaService } from './apertura.service';
 import { CreateAperturaDto } from './dto/create-apertura.dto';
 import { UpdateAperturaDto } from './dto/update-apertura.dto';
@@ -7,14 +21,18 @@ import { UpdateAperturaDto } from './dto/update-apertura.dto';
 export class AperturaController {
   constructor(private readonly aperturaService: AperturaService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createAperturaDto: CreateAperturaDto) {
-    return this.aperturaService.create(createAperturaDto);
+  create(@Req() req, @Body() createAperturaDto: CreateAperturaDto) {
+    return this.aperturaService.create(createAperturaDto, req.user);
   }
 
   @Get()
-  findAll() {
-    return this.aperturaService.findAll();
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
+    @Query('limit', new DefaultValuePipe(2), ParseIntPipe) limit = 20,
+  ) {
+    return this.aperturaService.findAll({ page, limit });
   }
 
   @Get(':id')
@@ -23,7 +41,10 @@ export class AperturaController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAperturaDto: UpdateAperturaDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateAperturaDto: UpdateAperturaDto,
+  ) {
     return this.aperturaService.update(+id, updateAperturaDto);
   }
 

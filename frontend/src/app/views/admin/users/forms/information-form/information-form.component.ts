@@ -54,12 +54,13 @@ export class InformationFormComponent implements OnInit, OnDestroy {
       this.businessService.getBusiness().subscribe(
         business =>{
           this.business = business;
-          console.log(business);
           if (this.business){
             this.loginForm.controls['name'].setValue(business.name);
             this.loginForm.controls['nit'].setValue(business.nit);
             this.loginForm.controls['phone'].setValue(business.phone);
             this.loginForm.controls['direction'].setValue(business.direction);
+            this.businessService.business.emit(this.business);
+            this.businessService.businessInformation = this.business;
           }
         },
         error =>{

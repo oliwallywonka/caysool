@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { of, Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 
 
 import { AuthResponse, User } from '../../interfaces/auth';
+import { BusinessService } from './business.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,12 @@ export class AuthService {
     return { ...this._user };
   }
 
+  @Output() user$:EventEmitter<User> = new EventEmitter();
 
-  constructor( private http: HttpClient ) { }
+  constructor(
+    private http: HttpClient,
+    private businessService: BusinessService
+  ) { }
 
   login( ci: string, password: string ) {
     const url  = `${ this.baseUrl }/auth/login`;
@@ -33,6 +38,11 @@ export class AuthService {
           if ( resp.token ) {
             sessionStorage.setItem('token', resp.token! );
             this._user = resp.user;
+            this.businessService.getBusiness().subscribe(
+              resp => {
+                this.businessService.businessInformation = resp;
+              }
+            );
           }
         }),
         map( resp => {
@@ -50,8 +60,17 @@ export class AuthService {
       .set('x-access-token', sessionStorage.getItem('token') || '' );
     return this.http.get<AuthResponse>( url, { headers } )
       .pipe(
+        tap( resp => {
+          if ( resp.token ) {
+            this.businessService.getBusiness().subscribe(
+              resp => {
+                this.businessService.businessInformation = resp;
+                this.businessService.business.emit(resp);
+              }
+            );
+          }
+        }),
         map( resp => {
-          console.log(resp)
           sessionStorage.setItem('token', resp.token! );
           this._user = resp.user;
           if(resp.status === 200){

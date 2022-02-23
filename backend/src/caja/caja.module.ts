@@ -5,5 +5,6 @@ import { CajaController } from './caja.controller';
 @Module({
   controllers: [CajaController],
   providers: [CajaService],
+  exports: [CajaService],
 })
 export class CajaModule {}

@@ -43,7 +43,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
     ],
     birthDate: ['',
       [
-
+        RxwebValidators.required({ message: this.errorMessages.required }),
         RxwebValidators.minLength({
           value: 2,
           message: this.errorMessages.minLength,
@@ -124,8 +124,14 @@ export class ClientModalComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  refreshClient() {
-
+  refreshClients() {
+    this.sub.add(
+      this.clientService.getClients({force: true}).subscribe(
+        response => {
+          this.clientService.response.emit(response);
+        }
+      )
+    );
   }
 
   subscribeClient() {
@@ -183,6 +189,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.successMessage('editado');
           this.clientService.client.emit(response);
+          this.refreshClients();
           this.closeModal();
         },
         error => {
@@ -195,6 +202,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
         response => {
           this.loading = false;
           this.successMessage();
+          this.refreshClients();
           this.closeModal();
         },
         error => {
