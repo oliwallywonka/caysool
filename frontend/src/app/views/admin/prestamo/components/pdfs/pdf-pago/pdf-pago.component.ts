@@ -121,7 +121,7 @@ export class PdfPagoComponent implements OnInit {
           //cargos generados (derecho de piso)
                   [{text:'4',alignment: 'center'}, {text:'CARGOS GENERADOS',alignment: 'left',colSpan: 2},{},{text:this.pago.costoPiso, alignment: 'right'}],
           //saldo restante actual
-                  [{text:'5',alignment: 'center'}, {text:'SALDO POR COBRAR',alignment: 'left',colSpan: 2},{},{text:(+this.prestamo.costoTotal - +this.prestamo.costoCancelado).toFixed(1),alignment: 'right'}],
+                  [{text:'5',alignment: 'center'}, {text:'SALDO POR COBRAR',alignment: 'left',colSpan: 2},{},{text:this.pago.costoPorCobrar2,alignment: 'right'}],
           //prenda empeñada
                   [{text:'PRENDA',alignment: 'center'}, {text:`${this.prestamo.inventario.map(i => (i.descripcion +' '))}`,alignment: 'left',colSpan: 2},{},{text:'',alignment: 'right'}],
           //total a pagar lo que se cobra interes + el capital +comision adminstrativa

@@ -108,7 +108,7 @@ export class Prestamo extends BaseEntity {
       .select('SUM(pago.costoPago)', 'costoCancelado')
       .where('pago.prestamo = :prestamo', { prestamo: this.id })
       .getRawOne();
-
+    console.log(costoPago);
     if (!costoPago) {
       this.costoCancelado = 0.0;
     } else {

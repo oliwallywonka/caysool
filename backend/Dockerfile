@@ -1,15 +1,46 @@
-FROM node:14-alpine as develoment
+FROM node:lts-alpine AS development
 
-WORKDIR /backend
+WORKDIR /usr/src/app
 
-COPY package*.json /backend
+COPY package*.json ./
 
-RUN npm cache clean --force && rm -rf node_modules && npm install
+RUN yarn add glob rimraf
+
+RUN yarn install --production=false
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
-EXPOSE 3000
+FROM node:lts-alpine as production
 
-CMD ["npm", "run", "start:prod"]
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN yarn install --production=false
+
+COPY . .
+
+COPY --from=development /usr/src/app/dist ./dist
+
+CMD ["node", "dist/main"]
+
+
+#RUN npm cache clean --force && rm -rf node_modules && npm install
+# FROM node:lts-alpine as develoment
+
+# WORKDIR /backend
+
+# COPY package*.json /backend
+
+# RUN npm cache clean --force && rm -rf node_modules && npm install
+
+# COPY . .
+
+# EXPOSE 3000
+
+# CMD ["npm", "run", "start:dev"]

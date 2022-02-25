@@ -95,16 +95,22 @@
               MontoPrestamo: Bol. {{ prestamo.costoPrestamo }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Interés al finalizar el Plazo: Bol. {{ (prestamo.costoTotal - prestamo.costoPrestamo).toFixed(1) }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Monto Total: Bol. {{ prestamo.costoTotal }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
               Monto cancelado: Bol. {{ prestamo.costoCancelado }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Por cobrar: Bol. {{ (prestamo.costoTotal - prestamo.costoCancelado).toFixed(1) }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
               Fecha de prestamo: {{ prestamo.fechaInicio | date:'medium' }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
               Fecha de vencimiento: {{ prestamo.fechaFinal | date:'medium' }}
-            </p>
-            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
-              Interés al finalizar el Plazo: Bol. {{ (prestamo.costoTotal - prestamo.costoPrestamo).toFixed(1) }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
               Estado: {{ prestamo.estado }}

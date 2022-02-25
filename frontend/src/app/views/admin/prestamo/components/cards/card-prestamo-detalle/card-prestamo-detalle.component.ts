@@ -44,7 +44,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     this.prestamoId = this.route.snapshot.paramMap.get('prestamoId');
     this.historialArray = [];
     this.getPrestamoById();
-    this.getPagosByPrestamoId();
+    //this.getPagosByPrestamoId();
     this.getImpresionByPrestamoId();
   }
 
@@ -95,8 +95,10 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
             cargoExtra:  0.00,
             amortiguado: 0.00,
           }
+          this.getPagosByPrestamoId();
           this.historialArray.push(historialItem);
           this.historialArray.push(historialItem2);
+          this.historialArray.sort((a, b) => (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
         }
       )
     );
@@ -107,21 +109,31 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
       this.pagoService.getByPrestamoId(+this.prestamoId).subscribe(
         pagos => {
           this.pagos = pagos;
-          this.pagos.map(pago => {
-            const historialItem = {
-              fecha: this.datePipe.transform(pago.createdAt, 'medium'),
-              operacion: pago.tipoPago === 'PAGO'? 'PAGO' : pago.tipoPago === 'INTERES'? 'PAGO INTERES': 'PAGO AMORTIZACION',
-              cargo: pago.tipoPago === 'PAGO' || 'INTERES'? pago.costoPago : 0.00,
-              comision: pago.costoAdministracion,
-              cargoExtra: pago.costoAdministracion,
-              amortiguado: pago.tipoPago === 'AMORTIGUADO'? pago.costoPago: 0.00,
-              ...pago
-            };
-            this.historialArray.push(historialItem);
-          });
+          this.setHistorialPago();
         }
       )
     );
+  }
+
+  setHistorialPago() {
+    let costoPago = 0;
+    this.pagos.map(pago => {
+      costoPago += +pago.costoPago;
+      const costoPorCobrar = this.prestamo.costoTotal - costoPago;
+      console.log(costoPorCobrar);
+      const historialItem = {
+        fecha: this.datePipe.transform(pago.createdAt, 'medium'),
+        operacion: pago.tipoPago === 'PAGO'? 'PAGO' : pago.tipoPago === 'INTERES'? 'PAGO INTERES': 'PAGO AMORTIZACION',
+        cargo: pago.tipoPago === 'AMORTIZACION'? 0.00 : pago.costoPago,
+        comision: pago.costoAdministracion,
+        cargoExtra: pago.costoAdministracion,
+        amortiguado: pago.tipoPago === 'AMORTIZACION'? pago.costoPago: 0.00,
+        costoPorCobrar2 : costoPorCobrar,
+        ...pago
+      };
+      this.historialArray.push(historialItem);
+      this.historialArray.sort((a, b) => (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
+    });
   }
 
   getImpresionByPrestamoId() {
@@ -132,13 +144,14 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
           this.impresiones.map(impresion => {
             const historialItem = {
               fecha: this.datePipe.transform(impresion.createdAt, 'medium'),
-              operacion: `REIMPRESIÓN ${impresion.tipoDocumento === 'CONTRATO'?'CONTRATO':'PAGO'}`,
+              operacion: `IMPRESIÓN ${impresion.tipoDocumento === 'CONTRATO'?'CONTRATO':'PAGO'}`,
               cargo: impresion.costoImpresion,
               comision: 0.00,
               cargoExtra: 0.00,
               amortiguado: 0.00
             };
             this.historialArray.push(historialItem);
+            this.historialArray.sort((a, b) => (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
           });
         }
       )
