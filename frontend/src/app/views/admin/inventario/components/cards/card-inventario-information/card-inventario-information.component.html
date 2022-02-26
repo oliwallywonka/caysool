@@ -45,6 +45,32 @@
                   {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}
               </p>
             </div>
+            <button
+              [popper]="venderItem"
+              [popperTrigger]="'hover'"
+              [popperPlacement]="'top'"
+              [popperPositionFixed]="true"
+              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button"
+              >
+              <i class="fas fa-tag"></i>
+            </button>
+            <popper-content #venderItem>
+              <p class="bold">Vender Item</p>
+            </popper-content>
+            <button
+              [popper]="devolverItem"
+              [popperTrigger]="'hover'"
+              [popperPlacement]="'top'"
+              [popperPositionFixed]="true"
+              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button"
+              >
+              <i class="fas fa-box-open"></i>
+            </button>
+            <popper-content #devolverItem>
+              <p class="bold">Devolver Item</p>
+            </popper-content>
         </div>
 
         <div class="flex items-center space-x-4 px-4 ">

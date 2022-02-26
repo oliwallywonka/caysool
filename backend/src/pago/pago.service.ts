@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { create } from 'domain';
 import { AuditService } from 'src/audit/audit.service';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 import { CreatePagoDto } from './dto/create-pago.dto';
@@ -10,7 +11,7 @@ export class PagoService {
   constructor(private auditService: AuditService) {}
 
   async create(createPagoDto: CreatePagoDto, user) {
-    const prestamo = await Prestamo.findOne(createPagoDto.prestamo.id);
+    const prestamo = await Prestamo.findOne(createPagoDto.prestamo);
     if (!prestamo)
       throw new BadRequestException({ message: 'Prestamo no encontrado' });
     const pago = Pago.create(createPagoDto);
@@ -49,5 +50,13 @@ export class PagoService {
 
   remove(id: number) {
     return `This action removes a #${id} pago`;
+  }
+
+  async getPagosByDate({ from = '', to = '' }) {
+    const pagos = await Pago.createQueryBuilder('pagos')
+      .where('pagos.createdAt >= :from', { from })
+      .andWhere('pagos.createdAt <= :to', { to })
+      .getMany();
+    return pagos;
   }
 }

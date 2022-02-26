@@ -1,9 +1,10 @@
+import { User } from "./auth";
 import { Client } from "./client";
 import { Inventario } from "./inventario";
 
 export interface Prestamo {
   id?: number;
-  user: number;
+  user: number & User;
   client: Client;
   fechaInicio: string;
   fechaFinal: string;

@@ -1,1 +1,123 @@
-<p>card-reporte-prestamo works!</p>
+<div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+  <div class="p-4 w-full ">
+    <div class="items-center mb-4">
+      <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+        <button
+            (click)="goToBackPage()"
+            class="mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1"
+            type="submit"
+          >
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        Prestamos
+      </h3>
+      <div class="flex items-center justify-start pt-2">
+
+      </div>
+      <div class="w-full ">
+        <div class="flex flex-col pt-4 items-baseline w-full">
+          <form
+            autocomplete="off"
+            [formGroup]="reporteForm"
+            (ngSubmit)="save()"
+          >
+            <div class="my-4 relative p-6 flex flex-wrap">
+              <div class="w-full lg:w-6/12 px-4 mb-2">
+                <app-input
+                  [inputForm]="reporteForm"
+                  inputLabel="DESDE"
+                  inputType="date"
+                  inputFormName="from"
+                  formControlName="from"
+                  [value]="reporteForm.value.from">
+                </app-input>
+              </div>
+
+              <div class="w-full lg:w-6/12 px-4 mb-2">
+                <app-input
+                  [inputForm]="reporteForm"
+                  inputLabel="HASTA"
+                  inputType="date"
+                  inputFormName="to"
+                  formControlName="to"
+                  [value]="reporteForm.value.to">
+                </app-input>
+              </div>
+              <div class="flex items-center justify-end ">
+                <button
+                  class="mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="submit"
+                >
+                  <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
+                </button>
+                <app-pdf-reporte-prestamo [prestamos]="prestamos" [from]="reporteForm.value.from" [to]="reporteForm.value.to"></app-pdf-reporte-prestamo>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Fecha de Prestamo
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Fecha de Vencimiento
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Cliente
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Monto de Prestamo
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Interés a Pagar
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="prestamos" >
+                            <tr
+                              *ngFor="let prestamo of prestamos"
+                              class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
+                              >
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                  {{prestamo.fechaInicio | date:'medium'}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  {{prestamo.fechaFinal | date:'medium'}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    {{prestamo.client.name}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{prestamo.costoPrestamo}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{prestamo.costoInteres}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{prestamo.costoTotal}}
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

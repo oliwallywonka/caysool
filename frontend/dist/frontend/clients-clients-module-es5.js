@@ -280,19 +280,60 @@
             costoPrestamo: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
               message: this.errorMessages.required
             })]],
-            descripcion: [''],
-            observacion: [''],
-            marca: [''],
-            modelo: [''],
-            linea: [''],
-            serie: [''],
-            placa: [''],
-            chasis: [''],
-            deuda: [''],
-            ruat: [''],
-            metal: [''],
-            peso: [''],
-            pureza: ['']
+            descripcion: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
+              message: this.errorMessages.required
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 70,
+              message: this.errorMessages.maxLenght
+            })]],
+            observacion: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 70,
+              message: this.errorMessages.maxLenght
+            })]],
+            marca: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 15,
+              message: this.errorMessages.maxLenght
+            })]],
+            modelo: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 15,
+              message: this.errorMessages.maxLenght
+            })]],
+            linea: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 15,
+              message: this.errorMessages.maxLenght
+            })]],
+            serie: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 30,
+              message: this.errorMessages.maxLenght
+            })]],
+            placa: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 15,
+              message: this.errorMessages.maxLenght
+            })]],
+            chasis: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 30,
+              message: this.errorMessages.maxLenght
+            })]],
+            deuda: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 15,
+              message: this.errorMessages.maxLenght
+            })]],
+            ruat: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 20,
+              message: this.errorMessages.maxLenght
+            })]],
+            metal: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 20,
+              message: this.errorMessages.maxLenght
+            })]],
+            peso: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 20,
+              message: this.errorMessages.maxLenght
+            })]],
+            pureza: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+              value: 20,
+              message: this.errorMessages.maxLenght
+            })]]
           });
         }
 
@@ -1009,17 +1050,11 @@
               value: 2,
               message: this.errorMessages.minLength
             }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
-              value: 20,
+              value: 50,
               message: this.errorMessages.maxLenght
             })]],
             birthDate: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
               message: this.errorMessages.required
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
-              value: 2,
-              message: this.errorMessages.minLength
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
-              value: 20,
-              message: this.errorMessages.maxLenght
             })]],
             phone: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
               message: this.errorMessages.required
@@ -1036,14 +1071,14 @@
               value: 2,
               message: this.errorMessages.minLength
             }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
-              value: 30,
+              value: 50,
               message: this.errorMessages.maxLenght
             })]],
             email: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].email(), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
               value: 2,
               message: this.errorMessages.minLength
             }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
-              value: 20,
+              value: 30,
               message: this.errorMessages.maxLenght
             })]],
             ci: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
@@ -1052,7 +1087,7 @@
               value: 2,
               message: this.errorMessages.minLength
             }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
-              value: 20,
+              value: 10,
               message: this.errorMessages.maxLenght
             })]]
           });

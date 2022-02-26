@@ -85,4 +85,12 @@ export class ImpresionDocService {
       throw new BadRequestException({ message: ' Prestamo no encontrado ' });
     return prestamo;
   }
+
+  async getImpresionesByDate({ from = '', to = '' }) {
+    const impresiones = await ImpresionDoc.createQueryBuilder('impresion')
+      .where('impresion.createdAt >= :from', { from })
+      .andWhere('impresion.createdAt <= :to', { to })
+      .getMany();
+    return impresiones;
+  }
 }

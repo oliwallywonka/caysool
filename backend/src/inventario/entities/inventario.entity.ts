@@ -25,7 +25,7 @@ export class Inventario extends BaseEntity {
   @Column({ type: 'varchar', length: 12, default: 'EMPENADO' })
   estado: string;
 
-  @Column({ type: 'varchar', length: 60, default: 'ARTICULO' })
+  @Column({ type: 'varchar', length: 12, default: 'ARTICULO' })
   tipo: string;
 
   @Column({ type: 'varchar', length: 70, default: 'NINGUNO' })
@@ -43,13 +43,13 @@ export class Inventario extends BaseEntity {
   @Column({ type: 'varchar', length: 15, nullable: true })
   linea: string;
 
-  @Column({ type: 'varchar', length: 15, nullable: true })
+  @Column({ type: 'varchar', length: 30, nullable: true })
   serie: string;
 
   @Column({ type: 'varchar', length: 15, nullable: true })
   placa: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({ type: 'varchar', length: 30, nullable: true })
   chasis: string;
 
   @Column({ type: 'varchar', length: 15, nullable: true })

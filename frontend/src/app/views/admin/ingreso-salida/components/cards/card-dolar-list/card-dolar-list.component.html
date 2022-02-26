@@ -49,19 +49,19 @@
                                   {{ dolar.operacion }}
                               </td>
                               <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                  {{ dolar.cantidad }}
+                                  $ {{ dolar.cantidad }}
                               </td>
                               <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                  {{ dolar.tipoCambio }}
+                                  Bol. {{ dolar.tipoCambio }}
                               </td>
                               <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                  {{ (dolar.cantidad * dolar.tipoCambio).toFixed(1) }}
+                                  Bol. {{ (dolar.cantidad * dolar.tipoCambio).toFixed(1) }}
                               </td>
                               <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                {{ dolar.tipoCambioOficial }}
-                            </td>
+                                  Bol. {{ dolar.tipoCambioOficial }}
+                              </td>
                               <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                  {{ (dolar.cantidad * dolar.tipoCambioOficial).toFixed(1) }}
+                                  Bol. {{ (dolar.cantidad * dolar.tipoCambioOficial).toFixed(1) }}
                               </td>
                               <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                   Bol. {{ dolar.diferencia }}

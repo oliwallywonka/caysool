@@ -33,6 +33,10 @@ export class ModalIngresoSalidaComponent implements OnInit, OnDestroy {
     concepto: ['',
       [
         RxwebValidators.required({ message: this.errorMessages.required }),
+        RxwebValidators.maxLength({
+          value: 80,
+          message: this.errorMessages.maxLenght,
+        }),
       ],
     ],
     cantidad: [0.0,

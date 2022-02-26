@@ -24,6 +24,8 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
   prestamoId: string;
   prestamo: Prestamo;
   historialArray: any[] = [];
+  historialPagosArray: any[] = [];
+  historialImpresionesArray: any[] = [];
   impresiones: Impresion[] = [];
   pagos: Pago[] = [];
   amorizaciones: Amortizacion[] = [];
@@ -44,30 +46,22 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     this.prestamoId = this.route.snapshot.paramMap.get('prestamoId');
     this.historialArray = [];
     this.getPrestamoById();
-    //this.getPagosByPrestamoId();
+    this.getPagosByPrestamoId();
     this.getImpresionByPrestamoId();
+    this.subscribePagos();
+    this.subscribeImpresines();
+    this.subscribePrestamo();
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
-  getDataBy() {
-    this.sub.add(
-      forkJoin([
-        this.prestamoService.getPrestamoById(+this.prestamoId),
-        this.pagoService.getByPrestamoId(+this.prestamoId),
-        this.amortizacionService.getByPrestamoId(+this.prestamoId),
-        this.impresionService.getByPrestamoId(+this.prestamoId)
-      ]).subscribe(([
-        responsePrestamo,
-        responsePago,
-        responseAmortizacion,
-        responseService
-      ]) => {
-
-      })
-    );
+  calculateDiasRestantes() {
+    const diaInicio = moment(this.prestamo.fechaInicio);
+    const diaFinal = moment(this.prestamo.fechaFinal);
+    this.diasRestantes = moment.duration(diaFinal.diff(diaInicio)).asDays();
+    this.diasRestantes = +this.diasRestantes.toFixed(1);
   }
 
   getPrestamoById() {
@@ -75,10 +69,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
       this.prestamoService.getPrestamoById(+this.prestamoId).subscribe(
         prestamo => {
           this.prestamo = prestamo;
-          console.log(prestamo);
-          const diaInicio = moment(this.prestamo.fechaInicio);
-          const diaFinal = moment(this.prestamo.fechaFinal);
-          this.diasRestantes = moment.duration(diaFinal.diff(diaInicio)).asDays();
+          this.calculateDiasRestantes();
           const historialItem = {
             fecha: this.datePipe.transform(this.prestamo.createdAt, 'medium'),
             operacion: 'Prestamo',
@@ -95,10 +86,8 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
             cargoExtra:  0.00,
             amortiguado: 0.00,
           }
-          this.getPagosByPrestamoId();
           this.historialArray.push(historialItem);
           this.historialArray.push(historialItem2);
-          this.historialArray.sort((a, b) => (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
         }
       )
     );
@@ -115,7 +104,21 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     );
   }
 
+  subscribePagos() {
+    this.sub.add(
+      this.pagoService.pagos.subscribe(
+        pagos => {
+          if (pagos) {
+            this.pagos = pagos;
+            this.setHistorialPago();
+          }
+        }
+      )
+    );
+  }
+
   setHistorialPago() {
+    this.historialPagosArray = [];
     let costoPago = 0;
     this.pagos.map(pago => {
       costoPago += +pago.costoPago;
@@ -131,8 +134,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
         costoPorCobrar2 : costoPorCobrar,
         ...pago
       };
-      this.historialArray.push(historialItem);
-      this.historialArray.sort((a, b) => (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
+      this.historialPagosArray.push(historialItem);
     });
   }
 
@@ -141,25 +143,61 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
       this.impresionService.getByPrestamoId(+this.prestamoId).subscribe(
         impresiones => {
           this.impresiones = impresiones;
-          this.impresiones.map(impresion => {
-            const historialItem = {
-              fecha: this.datePipe.transform(impresion.createdAt, 'medium'),
-              operacion: `IMPRESIÓN ${impresion.tipoDocumento === 'CONTRATO'?'CONTRATO':'PAGO'}`,
-              cargo: impresion.costoImpresion,
-              comision: 0.00,
-              cargoExtra: 0.00,
-              amortiguado: 0.00
-            };
-            this.historialArray.push(historialItem);
-            this.historialArray.sort((a, b) => (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
-          });
+          this.setHistorialImpresiones();
         }
       )
     )
   }
 
+  subscribeImpresines() {
+    this.sub.add(
+      this.impresionService.impresiones.subscribe(
+        impresiones => {
+          if (impresiones){
+            this.impresiones = impresiones;
+            this.setHistorialImpresiones();
+          }
+        }
+      )
+    );
+  }
+
+  setHistorialImpresiones() {
+    this.historialImpresionesArray = [];
+    this.impresiones.map(impresion => {
+      const historialItem = {
+        fecha: this.datePipe.transform(impresion.createdAt, 'medium'),
+        operacion: `IMPRESIÓN ${impresion.tipoDocumento === 'CONTRATO'?'CONTRATO':'PAGO'}`,
+        cargo: impresion.costoImpresion,
+        comision: 0.00,
+        cargoExtra: 0.00,
+        amortiguado: 0.00
+      };
+      this.historialImpresionesArray.push(historialItem);
+    });
+  }
+
+  subscribePrestamo() {
+    this.sub.add(
+      this.prestamoService.prestamo.subscribe(
+        (prestamo) => {
+          if (prestamo) {
+            this.prestamo = prestamo;
+            this.calculateDiasRestantes();
+          }
+        }
+      )
+    );
+  }
+
   goToBackPage() {
     this.location.back();
+  }
+
+  showCambioFechaModal() {
+    this.modal.modalName = 'prestamoEditModal';
+    this.modal.visible = true;
+    this.prestamoService.prestamo.emit(this.prestamo);
   }
 
   showPagoModal() {
@@ -183,10 +221,9 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     }
   }
 
-  showImpresionContratoModal(pago: Pago) {
+  showImpresionContratoModal() {
     this.modal.modalName = 'impresionPagoModal';
     this.modal.visible = true;
-    this.pagoService.pago.emit(pago);
     this.prestamoService.prestamo.emit(this.prestamo);
   }
 

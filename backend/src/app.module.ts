@@ -20,6 +20,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { NotificationModule } from './notification/notification.module';
 import { TransaccionMonedaModule } from './transaccion-moneda/transaccion-moneda.module';
+import { ReporteModule } from './reporte/reporte.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { TransaccionMonedaModule } from './transaccion-moneda/transaccion-moneda
     MovimientoModule,
     NotificationModule,
     TransaccionMonedaModule,
+    ReporteModule,
   ],
 })
 export class AppModule {}

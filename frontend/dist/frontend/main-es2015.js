@@ -476,7 +476,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"], _views_shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"], _core_core_module__WEBPACK_IMPORTED_MODULE_8__["CoreModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]],
-        providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["LOCALE_ID"], useValue: "es-*" }],
+        providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["LOCALE_ID"], useValue: "es" }],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]],
     })
 ], AppModule);
@@ -577,6 +577,8 @@ var InputComponent_1;
 let InputComponent = InputComponent_1 = class InputComponent {
     constructor() {
         this.inputLabel = 'Label';
+        this.inputMin = '';
+        this.inputMax = '';
         this.inputPlaceholder = 'Placeholder...';
         this.inputFormName = 'input';
         this.inputType = 'Text';
@@ -616,6 +618,8 @@ let InputComponent = InputComponent_1 = class InputComponent {
 InputComponent.ctorParameters = () => [];
 InputComponent.propDecorators = {
     inputLabel: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
+    inputMin: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
+    inputMax: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
     inputPlaceholder: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
     inputFormName: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
     inputType: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
@@ -908,7 +912,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<label\n  class=\"block uppercase text-gray-500 text-xs font-bold mb-2\"\n  htmlFor=\"grid-password\"\n>\n  {{ inputLabel }}\n</label>\n<input\n  type=\"{{ inputType }}\"\n  class=\"border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150\"\n  placeholder=\"{{ inputPlaceholder }}\"\n  (input)=\"onInput($event.target.value)\"\n  (input)=\"clickInput($event.target.value)\"\n  [value]=\"value\"\n/>\n<span\n  class=\"text-red-500\"\n  *ngFor=\"let error of inputForm.controls[inputFormName]['errorMessages']\"\n>\n  {{ error }}\n</span>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<label\n  class=\"block uppercase text-gray-500 text-xs font-bold mb-2\"\n  htmlFor=\"grid-password\"\n>\n  {{ inputLabel }}\n</label>\n<input\n  type=\"{{ inputType }}\"\n  class=\"border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150\"\n  placeholder=\"{{ inputPlaceholder }}\"\n  [min]=\"inputMin\"\n  [max]=\"inputMax\"\n  (input)=\"onInput($event.target.value)\"\n  (input)=\"clickInput($event.target.value)\"\n  [value]=\"value\"\n/>\n<span\n  class=\"text-red-500\"\n  *ngFor=\"let error of inputForm.controls[inputFormName]['errorMessages']\"\n>\n  {{ error }}\n</span>\n");
 
 /***/ }),
 

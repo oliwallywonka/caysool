@@ -13,5 +13,6 @@ import { Inventario } from 'src/inventario/entities/inventario.entity';
     AuditModule,
     InventarioModule,
   ],
+  exports: [PrestamoService],
 })
 export class PrestamoModule {}

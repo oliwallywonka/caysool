@@ -11,7 +11,7 @@ registerLocaleData(localeEs);
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, SharedModule, CoreModule, HttpClientModule],
-  providers: [{ provide: LOCALE_ID, useValue: "es-*" }],
+  providers: [{ provide: LOCALE_ID, useValue: "es" }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

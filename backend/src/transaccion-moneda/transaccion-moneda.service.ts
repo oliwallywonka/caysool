@@ -40,4 +40,14 @@ export class TransaccionMonedaService {
   remove(id: number) {
     return `This action removes a #${id} transaccionMoneda`;
   }
+
+  async getTransaccionesByDate({ from = '', to = '' }) {
+    const transacciones = await TransaccionMoneda.createQueryBuilder(
+      'transaccion',
+    )
+      .where('transaccion.createdAt >= :from', { from })
+      .andWhere('transaccion.createdAt <= :to', { to })
+      .getMany();
+    return transacciones;
+  }
 }

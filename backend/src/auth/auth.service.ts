@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
   async validateUser(ci: string, password: string): Promise<boolean> {
-    const user = await this.userService.findUserByCi(ci);
+    const user = await this.userService.findUserByAuth(ci);
     if (!user)
       throw new BadRequestException({ message: 'Usuario no encontrado' });
     return await user.validatePassword(password);

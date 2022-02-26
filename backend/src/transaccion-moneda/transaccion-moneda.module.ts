@@ -7,5 +7,6 @@ import { AuditModule } from 'src/audit/audit.module';
   controllers: [TransaccionMonedaController],
   providers: [TransaccionMonedaService],
   imports: [AuditModule],
+  exports: [TransaccionMonedaService],
 })
 export class TransaccionMonedaModule {}

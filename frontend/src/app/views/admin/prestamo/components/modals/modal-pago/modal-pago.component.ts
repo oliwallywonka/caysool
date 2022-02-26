@@ -149,6 +149,8 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
       response => {
         this.loading = false;
         this.successMessage();
+        this.refreshPagos();
+        this.refreshPrestamo();
         this.closeModal();
       },
       error => {
@@ -158,4 +160,27 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
     )
   }
 
+  refreshPagos() {
+    this.sub.add(
+      this.pagoService.getByPrestamoId(this.prestamo.id).subscribe(
+        (pagos) => {
+          if (pagos) {
+            this.pagoService.pagos.emit(pagos);
+          }
+        }
+      )
+    );
+  }
+
+  refreshPrestamo() {
+    this.sub.add(
+      this.prestamoService.getPrestamoById(this.prestamo.id).subscribe(
+        (prestamo) => {
+          if (prestamo) {
+            this.prestamoService.prestamo.emit(prestamo);
+          }
+        }
+      )
+    );
+  }
 }

@@ -7,5 +7,6 @@ import { AuditModule } from 'src/audit/audit.module';
   controllers: [ImpresionDocController],
   providers: [ImpresionDocService],
   imports: [AuditModule],
+  exports: [ImpresionDocService],
 })
 export class ImpresionDocModule {}

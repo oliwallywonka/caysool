@@ -1,0 +1,89 @@
+
+<div *ngIf="modal.visible&&modal.modalName==='prestamoEditModal'" class="justify-center items-center overflow-x-hidden overflow-y-auto fixed right-0 left-0 top-4 inset-0 z-50 grid">
+  <div class="relative px-4 w-full max-w-6xl h-full md:h-auto">
+
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+
+      <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+        <h4 class="text-2xl font-semibold">
+           PRESTAMO Nº {{prestamo.id}}
+        </h4>
+        <button
+          class="p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+          (click)="closeModal()"
+          type="button"
+        >
+          <span class="opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+            x
+          </span>
+        </button>
+      </div>
+      <div class="flex w-full">
+
+        <form
+          autocomplete="off"
+          [formGroup]="prestamoForm"
+          (ngSubmit)="save()"
+          class="w-full md:w-1/2"
+        >
+          <div class="my-4 relative p-6 flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4 mb-2">
+              <app-input
+                [inputForm]="prestamoForm"
+                inputLabel="INICIO PRESTAMO"
+                inputType="date"
+                inputFormName="fechaInicio"
+                formControlName="fechaInicio"
+                [inputMax]="prestamoForm.value.FechaFinal"
+                [value]="prestamoForm.value.fechaInicio"
+                (inputEvent)="calculateCostoTotal($event)">
+              </app-input>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4 mb-2">
+              <app-input
+                [inputForm]="prestamoForm"
+                inputLabel="FINAL del PRESTAMO"
+                inputType="date"
+                inputFormName="fechaFinal"
+                formControlName="fechaFinal"
+                [inputMin]="prestamoForm.value.fechaInicio"
+                (inputEvent)="calculateCostoTotal()"
+                [value]="prestamoForm.value.fechaFinal">
+              </app-input>
+            </div>
+          </div>
+
+        <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+          <button
+            class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            (click)="closeModal()"
+            type="button"
+          >
+            Cancelar
+          </button>
+          <button
+            [disabled]="!prestamoForm.valid || loading"
+            class="mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="submit"
+          >
+          <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
+          </button>
+        </div>
+
+        </form>
+
+        <div class="w-full md:w-1/2 my-4 relative p-6">
+          <div>
+            <p> Cantidad de dias: {{this.diasPrestamo}}</p>
+            <p> Prestamo total: Bol. {{this.prestamo.costoPrestamo}}</p>
+            <p> Interes al finalizar el plazo: Bol. {{(this.costoTotal - this.prestamo.costoPrestamo).toFixed(1)}}</p>
+            <p> Total a pagar al finalizar el plazo: Bol. {{this.costoTotal}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="modal.visible&&modal.modalName==='prestamoEditModal'" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

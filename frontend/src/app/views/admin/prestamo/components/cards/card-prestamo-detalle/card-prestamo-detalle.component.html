@@ -17,6 +17,7 @@
         <app-modal-amortiguar></app-modal-amortiguar>
         <app-modal-impresion-recibo></app-modal-impresion-recibo>
         <app-modal-impresion-contrato></app-modal-impresion-contrato>
+        <app-modal-edit-prestamo></app-modal-edit-prestamo>
       </div>
       <div class="w-full ">
         <div class="flex flex-col pt-4 items-baseline w-full">
@@ -34,13 +35,27 @@
             </div>
 
             <button
+              [popper]="editarFecha"
+              [popperTrigger]="'hover'"
+              [popperPlacement]="'top'"
+              [popperPositionFixed]="true"
+              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button"
+              (click)="showCambioFechaModal()">
+              <i class="fas fa-calendar"></i>
+            </button>
+            <popper-content #editarFecha>
+              <p class="bold">Editar fecha del prestamo</p>
+            </popper-content>
+
+            <button
               [popper]="imprimirContrato"
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
               class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button"
-              (click)="showImpresionContratoModal(null)">
+              (click)="showImpresionContratoModal()">
               <i class="fas fa-file-invoice"></i>
             </button>
             <popper-content #imprimirContrato>
@@ -90,7 +105,9 @@
                 </p>
               </div>
             </div>
-
+            <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
+              Usuario: {{ prestamo.user.ci }} {{ prestamo.user.name }}
+            </p>
             <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
               MontoPrestamo: Bol. {{ prestamo.costoPrestamo }}
             </p>
@@ -157,6 +174,52 @@
                         <tbody *ngIf="prestamo" >
                             <tr
                               *ngFor="let historial of historialArray"
+                              class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
+                              (click)="showImpresionPagoModal(historial)">
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ historial.fecha }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    {{ historial.operacion }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.cargo }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.comision }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.cargoExtra }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.amortiguado }}
+                                </td>
+                            </tr>
+                            <tr
+                              *ngFor="let historial of historialPagosArray"
+                              class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
+                              (click)="showImpresionPagoModal(historial)">
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ historial.fecha }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    {{ historial.operacion }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.cargo }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.comision }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.cargoExtra }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{ historial.amortiguado }}
+                                </td>
+                            </tr>
+                            <tr
+                              *ngFor="let historial of historialImpresionesArray"
                               class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
                               (click)="showImpresionPagoModal(historial)">
                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">

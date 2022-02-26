@@ -131,6 +131,7 @@ export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
       response => {
         this.loading = false;
         this.alertService.triggerMessage('Impresión registrada correctamente', 'success');
+        this.refreshImpresiones();
         this.closeModal();
       },
       error => {
@@ -138,5 +139,16 @@ export class ModalImpresionReciboComponent implements OnInit, OnDestroy{
         this.alertService.triggerMessage(error.error.message, 'error');
       }
     )
+  }
+  refreshImpresiones() {
+    this.sub.add(
+      this.impresionService.getByPrestamoId(this.prestamo.id).subscribe(
+        (impresiones) => {
+          if (impresiones) {
+            this.impresionService.impresiones.emit(impresiones);
+          }
+        }
+      )
+    );
   }
 }

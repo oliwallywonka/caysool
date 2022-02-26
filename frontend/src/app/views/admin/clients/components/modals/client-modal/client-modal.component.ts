@@ -36,23 +36,15 @@ export class ClientModalComponent implements OnInit, OnDestroy {
           message: this.errorMessages.minLength,
         }),
         RxwebValidators.maxLength({
-          value: 20,
+          value: 50,
           message: this.errorMessages.maxLenght,
         }),
       ],
     ],
     birthDate: ['',
       [
-        RxwebValidators.required({ message: this.errorMessages.required }),
-        RxwebValidators.minLength({
-          value: 2,
-          message: this.errorMessages.minLength,
-        }),
-        RxwebValidators.maxLength({
-          value: 20,
-          message: this.errorMessages.maxLenght,
-        }),
-      ],
+        RxwebValidators.required({ message: this.errorMessages.required })
+      ]
     ],
     phone: ['',
       [
@@ -75,7 +67,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
           message: this.errorMessages.minLength,
         }),
         RxwebValidators.maxLength({
-          value: 30,
+          value: 50,
           message: this.errorMessages.maxLenght,
         }),
       ],
@@ -88,7 +80,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
           message: this.errorMessages.minLength,
         }),
         RxwebValidators.maxLength({
-          value: 20,
+          value: 30,
           message: this.errorMessages.maxLenght,
         }),
       ],
@@ -101,7 +93,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
           message: this.errorMessages.minLength,
         }),
         RxwebValidators.maxLength({
-          value: 20,
+          value: 10,
           message: this.errorMessages.maxLenght,
         }),
       ],

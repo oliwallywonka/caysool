@@ -94,4 +94,13 @@ export class InventarioService {
       .getMany();
     return inventario;
   }
+
+  async getInventarioByDate({ from = '', to = '' }) {
+    const inventario = await Inventario.createQueryBuilder('inventario')
+      .where('inventario.createdAt >= :from', { from })
+      .andWhere('inventario.createdAt <= :to', { to })
+      .andWhere('inventario.estado = :estado', { estado: 'VENDIDO' })
+      .getMany();
+    return inventario;
+  }
 }

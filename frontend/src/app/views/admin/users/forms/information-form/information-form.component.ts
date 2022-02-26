@@ -28,11 +28,36 @@ export class InformationFormComponent implements OnInit, OnDestroy {
     name: ['',
       [
         RxwebValidators.required({ message: this.errorMessages.required }),
+        RxwebValidators.maxLength({
+          value: 30,
+          message: this.errorMessages.maxLenght,
+        }),
       ]
     ],
-    nit: [''],
-    phone: [''],
-    direction: ['']
+    nit: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 30,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    phone: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 30,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    direction: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 45,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ]
   });
   constructor(
     private businessService: BusinessService,

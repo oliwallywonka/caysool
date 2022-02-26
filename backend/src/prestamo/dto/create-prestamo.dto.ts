@@ -41,5 +41,5 @@ export class CreatePrestamoDto {
 
   @IsOptional()
   @Type(() => Inventario)
-  inventario: Inventario[];
+  inventario?: Inventario[];
 }

@@ -12,6 +12,7 @@ import { Impresion, ImpresionResponse } from 'src/app/interfaces/impresion';
 export class ImpresionService {
 
   @Output() impresion:EventEmitter<Impresion> = new EventEmitter();
+  @Output() impresiones:EventEmitter<Impresion[]> = new EventEmitter();
   @Output() response:EventEmitter<ImpresionResponse> = new EventEmitter();
   private baseUrl: string = environment.baseUrl;
 

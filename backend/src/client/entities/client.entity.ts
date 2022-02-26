@@ -21,13 +21,13 @@ export class Client extends BaseEntity {
   @Column({ type: 'date', nullable: true })
   birthDate: Date;
 
-  @Column({ type: 'varchar', length: 12 })
+  @Column({ type: 'varchar', length: 20 })
   phone: string;
 
-  @Column({ type: 'varchar', length: 15, default: 'SIN REFERENCIA' })
+  @Column({ type: 'varchar', length: 20, default: 'SIN REFERENCIA' })
   refPhone: string;
 
-  @Column({ type: 'varchar', length: 40 })
+  @Column({ type: 'varchar', length: 50 })
   direction: string;
 
   @Column({ type: 'varchar', length: 30 })

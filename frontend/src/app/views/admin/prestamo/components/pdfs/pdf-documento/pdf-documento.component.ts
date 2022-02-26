@@ -68,7 +68,7 @@ export class PdfDocumentoComponent implements OnInit {
         style: 'tableExample',
         table: {
           body: [
-            ['Monto de compra en:', `Bs.-${this.prestamo.costoTotal} `],
+            ['Monto de compra en:', `Bs. ${this.prestamo.costoPrestamo} `],
             ['INTERES', 'Tasa de interes del 15%'],
             ['COMISION POR CUSTODIA', 'Gastos generados']
           ]
@@ -102,7 +102,7 @@ export class PdfDocumentoComponent implements OnInit {
         fontSize: 12, alignment: 'justify'
       },
        //fecha del dia de prestamo
-      `Fecha de la compra y venta: La Paz – El Alto ${this.datePipe.transform(this.prestamo.fechaInicio, 'medium')} \n\n\n\n\n\n\n\n\n\n`,
+      `Fecha de la compra y venta: La Paz – El Alto ${this.datePipe.transform(this.prestamo.fechaInicio, 'mediumDate')} \n\n\n\n\n\n\n\n\n\n`,
        //numero del CI vendedor y comprador
       {
         text: ['……………………………………………	                                                   ……………………….………………….\n',

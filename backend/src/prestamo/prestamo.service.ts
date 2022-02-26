@@ -11,6 +11,7 @@ import { InventarioService } from 'src/inventario/inventario.service';
 import moment = require('moment');
 import { Connection } from 'typeorm';
 import { Inventario } from 'src/inventario/entities/inventario.entity';
+import { CreateInventarioDto } from 'src/inventario/dto/create-inventario.dto';
 @Injectable()
 export class PrestamoService {
   constructor(
@@ -24,22 +25,21 @@ export class PrestamoService {
   }
 
   async create(createPrestamoDto: CreatePrestamoDto, user) {
+    const inventario = [...createPrestamoDto.inventario];
+    createPrestamoDto.inventario = null;
     const prestamo = Prestamo.create(createPrestamoDto);
     const prestamoSaved = await Prestamo.save(prestamo);
-    this.auditService.audit({
+    await this.auditService.audit({
       action: 'Se creo un nuevo registro',
       auditTable: 'PRESTAMO',
       previusData: {},
       actualData: prestamoSaved,
       user: user,
     });
-    if (createPrestamoDto.inventario.length > 0) {
-      for (const inv in createPrestamoDto.inventario) {
-        createPrestamoDto.inventario[inv].prestamo = prestamoSaved;
-        await this.inventarioService.create(
-          createPrestamoDto.inventario[inv],
-          user,
-        );
+    if (inventario.length > 0) {
+      for (const index in inventario) {
+        inventario[index].prestamo = prestamoSaved;
+        await this.inventarioService.create(inventario[index], user);
       }
     }
     return prestamoSaved;
@@ -172,5 +172,15 @@ export class PrestamoService {
       }
     }
     await queryRunner.release();
+  }
+
+  async getPrestamosByDate({ from = '', to = '' }) {
+    const prestamos = await Prestamo.createQueryBuilder('prestamo')
+      .leftJoinAndSelect('prestamo.client', 'client')
+      .leftJoinAndSelect('prestamo.inventario', 'inventario')
+      .where('prestamo.createdAt >= :from', { from })
+      .andWhere('prestamo.createdAt <= :to', { to })
+      .getMany();
+    return prestamos;
   }
 }

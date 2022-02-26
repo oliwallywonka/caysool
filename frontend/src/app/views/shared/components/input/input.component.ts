@@ -17,6 +17,10 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input()
   inputLabel: string = 'Label';
   @Input()
+  inputMin: string = '';
+  @Input()
+  inputMax: string = '';
+  @Input()
   inputPlaceholder: string = 'Placeholder...';
   @Input()
   inputFormName: string = 'input';

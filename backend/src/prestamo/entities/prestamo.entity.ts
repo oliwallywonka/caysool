@@ -14,6 +14,8 @@ import {
   ManyToOne,
   Index,
   OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 import moment = require('moment');
@@ -31,14 +33,14 @@ export class Prestamo extends BaseEntity {
   @OneToMany(() => Inventario, (inventario) => inventario.prestamo)
   inventario: Inventario[];
 
-  @Column({ type: 'date', nullable: true })
-  fechaInicio: Date;
+  @Column({ type: 'datetime', nullable: true })
+  fechaInicio: string;
 
-  @Column({ type: 'date', nullable: true })
-  fechaLimite: Date;
+  @Column({ type: 'datetime', nullable: true })
+  fechaLimite: string;
 
-  @Column({ type: 'date', nullable: true })
-  fechaFinal: Date;
+  @Column({ type: 'datetime', nullable: true })
+  fechaFinal: string;
 
   @Index()
   @Column({ type: 'varchar', length: 10, default: 'ACTIVO' })
@@ -67,6 +69,18 @@ export class Prestamo extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  dateCalculate() {
+    this.fechaInicio = moment(this.fechaInicio)
+      .startOf('day')
+      .format('YYYY-MM-DD HH:mm:ss');
+    this.fechaFinal = moment(this.fechaFinal)
+      .endOf('day')
+      .format('YYYY-MM-DD HH:mm:ss');
+    console.log(this.fechaInicio, this.fechaFinal);
+  }
 
   async calculateCostoTotal() {
     //const interes = await Business.findOne(1);
@@ -108,7 +122,6 @@ export class Prestamo extends BaseEntity {
       .select('SUM(pago.costoPago)', 'costoCancelado')
       .where('pago.prestamo = :prestamo', { prestamo: this.id })
       .getRawOne();
-    console.log(costoPago);
     if (!costoPago) {
       this.costoCancelado = 0.0;
     } else {

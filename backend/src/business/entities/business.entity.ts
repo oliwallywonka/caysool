@@ -12,16 +12,16 @@ export class Business extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 20, default: '' })
+  @Column({ type: 'varchar', length: 30, default: '' })
   name: string;
 
-  @Column({ type: 'varchar', length: 20, default: '' })
+  @Column({ type: 'varchar', length: 30, default: '' })
   nit: string;
 
-  @Column({ type: 'varchar', length: 20, default: '' })
+  @Column({ type: 'varchar', length: 30, default: '' })
   phone: string;
 
-  @Column({ type: 'varchar', length: 12, default: '' })
+  @Column({ type: 'varchar', length: 45, default: '' })
   direction: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
@@ -30,7 +30,7 @@ export class Business extends BaseEntity {
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.15 })
   interest: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  @Column({ type: 'decimal', precision: 6, scale: 2, default: 0.0 })
   cambioDolar: number;
 
   @CreateDateColumn()

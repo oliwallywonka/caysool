@@ -34,10 +34,10 @@ export class Apertura extends BaseEntity {
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   montoCierre: number;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'datetime', nullable: true })
   fechaApertura: Date;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'datetime', nullable: true })
   fechaCierre: Date;
 
   @CreateDateColumn()

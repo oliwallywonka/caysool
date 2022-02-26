@@ -7,5 +7,6 @@ import { AuditModule } from 'src/audit/audit.module';
   controllers: [PagoController],
   providers: [PagoService],
   imports: [AuditModule],
+  exports: [PagoService],
 })
 export class PagoModule {}

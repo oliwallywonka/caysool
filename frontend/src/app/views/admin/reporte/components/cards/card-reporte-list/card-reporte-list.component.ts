@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-reporte-list',
@@ -8,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardReporteListComponent implements OnInit {
 
-  constructor() { }
+  reportePages: 'pagos' | 'inventario' | 'impresiones' | 'transacciones';
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  goToAnotherPage(pageName: string) {
+    this.router.navigate([`admin/reportes/${pageName}`]);
   }
 
 }

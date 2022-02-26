@@ -66,6 +66,15 @@ export class UserService {
     return user;
   }
 
+  async findUserByAuth(ci: string) {
+    const user = await User.createQueryBuilder('user')
+      .addSelect('user.password')
+      .where('user.ci = :ci', { ci })
+      .andWhere('user.isActive = :isActive', { isActive: 1 })
+      .getOne();
+    return user;
+  }
+
   async findAll(options: IPaginationOptions, ci: string) {
     const users = User.createQueryBuilder('user')
       //.where('user.isActive = :isActive', { isActive: true })

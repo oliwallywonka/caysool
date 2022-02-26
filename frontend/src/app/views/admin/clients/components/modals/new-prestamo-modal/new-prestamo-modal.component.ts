@@ -83,19 +83,111 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
         RxwebValidators.required({ message: this.errorMessages.required }),
       ]
     ],
-    descripcion: [''],
-    observacion: [''],
-    marca: [''],
-    modelo: [''],
-    linea: [''],
-    serie: [''],
-    placa: [''],
-    chasis: [''],
-    deuda: [''],
-    ruat: [''],
-    metal: [''],
-    peso: [''],
-    pureza: [''],
+    descripcion: ['',
+      [
+        RxwebValidators.required({ message: this.errorMessages.required }),
+        RxwebValidators.maxLength({
+          value: 70,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    observacion: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 70,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    marca: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 15,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    modelo: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 15,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    linea: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 15,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    serie: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 30,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    placa: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 15,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    chasis: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 30,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    deuda: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 15,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    ruat: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 20,
+          message: this.errorMessages.maxLenght,
+        }),
+    ],
+    ],
+    metal: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 20,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    peso: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 20,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
+    pureza: ['',
+      [
+        RxwebValidators.maxLength({
+          value: 20,
+          message: this.errorMessages.maxLenght,
+        }),
+      ],
+    ],
   });
 
   constructor(
