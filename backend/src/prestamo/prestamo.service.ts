@@ -160,7 +160,8 @@ export class PrestamoService {
       for (const prestamo of prestamos) {
         prestamo.estado = 'VENCIDO';
         await prestamo.save();
-        const inventario = await Inventario.createQueryBuilder('inventario')
+        //DESACTIVADO LA FUNCION DE CAMBIAR AUTOMATICAMENTE EL ESTADO DEL INVENTARIO CUANDO EL PRESTAMO VENCE
+        /*const inventario = await Inventario.createQueryBuilder('inventario')
           .where('inventario.prestamo = :prestamo', { prestamo: prestamo.id })
           .getMany();
         if (inventario.length > 0) {
@@ -168,7 +169,7 @@ export class PrestamoService {
             inv.estado = 'EN VENTA';
             await inv.save();
           }
-        }
+        }*/
       }
     }
     await queryRunner.release();

@@ -31,6 +31,7 @@
               inputLabel="TIPO DE PAGO"
               inputFormName="tipoPago"
               formControlName="tipoPago"
+              (selectEvent)="calculateInteresPago()"
               [value]="pagoForm.value.tipoPago">
             </app-select>
           </div>
@@ -62,15 +63,26 @@
                 inputType="number"
                 inputFormName="costoPago"
                 formControlName="costoPago"
+
+                [isDisabled]="pagoForm.value.tipoPago==='INTERES'"
                 [value]="pagoForm.value.costoPago">
             </app-input>
           </div>
 
         </div>
 
-        <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+        <div class="flex flex-col items-start justify-between px-4 border-b border-solid border-blueGray-200 rounded-t">
+          <h4 class="text-xl text-gray-400 font-semibold">
+            Interes al final al plazo: Bol. {{ prestamo.costoInteres }}
+          </h4>
+          <h4 class="text-xl text-gray-400 font-semibold">
+            Costo Prestamo: Bol. {{ prestamo.costoPrestamo }}
+          </h4>
+          <h4 class="text-xl text-gray-400 font-semibold">
+            Costo Total: Bol. {{ prestamo.costoTotal }}
+          </h4>
           <h4 class="text-2xl font-semibold">
-             TOTAL: Bol {{ +pagoForm.value.costoAdministracion + +pagoForm.value.costoPiso + +pagoForm.value.costoPago }}
+            TOTAL Pago: Bol. {{ (+pagoForm.value.costoAdministracion + +pagoForm.value.costoPiso + +pagoForm.value.costoPago).toFixed(1) }}
           </h4>
         </div>
 

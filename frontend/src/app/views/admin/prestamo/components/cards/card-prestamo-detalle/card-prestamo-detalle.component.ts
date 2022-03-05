@@ -49,7 +49,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     this.getPagosByPrestamoId();
     this.getImpresionByPrestamoId();
     this.subscribePagos();
-    this.subscribeImpresines();
+    this.subscribeImpresiones();
     this.subscribePrestamo();
   }
 
@@ -70,27 +70,32 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
         prestamo => {
           this.prestamo = prestamo;
           this.calculateDiasRestantes();
-          const historialItem = {
-            fecha: this.datePipe.transform(this.prestamo.createdAt, 'medium'),
-            operacion: 'Prestamo',
-            cargo: prestamo.costoPrestamo,
-            comision: 0.00,
-            cargoExtra: 0.00,
-            amortiguado: 0.00,
-          }
-          const historialItem2 = {
-            fecha: this.datePipe.transform(this.prestamo.createdAt, 'medium'),
-            operacion: 'Interés Generado',
-            cargo: prestamo.costoInteres,
-            comision: 0.00,
-            cargoExtra:  0.00,
-            amortiguado: 0.00,
-          }
-          this.historialArray.push(historialItem);
-          this.historialArray.push(historialItem2);
+          this.setHistorialPrestamo();
         }
       )
     );
+  }
+
+  setHistorialPrestamo() {
+    this.historialArray = [];
+    const historialItem = {
+      fecha: this.datePipe.transform(this.prestamo.createdAt, 'medium'),
+      operacion: 'Prestamo',
+      cargo: this.prestamo.costoPrestamo,
+      comision: 0.00,
+      cargoExtra: 0.00,
+      amortiguado: 0.00,
+    }
+    const historialItem2 = {
+      fecha: this.datePipe.transform(this.prestamo.createdAt, 'medium'),
+      operacion: 'Interés al finalizar el plazo',
+      cargo: this.prestamo.costoInteres,
+      comision: 0.00,
+      cargoExtra:  0.00,
+      amortiguado: 0.00,
+    }
+    this.historialArray.push(historialItem);
+    this.historialArray.push(historialItem2);
   }
 
   getPagosByPrestamoId() {
@@ -143,13 +148,12 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
       this.impresionService.getByPrestamoId(+this.prestamoId).subscribe(
         impresiones => {
           this.impresiones = impresiones;
-          this.setHistorialImpresiones();
         }
       )
     )
   }
 
-  subscribeImpresines() {
+  subscribeImpresiones() {
     this.sub.add(
       this.impresionService.impresiones.subscribe(
         impresiones => {
@@ -184,6 +188,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
           if (prestamo) {
             this.prestamo = prestamo;
             this.calculateDiasRestantes();
+            this.setHistorialPrestamo();
           }
         }
       )
@@ -204,6 +209,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     this.modal.modalName = 'pagoModal';
     this.modal.visible = true;
     this.prestamoService.prestamo.emit(this.prestamo);
+    this.pagoService.pagos.emit(this.pagos);
   }
 
   showAmortiguarModal() {

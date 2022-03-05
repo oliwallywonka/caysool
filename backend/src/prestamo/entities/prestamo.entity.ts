@@ -79,7 +79,6 @@ export class Prestamo extends BaseEntity {
     this.fechaFinal = moment(this.fechaFinal)
       .endOf('day')
       .format('YYYY-MM-DD HH:mm:ss');
-    console.log(this.fechaInicio, this.fechaFinal);
   }
 
   async calculateCostoTotal() {
@@ -87,15 +86,15 @@ export class Prestamo extends BaseEntity {
     const interes = 0.15;
     //Formula Para Prestamo
     //DIAS MINIMO 5
-    const diaInicio = moment(this.fechaInicio);
-    const diaFinal = moment(this.fechaFinal);
+    const diaInicio = moment(this.fechaInicio).startOf('day');
+    const diaFinal = moment(this.fechaFinal).endOf('day');
     const day = moment(Date.now()).startOf('day');
     const today = moment.duration(diaFinal.diff(day)).asDays();
-    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays() + 1;
+    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
     const costoTotal =
       this.costoPrestamo * (1 + interes / 30) ** (dias < 5 ? 5 : dias);
     const costoInteres = costoTotal - this.costoPrestamo;
-    this.costoTotal = costoTotal;
+    this.costoTotal = +costoTotal.toFixed(1);
     this.costoInteres = costoInteres;
     if (this.costoCancelado < this.costoTotal) {
       if (today > 0) {

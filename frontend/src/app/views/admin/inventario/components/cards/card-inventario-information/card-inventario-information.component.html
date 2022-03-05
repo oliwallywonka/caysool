@@ -14,6 +14,8 @@
       </h3>
       <div class="flex items-center justify-start pt-2">
         <app-modal-delete-picture></app-modal-delete-picture>
+        <app-modal-venta-inventario></app-modal-venta-inventario>
+        <app-modal-devolver-inventario></app-modal-devolver-inventario>
       </div>
       <div class="w-full ">
         <div class="flex flex-col pt-4 items-baseline w-full">
@@ -46,25 +48,26 @@
               </p>
             </div>
             <button
+              *ngIf="inventario.estado==='EMPENADO'"
               [popper]="venderItem"
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
               class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button"
-              >
+              (click)="openVentaModal()">
               <i class="fas fa-tag"></i>
             </button>
             <popper-content #venderItem>
               <p class="bold">Vender Item</p>
             </popper-content>
             <button
+              *ngIf="inventario.estado==='EMPENADO'"
               [popper]="devolverItem"
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"
               [popperPositionFixed]="true"
               class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button"
+              (click)="openDevolucionModal()"
               >
               <i class="fas fa-box-open"></i>
             </button>
@@ -77,7 +80,7 @@
           <div class="flex-1 min-w-0 py-8">
 
             <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
-              Dueño original: {{ inventario.prestamo.client.name }}
+              Dueño original: {{ inventario.prestamo?.client?.name }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
               Descripción: {{ inventario.descripcion }}
@@ -92,7 +95,26 @@
               Prestamo: Bol. {{ inventario.costoPrestamo }}
             </p>
             <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
-              Estado: Bol. {{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}
+              Precio de Venta: Bol. {{ inventario.precioVenta}}
+            </p>
+
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Precio de Compra: Bol. {{ inventario.costoCompra}}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Precio de Venta: Bol. {{ inventario.precioVenta}}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Fecha de Venta: {{ inventario.fechaVenta| date:'medium' }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Fecha de Compra: {{ inventario.fechaCompra| date:'medium' }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Fecha de Devolucion: {{ inventario.fechaDevolucion| date:'medium' }}
+            </p>
+            <p class="text-xl font-medium text-gray-500 truncate dark:text-gray-400">
+              Estado:{{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}
             </p>
           </div>
         </div>

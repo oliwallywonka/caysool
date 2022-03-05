@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { BusinessService } from 'src/app/core/services/business.service';
 import { Business } from 'src/app/interfaces/business';
+import { numeroALetras } from 'src/app/helpers/numberToLetter';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-pdf-pago',
@@ -23,6 +24,12 @@ export class PdfPagoComponent implements OnInit {
     this.businessService.business.subscribe((business) => {
       this.business = business;
     });
+    console.log(numeroALetras(500.3, {
+      plural: 'dólares estadounidenses',
+      singular: 'dólar estadounidense',
+      centPlural: 'centavos',
+      centSingular: 'centavo'
+    }))
   }
 
   exportToPdf() {
@@ -193,7 +200,7 @@ export class PdfPagoComponent implements OnInit {
                   colSpan: 2,
                 },
                 {},
-                { text: `Bol. ${this.pago.costoPorCobrar2}`, alignment: 'right' },
+                { text: `Bol. ${this.pago.costoPorCobrar2.toFixed(1)}`, alignment: 'right' },
               ],
               [
                 { text: 'Prenda', fontSize: 10, alignment: 'center' },
@@ -392,7 +399,7 @@ export class PdfPagoComponent implements OnInit {
                   colSpan: 2,
                 },
                 {},
-                { text: `Bol. ${this.pago.costoPorCobrar2}`, alignment: 'right' },
+                { text: `Bol. ${this.pago.costoPorCobrar2.toFixed(1)}`, alignment: 'right' },
               ],
               [
                 { text: 'Prenda', fontSize: 10, alignment: 'center' },

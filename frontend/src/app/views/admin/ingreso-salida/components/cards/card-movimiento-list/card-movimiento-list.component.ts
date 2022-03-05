@@ -19,6 +19,8 @@ export class CardMovimientoListComponent implements OnInit, OnDestroy {
   apertura: Apertura;
   movimientos: Movimiento[];
   totalMovimiento: number;
+  totalGastos: number;
+  totalIngresos: number;
   constructor(
     private movimientoService: MovimientoService,
     private aperturaService: AperturaService,
@@ -40,11 +42,15 @@ export class CardMovimientoListComponent implements OnInit, OnDestroy {
 
   calculateTotalMovimientos(movimientos: Movimiento[]) {
     this.totalMovimiento = 0;
+    this.totalGastos = 0;
+    this.totalIngresos = 0;
     for (const movimiento of movimientos ) {
       if (movimiento.tipo){
         this.totalMovimiento += +movimiento.cantidad;
+        this.totalIngresos += +movimiento.cantidad;
       }else {
         this.totalMovimiento -= +movimiento.cantidad;
+        this.totalGastos += +movimiento.cantidad;
       }
     }
     this.totalMovimiento.toFixed(1);
@@ -54,7 +60,6 @@ export class CardMovimientoListComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.movimientoService.getMovimientosByAperturaId(+this.aperturaId).subscribe(
         movimientos => {
-          console.log(movimientos)
           this.movimientos = movimientos;
           this.calculateTotalMovimientos(this.movimientos);
         }

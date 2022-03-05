@@ -43,4 +43,6 @@ CMD ["node", "dist/main"]
 
 # EXPOSE 3000
 
+# ENV TZ 'America/La_Paz'
+
 # CMD ["npm", "run", "start:dev"]

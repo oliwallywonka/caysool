@@ -10,37 +10,59 @@ export class InventarioService {
   constructor(private readonly auditService: AuditService) {}
 
   async create(createInventarioDto: CreateInventarioDto, user) {
-    const prestamo = await Prestamo.findOne(createInventarioDto.prestamo.id);
-    if (!prestamo)
-      throw new BadRequestException({ message: 'Prestamo no encontrado' });
-    const inventario = Inventario.create(createInventarioDto);
-    const inventarioSaved = await inventario.save();
-    await prestamo.calculateCostoPrestamo();
-    await prestamo.calculateCostoTotal();
-    await prestamo.save();
-    this.auditService.audit({
-      action: 'Se creo un nuevo registro',
-      auditTable: 'INVENTARIO',
-      previusData: {},
-      actualData: {
-        ...inventarioSaved,
-        prestamo: createInventarioDto.prestamo.id,
-      },
-      user: user,
-    });
-    return inventarioSaved;
+    if (createInventarioDto.prestamo) {
+      const prestamo = await Prestamo.findOne(createInventarioDto.prestamo.id);
+      if (!prestamo)
+        throw new BadRequestException({ message: 'Prestamo no encontrado' });
+      const inventario = Inventario.create(createInventarioDto);
+      const inventarioSaved = await inventario.save();
+      await prestamo.calculateCostoPrestamo();
+      await prestamo.calculateCostoTotal();
+      await prestamo.save();
+      this.auditService.audit({
+        action: 'Se creo un nuevo registro',
+        auditTable: 'INVENTARIO',
+        previusData: {},
+        actualData: {
+          ...inventarioSaved,
+          prestamo: createInventarioDto.prestamo.id,
+        },
+        user: user,
+      });
+      return inventarioSaved;
+    } else {
+      const inventario = Inventario.create(createInventarioDto);
+      const inventarioSaved = await inventario.save();
+      this.auditService.audit({
+        action: 'Se creo un nuevo registro',
+        auditTable: 'INVENTARIO',
+        previusData: {},
+        actualData: {
+          ...inventarioSaved,
+        },
+        user: user,
+      });
+      return inventarioSaved;
+    }
   }
 
   async findAll(
     options: IPaginationOptions,
     clientCi: string,
-    estadoInventario: string,
+    estadoInv: string,
   ) {
     const inventario = Inventario.createQueryBuilder('inventario')
       .leftJoinAndSelect('inventario.prestamo', 'prestamo')
       .leftJoinAndSelect('prestamo.client', 'client')
-      .where('inventario.estado = :estadoInventario', { estadoInventario })
-      .andWhere(`client.ci LIKE'%${clientCi ? clientCi : ''}%'`)
+      .where(`client.ci LIKE '%${clientCi ? clientCi : ''}%'`)
+      .andWhere(`inventario.estado LIKE '%${estadoInv ? estadoInv : ''}%'`)
+      .orderBy('inventario.id', 'DESC');
+    return await paginate<Inventario>(inventario, options);
+  }
+
+  async findComprado(options: IPaginationOptions) {
+    const inventario = Inventario.createQueryBuilder('inventario')
+      .where('inventario.estado = :estadoInv', { estadoInv: 'COMPRADO' })
       .orderBy('inventario.id', 'DESC');
     return await paginate<Inventario>(inventario, options);
   }
@@ -60,24 +82,37 @@ export class InventarioService {
     const prevInventario = { ...inventario };
     if (!inventario)
       throw new BadRequestException({ message: 'Inventario no encontrado' });
-    const prestamo = await Prestamo.findOne(inventario.prestamo);
-    if (!prestamo)
-      throw new BadRequestException({ message: 'Prestamo no encontrado' });
-    Inventario.merge(inventario, updateInventarioDto);
-    await inventario.save();
-    if (updateInventarioDto.costoPrestamo) {
-      await prestamo.calculateCostoPrestamo();
-      await prestamo.calculateCostoTotal();
-      await prestamo.save();
+    if (inventario.prestamo) {
+      const prestamo = await Prestamo.findOne(inventario.prestamo);
+      if (!prestamo)
+        throw new BadRequestException({ message: 'Prestamo no encontrado' });
+      Inventario.merge(inventario, updateInventarioDto);
+      await inventario.save();
+      if (updateInventarioDto.costoPrestamo) {
+        await prestamo.calculateCostoPrestamo();
+        await prestamo.calculateCostoTotal();
+        await prestamo.save();
+      }
+      this.auditService.audit({
+        action: `Se edito el registro ${id}`,
+        auditTable: 'Clientes',
+        previusData: prevInventario,
+        actualData: updateInventarioDto,
+        user: user,
+      });
+      return { message: 'Inventario actualizado correctamente' };
+    } else {
+      Inventario.merge(inventario, updateInventarioDto);
+      await inventario.save();
+      this.auditService.audit({
+        action: `Se edito el registro ${id}`,
+        auditTable: 'Clientes',
+        previusData: prevInventario,
+        actualData: updateInventarioDto,
+        user: user,
+      });
+      return { message: 'Inventario actualizado correctamente' };
     }
-    this.auditService.audit({
-      action: `Se edito el registro ${id}`,
-      auditTable: 'Clientes',
-      previusData: prevInventario,
-      actualData: updateInventarioDto,
-      user: user,
-    });
-    return { message: 'Inventario actualizado correctamente' };
   }
 
   remove(id: number) {

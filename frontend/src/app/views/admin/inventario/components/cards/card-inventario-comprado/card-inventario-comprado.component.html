@@ -3,21 +3,15 @@
     <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lista de Inventario</h3>
     <div class="flex items-center justify-start pt-2">.
       <app-modal-edit-inventario></app-modal-edit-inventario>
-
     </div>
     <div class="w-full ">
       <div class="flex flex-col pt-4 items-baseline w-full ">
-        <form
-          [formGroup]="ciForm"
-        >
-          <input
-            type="text"
-            placeholder="Buscar por CI Ej: 836378..."
-            class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150"
-            formControlName="ci"
-            (ngModelChange)="search($event)"
-          >
-        </form>
+        <button
+          class="bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          (click)="openModalInventario()"
+          type="button">
+          <i class="fas fa-plus"></i> Nuevo
+        </button>
       </div>
     </div>
   </div>
@@ -43,22 +37,19 @@
                 <p *ngIf="inventario.tipo === 'VEHICULO'">
                     {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}
                 </p>
-                <p *ngIf="inventario.estado==='EMPENADO'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
-                  {{ inventario.prestamo.fechaInicio | date:'mediumDate' }} - {{ inventario.prestamo.fechaFinal | date:'mediumDate' }}
-                </p>
-                <p *ngIf="inventario.estado==='DEVUELTO'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
-                  Fecha devolución: {{ inventario.fechaDevolucion | date:'mediumDate' }}
-                </p>
-                <p *ngIf="inventario.estado==='VENTA'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
-                  Fecha Venta: {{ inventario.fechaVenta | date:'mediumDate' }}
+                  <div
+                  *ngFor="let inv of inventario.inventario"
+                  class="text-xl font-medium text-gray-500 truncate dark:text-white">
+
+
+                </div>
+                <p class="text-xl font-medium text-gray-500 truncate dark:text-white">
+                  Fecha Compra: {{ inventario.fechaCompra | date:'mediumDate' }}
                 </p>
               </div>
               <div class="text-gray-500 text-xl font-bold mr-8">
-                <p *ngIf="inventario.estado==='PRESTAMO'||'DEVUELTO'">
-                  BOL. {{ inventario.costoPrestamo }}
-                </p>
-                <p *ngIf="inventario.estado==='VENTA'">
-                  BOL. {{ inventario.precioVenta }}
+                <p>
+                  BOL. {{ inventario.costoCompra }}
                 </p>
                 <p class="text-sm">
                   {{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}

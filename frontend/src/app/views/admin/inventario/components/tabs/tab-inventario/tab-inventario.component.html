@@ -15,7 +15,7 @@
           class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
           (click)="toggleTabs(2)"
           [ngClass]="{'text-sky-700 bg-white': openTab !== 2, 'text-white bg-sky-700': openTab === 2}">
-          En Venta
+          Devueltos
         </a>
       </li>
 
@@ -24,7 +24,16 @@
           class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
           (click)="toggleTabs(3)"
           [ngClass]="{'text-sky-700 bg-white': openTab !== 3, 'text-white bg-sky-700': openTab === 3}">
-          Vendido
+          Vendidos
+        </a>
+      </li>
+
+      <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+        <a
+          class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+          (click)="toggleTabs(4)"
+          [ngClass]="{'text-sky-700 bg-white': openTab !== 4, 'text-white bg-sky-700': openTab === 4}">
+          Adquisiciones
         </a>
       </li>
 
@@ -36,10 +45,13 @@
             <app-card-inventario-list [estado]="'EMPENADO'"></app-card-inventario-list>
           </div>
           <div *ngIf="openTab === 2">
-            <app-card-inventario-list [estado]="'EN VENTA'"></app-card-inventario-list>
+            <app-card-inventario-list [estado]="'DEVUELTO'"></app-card-inventario-list>
           </div>
           <div *ngIf="openTab === 3">
             <app-card-inventario-list [estado]="'VENDIDO'"></app-card-inventario-list>
+          </div>
+          <div *ngIf="openTab === 4">
+            <app-card-inventario-comprado></app-card-inventario-comprado>
           </div>
         </div>
       </div>

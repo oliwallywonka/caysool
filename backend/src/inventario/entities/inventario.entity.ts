@@ -9,7 +9,11 @@ import {
   BaseEntity,
   ManyToOne,
   OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
+
+import moment = require('moment');
 
 @Entity()
 export class Inventario extends BaseEntity {
@@ -67,14 +71,26 @@ export class Inventario extends BaseEntity {
   @Column({ type: 'varchar', length: 20, nullable: true })
   pureza: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   precioVenta: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
+  costoCompra: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   precioAvaluo: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   costoPrestamo: number;
+
+  @Column({ type: 'datetime', nullable: true })
+  fechaCompra: string;
+
+  @Column({ type: 'datetime', nullable: true })
+  fechaVenta: string;
+
+  @Column({ type: 'datetime', nullable: true })
+  fechaDevolucion: string;
 
   @Column({ default: true })
   isActive: boolean;
@@ -84,4 +100,23 @@ export class Inventario extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  setDateByState() {
+    switch (this.estado) {
+      case 'COMPRADO':
+        this.fechaCompra = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        break;
+      case 'VENDIDO':
+        this.fechaVenta = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        break;
+      case 'DEVUELTO':
+        this.fechaDevolucion = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+        console.log(this.fechaDevolucion);
+        break;
+      default:
+        break;
+    }
+  }
 }

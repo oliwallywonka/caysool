@@ -52,6 +52,7 @@ export class CardInventarioInformationComponent implements OnInit, OnDestroy {
     this.getInventarioById();
     this.getPicturesByInventarioId();
     this.subscribePictures();
+    this.subscribeInventario();
   }
 
   ngOnDestroy(): void {
@@ -64,6 +65,18 @@ export class CardInventarioInformationComponent implements OnInit, OnDestroy {
       this.inventarioService.getInventarioById(+this.inventarioId).subscribe(
         inventario => {
           this.inventario = inventario;
+        }
+      )
+    );
+  }
+
+  subscribeInventario() {
+    this.sub.add(
+      this.inventarioService.inventario.subscribe(
+        (inventario) => {
+          if (inventario) {
+            this.inventario = inventario;
+          }
         }
       )
     );
@@ -150,6 +163,18 @@ export class CardInventarioInformationComponent implements OnInit, OnDestroy {
         picture: compressedFile,
       });
     })
+  }
+
+  openVentaModal() {
+    this.modal.modalName = 'inventarioVentaModal';
+    this.modal.visible = true;
+    this.inventarioService.inventario.emit(this.inventario);
+  }
+
+  openDevolucionModal() {
+    this.modal.modalName = 'inventarioDevolucionModal';
+    this.modal.visible = true;
+    this.inventarioService.inventario.emit(this.inventario);
   }
 
 }

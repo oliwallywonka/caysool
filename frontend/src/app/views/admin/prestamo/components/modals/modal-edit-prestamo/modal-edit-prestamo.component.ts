@@ -64,10 +64,10 @@ export class ModalEditPrestamoComponent implements OnInit, OnDestroy {
       this.prestamoService.prestamo.subscribe(
         (prestamo) => {
           this.prestamo = prestamo;
-          console.log(this.prestamo);
           if (this.prestamo) {
             this.prestamoForm.controls['fechaInicio'].setValue(new Date(this.prestamo.fechaInicio).toISOString().substring(0, 10));
             this.prestamoForm.controls['fechaFinal'].setValue(new Date(this.prestamo.fechaFinal).toISOString().substring(0, 10));
+            this.calculateCostoTotal();
           }
         }
       )
@@ -113,9 +113,9 @@ export class ModalEditPrestamoComponent implements OnInit, OnDestroy {
   calculateCostoTotal(event = '') {
     this.diasPrestamo = 0;
     this.costoTotal = 0;
-    const diaInicio = moment(this.prestamoForm.value.fechaIncio);
-    const diaFinal = moment(this.prestamoForm.value.fechaFinal);
-    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays() + 1;
+    const diaInicio = moment(this.prestamoForm.value.fechaIncio).startOf('day');
+    const diaFinal = moment(this.prestamoForm.value.fechaFinal).endOf('day');
+    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
     this.diasPrestamo = +(dias < 5 ? 5: dias).toFixed(0);
     this.costoTotal = +(this.prestamo.costoPrestamo * (1 + 0.15 / 30) ** (dias < 5 ? 5 : dias)).toFixed(1);
   }

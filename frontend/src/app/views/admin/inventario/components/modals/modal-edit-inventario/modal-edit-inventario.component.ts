@@ -5,29 +5,22 @@ import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { ClientService } from 'src/app/core/services/client.service';
 import { ModalService } from 'src/app/core/services/modal.service';
-import { User } from 'src/app/interfaces/auth';
-import { Client } from 'src/app/interfaces/client';
 import { Inventario } from 'src/app/interfaces/inventario';
 import * as moment from 'moment';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { PrestamoService } from 'src/app/core/services/prestamo.service';
 import { Prestamo } from 'src/app/interfaces/prestamo';
-import { Router } from '@angular/router';
-
+import { InventarioService } from 'src/app/core/services/inventario.service';
 @Component({
-  selector: 'app-new-prestamo-modal',
-  templateUrl: './new-prestamo-modal.component.html',
+  selector: 'app-modal-edit-inventario',
+  templateUrl: './modal-edit-inventario.component.html',
   styles: [
   ]
 })
-export class NewPrestamoModalComponent implements OnInit, OnDestroy {
+export class ModalEditInventarioComponent implements OnInit, OnDestroy {
 
   sub: Subscription;
   loading: boolean = false;
+  inventario: Inventario;
   prestamo: Prestamo;
-  client: Client;
-  inventarioArray: Inventario[] = [];
-  user: User;
   costoPrestamo: number = 0.00;
   costoTotal: number = 0.00;
   diasPrestamo: number = 0;
@@ -53,32 +46,16 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
       name: 'ARTICULO',
     },
   ]
-  prestamoForm: FormGroup = this.fb.group({
-    fechaInicio: [
-      new Date().toISOString().substring(0, 10),
-      [
-        RxwebValidators.required({ message: this.errorMessages.required }),
-      ],
-    ],
-    fechaFinal: [
-      '',
-      [
-        RxwebValidators.required({ message: this.errorMessages.required }),
-      ],
-    ],
-    user: [''],
-    client: [''],
-    inventario: [''],
-  });
 
   inventarioForm: FormGroup = this.fb.group({
+    estado: ['COMPRADO'],
     tipo: ['',
       [
         RxwebValidators.required({ message: this.errorMessages.required }),
       ]
     ],
     precioAvaluo: [''],
-    costoPrestamo: ['',
+    costoCompra: ['',
       [
         RxwebValidators.required({ message: this.errorMessages.required }),
       ]
@@ -191,112 +168,82 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    private prestamoService: PrestamoService,
-    private clientService: ClientService,
-    private authService: AuthService,
+    private inventarioService: InventarioService,
     private alertService: AlertService,
     private modalService: ModalService,
-    private router: Router,
     private fb: RxFormBuilder
   ) { }
 
   ngOnInit(): void {
     this.sub = new Subscription();
-    this.subscribeClient();
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  refreshClient() {
+
+  closeModal() {
+    this.modal.visible = false;
+    this.modal.modalName = '';
+  }
+
+  refreshForm() {
+    this.costoPrestamo = 0;
+    this.diasPrestamo = 0;
+    this.costoTotal = 0;
+    (<FormGroupExtension>this.inventarioForm).resetForm();
+  }
+
+
+  save() {
+    this.loading = true;
+    const body: Inventario = {
+      ...this.inventarioForm.value,
+      precioAvaluo: +this.inventarioForm.value.precioAvaluo,
+      costoCompra: +this.inventarioForm.value.costoCompra
+    }
+    console.log(body);
+    if (this.inventario) {
+
+    }else {
+      this.sub.add(
+        this.inventarioService.postInventario(body).subscribe(
+          (response) => {
+            this.loading = false;
+            this.alertService.triggerMessage('Inventario Ingresado Correctamente', 'success');
+            this.refreshInventario();
+            this.closeModal();
+          },
+          (error) => {
+            this.loading = false;
+            this.alertService.triggerMessage(error.error.message, 'error');
+          }
+        )
+      );
+    }
 
   }
 
-  subscribeClient() {
+  refreshInventario() {
     this.sub.add(
-      this.prestamoService.client.subscribe(
-        (client: Client) => {
-          this.client = client;
-          if (client) {
-            //this.clientForm.controls['name'].setValue(client.name);
-          }
+      this.inventarioService.getInventarioComprado({force: true}).subscribe(
+        (response) => {
+          this.inventarioService.response.emit(response);
         }
       )
     );
   }
 
-  closeModal() {
-    this.modal.visible = false;
-    this.modal.modalName = '';
-    this.clientService.client.emit(null);
-    this.prestamoService.prestamo.emit(null);
-    this.prestamoService.client.emit(null);
-  }
 
-  refreshForm() {
-    this.inventarioArray = [];
-    this.costoPrestamo = 0;
-    this.diasPrestamo = 0;
-    this.costoTotal = 0;
-    (<FormGroupExtension>this.prestamoForm).resetForm();
-    (<FormGroupExtension>this.inventarioForm).resetForm();
-  }
-
-  successMessage(message = 'creado') {
-    this.alertService.alert.fire({
-      title: `Prestamo ${message} Exitosamente`,
-      icon: 'success',
-    });
-  }
-
-  errorMessage(message) {
-    this.alertService.alert.fire({
-      title: message,
-      icon: 'error',
-    });
-  }
-
-  save() {
-    this.loading = true;
-    const bodyPrestamo = {
-      user: this.authService.user.id,
-      client: this.client.id,
-      fechaInicio: this.prestamoForm.value.fechaInicio,
-      fechaFinal: this.prestamoForm.value.fechaFinal,
-      inventario: this.inventarioArray
-    }
-    this.prestamoService.postPrestamo(bodyPrestamo).subscribe(
-      response => {
-        this.loading = false;
-        this.successMessage();
-        this.closeModal();
-        this.router.navigate(['/admin/prestamos', response.id]);
-      },
-      error => {
-        this.loading = false;
-        this.errorMessage(error.error.message);
-      }
-    )
-  }
-
-  addInventory() {
-    this.inventarioArray.push(this.inventarioForm.value);
-    this.calculateCostoTotal();
-  }
-
-  deleteInventario(index) {
-    this.inventarioArray.splice(index, 1);
-    this.calculateCostoTotal();
-  }
 
   calculateCostoTotal(event = '') {
-    this.costoPrestamo = 0;
+    /*this.costoPrestamo = 0;
     this.diasPrestamo = 0;
     this.costoTotal = 0;
-    const diaInicio = moment(this.prestamoForm.value.fechaInicio).startOf('day');
-    const diaFinal = moment(this.prestamoForm.value.fechaFinal).endOf('day');
-    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
+    const diaInicio = moment(this.prestamoForm.value.fechaInicio);
+    const diaFinal = moment(this.prestamoForm.value.fechaFinal);
+    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays() + 1;
     this.diasPrestamo = dias < 5 ? 5 : dias;
     if (this.inventarioArray.length > 0) {
       for (const inventario of this.inventarioArray) {
@@ -305,12 +252,9 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
         this.costoPrestamo += inventario.costoPrestamo;
       }
       this.costoTotal = +(this.costoPrestamo * (1 + 0.15 / 30) ** (dias < 5 ? 5 : dias)).toFixed(1);
-    }
+    }*/
   }
 
-  showEvent(event){
-    console.log(event);
-    console.log(this.inventarioForm.value.tipo);
-  }
+
 
 }

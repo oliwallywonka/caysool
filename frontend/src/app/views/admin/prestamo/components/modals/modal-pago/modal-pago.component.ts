@@ -8,6 +8,7 @@ import { ModalService } from 'src/app/core/services/modal.service';
 import { Pago } from 'src/app/interfaces/pago';
 import { PrestamoService } from 'src/app/core/services/prestamo.service';
 import { Prestamo } from 'src/app/interfaces/prestamo';
+import * as moment from 'moment';
 @Component({
   selector: 'app-modal-pago',
   templateUrl: './modal-pago.component.html',
@@ -20,9 +21,12 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   prestamo: Prestamo;
   pago: Pago;
+  pagos: Pago[] = [];
+  pagosInteres: Pago[] = [];
   modal = this.modalService.modal;
-  compressed = true;
   submitted = false;
+  diasInteres: number;
+  costoInteres: number;
   errorMessages = {
     required: 'El campo es obligatorio',
     minLength: 'El campo es muy corto',
@@ -93,10 +97,21 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = new Subscription();
     this.subscribePrestamo();
+    this.subscribePagos();
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  subscribePagos() {
+    this.sub.add(
+      this.pagoService.pagos.subscribe(
+        (pagos) => {
+          this.pagos = pagos;
+        }
+      )
+    );
   }
 
 
@@ -183,4 +198,36 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
       )
     );
   }
+
+  calculateInteresPago() {
+    let costoPagoInteres = 0;
+    this.pagosInteres = [];
+    if (this.pagoForm.value.tipoPago === 'INTERES') {
+      for (const pago  of this.pagos) {
+        if (pago.tipoPago === 'INTERES') {
+          costoPagoInteres += pago.costoPago;
+          this.pagosInteres.push(pago);
+
+        }
+      };
+      console.log(this.pagosInteres);
+      if ( this.pagosInteres.length > 0){
+        const ultimoPagoInteres = this.pagosInteres[this.pagosInteres.length -1];
+        const diaInicio = moment(ultimoPagoInteres.createdAt).startOf('day');
+        const diaFinal = moment(Date.now()).endOf('day');
+        const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
+        this.diasInteres = +dias.toFixed(1) - 1;
+        this.costoInteres = +(this.prestamo.costoPrestamo * (1 + 0.15 / 30) ** (this.diasInteres)).toFixed(1) - +this.prestamo.costoPrestamo;
+        this.pagoForm.value.costoPago = +this.costoInteres.toFixed(1);
+      } else {
+        const diaInicio = moment(this.prestamo.fechaInicio).startOf('day');
+        const diaFinal = moment(Date.now()).endOf('day');
+        const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
+        this.diasInteres = +(dias).toFixed(0);
+        this.costoInteres = +(this.prestamo.costoPrestamo * (1 + 0.15 / 30) ** (dias)).toFixed(1) - +this.prestamo.costoPrestamo;
+        this.pagoForm.value.costoPago = +this.costoInteres.toFixed(1);
+      }
+    }
+  }
+
 }

@@ -29,6 +29,8 @@ services:
       - ./backend:/backend
       - /backend/node_modules
     restart: always
+    environment:
+      - TIME_ZONE="America/La_Paz"
     links:
       - mysql
 
@@ -40,6 +42,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=cobros
+      - TIME_ZONE=America/La_Paz
+      - TZ=America/La_Paz
     ports:
       - 3309:3306
     volumes:

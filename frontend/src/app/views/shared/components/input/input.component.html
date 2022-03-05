@@ -9,6 +9,7 @@
   type="{{ inputType }}"
   class="border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150"
   placeholder="{{ inputPlaceholder }}"
+  [disabled]="isDisabled"
   [min]="inputMin"
   [max]="inputMax"
   (input)="onInput($event.target.value)"

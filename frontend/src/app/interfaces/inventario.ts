@@ -3,13 +3,17 @@ import { Prestamo } from "./prestamo";
 
 export interface Inventario {
   id?: number;
-  prestamo: Prestamo;
-  pictures: Picture[];
+  prestamo?: Prestamo;
+  pictures?: Picture[];
   estado?: string;
-  tipo: string;
+  tipo?: string;
   precioVenta?: number;
   precioAvaluo?: number;
   costoPrestamo?: number;
+  costoCompra?: number;
+  fechaCompra?: string;
+  fechaVenta?: string;
+  fechaDevolucion?: string;
   observacion?: string;
   descripcion?: string;
   marca?: string;

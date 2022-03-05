@@ -35,7 +35,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   // Nos conecta nuestro custom input con forms, reactive forms etc
   @Input()
   value: string = '';
-  isDisabled: boolean;
+  @Input()
+  isDisabled: boolean = false;
   onChange = (_:any) => {}
   onTouch = () => {}
   onInput(value: string) {

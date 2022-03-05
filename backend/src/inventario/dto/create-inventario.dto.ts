@@ -1,18 +1,19 @@
 import {
-  IsBoolean,
   IsInt,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
-  Max,
-  Min,
 } from 'class-validator';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 export class CreateInventarioDto {
-  @IsNotEmpty({ message: 'El campo nombre no puede ir vacio' })
+  @IsOptional()
   @IsInt()
   prestamo: Prestamo;
+
+  @IsOptional()
+  @IsString()
+  estado: string;
 
   @IsOptional()
   @IsString()
@@ -26,20 +27,20 @@ export class CreateInventarioDto {
   @IsNumber()
   precioAvaluo: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   costoPrestamo: number;
 
   @IsOptional()
+  @IsNumber()
+  costoCompra: number;
+
+  @IsOptional()
   @IsString()
-  @Min(2)
-  @Max(70)
   descripcion: string;
 
   @IsOptional()
   @IsString()
-  @Min(2)
-  @Max(70)
   observacion: string;
 
   //Articulo
