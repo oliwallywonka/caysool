@@ -13,10 +13,10 @@ export class ReporteService {
 
   constructor( private http: HttpClient ) { }
 
-  getPrestamosByDate({ from , to}):Observable<any>{
+  getPrestamosByDate({ from , to, estado}):Observable<any>{
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');
-    return this.http.get(`${this.baseUrl}/reporte/prestamo?from=${from}&to=${to}`,{headers});
+    return this.http.get(`${this.baseUrl}/reporte/prestamo?from=${from}&to=${to}&estado=${estado}`,{headers});
   }
 
   getPagosByDate({ from , to}):Observable<any>{
@@ -41,6 +41,12 @@ export class ReporteService {
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');
     return this.http.get(`${this.baseUrl}/reporte/transaccion?from=${from}&to=${to}`,{headers});
+  }
+
+  getIngresoSalidaByDate({ from , to}):Observable<any>{
+    const headers = new HttpHeaders()
+      .set('x-access-token',sessionStorage.getItem('token')||'');
+    return this.http.get(`${this.baseUrl}/reporte/movimiento?from=${from}&to=${to}`,{headers});
   }
 
 }

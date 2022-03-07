@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CardReporteImpresionComponent } from './components/cards/card-reporte-impresion/card-reporte-impresion.component';
+import { CardReporteIngresoSalidaComponent } from './components/cards/card-reporte-ingreso-salida/card-reporte-ingreso-salida.component';
 import { CardReporteInventarioComponent } from './components/cards/card-reporte-inventario/card-reporte-inventario.component';
 import { CardReporteListComponent } from './components/cards/card-reporte-list/card-reporte-list.component';
 import { CardReportePagoComponent } from './components/cards/card-reporte-pago/card-reporte-pago.component';
@@ -17,7 +18,7 @@ const routes: Routes = [{
       component: CardReporteListComponent
     },
     {
-      path: 'prestamos',
+      path: 'prestamos/:prestamoEstado',
       component: CardReportePrestamoComponent
     },
     {
@@ -35,6 +36,10 @@ const routes: Routes = [{
     {
       path: 'compra-venta-dolar',
       component: CardReporteTransaccionComponent
+    },
+    {
+      path: 'ingreso-salida',
+      component: CardReporteIngresoSalidaComponent
     },
   ]
 }];

@@ -360,7 +360,7 @@ let NewPrestamoModalComponent = class NewPrestamoModalComponent {
         const diaInicio = moment__WEBPACK_IMPORTED_MODULE_8__(this.prestamoForm.value.fechaInicio).startOf('day');
         const diaFinal = moment__WEBPACK_IMPORTED_MODULE_8__(this.prestamoForm.value.fechaFinal).endOf('day');
         const dias = moment__WEBPACK_IMPORTED_MODULE_8__["duration"](diaFinal.diff(diaInicio)).asDays();
-        this.diasPrestamo = dias < 5 ? 5 : dias;
+        this.diasPrestamo = +(dias < 5 ? 5 : dias).toFixed(0);
         if (this.inventarioArray.length > 0) {
             for (const inventario of this.inventarioArray) {
                 inventario.costoPrestamo = +inventario.costoPrestamo;

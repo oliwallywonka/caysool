@@ -19,10 +19,10 @@
               <button
                 type="button"
                 class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                (click)="goToAnotherPage('prestamos')">
+                (click)="goToAnotherPageEstado('prestamos', 'CANCELADO')">
                 <div class="flex flex-col">
                   <p class="p-3">
-                    Prestamos
+                    Prestamos cancelados
                   </p>
                   <i class="text-4xl fas fa-calendar"></i>
                 </div>
@@ -31,26 +31,30 @@
               <button
                 type="button"
                 class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                (click)="goToAnotherPage('pagos')">
+                (click)="goToAnotherPageEstado('prestamos', 'ACTIVO')">
                 <div class="flex flex-col">
                   <p class="p-3">
-                    Pagos
+                    Prestamos vigentes
                   </p>
                   <i class="text-4xl fas fa-calendar"></i>
                 </div>
               </button>
-
               <button
-                type="button"
-                class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                (click)="goToAnotherPage('impresiones')">
-                <div class="flex flex-col">
-                  <p class="p-3">
-                    Reimpresiones
-                  </p>
-                  <i class="text-4xl fas fa-calendar"></i>
-                </div>
-              </button>
+              type="button"
+              class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              (click)="goToAnotherPageEstado('prestamos', 'VENCIDO')">
+              <div class="flex flex-col">
+                <p class="p-3">
+                  Prestamos vencidos
+                </p>
+                <i class="text-4xl fas fa-calendar"></i>
+              </div>
+            </button>
+            </div>
+            <h3 class="text-xl font-bold leading-none text-gray-600 dark:text-white">
+              Compras y ventas
+            </h3>
+            <div class="relative flex flex-wrap m-3">
 
               <button
                 type="button"
@@ -58,7 +62,36 @@
                 (click)="goToAnotherPage('compra-venta-dolar')">
                 <div class="flex flex-col">
                   <p class="p-3">
-                    Compra venta Dolar
+                    Compra y venta de dolar
+                  </p>
+                  <i class="text-4xl fas fa-calendar"></i>
+                </div>
+              </button>
+              <button
+                type="button"
+                class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                (click)="goToAnotherPage('venta')">
+                <div class="flex flex-col">
+                  <p class="p-3">
+                    Ventas
+                  </p>
+                  <i class="text-4xl fas fa-calendar"></i>
+                </div>
+              </button>
+            </div>
+
+            <h3 class="text-xl font-bold leading-none text-gray-600 dark:text-white">
+              Ingresos y Salidas
+            </h3>
+            <div class="relative flex flex-wrap m-3">
+
+              <button
+                type="button"
+                class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                (click)="goToAnotherPage('ingreso-salida')">
+                <div class="flex flex-col">
+                  <p class="p-3">
+                    Ingresos y salidas
                   </p>
                   <i class="text-4xl fas fa-calendar"></i>
                 </div>

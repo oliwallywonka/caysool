@@ -48,7 +48,7 @@
               </p>
             </div>
             <button
-              *ngIf="inventario.estado==='EMPENADO'"
+              *ngIf="inventario.estado==='EMPENADO'||'COMPRADO'"
               [popper]="venderItem"
               [popperTrigger]="'hover'"
               [popperPlacement]="'top'"

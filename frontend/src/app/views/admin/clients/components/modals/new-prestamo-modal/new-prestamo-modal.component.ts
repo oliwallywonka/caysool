@@ -297,7 +297,7 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
     const diaInicio = moment(this.prestamoForm.value.fechaInicio).startOf('day');
     const diaFinal = moment(this.prestamoForm.value.fechaFinal).endOf('day');
     const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
-    this.diasPrestamo = dias < 5 ? 5 : dias;
+    this.diasPrestamo = +(dias < 5 ? 5 : dias).toFixed(0);
     if (this.inventarioArray.length > 0) {
       for (const inventario of this.inventarioArray) {
         inventario.costoPrestamo = +inventario.costoPrestamo;

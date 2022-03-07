@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { ReporteService } from 'src/app/core/services/reporte.service';
 import { RxFormBuilder } from '@rxweb/reactive-form-validators';
-import { Impresion } from 'src/app/interfaces/impresion';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormGroup } from '@angular/forms';
+import { Prestamo } from 'src/app/interfaces/prestamo';
 @Component({
   selector: 'app-card-reporte-prestamo',
   templateUrl: './card-reporte-prestamo.component.html',
@@ -12,10 +13,10 @@ import { FormGroup } from '@angular/forms';
   ]
 })
 export class CardReportePrestamoComponent implements OnInit, OnDestroy {
-
+  estado: string = '';
   sub: Subscription;
   loading = false;
-  prestamos: Impresion[] = [];
+  prestamos: Prestamo[] = [];
   reporteForm: FormGroup = this.fb.group({
     from:[new Date().toISOString().slice(0, 19).replace('T', ' ')],
     to:[new Date().toISOString().slice(0, 19).replace('T', ' ')]
@@ -23,11 +24,13 @@ export class CardReportePrestamoComponent implements OnInit, OnDestroy {
   constructor(
     private reporteService: ReporteService,
     private location: Location,
+    private route: ActivatedRoute,
     private fb: RxFormBuilder
   ) { }
 
   ngOnInit(): void {
     this.sub = new Subscription();
+    this.estado = this.route.snapshot.paramMap.get('prestamoEstado');
     this.getPrestamos();
   }
   ngOnDestroy(): void {
@@ -40,7 +43,8 @@ export class CardReportePrestamoComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.reporteService.getPrestamosByDate({
         from: this.reporteForm.value.from,
-        to: this.reporteForm.value.to
+        to: this.reporteForm.value.to,
+        estado: this.estado
       }).subscribe(
         (prestamos) => {
           console.log(prestamos);

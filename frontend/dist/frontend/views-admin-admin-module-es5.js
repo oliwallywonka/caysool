@@ -206,7 +206,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | prestamo-prestamo-module */
-            [__webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module~reporte-reporte-module"), __webpack_require__.e("default~clients-clients-module~ingreso-salida-ingreso-salida-module~prestamo-prestamo-module"), __webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module"), __webpack_require__.e("common"), __webpack_require__.e("prestamo-prestamo-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module~reporte-reporte-module"), __webpack_require__.e("default~clients-clients-module~ingreso-salida-ingreso-salida-module~prestamo-prestamo-module"), __webpack_require__.e("common"), __webpack_require__.e("prestamo-prestamo-module")]).then(__webpack_require__.bind(null,
             /*! ./prestamo/prestamo.module */
             "itTI")).then(function (m) {
               return m.PrestamoModule;
@@ -217,7 +217,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | inventario-inventario-module */
-            [__webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module~reporte-reporte-module"), __webpack_require__.e("default~inventario-inventario-module~users-users-module"), __webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module"), __webpack_require__.e("common"), __webpack_require__.e("inventario-inventario-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module~reporte-reporte-module"), __webpack_require__.e("default~inventario-inventario-module~users-users-module"), __webpack_require__.e("common"), __webpack_require__.e("inventario-inventario-module")]).then(__webpack_require__.bind(null,
             /*! ./inventario/inventario.module */
             "jz+1")).then(function (m) {
               return m.InventarioModule;
@@ -258,7 +258,7 @@
           }
         }, {
           path: '**',
-          redirectTo: 'panel-control'
+          redirectTo: 'clientes'
         }]
       }];
 

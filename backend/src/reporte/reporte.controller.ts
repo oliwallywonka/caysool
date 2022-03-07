@@ -5,6 +5,7 @@ import { PagoService } from 'src/pago/pago.service';
 import { PrestamoService } from 'src/prestamo/prestamo.service';
 import { TransaccionMonedaService } from 'src/transaccion-moneda/transaccion-moneda.service';
 import moment = require('moment');
+import { MovimientoService } from 'src/movimiento/movimiento.service';
 
 @Controller('api/reporte')
 export class ReporteController {
@@ -14,13 +15,18 @@ export class ReporteController {
     private readonly impresionService: ImpresionDocService,
     private readonly inventarioService: InventarioService,
     private readonly transaccionService: TransaccionMonedaService,
+    private readonly movimientoService: MovimientoService,
   ) {}
 
   @Get('prestamo')
-  findPrestamoByDate(@Query('from') from = '', @Query('to') to = '') {
+  findPrestamoByDate(
+    @Query('from') from = '',
+    @Query('to') to = '',
+    @Query('estado') estado = '',
+  ) {
     from = moment(from).startOf('day').format('YYYY-MM-DD HH:mm:ss');
     to = moment(to).endOf('day').format('YYYY-MM-DD HH:mm:ss');
-    return this.prestamoService.getPrestamosByDate({ from, to });
+    return this.prestamoService.getPrestamosByDate({ from, to, estado });
   }
 
   @Get('pago')
@@ -49,5 +55,12 @@ export class ReporteController {
     from = moment(from).startOf('day').format('YYYY-MM-DD HH:mm:ss');
     to = moment(to).endOf('day').format('YYYY-MM-DD HH:mm:ss');
     return this.transaccionService.getTransaccionesByDate({ from, to });
+  }
+
+  @Get('movimiento')
+  findMovimientoByDate(@Query('from') from = '', @Query('to') to = '') {
+    from = moment(from).startOf('day').format('YYYY-MM-DD HH:mm:ss');
+    to = moment(to).endOf('day').format('YYYY-MM-DD HH:mm:ss');
+    return this.movimientoService.getMovimientoByDate({ from, to });
   }
 }

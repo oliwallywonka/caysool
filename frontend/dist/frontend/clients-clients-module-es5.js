@@ -448,7 +448,7 @@
             var diaInicio = moment__WEBPACK_IMPORTED_MODULE_8__(this.prestamoForm.value.fechaInicio).startOf('day');
             var diaFinal = moment__WEBPACK_IMPORTED_MODULE_8__(this.prestamoForm.value.fechaFinal).endOf('day');
             var dias = moment__WEBPACK_IMPORTED_MODULE_8__["duration"](diaFinal.diff(diaInicio)).asDays();
-            this.diasPrestamo = dias < 5 ? 5 : dias;
+            this.diasPrestamo = +(dias < 5 ? 5 : dias).toFixed(0);
 
             if (this.inventarioArray.length > 0) {
               var _iterator = _createForOfIteratorHelper(this.inventarioArray),

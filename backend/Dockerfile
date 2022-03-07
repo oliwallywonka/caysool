@@ -27,6 +27,8 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
+ENV TZ 'America/La_Paz'
+
 CMD ["node", "dist/main"]
 
 

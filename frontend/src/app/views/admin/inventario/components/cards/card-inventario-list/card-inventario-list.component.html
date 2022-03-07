@@ -49,15 +49,18 @@
                 <p *ngIf="inventario.estado==='DEVUELTO'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
                   Fecha devolución: {{ inventario.fechaDevolucion | date:'mediumDate' }}
                 </p>
-                <p *ngIf="inventario.estado==='VENTA'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
+                <p *ngIf="inventario.estado==='VENDIDO'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
                   Fecha Venta: {{ inventario.fechaVenta | date:'mediumDate' }}
                 </p>
               </div>
               <div class="text-gray-500 text-xl font-bold mr-8">
-                <p *ngIf="inventario.estado==='PRESTAMO'||'DEVUELTO'">
+                <p *ngIf="inventario.estado==='DEVUELTO'">
                   BOL. {{ inventario.costoPrestamo }}
                 </p>
-                <p *ngIf="inventario.estado==='VENTA'">
+                <p *ngIf="inventario.estado==='EMPENADO'">
+                  BOL. {{ inventario.costoPrestamo }}
+                </p>
+                <p *ngIf="inventario.estado==='VENDIDO'">
                   BOL. {{ inventario.precioVenta }}
                 </p>
                 <p class="text-sm">

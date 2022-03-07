@@ -29,6 +29,7 @@
               <p> Descripción: {{ inventario.descripcion}}</p>
               <p> Precio Avaluo: Bol. {{ inventario.precioAvaluo }}</p>
               <p> Precio Prestamo: Bol. {{ inventario.costoPrestamo }}</p>
+              <p *ngIf="inventario.estado==='COMPRADO'"> Precio compra: Bol. {{ inventario.costoCompra }}</p>
             </div>
 
             <div class="w-full lg:w-6/12 px-4 mb-2">

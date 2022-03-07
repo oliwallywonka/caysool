@@ -57,6 +57,14 @@ export class MovimientoService {
     return movimientos;
   }
 
+  async getMovimientoByDate({ from = '', to = '' }) {
+    const movimientos = await Movimiento.createQueryBuilder('movimiento')
+      .where('movimiento.createdAt >= :from', { from })
+      .andWhere('movimiento.createdAt <= :to', { to })
+      .getMany();
+    return movimientos;
+  }
+
   update(id: number, updateMovimientoDto: UpdateMovimientoDto) {
     return `This action updates a #${id} movimiento`;
   }

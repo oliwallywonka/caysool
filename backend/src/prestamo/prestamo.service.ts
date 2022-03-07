@@ -175,12 +175,13 @@ export class PrestamoService {
     await queryRunner.release();
   }
 
-  async getPrestamosByDate({ from = '', to = '' }) {
+  async getPrestamosByDate({ from = '', to = '', estado = '' }) {
     const prestamos = await Prestamo.createQueryBuilder('prestamo')
       .leftJoinAndSelect('prestamo.client', 'client')
       .leftJoinAndSelect('prestamo.inventario', 'inventario')
       .where('prestamo.createdAt >= :from', { from })
       .andWhere('prestamo.createdAt <= :to', { to })
+      .andWhere(`prestamo.estado LIKE '%${estado ? estado : ''}%'`)
       .getMany();
     return prestamos;
   }

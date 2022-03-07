@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class CardReporteListComponent implements OnInit {
 
   reportePages: 'pagos' | 'inventario' | 'impresiones' | 'transacciones';
+  estado: string;
   constructor(
     private router: Router,
   ) { }
@@ -18,7 +19,15 @@ export class CardReporteListComponent implements OnInit {
   }
 
   goToAnotherPage(pageName: string) {
-    this.router.navigate([`admin/reportes/${pageName}`]);
+    this.router.navigate([`admin/reportes/${pageName}`, ]);
+  }
+
+  goToAnotherPageEstado(pageName: string, estado: string) {
+    this.router.navigate([`admin/reportes/${pageName}`, estado]);
+  }
+
+  setEstado(estado='') {
+    this.estado = estado;
   }
 
 }
