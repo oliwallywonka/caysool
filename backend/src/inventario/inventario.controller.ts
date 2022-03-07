@@ -40,11 +40,15 @@ export class InventarioController {
 
   @UseGuards(JwtAuthGuard)
   @Get('comprado')
-  findCompradoAll(
+  findByEstado(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
+    @Query('estadoInv') estadoInv = 'COMPRADO',
   ) {
-    return this.inventarioService.findComprado({ page, limit });
+    return this.inventarioService.findInventarioByEstado(
+      { page, limit },
+      estadoInv,
+    );
   }
 
   @UseGuards(JwtAuthGuard)

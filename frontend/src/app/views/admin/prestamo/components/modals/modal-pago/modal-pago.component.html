@@ -42,6 +42,7 @@
               inputLabel="COMISION ADMINISTRATIVA (cargos extra)"
               inputFormName="costoAdministracion"
               formControlName="costoAdministracion"
+              (selectEvent)="calculateInteresPago()"
               [value]="pagoForm.value.costoAdministracion">
             </app-select>
           </div>
@@ -53,6 +54,7 @@
               inputPlaceholder="Ingrese su nombre..."
               inputFormName="costoPiso"
               formControlName="costoPiso"
+              (inputEvent)="calculateInteresPago()"
               [value]="pagoForm.value.costoPiso">
             </app-input>
           </div>
@@ -63,6 +65,7 @@
                 inputType="number"
                 inputFormName="costoPago"
                 formControlName="costoPago"
+                (selectEvent)="calculateInteresPago()"
                 [isDisabled]="pagoForm.value.tipoPago==='INTERES'"
                 [value]="pagoForm.value.costoPago">
             </app-input>

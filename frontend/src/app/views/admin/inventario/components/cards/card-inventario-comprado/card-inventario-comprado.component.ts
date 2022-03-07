@@ -33,7 +33,7 @@ export class CardInventarioCompradoComponent implements OnInit, OnDestroy {
   }
 
   getInventarioComprado(force = false) {
-    this.inventarioService.getInventarioComprado({ force }).subscribe(
+    this.inventarioService.getInventarioByEstado({ force }).subscribe(
       (response) => {
         this.response = response;
         this.loading = false;
@@ -57,7 +57,7 @@ export class CardInventarioCompradoComponent implements OnInit, OnDestroy {
   getOnPageResponse(page: number) {
     this.response = null;
     this.inventarioService
-      .getInventarioComprado({
+      .getInventarioByEstado({
         force: true,
         page
       })

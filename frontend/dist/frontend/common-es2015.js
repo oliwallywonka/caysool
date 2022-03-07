@@ -25,6 +25,7 @@ let InventarioService = class InventarioService {
         this.http = http;
         this.inventario = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.response = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.response2 = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl;
     }
     getInventario({ clientCi = '', page = 1, force = false, estadoInv = '' }) {
@@ -37,12 +38,12 @@ let InventarioService = class InventarioService {
         }
         return this.cacheResponse$;
     }
-    getInventarioComprado({ page = 1, force = false, }) {
+    getInventarioByEstado({ page = 1, force = false, estadoInv = 'COMPRADO' }) {
         const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]()
             .set('x-access-token', sessionStorage.getItem('token') || '');
         if (force || !this.cacheResponse2$) {
             return this.cacheResponse$ = this.http
-                .get(`${this.baseUrl}/inventario/comprado?page=${page}`, { headers })
+                .get(`${this.baseUrl}/inventario/comprado?page=${page}&estadoInv=${estadoInv}`, { headers })
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["shareReplay"])(1));
         }
         return this.cacheResponse2$;
@@ -73,7 +74,8 @@ InventarioService.ctorParameters = () => [
 ];
 InventarioService.propDecorators = {
     inventario: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"] }],
-    response: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"] }]
+    response: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"] }],
+    response2: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"] }]
 };
 InventarioService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

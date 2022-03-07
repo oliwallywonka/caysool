@@ -63,6 +63,7 @@
           this.http = http;
           this.inventario = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
           this.response = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+          this.response2 = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
           this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl;
         }
 
@@ -88,16 +89,18 @@
             return this.cacheResponse$;
           }
         }, {
-          key: "getInventarioComprado",
-          value: function getInventarioComprado(_ref2) {
+          key: "getInventarioByEstado",
+          value: function getInventarioByEstado(_ref2) {
             var _ref2$page = _ref2.page,
                 page = _ref2$page === void 0 ? 1 : _ref2$page,
                 _ref2$force = _ref2.force,
-                force = _ref2$force === void 0 ? false : _ref2$force;
+                force = _ref2$force === void 0 ? false : _ref2$force,
+                _ref2$estadoInv = _ref2.estadoInv,
+                estadoInv = _ref2$estadoInv === void 0 ? 'COMPRADO' : _ref2$estadoInv;
             var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
 
             if (force || !this.cacheResponse2$) {
-              return this.cacheResponse$ = this.http.get("".concat(this.baseUrl, "/inventario/comprado?page=").concat(page), {
+              return this.cacheResponse$ = this.http.get("".concat(this.baseUrl, "/inventario/comprado?page=").concat(page, "&estadoInv=").concat(estadoInv), {
                 headers: headers
               }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["shareReplay"])(1));
             }
@@ -152,6 +155,9 @@
           type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"]
         }],
         response: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"]
+        }],
+        response2: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"]
         }]
       };

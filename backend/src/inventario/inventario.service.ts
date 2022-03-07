@@ -60,9 +60,13 @@ export class InventarioService {
     return await paginate<Inventario>(inventario, options);
   }
 
-  async findComprado(options: IPaginationOptions) {
+  async findInventarioByEstado(
+    options: IPaginationOptions,
+    estadoInv = 'COMPRADO',
+  ) {
     const inventario = Inventario.createQueryBuilder('inventario')
-      .where('inventario.estado = :estadoInv', { estadoInv: 'COMPRADO' })
+      .where('inventario.estado = :estadoInv', { estadoInv: estadoInv })
+      .andWhere('inventario.prestamo is null')
       .orderBy('inventario.id', 'DESC');
     return await paginate<Inventario>(inventario, options);
   }

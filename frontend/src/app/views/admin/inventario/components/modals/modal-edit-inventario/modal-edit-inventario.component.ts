@@ -227,7 +227,7 @@ export class ModalEditInventarioComponent implements OnInit, OnDestroy {
 
   refreshInventario() {
     this.sub.add(
-      this.inventarioService.getInventarioComprado({force: true}).subscribe(
+      this.inventarioService.getInventarioByEstado({force: true}).subscribe(
         (response) => {
           this.inventarioService.response.emit(response);
         }

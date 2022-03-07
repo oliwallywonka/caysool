@@ -16,6 +16,7 @@ export class InventarioService {
 
   @Output() inventario:EventEmitter<Inventario> = new EventEmitter();
   @Output() response:EventEmitter<InventarioResponse> = new EventEmitter();
+  @Output() response2:EventEmitter<InventarioResponse> = new EventEmitter();
   cacheResponse$: Observable<any>;
   cacheResponse2$: Observable<any>;
   private baseUrl: string = environment.baseUrl;
@@ -38,15 +39,16 @@ export class InventarioService {
     return this.cacheResponse$;
   }
 
-  getInventarioComprado({
+  getInventarioByEstado({
     page = 1,
     force = false,
+    estadoInv = 'COMPRADO'
   }):Observable<any>{
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');
     if (force || !this.cacheResponse2$) {
       return this.cacheResponse$ = this.http
-        .get(`${this.baseUrl}/inventario/comprado?page=${page}`,{headers})
+        .get(`${this.baseUrl}/inventario/comprado?page=${page}&estadoInv=${estadoInv}`,{headers})
         .pipe( shareReplay(1));
     }
     return this.cacheResponse2$;

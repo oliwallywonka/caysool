@@ -21,6 +21,8 @@ export class CardInventarioListComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   response: InventarioResponse;
 
+  response2: InventarioResponse;
+
   ciForm: FormGroup = this.fb.group({
     ci: [''],
   });
@@ -36,6 +38,10 @@ export class CardInventarioListComponent implements OnInit, OnDestroy {
     this.sub = new Subscription();
     this.getInventario(true);
     this.subscribeInventarios();
+    if (this.estado === 'VENDIDO') {
+      this.getInventarioWhitOutPrestamo();
+      this.subscribeInventarioWhitOutPrestamo();
+    }
   }
 
   ngOnDestroy(): void {
@@ -51,12 +57,35 @@ export class CardInventarioListComponent implements OnInit, OnDestroy {
     )
   }
 
+  getInventarioWhitOutPrestamo() {
+    this.sub.add(
+      this.inventarioService.getInventarioByEstado({ force: true, estadoInv: this.estado}).subscribe(
+        (response) => {
+          this.response2 = response;
+        }
+      )
+    );
+  }
+
   subscribeInventarios() {
     this.sub.add(
       this.inventarioService.response.subscribe(
         (response) => {
           if (response.items.length > 0) {
             this.response = response;
+            this.loading = false;
+          }
+        }
+      )
+    );
+  }
+
+  subscribeInventarioWhitOutPrestamo() {
+    this.sub.add(
+      this.inventarioService.response2.subscribe(
+        (response) => {
+          if (response.items.length > 0) {
+            this.response2 = response;
             this.loading = false;
           }
         }
@@ -99,6 +128,19 @@ export class CardInventarioListComponent implements OnInit, OnDestroy {
       })
       .subscribe((response) => {
         this.inventarioService.response.emit(response);
+      });
+  }
+
+  getOnPageResponseWhitOutPrestamo(page: number) {
+    this.response2 = null;
+    this.inventarioService
+      .getInventarioByEstado({
+        force: true,
+        estadoInv: this.estado,
+        page
+      })
+      .subscribe((response) => {
+        this.inventarioService.response2.emit(response);
       });
   }
 

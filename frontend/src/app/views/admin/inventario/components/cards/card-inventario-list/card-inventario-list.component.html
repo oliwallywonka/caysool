@@ -1,6 +1,6 @@
 <div class="p-4 w-full ">
   <div class="items-center mb-4">
-    <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lista de Inventario</h3>
+    <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lista de Inventario {{ estado==='EMPENADO'?'EMPEÑADO': estado }} {{estado==='VENDIDO'?'de PRESTAMOS':''}}</h3>
     <div class="flex items-center justify-start pt-2">.
       <app-modal-edit-inventario></app-modal-edit-inventario>
 
@@ -77,4 +77,74 @@
   *ngIf="response"
   [response]="response.meta"
   (pageEvent)="getOnPageResponse($event)"
+></app-pagination>
+
+<div *ngIf="estado==='VENDIDO'" class="p-4 w-full ">
+  <div class="items-center mb-4">
+    <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lista de Inventario VENDIDO de Compras</h3>
+    <div class="flex items-center justify-start pt-2">.
+
+    </div>
+    <div class="w-full ">
+      <div class="flex flex-col pt-4 items-baseline w-full ">
+
+      </div>
+    </div>
+  </div>
+  <div class="flow-root w-auto">
+    <ul *ngIf="response2" role="list" class="relative">
+      <li *ngFor="let inventario of response2.items; let i=index;"
+          class="cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-600 transform hover:-translate-y-1 ease-linear transition-all duration-150"
+          (click)="goToInventarioInformation(inventario)">
+          <div class="flex items-center">
+              <div class="text-3xl p-4 bg-green-600">
+                {{inventario.id}}
+              </div>
+              <div  class="flex-1 min-w-0 mx-6 flex flex-col">
+                <p class="text-xl font-medium truncate dark:text-white">
+                  {{ inventario.descripcion }}
+                </p>
+                <p *ngIf="inventario.tipo === 'JOYA'">
+                  {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}
+                </p>
+                <p *ngIf="inventario.tipo === 'ARTICULO'">
+                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}
+                </p>
+                <p *ngIf="inventario.tipo === 'VEHICULO'">
+                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}
+                </p>
+                <p *ngIf="inventario.estado==='EMPENADO'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
+                  {{ inventario.prestamo.fechaInicio | date:'mediumDate' }} - {{ inventario.prestamo.fechaFinal | date:'mediumDate' }}
+                </p>
+                <p *ngIf="inventario.estado==='DEVUELTO'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
+                  Fecha devolución: {{ inventario.fechaDevolucion | date:'mediumDate' }}
+                </p>
+                <p *ngIf="inventario.estado==='VENDIDO'" class="text-xl font-medium text-gray-500 truncate dark:text-white">
+                  Fecha Venta: {{ inventario.fechaVenta | date:'mediumDate' }}
+                </p>
+              </div>
+              <div class="text-gray-500 text-xl font-bold mr-8">
+                <p *ngIf="inventario.estado==='DEVUELTO'">
+                  BOL. {{ inventario.costoPrestamo }}
+                </p>
+                <p *ngIf="inventario.estado==='EMPENADO'">
+                  BOL. {{ inventario.costoPrestamo }}
+                </p>
+                <p *ngIf="inventario.estado==='VENDIDO'">
+                  BOL. {{ inventario.precioVenta }}
+                </p>
+                <p class="text-sm">
+                  {{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}
+                </p>
+              </div>
+          </div>
+      </li>
+  </ul>
+  </div>
+</div>
+
+<app-pagination
+  *ngIf="response2"
+  [response]="response.meta"
+  (pageEvent)="getOnPageResponseWhitOutPrestamo($event)"
 ></app-pagination>

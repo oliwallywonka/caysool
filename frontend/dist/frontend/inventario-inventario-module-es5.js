@@ -82,7 +82,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Información Inventario Nº {{ inventario?.id }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n        <app-modal-delete-picture></app-modal-delete-picture>\n        <app-modal-venta-inventario></app-modal-venta-inventario>\n        <app-modal-devolver-inventario></app-modal-devolver-inventario>\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n\n        </div>\n      </div>\n    </div>\n    <div class=\"flow-root w-auto flex flex-col justify-center\">\n      <div *ngIf=\"inventario\" class=\"cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-600 transform hover:-translate-y-1 ease-linear transition-all duration-150\">\n        <div class=\"flex items-center space-x-4 px-4 py-2 bg-blueGray-600 \">\n            <div class=\"flex-1 min-w-0 text-white\">\n              <p\n                class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.descripcion }}\n              </p>\n              <p\n                *ngIf=\"inventario.tipo === 'JOYA'\"\n                class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}\n              </p>\n              <p\n                *ngIf=\"inventario.tipo === 'ARTICULO'\"\n                class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}\n              </p>\n              <p\n                *ngIf=\"inventario.tipo === 'VEHICULO'\"\n                class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}\n              </p>\n            </div>\n            <button\n              *ngIf=\"inventario.estado==='EMPENADO'||'COMPRADO'\"\n              [popper]=\"venderItem\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              (click)=\"openVentaModal()\">\n              <i class=\"fas fa-tag\"></i>\n            </button>\n            <popper-content #venderItem>\n              <p class=\"bold\">Vender Item</p>\n            </popper-content>\n            <button\n              *ngIf=\"inventario.estado==='EMPENADO'\"\n              [popper]=\"devolverItem\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              (click)=\"openDevolucionModal()\"\n              >\n              <i class=\"fas fa-box-open\"></i>\n            </button>\n            <popper-content #devolverItem>\n              <p class=\"bold\">Devolver Item</p>\n            </popper-content>\n            <app-pdf-devolucion\n              *ngIf=\"inventario.estado==='DEVUELTO'\"\n              [inventario]=\"inventario\"\n            ></app-pdf-devolucion>\n        </div>\n\n        <div class=\"flex items-center space-x-4 px-4 \">\n          <div class=\"flex-1 min-w-0 py-8\">\n\n            <p class=\"text-xl font-medium text-gray-900 truncate dark:text-white\">\n              Dueño original: {{ inventario.prestamo?.client?.name }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Descripción: {{ inventario.descripcion }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Observaciones: {{ inventario.observacion }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Avalúo: {{ inventario.precioAvaluo }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Prestamo: Bol. {{ inventario.costoPrestamo }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Precio de Venta: Bol. {{ inventario.precioVenta}}\n            </p>\n\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Precio de Compra: Bol. {{ inventario.costoCompra}}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Precio de Venta: Bol. {{ inventario.precioVenta}}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de Venta: {{ inventario.fechaVenta| date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de Compra: {{ inventario.fechaCompra| date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de Devolucion: {{ inventario.fechaDevolucion| date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Estado:{{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}\n            </p>\n          </div>\n        </div>\n      </div>\n   </div>\n  </div>\n\n  <form\n    [formGroup]=\"pictureForm\"\n    (ngSubmit)=\"savePicture()\"\n  >\n\n    <div class=\"my-4 relative p-6 flex flex-wrap\">\n\n      <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n        <label\n          for=\"image\"\n          class=\"block uppercase text-blueGray-600 text-xs font-bold mb-2\">\n          Fotografia\n        </label>\n        <h4 *ngIf=\"!comprimido\" class=\"text-xs font-semibold\">\n          Comprimiendo archivo espere porfavor...\n        </h4>\n        <input\n          type=\"file\"\n          class=\"border-0 px-3 py-3  text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150\"\n          formControlName=\"picture\"\n          (change)=\"onFileChange($event)\">\n        <button\n          [disabled]=\"!pictureForm.valid || loading\"\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"submit\"\n        >\n          <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar\n        </button>\n      </div>\n    </div>\n  </form>\n<div *ngIf=\"pictures\">\n\n  <div  class=\"grid lg:grid-cols-4 sm:grid-cols-2 gap-4 flex items-center ml-6 w-auto\">\n    <div *ngFor=\"let picture of pictures\" class=\"mb-4 relative \">\n        <button\n          (click)=\"openDeleteModal(picture)\"\n          class=\"absolute top-0 right-0 mx-4 bg-none text-red-600 active:text-red-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n          type=\"button\"\n          >\n          <i class=\"fas fa-trash\"></i>\n        </button>\n        <img src=\"{{picture.path?baseUrl+'/'+picture.path:'assets/img/image-not-found.png'}}\" class=\"w-96 h-auto object-fit rounded-lg\" alt=\"\">\n      </div>\n    </div>\n  </div>\n</div>\n";
+      __webpack_exports__["default"] = "\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Información Inventario Nº {{ inventario?.id }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n        <app-modal-delete-picture></app-modal-delete-picture>\n        <app-modal-venta-inventario></app-modal-venta-inventario>\n        <app-modal-devolver-inventario></app-modal-devolver-inventario>\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n\n        </div>\n      </div>\n    </div>\n    <div class=\"flow-root w-auto flex flex-col justify-center\">\n      <div *ngIf=\"inventario\" class=\"cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-600 transform hover:-translate-y-1 ease-linear transition-all duration-150\">\n        <div class=\"flex items-center space-x-4 px-4 py-2 bg-blueGray-600 \">\n            <div class=\"flex-1 min-w-0 text-white\">\n              <p\n                class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.descripcion }}\n              </p>\n              <p\n                *ngIf=\"inventario.tipo === 'JOYA'\"\n                class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}\n              </p>\n              <p\n                *ngIf=\"inventario.tipo === 'ARTICULO'\"\n                class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}\n              </p>\n              <p\n                *ngIf=\"inventario.tipo === 'VEHICULO'\"\n                class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}\n              </p>\n            </div>\n            <button\n              *ngIf=\"inventario.estado==='EMPENADO'|| inventario.estado==='COMPRADO'\"\n              [popper]=\"venderItem\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              (click)=\"openVentaModal()\">\n              <i class=\"fas fa-tag\"></i>\n            </button>\n            <popper-content #venderItem>\n              <p class=\"bold\">Vender Item</p>\n            </popper-content>\n            <button\n              *ngIf=\"inventario.estado==='EMPENADO'\"\n              [popper]=\"devolverItem\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              (click)=\"openDevolucionModal()\"\n              >\n              <i class=\"fas fa-box-open\"></i>\n            </button>\n            <popper-content #devolverItem>\n              <p class=\"bold\">Devolver Item</p>\n            </popper-content>\n            <app-pdf-devolucion\n              *ngIf=\"inventario.estado==='DEVUELTO'\"\n              [inventario]=\"inventario\"\n            ></app-pdf-devolucion>\n        </div>\n\n        <div class=\"flex items-center space-x-4 px-4 \">\n          <div class=\"flex-1 min-w-0 py-8\">\n\n            <p class=\"text-xl font-medium text-gray-900 truncate dark:text-white\">\n              Dueño original: {{ inventario.prestamo?.client?.name }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Descripción: {{ inventario.descripcion }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Observaciones: {{ inventario.observacion }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Avalúo: {{ inventario.precioAvaluo }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Prestamo: Bol. {{ inventario.costoPrestamo }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Precio de Venta: Bol. {{ inventario.precioVenta}}\n            </p>\n\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Precio de Compra: Bol. {{ inventario.costoCompra}}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Precio de Venta: Bol. {{ inventario.precioVenta}}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de Venta: {{ inventario.fechaVenta| date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de Compra: {{ inventario.fechaCompra| date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de Devolucion: {{ inventario.fechaDevolucion| date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Estado:{{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}\n            </p>\n          </div>\n        </div>\n      </div>\n   </div>\n  </div>\n\n  <form\n    [formGroup]=\"pictureForm\"\n    (ngSubmit)=\"savePicture()\"\n  >\n\n    <div class=\"my-4 relative p-6 flex flex-wrap\">\n\n      <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n        <label\n          for=\"image\"\n          class=\"block uppercase text-blueGray-600 text-xs font-bold mb-2\">\n          Fotografia\n        </label>\n        <h4 *ngIf=\"!comprimido\" class=\"text-xs font-semibold\">\n          Comprimiendo archivo espere porfavor...\n        </h4>\n        <input\n          type=\"file\"\n          class=\"border-0 px-3 py-3  text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150\"\n          formControlName=\"picture\"\n          (change)=\"onFileChange($event)\">\n        <button\n          [disabled]=\"!pictureForm.valid || loading\"\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-800 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"submit\"\n        >\n          <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar\n        </button>\n      </div>\n    </div>\n  </form>\n<div *ngIf=\"pictures\">\n\n  <div  class=\"grid lg:grid-cols-4 sm:grid-cols-2 gap-4 flex items-center ml-6 w-auto\">\n    <div *ngFor=\"let picture of pictures\" class=\"mb-4 relative \">\n        <button\n          (click)=\"openDeleteModal(picture)\"\n          class=\"absolute top-0 right-0 mx-4 bg-none text-red-600 active:text-red-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n          type=\"button\"\n          >\n          <i class=\"fas fa-trash\"></i>\n        </button>\n        <img src=\"{{picture.path?baseUrl+'/'+picture.path:'assets/img/image-not-found.png'}}\" class=\"w-96 h-auto object-fit rounded-lg\" alt=\"\">\n      </div>\n    </div>\n  </div>\n</div>\n";
       /***/
     },
 
@@ -255,7 +255,7 @@
             var _this = this;
 
             var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-            this.inventarioService.getInventarioComprado({
+            this.inventarioService.getInventarioByEstado({
               force: force
             }).subscribe(function (response) {
               _this.response = response;
@@ -280,7 +280,7 @@
             var _this3 = this;
 
             this.response = null;
-            this.inventarioService.getInventarioComprado({
+            this.inventarioService.getInventarioByEstado({
               force: true,
               page: page
             }).subscribe(function (response) {
@@ -862,6 +862,11 @@
             this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subscription"]();
             this.getInventario(true);
             this.subscribeInventarios();
+
+            if (this.estado === 'VENDIDO') {
+              this.getInventarioWhitOutPrestamo();
+              this.subscribeInventarioWhitOutPrestamo();
+            }
           }
         }, {
           key: "ngOnDestroy",
@@ -883,21 +888,45 @@
             });
           }
         }, {
+          key: "getInventarioWhitOutPrestamo",
+          value: function getInventarioWhitOutPrestamo() {
+            var _this11 = this;
+
+            this.sub.add(this.inventarioService.getInventarioByEstado({
+              force: true,
+              estadoInv: this.estado
+            }).subscribe(function (response) {
+              _this11.response2 = response;
+            }));
+          }
+        }, {
           key: "subscribeInventarios",
           value: function subscribeInventarios() {
-            var _this11 = this;
+            var _this12 = this;
 
             this.sub.add(this.inventarioService.response.subscribe(function (response) {
               if (response.items.length > 0) {
-                _this11.response = response;
-                _this11.loading = false;
+                _this12.response = response;
+                _this12.loading = false;
+              }
+            }));
+          }
+        }, {
+          key: "subscribeInventarioWhitOutPrestamo",
+          value: function subscribeInventarioWhitOutPrestamo() {
+            var _this13 = this;
+
+            this.sub.add(this.inventarioService.response2.subscribe(function (response) {
+              if (response.items.length > 0) {
+                _this13.response2 = response;
+                _this13.loading = false;
               }
             }));
           }
         }, {
           key: "search",
           value: function search(event) {
-            var _this12 = this;
+            var _this14 = this;
 
             this.loading = true;
             this.sub.add(this.inventarioService.getInventario({
@@ -905,22 +934,22 @@
               force: true,
               estadoInv: this.ciForm.value.ci ? '' : this.estado
             }).subscribe(function (response) {
-              _this12.loading = false;
+              _this14.loading = false;
 
               if (response.items.length === 0) {
-                _this12.alertService.alert.fire({
+                _this14.alertService.alert.fire({
                   title: 'No hay datos relacionados con la busqueda',
                   icon: 'error'
                 });
               } else {
-                _this12.response = response;
+                _this14.response = response;
               }
             }));
           }
         }, {
           key: "getOnPageResponse",
           value: function getOnPageResponse(page) {
-            var _this13 = this;
+            var _this15 = this;
 
             this.response = null;
             this.inventarioService.getInventario({
@@ -929,7 +958,21 @@
               estadoInv: this.ciForm.value.ci ? '' : this.estado,
               page: page
             }).subscribe(function (response) {
-              _this13.inventarioService.response.emit(response);
+              _this15.inventarioService.response.emit(response);
+            });
+          }
+        }, {
+          key: "getOnPageResponseWhitOutPrestamo",
+          value: function getOnPageResponseWhitOutPrestamo(page) {
+            var _this16 = this;
+
+            this.response2 = null;
+            this.inventarioService.getInventarioByEstado({
+              force: true,
+              estadoInv: this.estado,
+              page: page
+            }).subscribe(function (response) {
+              _this16.inventarioService.response2.emit(response);
             });
           }
         }, {
@@ -1069,21 +1112,21 @@
         }, {
           key: "refreshPictures",
           value: function refreshPictures() {
-            var _this14 = this;
+            var _this17 = this;
 
             this.sub.add(this.pictureService.getPictures(this.picture.inventario.id).subscribe(function (pictures) {
               console.log(pictures);
 
-              _this14.pictureService.pictures.emit(pictures);
+              _this17.pictureService.pictures.emit(pictures);
             }));
           }
         }, {
           key: "subscribePicture",
           value: function subscribePicture() {
-            var _this15 = this;
+            var _this18 = this;
 
             this.sub.add(this.pictureService.picture.subscribe(function (picture) {
-              _this15.picture = picture;
+              _this18.picture = picture;
             }));
           }
         }, {
@@ -1102,23 +1145,23 @@
         }, {
           key: "save",
           value: function save() {
-            var _this16 = this;
+            var _this19 = this;
 
             this.loading = true;
             this.pictureService.deletePicture(this.picture.id).subscribe(function (response) {
-              _this16.loading = false;
+              _this19.loading = false;
 
-              _this16.alertService.triggerMessage('Imagen Eliminada exitosamente', 'success');
+              _this19.alertService.triggerMessage('Imagen Eliminada exitosamente', 'success');
 
-              _this16.refreshPictures();
+              _this19.refreshPictures();
 
-              _this16.closeModal();
+              _this19.closeModal();
             }, function (error) {
-              _this16.loading = false;
+              _this19.loading = false;
 
-              _this16.alertService.triggerMessage(error.error.message, 'error');
+              _this19.alertService.triggerMessage(error.error.message, 'error');
 
-              _this16.closeModal();
+              _this19.closeModal();
             });
           }
         }]);
@@ -1615,40 +1658,40 @@
         }, {
           key: "getInventarioById",
           value: function getInventarioById() {
-            var _this17 = this;
+            var _this20 = this;
 
             this.sub.add(this.inventarioService.getInventarioById(+this.inventarioId).subscribe(function (inventario) {
-              _this17.inventario = inventario;
+              _this20.inventario = inventario;
             }));
           }
         }, {
           key: "subscribeInventario",
           value: function subscribeInventario() {
-            var _this18 = this;
+            var _this21 = this;
 
             this.sub.add(this.inventarioService.inventario.subscribe(function (inventario) {
               if (inventario) {
-                _this18.inventario = inventario;
+                _this21.inventario = inventario;
               }
             }));
           }
         }, {
           key: "getPicturesByInventarioId",
           value: function getPicturesByInventarioId() {
-            var _this19 = this;
+            var _this22 = this;
 
             this.sub.add(this.pictureService.getPictures(+this.inventarioId).subscribe(function (pictures) {
-              _this19.pictures = pictures;
+              _this22.pictures = pictures;
             }));
           }
         }, {
           key: "subscribePictures",
           value: function subscribePictures() {
-            var _this20 = this;
+            var _this23 = this;
 
             this.sub.add(this.pictureService.pictures.subscribe(function (pictures) {
               if (pictures) {
-                _this20.pictures = pictures;
+                _this23.pictures = pictures;
               }
             }));
           }
@@ -1667,20 +1710,20 @@
         }, {
           key: "savePicture",
           value: function savePicture() {
-            var _this21 = this;
+            var _this24 = this;
 
             this.loading = true;
             var formData = this.pictureForm.toFormData();
             this.pictureService.postPicture(formData, +this.inventarioId).subscribe(function (response) {
-              _this21.successMessage('creada');
+              _this24.successMessage('creada');
 
-              _this21.getPicturesByInventarioId();
+              _this24.getPicturesByInventarioId();
 
-              _this21.loading = false;
+              _this24.loading = false;
             }, function (error) {
-              _this21.errorMessage(error.error.message);
+              _this24.errorMessage(error.error.message);
 
-              _this21.loading = false;
+              _this24.loading = false;
             });
           }
         }, {
@@ -1711,14 +1754,14 @@
         }, {
           key: "compressFile",
           value: function compressFile(image) {
-            var _this22 = this;
+            var _this25 = this;
 
             this.comprimido = false;
             this.ng2ImgMax.resizeImage(image, 400, 300).subscribe(function (result) {
               var compressedFile = new File([result], result.name);
-              _this22.comprimido = true;
+              _this25.comprimido = true;
 
-              _this22.pictureForm.patchValue({
+              _this25.pictureForm.patchValue({
                 picture: compressedFile
               });
             });
@@ -2083,7 +2126,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this23 = this;
+            var _this26 = this;
 
             this.loading = true;
             var body = Object.assign(Object.assign({}, this.inventarioForm.value), {
@@ -2094,29 +2137,29 @@
 
             if (this.inventario) {} else {
               this.sub.add(this.inventarioService.postInventario(body).subscribe(function (response) {
-                _this23.loading = false;
+                _this26.loading = false;
 
-                _this23.alertService.triggerMessage('Inventario Ingresado Correctamente', 'success');
+                _this26.alertService.triggerMessage('Inventario Ingresado Correctamente', 'success');
 
-                _this23.refreshInventario();
+                _this26.refreshInventario();
 
-                _this23.closeModal();
+                _this26.closeModal();
               }, function (error) {
-                _this23.loading = false;
+                _this26.loading = false;
 
-                _this23.alertService.triggerMessage(error.error.message, 'error');
+                _this26.alertService.triggerMessage(error.error.message, 'error');
               }));
             }
           }
         }, {
           key: "refreshInventario",
           value: function refreshInventario() {
-            var _this24 = this;
+            var _this27 = this;
 
-            this.sub.add(this.inventarioService.getInventarioComprado({
+            this.sub.add(this.inventarioService.getInventarioByEstado({
               force: true
             }).subscribe(function (response) {
-              _this24.inventarioService.response.emit(response);
+              _this27.inventarioService.response.emit(response);
             }));
           }
         }, {
@@ -2282,7 +2325,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"p-4 w-full \">\n  <div class=\"items-center mb-4\">\n    <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">Lista de Inventario</h3>\n    <div class=\"flex items-center justify-start pt-2\">.\n      <app-modal-edit-inventario></app-modal-edit-inventario>\n\n    </div>\n    <div class=\"w-full \">\n      <div class=\"flex flex-col pt-4 items-baseline w-full \">\n        <form\n          [formGroup]=\"ciForm\"\n        >\n          <input\n            type=\"text\"\n            placeholder=\"Buscar por CI Ej: 836378...\"\n            class=\"border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150\"\n            formControlName=\"ci\"\n            (ngModelChange)=\"search($event)\"\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n  <div class=\"flow-root w-auto\">\n    <ul *ngIf=\"response\" role=\"list\" class=\"relative\">\n      <li *ngFor=\"let inventario of response.items; let i=index;\"\n          class=\"cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-600 transform hover:-translate-y-1 ease-linear transition-all duration-150\"\n          (click)=\"goToInventarioInformation(inventario)\">\n          <div class=\"flex items-center\">\n              <div class=\"text-3xl p-4 bg-green-600\">\n                {{inventario.id}}\n              </div>\n              <div  class=\"flex-1 min-w-0 mx-6 flex flex-col\">\n                <p class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.descripcion }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'JOYA'\">\n                  {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'ARTICULO'\">\n                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'VEHICULO'\">\n                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}\n                </p>\n                <p *ngIf=\"inventario.estado==='EMPENADO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  {{ inventario.prestamo.fechaInicio | date:'mediumDate' }} - {{ inventario.prestamo.fechaFinal | date:'mediumDate' }}\n                </p>\n                <p *ngIf=\"inventario.estado==='DEVUELTO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  Fecha devolución: {{ inventario.fechaDevolucion | date:'mediumDate' }}\n                </p>\n                <p *ngIf=\"inventario.estado==='VENDIDO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  Fecha Venta: {{ inventario.fechaVenta | date:'mediumDate' }}\n                </p>\n              </div>\n              <div class=\"text-gray-500 text-xl font-bold mr-8\">\n                <p *ngIf=\"inventario.estado==='DEVUELTO'\">\n                  BOL. {{ inventario.costoPrestamo }}\n                </p>\n                <p *ngIf=\"inventario.estado==='EMPENADO'\">\n                  BOL. {{ inventario.costoPrestamo }}\n                </p>\n                <p *ngIf=\"inventario.estado==='VENDIDO'\">\n                  BOL. {{ inventario.precioVenta }}\n                </p>\n                <p class=\"text-sm\">\n                  {{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}\n                </p>\n              </div>\n          </div>\n      </li>\n  </ul>\n  </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponse($event)\"\n></app-pagination>\n";
+      __webpack_exports__["default"] = "<div class=\"p-4 w-full \">\n  <div class=\"items-center mb-4\">\n    <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">Lista de Inventario {{ estado==='EMPENADO'?'EMPEÑADO': estado }} {{estado==='VENDIDO'?'de PRESTAMOS':''}}</h3>\n    <div class=\"flex items-center justify-start pt-2\">.\n      <app-modal-edit-inventario></app-modal-edit-inventario>\n\n    </div>\n    <div class=\"w-full \">\n      <div class=\"flex flex-col pt-4 items-baseline w-full \">\n        <form\n          [formGroup]=\"ciForm\"\n        >\n          <input\n            type=\"text\"\n            placeholder=\"Buscar por CI Ej: 836378...\"\n            class=\"border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150\"\n            formControlName=\"ci\"\n            (ngModelChange)=\"search($event)\"\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n  <div class=\"flow-root w-auto\">\n    <ul *ngIf=\"response\" role=\"list\" class=\"relative\">\n      <li *ngFor=\"let inventario of response.items; let i=index;\"\n          class=\"cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-600 transform hover:-translate-y-1 ease-linear transition-all duration-150\"\n          (click)=\"goToInventarioInformation(inventario)\">\n          <div class=\"flex items-center\">\n              <div class=\"text-3xl p-4 bg-green-600\">\n                {{inventario.id}}\n              </div>\n              <div  class=\"flex-1 min-w-0 mx-6 flex flex-col\">\n                <p class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.descripcion }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'JOYA'\">\n                  {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'ARTICULO'\">\n                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'VEHICULO'\">\n                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}\n                </p>\n                <p *ngIf=\"inventario.estado==='EMPENADO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  {{ inventario.prestamo.fechaInicio | date:'mediumDate' }} - {{ inventario.prestamo.fechaFinal | date:'mediumDate' }}\n                </p>\n                <p *ngIf=\"inventario.estado==='DEVUELTO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  Fecha devolución: {{ inventario.fechaDevolucion | date:'mediumDate' }}\n                </p>\n                <p *ngIf=\"inventario.estado==='VENDIDO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  Fecha Venta: {{ inventario.fechaVenta | date:'mediumDate' }}\n                </p>\n              </div>\n              <div class=\"text-gray-500 text-xl font-bold mr-8\">\n                <p *ngIf=\"inventario.estado==='DEVUELTO'\">\n                  BOL. {{ inventario.costoPrestamo }}\n                </p>\n                <p *ngIf=\"inventario.estado==='EMPENADO'\">\n                  BOL. {{ inventario.costoPrestamo }}\n                </p>\n                <p *ngIf=\"inventario.estado==='VENDIDO'\">\n                  BOL. {{ inventario.precioVenta }}\n                </p>\n                <p class=\"text-sm\">\n                  {{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}\n                </p>\n              </div>\n          </div>\n      </li>\n  </ul>\n  </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponse($event)\"\n></app-pagination>\n\n<div *ngIf=\"estado==='VENDIDO'\" class=\"p-4 w-full \">\n  <div class=\"items-center mb-4\">\n    <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">Lista de Inventario VENDIDO de Compras</h3>\n    <div class=\"flex items-center justify-start pt-2\">.\n\n    </div>\n    <div class=\"w-full \">\n      <div class=\"flex flex-col pt-4 items-baseline w-full \">\n\n      </div>\n    </div>\n  </div>\n  <div class=\"flow-root w-auto\">\n    <ul *ngIf=\"response2\" role=\"list\" class=\"relative\">\n      <li *ngFor=\"let inventario of response2.items; let i=index;\"\n          class=\"cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-600 transform hover:-translate-y-1 ease-linear transition-all duration-150\"\n          (click)=\"goToInventarioInformation(inventario)\">\n          <div class=\"flex items-center\">\n              <div class=\"text-3xl p-4 bg-green-600\">\n                {{inventario.id}}\n              </div>\n              <div  class=\"flex-1 min-w-0 mx-6 flex flex-col\">\n                <p class=\"text-xl font-medium truncate dark:text-white\">\n                  {{ inventario.descripcion }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'JOYA'\">\n                  {{ inventario.metal }} {{ inventario.peso }} {{ inventario.pureza }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'ARTICULO'\">\n                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.linea }}\n                </p>\n                <p *ngIf=\"inventario.tipo === 'VEHICULO'\">\n                    {{ inventario.marca }} {{ inventario.modelo }} {{ inventario.placa }}\n                </p>\n                <p *ngIf=\"inventario.estado==='EMPENADO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  {{ inventario.prestamo.fechaInicio | date:'mediumDate' }} - {{ inventario.prestamo.fechaFinal | date:'mediumDate' }}\n                </p>\n                <p *ngIf=\"inventario.estado==='DEVUELTO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  Fecha devolución: {{ inventario.fechaDevolucion | date:'mediumDate' }}\n                </p>\n                <p *ngIf=\"inventario.estado==='VENDIDO'\" class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                  Fecha Venta: {{ inventario.fechaVenta | date:'mediumDate' }}\n                </p>\n              </div>\n              <div class=\"text-gray-500 text-xl font-bold mr-8\">\n                <p *ngIf=\"inventario.estado==='DEVUELTO'\">\n                  BOL. {{ inventario.costoPrestamo }}\n                </p>\n                <p *ngIf=\"inventario.estado==='EMPENADO'\">\n                  BOL. {{ inventario.costoPrestamo }}\n                </p>\n                <p *ngIf=\"inventario.estado==='VENDIDO'\">\n                  BOL. {{ inventario.precioVenta }}\n                </p>\n                <p class=\"text-sm\">\n                  {{ inventario.estado === 'EMPENADO'? 'EMPEÑADO': inventario.estado }}\n                </p>\n              </div>\n          </div>\n      </li>\n  </ul>\n  </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response2\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponseWhitOutPrestamo($event)\"\n></app-pagination>\n";
       /***/
     }
   }]);
