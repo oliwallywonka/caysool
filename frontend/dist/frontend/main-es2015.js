@@ -586,6 +586,7 @@ let InputComponent = InputComponent_1 = class InputComponent {
         // CONTROL VALUE ACCESSOR INTERFACE
         // Nos conecta nuestro custom input con forms, reactive forms etc
         this.value = '';
+        this.isDisabled = false;
         this.onChange = (_) => { };
         this.onTouch = () => { };
     }
@@ -625,7 +626,8 @@ InputComponent.propDecorators = {
     inputType: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
     inputForm: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
     inputEvent: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"] }],
-    value: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }]
+    value: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }],
+    isDisabled: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }]
 };
 InputComponent = InputComponent_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -912,7 +914,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<label\n  class=\"block uppercase text-gray-500 text-xs font-bold mb-2\"\n  htmlFor=\"grid-password\"\n>\n  {{ inputLabel }}\n</label>\n<input\n  type=\"{{ inputType }}\"\n  class=\"border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150\"\n  placeholder=\"{{ inputPlaceholder }}\"\n  [min]=\"inputMin\"\n  [max]=\"inputMax\"\n  (input)=\"onInput($event.target.value)\"\n  (input)=\"clickInput($event.target.value)\"\n  [value]=\"value\"\n/>\n<span\n  class=\"text-red-500\"\n  *ngFor=\"let error of inputForm.controls[inputFormName]['errorMessages']\"\n>\n  {{ error }}\n</span>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<label\n  class=\"block uppercase text-gray-500 text-xs font-bold mb-2\"\n  htmlFor=\"grid-password\"\n>\n  {{ inputLabel }}\n</label>\n<input\n  type=\"{{ inputType }}\"\n  class=\"border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150\"\n  placeholder=\"{{ inputPlaceholder }}\"\n  [disabled]=\"isDisabled\"\n  [min]=\"inputMin\"\n  [max]=\"inputMax\"\n  (input)=\"onInput($event.target.value)\"\n  (input)=\"clickInput($event.target.value)\"\n  [value]=\"value\"\n/>\n<span\n  class=\"text-red-500\"\n  *ngFor=\"let error of inputForm.controls[inputFormName]['errorMessages']\"\n>\n  {{ error }}\n</span>\n");
 
 /***/ }),
 

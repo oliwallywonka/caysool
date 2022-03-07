@@ -74,6 +74,10 @@
             <popper-content #devolverItem>
               <p class="bold">Devolver Item</p>
             </popper-content>
+            <app-pdf-devolucion
+              *ngIf="inventario.estado==='DEVUELTO'"
+              [inventario]="inventario"
+            ></app-pdf-devolucion>
         </div>
 
         <div class="flex items-center space-x-4 px-4 ">

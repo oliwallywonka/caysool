@@ -136,7 +136,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
         comision: pago.costoAdministracion,
         cargoExtra: pago.costoAdministracion,
         amortiguado: pago.tipoPago === 'AMORTIZACION'? pago.costoPago: 0.00,
-        costoPorCobrar2 : costoPorCobrar,
+        costoPorCobrar2 : costoPorCobrar.toFixed(1),
         ...pago
       };
       this.historialPagosArray.push(historialItem);

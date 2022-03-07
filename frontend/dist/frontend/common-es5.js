@@ -80,12 +80,29 @@
             var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
 
             if (force || !this.cacheResponse$) {
-              return this.cacheResponse$ = this.http.get("".concat(this.baseUrl, "/inventario?ci=").concat(clientCi, "&estadoInv=").concat(estadoInv, "&page=").concat(page), {
+              return this.cacheResponse$ = this.http.get("".concat(this.baseUrl, "/inventario?clientCi=").concat(clientCi, "&estadoInv=").concat(estadoInv, "&page=").concat(page), {
                 headers: headers
               }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["shareReplay"])(1));
             }
 
             return this.cacheResponse$;
+          }
+        }, {
+          key: "getInventarioComprado",
+          value: function getInventarioComprado(_ref2) {
+            var _ref2$page = _ref2.page,
+                page = _ref2$page === void 0 ? 1 : _ref2$page,
+                _ref2$force = _ref2.force,
+                force = _ref2$force === void 0 ? false : _ref2$force;
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+
+            if (force || !this.cacheResponse2$) {
+              return this.cacheResponse$ = this.http.get("".concat(this.baseUrl, "/inventario/comprado?page=").concat(page), {
+                headers: headers
+              }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["shareReplay"])(1));
+            }
+
+            return this.cacheResponse2$;
           }
         }, {
           key: "getInventarioById",
@@ -208,15 +225,15 @@
 
         _createClass(PrestamoService, [{
           key: "getPrestamos",
-          value: function getPrestamos(_ref2) {
-            var _ref2$clientCi = _ref2.clientCi,
-                clientCi = _ref2$clientCi === void 0 ? '' : _ref2$clientCi,
-                _ref2$estadoPrestamo = _ref2.estadoPrestamo,
-                estadoPrestamo = _ref2$estadoPrestamo === void 0 ? '' : _ref2$estadoPrestamo,
-                _ref2$page = _ref2.page,
-                page = _ref2$page === void 0 ? 1 : _ref2$page,
-                _ref2$force = _ref2.force,
-                force = _ref2$force === void 0 ? false : _ref2$force;
+          value: function getPrestamos(_ref3) {
+            var _ref3$clientCi = _ref3.clientCi,
+                clientCi = _ref3$clientCi === void 0 ? '' : _ref3$clientCi,
+                _ref3$estadoPrestamo = _ref3.estadoPrestamo,
+                estadoPrestamo = _ref3$estadoPrestamo === void 0 ? '' : _ref3$estadoPrestamo,
+                _ref3$page = _ref3.page,
+                page = _ref3$page === void 0 ? 1 : _ref3$page,
+                _ref3$force = _ref3.force,
+                force = _ref3$force === void 0 ? false : _ref3$force;
             var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
 
             if (force || !this.cacheResponse$) {

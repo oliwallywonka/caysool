@@ -12,6 +12,7 @@ import { ModalVentaInventarioComponent } from './components/modals/modal-venta-i
 import { ModalDevolverInventarioComponent } from './components/modals/modal-devolver-inventario/modal-devolver-inventario.component';
 import { ModalEditInventarioComponent } from './components/modals/modal-edit-inventario/modal-edit-inventario.component';
 import { CardInventarioCompradoComponent } from './components/cards/card-inventario-comprado/card-inventario-comprado.component';
+import { PdfDevolucionComponent } from './components/pdfs/pdf-devolucion/pdf-devolucion.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CardInventarioCompradoComponent } from './components/cards/card-inventa
     ModalDevolverInventarioComponent,
     ModalEditInventarioComponent,
     CardInventarioCompradoComponent,
+    PdfDevolucionComponent,
   ],
   imports: [SharedModule, InventarioRoutingModule, Ng2ImgMaxModule],
 })

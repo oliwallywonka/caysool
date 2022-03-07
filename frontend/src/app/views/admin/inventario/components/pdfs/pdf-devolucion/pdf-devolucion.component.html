@@ -1,0 +1,13 @@
+<button
+  [popper]="pagoModal"
+  [popperTrigger]="'hover'"
+  [popperPlacement]="'top'"
+  [popperPositionFixed]="true"
+  class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+  type="button"
+  (click)="exportToPdf()">
+  <i class="fas fa-user"></i>
+</button>
+<popper-content #pagoModal>
+  <p class="bold">Imprimir Boleta de devolución</p>
+</popper-content>

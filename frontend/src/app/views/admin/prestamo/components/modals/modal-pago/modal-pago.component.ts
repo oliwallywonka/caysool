@@ -98,6 +98,7 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
     this.sub = new Subscription();
     this.subscribePrestamo();
     this.subscribePagos();
+    this.calculateInteresPago();
   }
 
   ngOnDestroy() {
@@ -200,6 +201,8 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
   }
 
   calculateInteresPago() {
+    this.diasInteres = 0;
+    this.costoInteres = 0;
     let costoPagoInteres = 0;
     this.pagosInteres = [];
     if (this.pagoForm.value.tipoPago === 'INTERES') {

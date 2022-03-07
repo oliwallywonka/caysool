@@ -32,10 +32,20 @@ let InventarioService = class InventarioService {
             .set('x-access-token', sessionStorage.getItem('token') || '');
         if (force || !this.cacheResponse$) {
             return this.cacheResponse$ = this.http
-                .get(`${this.baseUrl}/inventario?ci=${clientCi}&estadoInv=${estadoInv}&page=${page}`, { headers })
+                .get(`${this.baseUrl}/inventario?clientCi=${clientCi}&estadoInv=${estadoInv}&page=${page}`, { headers })
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["shareReplay"])(1));
         }
         return this.cacheResponse$;
+    }
+    getInventarioComprado({ page = 1, force = false, }) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]()
+            .set('x-access-token', sessionStorage.getItem('token') || '');
+        if (force || !this.cacheResponse2$) {
+            return this.cacheResponse$ = this.http
+                .get(`${this.baseUrl}/inventario/comprado?page=${page}`, { headers })
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["shareReplay"])(1));
+        }
+        return this.cacheResponse2$;
     }
     getInventarioById(id) {
         const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]()
