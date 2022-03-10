@@ -6,8 +6,8 @@ export interface Prestamo {
   id?: number;
   user: number & User;
   client: Client;
-  fechaInicio: string;
-  fechaFinal: string;
+  fechaInicio: string & Date;
+  fechaFinal: string & Date;
   estado?: string;
   costoPrestamo?: number;
   costoInteres?: number;

@@ -35,4 +35,9 @@ export class PagoService {
       .set('x-access-token',sessionStorage.getItem('token')||'');
     return this.http.post(`${this.baseUrl}/pago`,body, { headers });
   }
+
+  deleteById(id: number):Observable<any>{
+    const headers = new HttpHeaders().set('x-access-token',sessionStorage.getItem('token')||'');
+    return this.http.delete(`${this.baseUrl}/pago/${id}`,{ headers })
+  }
 }

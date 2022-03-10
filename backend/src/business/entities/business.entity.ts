@@ -21,13 +21,13 @@ export class Business extends BaseEntity {
   @Column({ type: 'varchar', length: 30, default: '' })
   phone: string;
 
-  @Column({ type: 'varchar', length: 45, default: '' })
+  @Column({ type: 'varchar', length: 200, default: '' })
   direction: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
   comission: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.15 })
+  @Column({ type: 'int', default: 15 })
   interest: number;
 
   @Column({ type: 'decimal', precision: 6, scale: 2, default: 0.0 })

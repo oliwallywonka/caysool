@@ -18,8 +18,8 @@ export class CardReportePrestamoComponent implements OnInit, OnDestroy {
   loading = false;
   prestamos: Prestamo[] = [];
   reporteForm: FormGroup = this.fb.group({
-    from:[new Date().toISOString().slice(0, 19).replace('T', ' ')],
-    to:[new Date().toISOString().slice(0, 19).replace('T', ' ')]
+    from:[new Date().toISOString().substring(0, 10),],
+    to:[new Date().toISOString().substring(0, 10),]
   })
   constructor(
     private reporteService: ReporteService,

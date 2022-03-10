@@ -237,13 +237,13 @@ export class PdfPagoComponent implements OnInit {
               [
                 { text: "", alignment: "center" },
                 {
-                  text: "SALDO POR COBRAR (Capital actual e interes)",
+                  text: "CAPITAL PRESTADO",
                   fontSize: 10,
                   alignment: "left",
                   colSpan: 2,
                 },
                 {},
-                { text: `Bol. ${this.pago.costoPorCobrar2}`, alignment: "right" },
+                { text: `Bol. ${this.prestamo.costoPrestamo}`, alignment: "right" },
               ],
               [
                 { text: "Prenda", fontSize: 10, alignment: "center" },
@@ -469,13 +469,13 @@ export class PdfPagoComponent implements OnInit {
               [
                 { text: "", alignment: "center" },
                 {
-                  text: "SALDO POR COBRAR (Capital actual e interes)",
+                  text: "CAPITAL PRESTADO",
                   fontSize: 10,
                   alignment: "left",
                   colSpan: 2,
                 },
                 {},
-                { text: `Bol. ${this.pago.costoPorCobrar2}`, alignment: "right" },
+                { text: `Bol. ${this.prestamo.costoPrestamo}`, alignment: "right" },
               ],
               [
                 { text: "Prenda", fontSize: 10, alignment: "center" },

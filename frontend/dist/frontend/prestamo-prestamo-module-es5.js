@@ -33,6 +33,26 @@
     },
 
     /***/
+    "6JaV":
+    /*!*************************************************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/prestamo/components/modals/modal-delete-pago/modal-delete-pago.component.html ***!
+      \*************************************************************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function JaV(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<div *ngIf=\"modal.visible&&modal.modalName==='deletePagoModal'\" class=\"justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none\">\n  <div class=\"relative w-auto my-6 mx-auto max-w-580-px\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           ELIMINAR PAGO\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n\n        <div class=\"my-4 relative p-6 flex flex-wrap\">\n          <div class=\"w-full px-4 mb-2\">\n            <p> ¿ Desea eliminar el pago Nº {{ pago.id }} permanentemente? </p>\n            <p> Monto del Pago: Bol. {{ pago.costoPago }} </p>\n            <p> Monto Administración: Bol. {{ pago.costoAdministracion }} </p>\n            <p> Monto Piso (extras): Bol. {{ pago.costoPiso }} </p>\n            <p> Monto Total : Bol. {{ pago.costoTotal }} </p>\n            <p> Esta acción no puede revertirse </p>\n          </div>\n\n        </div>\n\n      <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n        <button\n          class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          Cancelar\n        </button>\n        <button\n          [disabled]=\"loading\"\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"button\"\n          (click)=\"save()\"\n        >\n        <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n        </button>\n      </div>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='deletePagoModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n";
+      /***/
+    },
+
+    /***/
     "7Aut":
     /*!***********************************************************************************************************************************!*\
       !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/prestamo/components/modals/modal-pago/modal-pago.component.html ***!
@@ -310,12 +330,12 @@
                     text: "",
                     alignment: "center"
                   }, {
-                    text: "SALDO POR COBRAR (Capital actual e interes)",
+                    text: "CAPITAL PRESTADO",
                     fontSize: 10,
                     alignment: "left",
                     colSpan: 2
                   }, {}, {
-                    text: "Bol. ".concat(this.pago.costoPorCobrar2),
+                    text: "Bol. ".concat(this.prestamo.costoPrestamo),
                     alignment: "right"
                   }], [{
                     text: "Prenda",
@@ -481,12 +501,12 @@
                     text: "",
                     alignment: "center"
                   }, {
-                    text: "SALDO POR COBRAR (Capital actual e interes)",
+                    text: "CAPITAL PRESTADO",
                     fontSize: 10,
                     alignment: "left",
                     colSpan: 2
                   }, {}, {
-                    text: "Bol. ".concat(this.pago.costoPorCobrar2),
+                    text: "Bol. ".concat(this.prestamo.costoPrestamo),
                     alignment: "right"
                   }], [{
                     text: "Prenda",
@@ -570,6 +590,197 @@
     },
 
     /***/
+    "AcEr":
+    /*!*********************************************************************************************************!*\
+      !*** ./src/app/views/admin/prestamo/components/modals/modal-delete-pago/modal-delete-pago.component.ts ***!
+      \*********************************************************************************************************/
+
+    /*! exports provided: ModalDeletePagoComponent */
+
+    /***/
+    function AcEr(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ModalDeletePagoComponent", function () {
+        return ModalDeletePagoComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_modal_delete_pago_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./modal-delete-pago.component.html */
+      "6JaV");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
+      /* harmony import */
+
+
+      var src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/core/services/alert.service */
+      "jKJn");
+      /* harmony import */
+
+
+      var src_app_core_services_pago_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/core/services/pago.service */
+      "AntR");
+      /* harmony import */
+
+
+      var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/core/services/modal.service */
+      "S0jo");
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! src/environments/environment */
+      "AytR");
+      /* harmony import */
+
+
+      var src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/app/core/services/prestamo.service */
+      "U31Y");
+
+      var ModalDeletePagoComponent = /*#__PURE__*/function () {
+        function ModalDeletePagoComponent(pagoService, prestamoService, alertService, modalService) {
+          _classCallCheck(this, ModalDeletePagoComponent);
+
+          this.pagoService = pagoService;
+          this.prestamoService = prestamoService;
+          this.alertService = alertService;
+          this.modalService = modalService;
+          this.publicUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].publicUrl;
+          this.loading = false;
+          this.modal = this.modalService.modal;
+        }
+
+        _createClass(ModalDeletePagoComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subscription"]();
+            this.subscribePago();
+            this.subscribePrestamo();
+          }
+        }, {
+          key: "ngOnDestroy",
+          value: function ngOnDestroy() {
+            this.sub.unsubscribe();
+          }
+        }, {
+          key: "refreshPagos",
+          value: function refreshPagos() {
+            var _this2 = this;
+
+            this.sub.add(this.pagoService.getByPrestamoId(this.prestamo.id).subscribe(function (pagos) {
+              _this2.pagoService.pagos.emit(pagos);
+            }));
+          }
+        }, {
+          key: "refreshPrestamo",
+          value: function refreshPrestamo() {
+            var _this3 = this;
+
+            this.sub.add(this.prestamoService.getPrestamoById(this.prestamo.id).subscribe(function (prestamo) {
+              _this3.prestamoService.prestamo.emit(prestamo);
+            }));
+          }
+        }, {
+          key: "subscribePago",
+          value: function subscribePago() {
+            var _this4 = this;
+
+            this.sub.add(this.pagoService.pago.subscribe(function (pago) {
+              _this4.pago = pago;
+            }));
+          }
+        }, {
+          key: "subscribePrestamo",
+          value: function subscribePrestamo() {
+            var _this5 = this;
+
+            this.sub.add(this.prestamoService.prestamo.subscribe(function (prestamo) {
+              _this5.prestamo = prestamo;
+            }));
+          }
+        }, {
+          key: "closeModal",
+          value: function closeModal() {
+            this.modal.visible = false;
+            this.modal.modalName = '';
+            this.pagoService.pago.emit(null);
+          }
+        }, {
+          key: "save",
+          value: function save() {
+            var _this6 = this;
+
+            this.loading = true;
+            this.pagoService.deleteById(this.pago.id).subscribe(function (response) {
+              _this6.loading = false;
+              console.log(response);
+
+              _this6.alertService.triggerMessage(response.message, 'success');
+
+              _this6.refreshPagos();
+
+              _this6.refreshPrestamo();
+
+              _this6.closeModal();
+            }, function (error) {
+              _this6.loading = false;
+
+              _this6.alertService.triggerMessage(error.error.message, 'error');
+
+              _this6.closeModal();
+            });
+          }
+        }]);
+
+        return ModalDeletePagoComponent;
+      }();
+
+      ModalDeletePagoComponent.ctorParameters = function () {
+        return [{
+          type: src_app_core_services_pago_service__WEBPACK_IMPORTED_MODULE_5__["PagoService"]
+        }, {
+          type: src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_8__["PrestamoService"]
+        }, {
+          type: src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_4__["AlertService"]
+        }, {
+          type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_6__["ModalService"]
+        }];
+      };
+
+      ModalDeletePagoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-modal-delete-pago',
+        template: _raw_loader_modal_delete_pago_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
+      })], ModalDeletePagoComponent);
+      /***/
+    },
+
+    /***/
     "AntR":
     /*!***********************************************!*\
       !*** ./src/app/core/services/pago.service.ts ***!
@@ -644,6 +855,14 @@
           value: function postPago(body) {
             var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
             return this.http.post("".concat(this.baseUrl, "/pago"), body, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "deleteById",
+          value: function deleteById(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.http["delete"]("".concat(this.baseUrl, "/pago/").concat(id), {
               headers: headers
             });
           }
@@ -872,22 +1091,22 @@
         }, {
           key: "calculateDiasRestantes",
           value: function calculateDiasRestantes() {
-            var diaInicio = moment__WEBPACK_IMPORTED_MODULE_11__(this.prestamo.fechaInicio);
-            var diaFinal = moment__WEBPACK_IMPORTED_MODULE_11__(this.prestamo.fechaFinal);
+            var diaInicio = moment__WEBPACK_IMPORTED_MODULE_11__(this.prestamo.fechaInicio).startOf('day');
+            var diaFinal = moment__WEBPACK_IMPORTED_MODULE_11__(this.prestamo.fechaFinal).endOf('day');
             this.diasRestantes = moment__WEBPACK_IMPORTED_MODULE_11__["duration"](diaFinal.diff(diaInicio)).asDays();
             this.diasRestantes = +this.diasRestantes.toFixed(1);
           }
         }, {
           key: "getPrestamoById",
           value: function getPrestamoById() {
-            var _this2 = this;
+            var _this7 = this;
 
             this.sub.add(this.prestamoService.getPrestamoById(+this.prestamoId).subscribe(function (prestamo) {
-              _this2.prestamo = prestamo;
+              _this7.prestamo = prestamo;
 
-              _this2.calculateDiasRestantes();
+              _this7.calculateDiasRestantes();
 
-              _this2.setHistorialPrestamo();
+              _this7.setHistorialPrestamo();
             }));
           }
         }, {
@@ -916,82 +1135,84 @@
         }, {
           key: "getPagosByPrestamoId",
           value: function getPagosByPrestamoId() {
-            var _this3 = this;
+            var _this8 = this;
 
             this.sub.add(this.pagoService.getByPrestamoId(+this.prestamoId).subscribe(function (pagos) {
-              _this3.pagos = pagos;
+              _this8.pagos = pagos;
 
-              _this3.setHistorialPago();
+              _this8.setHistorialPago();
             }));
           }
         }, {
           key: "subscribePagos",
           value: function subscribePagos() {
-            var _this4 = this;
+            var _this9 = this;
 
             this.sub.add(this.pagoService.pagos.subscribe(function (pagos) {
               if (pagos) {
-                _this4.pagos = pagos;
+                _this9.pagos = pagos;
 
-                _this4.setHistorialPago();
+                _this9.setHistorialPago();
               }
             }));
           }
         }, {
           key: "setHistorialPago",
           value: function setHistorialPago() {
-            var _this5 = this;
+            var _this10 = this;
 
             this.historialPagosArray = [];
             var costoPago = 0;
             this.pagos.map(function (pago) {
               costoPago += +pago.costoPago;
-              var costoPorCobrar = _this5.prestamo.costoTotal - costoPago;
+              var costoPorCobrar = _this10.prestamo.costoTotal - costoPago;
               console.log(costoPorCobrar);
               var historialItem = Object.assign({
-                fecha: _this5.datePipe.transform(pago.createdAt, 'medium'),
+                fecha: _this10.datePipe.transform(pago.createdAt, 'medium'),
                 operacion: pago.tipoPago === 'PAGO' ? 'PAGO' : pago.tipoPago === 'INTERES' ? 'PAGO INTERES' : 'PAGO AMORTIZACION',
                 cargo: pago.tipoPago === 'AMORTIZACION' ? 0.00 : pago.costoPago,
                 comision: pago.costoAdministracion,
-                cargoExtra: pago.costoAdministracion,
+                cargoExtra: pago.costoPiso,
                 amortiguado: pago.tipoPago === 'AMORTIZACION' ? pago.costoPago : 0.00,
                 costoPorCobrar2: costoPorCobrar.toFixed(1)
               }, pago);
 
-              _this5.historialPagosArray.push(historialItem);
+              _this10.historialPagosArray.push(historialItem);
             });
           }
         }, {
           key: "getImpresionByPrestamoId",
           value: function getImpresionByPrestamoId() {
-            var _this6 = this;
+            var _this11 = this;
 
             this.sub.add(this.impresionService.getByPrestamoId(+this.prestamoId).subscribe(function (impresiones) {
-              _this6.impresiones = impresiones;
+              _this11.impresiones = impresiones;
+
+              _this11.setHistorialImpresiones();
             }));
           }
         }, {
           key: "subscribeImpresiones",
           value: function subscribeImpresiones() {
-            var _this7 = this;
+            var _this12 = this;
 
             this.sub.add(this.impresionService.impresiones.subscribe(function (impresiones) {
               if (impresiones) {
-                _this7.impresiones = impresiones;
+                _this12.impresiones = impresiones;
 
-                _this7.setHistorialImpresiones();
+                _this12.setHistorialImpresiones();
               }
             }));
           }
         }, {
           key: "setHistorialImpresiones",
           value: function setHistorialImpresiones() {
-            var _this8 = this;
+            var _this13 = this;
 
             this.historialImpresionesArray = [];
             this.impresiones.map(function (impresion) {
               var historialItem = {
-                fecha: _this8.datePipe.transform(impresion.createdAt, 'medium'),
+                fecha: _this13.datePipe.transform(impresion.createdAt, 'medium'),
                 operacion: "IMPRESI\xD3N ".concat(impresion.tipoDocumento === 'CONTRATO' ? 'CONTRATO' : 'PAGO'),
                 cargo: impresion.costoImpresion,
                 comision: 0.00,
@@ -999,21 +1220,21 @@
                 amortiguado: 0.00
               };
 
-              _this8.historialImpresionesArray.push(historialItem);
+              _this13.historialImpresionesArray.push(historialItem);
             });
           }
         }, {
           key: "subscribePrestamo",
           value: function subscribePrestamo() {
-            var _this9 = this;
+            var _this14 = this;
 
             this.sub.add(this.prestamoService.prestamo.subscribe(function (prestamo) {
               if (prestamo) {
-                _this9.prestamo = prestamo;
+                _this14.prestamo = prestamo;
 
-                _this9.calculateDiasRestantes();
+                _this14.calculateDiasRestantes();
 
-                _this9.setHistorialPrestamo();
+                _this14.setHistorialPrestamo();
               }
             }));
           }
@@ -1053,6 +1274,14 @@
               this.pagoService.pago.emit(pago);
               this.prestamoService.prestamo.emit(this.prestamo);
             }
+          }
+        }, {
+          key: "showDeletePagoModal",
+          value: function showDeletePagoModal(pago) {
+            this.modal.modalName = 'deletePagoModal';
+            this.modal.visible = true;
+            this.pagoService.pago.emit(pago);
+            this.prestamoService.prestamo.emit(this.prestamo);
           }
         }, {
           key: "showImpresionContratoModal",
@@ -1289,19 +1518,19 @@
         }, {
           key: "subscribePagos",
           value: function subscribePagos() {
-            var _this10 = this;
+            var _this15 = this;
 
             this.sub.add(this.pagoService.pagos.subscribe(function (pagos) {
-              _this10.pagos = pagos;
+              _this15.pagos = pagos;
             }));
           }
         }, {
           key: "subscribePrestamo",
           value: function subscribePrestamo() {
-            var _this11 = this;
+            var _this16 = this;
 
             this.sub.add(this.prestamoService.prestamo.subscribe(function (prestamo) {
-              _this11.prestamo = prestamo;
+              _this16.prestamo = prestamo;
             }));
           }
         }, {
@@ -1336,7 +1565,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this12 = this;
+            var _this17 = this;
 
             this.loading = true;
             var body = {
@@ -1348,40 +1577,40 @@
             };
             console.log(body);
             this.pagoService.postPago(body).subscribe(function (response) {
-              _this12.loading = false;
+              _this17.loading = false;
 
-              _this12.successMessage();
+              _this17.successMessage();
 
-              _this12.refreshPagos();
+              _this17.refreshPagos();
 
-              _this12.refreshPrestamo();
+              _this17.refreshPrestamo();
 
-              _this12.closeModal();
+              _this17.closeModal();
             }, function (error) {
-              _this12.loading = false;
+              _this17.loading = false;
 
-              _this12.errorMessage(error.error.message);
+              _this17.errorMessage(error.error.message);
             });
           }
         }, {
           key: "refreshPagos",
           value: function refreshPagos() {
-            var _this13 = this;
+            var _this18 = this;
 
             this.sub.add(this.pagoService.getByPrestamoId(this.prestamo.id).subscribe(function (pagos) {
               if (pagos) {
-                _this13.pagoService.pagos.emit(pagos);
+                _this18.pagoService.pagos.emit(pagos);
               }
             }));
           }
         }, {
           key: "refreshPrestamo",
           value: function refreshPrestamo() {
-            var _this14 = this;
+            var _this19 = this;
 
             this.sub.add(this.prestamoService.getPrestamoById(this.prestamo.id).subscribe(function (prestamo) {
               if (prestamo) {
-                _this14.prestamoService.prestamo.emit(prestamo);
+                _this19.prestamoService.prestamo.emit(prestamo);
               }
             }));
           }
@@ -1674,33 +1903,34 @@
         }, {
           key: "getPrestamos",
           value: function getPrestamos() {
-            var _this15 = this;
+            var _this20 = this;
 
             var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
             this.prestamoService.getPrestamos({
               force: force,
               estadoPrestamo: this.estado
             }).subscribe(function (response) {
-              _this15.response = response;
-              _this15.loading = false;
+              console.log(response);
+              _this20.response = response;
+              _this20.loading = false;
             });
           }
         }, {
           key: "subscribePrestamos",
           value: function subscribePrestamos() {
-            var _this16 = this;
+            var _this21 = this;
 
             this.sub.add(this.prestamoService.response.subscribe(function (response) {
               if (response.items.length > 0) {
-                _this16.response = response;
-                _this16.loading = false;
+                _this21.response = response;
+                _this21.loading = false;
               }
             }));
           }
         }, {
           key: "search",
           value: function search(event) {
-            var _this17 = this;
+            var _this22 = this;
 
             this.loading = true;
             this.sub.add(this.prestamoService.getPrestamos({
@@ -1708,22 +1938,22 @@
               force: true,
               estadoPrestamo: this.ciForm.value.ci ? '' : this.estado
             }).subscribe(function (response) {
-              _this17.loading = false;
+              _this22.loading = false;
 
               if (response.items.length === 0) {
-                _this17.alertService.alert.fire({
+                _this22.alertService.alert.fire({
                   title: 'No hay datos relacionados con la busqueda',
                   icon: 'error'
                 });
               } else {
-                _this17.response = response;
+                _this22.response = response;
               }
             }));
           }
         }, {
           key: "getOnPageResponse",
           value: function getOnPageResponse(page) {
-            var _this18 = this;
+            var _this23 = this;
 
             this.response = null;
             this.prestamoService.getPrestamos({
@@ -1732,7 +1962,7 @@
               estadoPrestamo: this.ciForm.value.ci ? '' : this.estado,
               page: page
             }).subscribe(function (response) {
-              _this18.prestamoService.response.emit(response);
+              _this23.prestamoService.response.emit(response);
             });
           }
         }, {
@@ -1928,28 +2158,28 @@
         }, {
           key: "getPago",
           value: function getPago() {
-            var _this19 = this;
+            var _this24 = this;
 
             this.sub.add(this.pagoService.getById(this.pago.id).subscribe(function (pago) {
-              _this19.pago = pago;
+              _this24.pago = pago;
             }));
           }
         }, {
           key: "subscribePago",
           value: function subscribePago() {
-            var _this20 = this;
+            var _this25 = this;
 
             this.sub.add(this.pagoService.pago.subscribe(function (pago) {
-              _this20.pago = pago;
+              _this25.pago = pago;
             }));
           }
         }, {
           key: "subscribePrestamo",
           value: function subscribePrestamo() {
-            var _this21 = this;
+            var _this26 = this;
 
             this.sub.add(this.prestamoService.prestamo.subscribe(function (prestamo) {
-              _this21.prestamo = prestamo;
+              _this26.prestamo = prestamo;
             }));
           }
         }, {
@@ -1967,7 +2197,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this22 = this;
+            var _this27 = this;
 
             this.loading = true;
             var body = {
@@ -1977,27 +2207,27 @@
             };
             console.log(body);
             this.impresionService.postImpresion(body).subscribe(function (response) {
-              _this22.loading = false;
+              _this27.loading = false;
 
-              _this22.alertService.triggerMessage('Impresión registrada correctamente', 'success');
+              _this27.alertService.triggerMessage('Impresión registrada correctamente', 'success');
 
-              _this22.refreshImpresiones();
+              _this27.refreshImpresiones();
 
-              _this22.closeModal();
+              _this27.closeModal();
             }, function (error) {
-              _this22.loading = false;
+              _this27.loading = false;
 
-              _this22.alertService.triggerMessage(error.error.message, 'error');
+              _this27.alertService.triggerMessage(error.error.message, 'error');
             });
           }
         }, {
           key: "refreshImpresiones",
           value: function refreshImpresiones() {
-            var _this23 = this;
+            var _this28 = this;
 
             this.sub.add(this.impresionService.getByPrestamoId(this.prestamo.id).subscribe(function (impresiones) {
               if (impresiones) {
-                _this23.impresionService.impresiones.emit(impresiones);
+                _this28.impresionService.impresiones.emit(impresiones);
               }
             }));
           }
@@ -2148,10 +2378,10 @@
         }, {
           key: "subscribeBusiness",
           value: function subscribeBusiness() {
-            var _this24 = this;
+            var _this29 = this;
 
             this.sub.add(this.businessService.business.subscribe(function (business) {
-              _this24.business = business;
+              _this29.business = business;
             }));
           }
         }, {
@@ -2451,17 +2681,17 @@
         }, {
           key: "subscribePrestamo",
           value: function subscribePrestamo() {
-            var _this25 = this;
+            var _this30 = this;
 
             this.sub.add(this.prestamoService.prestamo.subscribe(function (prestamo) {
-              _this25.prestamo = prestamo;
+              _this30.prestamo = prestamo;
 
-              if (_this25.prestamo) {
-                _this25.prestamoForm.controls['fechaInicio'].setValue(new Date(_this25.prestamo.fechaInicio).toISOString().substring(0, 10));
+              if (_this30.prestamo) {
+                _this30.prestamoForm.controls['fechaInicio'].patchValue(new Date(_this30.prestamo.fechaInicio).toISOString().substring(0, 10));
 
-                _this25.prestamoForm.controls['fechaFinal'].setValue(new Date(_this25.prestamo.fechaFinal).toISOString().substring(0, 10));
+                _this30.prestamoForm.controls['fechaFinal'].patchValue(new Date(moment__WEBPACK_IMPORTED_MODULE_9__(_this30.prestamo.fechaFinal).subtract(4, 'hours').toISOString()).toISOString().substring(0, 10));
 
-                _this25.calculateCostoTotal();
+                _this30.calculateCostoTotal();
               }
             }));
           }
@@ -2475,31 +2705,31 @@
         }, {
           key: "save",
           value: function save() {
-            var _this26 = this;
+            var _this31 = this;
 
             this.loading = true;
             this.sub.add(this.prestamoService.patchPrestamo(this.prestamoForm.value, this.prestamo.id).subscribe(function (response) {
-              _this26.loading = false;
+              _this31.loading = false;
 
-              _this26.alertService.triggerMessage('Prestamo editado Exitosamente', 'success');
+              _this31.alertService.triggerMessage('Prestamo editado Exitosamente', 'success');
 
-              _this26.refreshPrestamo();
+              _this31.refreshPrestamo();
 
-              _this26.closeModal();
+              _this31.closeModal();
             }, function (error) {
-              _this26.loading = false;
+              _this31.loading = false;
 
-              _this26.alertService.triggerMessage(error.error.message, 'error');
+              _this31.alertService.triggerMessage(error.error.message, 'error');
             }));
           }
         }, {
           key: "refreshPrestamo",
           value: function refreshPrestamo() {
-            var _this27 = this;
+            var _this32 = this;
 
             this.sub.add(this.prestamoService.getPrestamoById(+this.prestamo.id).subscribe(function (prestamo) {
               if (prestamo) {
-                _this27.prestamoService.prestamo.emit(prestamo);
+                _this32.prestamoService.prestamo.emit(prestamo);
               }
             }));
           }
@@ -2509,9 +2739,16 @@
             var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
             this.diasPrestamo = 0;
             this.costoTotal = 0;
-            var diaInicio = moment__WEBPACK_IMPORTED_MODULE_9__(this.prestamoForm.value.fechaIncio).startOf('day');
-            var diaFinal = moment__WEBPACK_IMPORTED_MODULE_9__(this.prestamoForm.value.fechaFinal).endOf('day');
+            var diaInicio = moment__WEBPACK_IMPORTED_MODULE_9__(new Date(this.prestamoForm.value.fechaInicio).toDateString()).startOf('day');
+            var diaFinal = moment__WEBPACK_IMPORTED_MODULE_9__(new Date(this.prestamoForm.value.fechaFinal).toDateString()).endOf('day');
             var dias = moment__WEBPACK_IMPORTED_MODULE_9__["duration"](diaFinal.diff(diaInicio)).asDays();
+            /*console.log(new Date().toLocaleString('en-US', {
+              timeZone: 'America/La_Paz'
+            }))
+            console.log(this.prestamo.fechaFinal.toLocaleString('en-Us', { timeZone: 'America/La_Paz'}));
+            console.log(this.prestamoForm.value.fechaFinal);
+            console.log(new Date(this.prestamo.fechaFinal).toISOString().substring(0, 10));*/
+
             this.diasPrestamo = +(dias < 5 ? 5 : dias).toFixed(0);
             this.costoTotal = +(this.prestamo.costoPrestamo * Math.pow(1 + 0.15 / 30, dias < 5 ? 5 : dias)).toFixed(1);
           }
@@ -2557,7 +2794,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Información del Prestamo Nº {{ prestamo?.id }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n        <app-modal-pago></app-modal-pago>\n        <app-modal-amortiguar></app-modal-amortiguar>\n        <app-modal-impresion-recibo></app-modal-impresion-recibo>\n        <app-modal-impresion-contrato></app-modal-impresion-contrato>\n        <app-modal-edit-prestamo></app-modal-edit-prestamo>\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n\n        </div>\n      </div>\n    </div>\n    <div class=\"flow-root w-auto flex flex-col justify-center\">\n      <div *ngIf=\"prestamo\" class=\"cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150\">\n        <div class=\"flex items-center space-x-4 px-4 py-2 bg-blueGray-600 \">\n            <div class=\"flex-1 min-w-0\">\n              <p class=\"text-xl font-medium text-white truncate dark:text-white\">\n                  Cliente: {{ prestamo.client.name }}\n              </p>\n            </div>\n\n            <button\n              [popper]=\"editarFecha\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              type=\"button\"\n              (click)=\"showCambioFechaModal()\">\n              <i class=\"fas fa-calendar\"></i>\n            </button>\n            <popper-content #editarFecha>\n              <p class=\"bold\">Editar fecha del prestamo</p>\n            </popper-content>\n\n            <button\n              [popper]=\"imprimirContrato\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              type=\"button\"\n              (click)=\"showImpresionContratoModal()\">\n              <i class=\"fas fa-file-invoice\"></i>\n            </button>\n            <popper-content #imprimirContrato>\n              <p class=\"bold\">Imprimir contrato</p>\n            </popper-content>\n\n            <button\n              [popper]=\"pagoModal\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              type=\"button\"\n              (click)=\"showPagoModal()\">\n              <i class=\"fas fa-money-bill\"></i>\n            </button>\n            <popper-content #pagoModal>\n              <p class=\"bold\">Añadir pago</p>\n            </popper-content>\n        </div>\n\n        <div class=\"flex items-center space-x-4 px-4 \">\n          <div class=\"flex-1 min-w-0 py-8\">\n            <div class=\"text-xl font-medium text-gray-900 truncate dark:text-white flex flex-col\">\n              Prenda(s):\n              <div *ngFor=\"let inv of prestamo.inventario\" class=\"flex flex-col\">\n                <p\n                  *ngIf=\"inv.tipo === 'JOYA'\"\n                  class=\"text-blue-600 dark:text-blue-500 hover:underline\">\n                    <a [routerLink]=\"['/admin/inventario/'+inv.id]\">\n                      {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}\n                    </a>\n                </p>\n                <p\n                  *ngIf=\"inv.tipo === 'ARTICULO'\"\n                  class=\"text-blue-600 dark:text-blue-500 hover:underline\">\n                  <a [routerLink]=\"['/admin/inventario/'+inv.id]\">\n                    {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}\n                  </a>\n                </p>\n                <p\n                  *ngIf=\"inv.tipo === 'VEHICULO'\"\n                  class=\"text-blue-600 dark:text-blue-500 hover:underline\">\n                  <a [routerLink]=\"['/admin/inventario/'+inv.id]\">\n                    {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}\n                  </a>\n                </p>\n              </div>\n            </div>\n            <p class=\"text-xl font-medium text-gray-900 truncate dark:text-white\">\n              Usuario: {{ prestamo.user.ci }} {{ prestamo.user.name }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-900 truncate dark:text-white\">\n              MontoPrestamo: Bol. {{ prestamo.costoPrestamo }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Interés al finalizar el Plazo: Bol. {{ (prestamo.costoTotal - prestamo.costoPrestamo).toFixed(1) }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Monto Total: Bol. {{ prestamo.costoTotal }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Monto cancelado: Bol. {{ prestamo.costoCancelado }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Por cobrar: Bol. {{ (prestamo.costoTotal - prestamo.costoCancelado).toFixed(1) }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de prestamo: {{ prestamo.fechaInicio | date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de vencimiento: {{ prestamo.fechaFinal | date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Estado: {{ prestamo.estado }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Dias restantes: {{ diasRestantes }}\n            </p>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"items-center mb-4 ml-2 mt-4\">\n        <h3 class=\"text-xl font-bold leading-none text-gray-500 dark:text-white\">\n          HISTORIAL\n        </h3>\n      </div>\n      <div class=\"flex flex-col\">\n        <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n            <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                <div class=\"overflow-hidden shadow-md sm:rounded-lg\">\n                    <table class=\"min-w-full\">\n                        <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                            <tr>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Operación\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Cargo\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Comisión\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Cargos Generados\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Amortiguado\n                                </th>\n                            </tr>\n                        </thead>\n                        <tbody *ngIf=\"prestamo\" >\n                            <tr\n                              *ngFor=\"let historial of historialArray\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              (click)=\"showImpresionPagoModal(historial)\">\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                    {{ historial.fecha }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{ historial.operacion }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargo }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.comision }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargoExtra }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.amortiguado }}\n                                </td>\n                            </tr>\n                            <tr\n                              *ngFor=\"let historial of historialPagosArray\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              (click)=\"showImpresionPagoModal(historial)\">\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                    {{ historial.fecha }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{ historial.operacion }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargo }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.comision }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargoExtra }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.amortiguado }}\n                                </td>\n                            </tr>\n                            <tr\n                              *ngFor=\"let historial of historialImpresionesArray\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              (click)=\"showImpresionPagoModal(historial)\">\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                    {{ historial.fecha }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{ historial.operacion }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargo }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.comision }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargoExtra }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.amortiguado }}\n                                </td>\n                            </tr>\n\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n   </div>\n  </div>\n</div>\n";
+      __webpack_exports__["default"] = "\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Información del Prestamo Nº {{ prestamo?.id }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n        <app-modal-pago></app-modal-pago>\n        <app-modal-amortiguar></app-modal-amortiguar>\n        <app-modal-impresion-recibo></app-modal-impresion-recibo>\n        <app-modal-impresion-contrato></app-modal-impresion-contrato>\n        <app-modal-edit-prestamo></app-modal-edit-prestamo>\n        <app-modal-delete-pago></app-modal-delete-pago>\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n\n        </div>\n      </div>\n    </div>\n    <div class=\"flow-root w-auto flex flex-col justify-center\">\n      <div *ngIf=\"prestamo\" class=\"cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150\">\n        <div class=\"flex items-center space-x-4 px-4 py-2 bg-blueGray-600 \">\n            <div class=\"flex-1 min-w-0\">\n              <p class=\"text-xl font-medium text-white truncate dark:text-white\">\n                  Cliente: {{ prestamo.client.name }}\n              </p>\n            </div>\n\n            <button\n              [popper]=\"editarFecha\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              type=\"button\"\n              (click)=\"showCambioFechaModal()\">\n              <i class=\"fas fa-calendar\"></i>\n            </button>\n            <popper-content #editarFecha>\n              <p class=\"bold\">Editar fecha del prestamo</p>\n            </popper-content>\n\n            <button\n              [popper]=\"imprimirContrato\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              type=\"button\"\n              (click)=\"showImpresionContratoModal()\">\n              <i class=\"fas fa-file-invoice\"></i>\n            </button>\n            <popper-content #imprimirContrato>\n              <p class=\"bold\">Imprimir contrato</p>\n            </popper-content>\n\n            <button\n              [popper]=\"pagoModal\"\n              [popperTrigger]=\"'hover'\"\n              [popperPlacement]=\"'top'\"\n              [popperPositionFixed]=\"true\"\n              class=\"text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150\"\n              type=\"button\"\n              (click)=\"showPagoModal()\">\n              <i class=\"fas fa-money-bill\"></i>\n            </button>\n            <popper-content #pagoModal>\n              <p class=\"bold\">Añadir pago</p>\n            </popper-content>\n        </div>\n\n        <div class=\"flex items-center space-x-4 px-4 \">\n          <div class=\"flex-1 min-w-0 py-8\">\n            <div class=\"text-xl font-medium text-gray-900 truncate dark:text-white flex flex-col\">\n              Prenda(s):\n              <div *ngFor=\"let inv of prestamo.inventario\" class=\"flex flex-col\">\n                <p\n                  *ngIf=\"inv.tipo === 'JOYA'\"\n                  class=\"text-blue-600 dark:text-blue-500 hover:underline\">\n                    <a [routerLink]=\"['/admin/inventario/'+inv.id]\">\n                      {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}\n                    </a>\n                </p>\n                <p\n                  *ngIf=\"inv.tipo === 'ARTICULO'\"\n                  class=\"text-blue-600 dark:text-blue-500 hover:underline\">\n                  <a [routerLink]=\"['/admin/inventario/'+inv.id]\">\n                    {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}\n                  </a>\n                </p>\n                <p\n                  *ngIf=\"inv.tipo === 'VEHICULO'\"\n                  class=\"text-blue-600 dark:text-blue-500 hover:underline\">\n                  <a [routerLink]=\"['/admin/inventario/'+inv.id]\">\n                    {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}\n                  </a>\n                </p>\n              </div>\n            </div>\n            <p class=\"text-xl font-medium text-gray-900 truncate dark:text-white\">\n              Usuario: {{ prestamo.user.ci }} {{ prestamo.user.name }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-900 truncate dark:text-white\">\n              MontoPrestamo: Bol. {{ prestamo.costoPrestamo }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Interés al finalizar el Plazo: Bol. {{ (prestamo.costoTotal - prestamo.costoPrestamo).toFixed(1) }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Monto Total: Bol. {{ prestamo.costoTotal }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Monto cancelado: Bol. {{ prestamo.costoCancelado }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Por cobrar: Bol. {{ (prestamo.costoTotal - prestamo.costoCancelado).toFixed(1) }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de prestamo: {{ prestamo.fechaInicio | date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Fecha de vencimiento: {{ prestamo.fechaFinal | date:'medium' }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Estado: {{ prestamo.estado }}\n            </p>\n            <p class=\"text-xl font-medium text-gray-500 truncate dark:text-gray-400\">\n              Dias restantes: {{ diasRestantes }}\n            </p>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"items-center mb-4 ml-2 mt-4\">\n        <h3 class=\"text-xl font-bold leading-none text-gray-500 dark:text-white\">\n          HISTORIAL\n        </h3>\n      </div>\n      <div class=\"flex flex-col\">\n        <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n            <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                <div class=\"overflow-hidden shadow-md sm:rounded-lg\">\n                    <table class=\"min-w-full\">\n                        <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                            <tr>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Operación\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Cargo\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Comisión\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Cargos Generados\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Amortiguado\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Acciones\n                                </th>\n                            </tr>\n                        </thead>\n                        <tbody *ngIf=\"prestamo\" >\n                            <tr\n                              *ngFor=\"let historial of historialArray\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              (click)=\"showImpresionPagoModal(historial)\">\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                    {{ historial.fecha }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{ historial.operacion }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargo }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.comision }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargoExtra }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.amortiguado }}\n                                </td>\n                            </tr>\n                            <tr\n                              *ngFor=\"let historial of historialPagosArray\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              >\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                    {{ historial.fecha }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{ historial.operacion }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargo }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.comision }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargoExtra }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.amortiguado }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  <a\n                                    (click)=\"showImpresionPagoModal(historial)\"\n                                    class=\"p-2 text-blue-600 dark:text-blue-500 hover:underline\">\n                                    Imprimir</a>\n                                  <a\n                                    (click)=\"showDeletePagoModal(historial)\"\n                                    class=\"p-2 text-red-600 dark:text-red-500 hover:underline\">\n                                    Eliminar</a>\n                                </td>\n                            </tr>\n                            <tr\n                              *ngFor=\"let historial of historialImpresionesArray\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              >\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                    {{ historial.fecha }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{ historial.operacion }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargo }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.comision }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.cargoExtra }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{ historial.amortiguado }}\n                                </td>\n                            </tr>\n\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n   </div>\n  </div>\n</div>\n";
       /***/
     },
 
@@ -2796,10 +3033,10 @@
         }, {
           key: "subscribePrestamo",
           value: function subscribePrestamo() {
-            var _this28 = this;
+            var _this33 = this;
 
             this.sub.add(this.prestamoService.prestamo.subscribe(function (prestamo) {
-              _this28.prestamo = prestamo;
+              _this33.prestamo = prestamo;
             }));
           }
         }, {
@@ -2834,7 +3071,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this29 = this;
+            var _this34 = this;
 
             this.loading = true;
             var body = {
@@ -2843,15 +3080,15 @@
             };
             console.log(body);
             this.amortizacionService.postAmortizacion(body).subscribe(function (response) {
-              _this29.loading = false;
+              _this34.loading = false;
 
-              _this29.successMessage();
+              _this34.successMessage();
 
-              _this29.closeModal();
+              _this34.closeModal();
             }, function (error) {
-              _this29.loading = false;
+              _this34.loading = false;
 
-              _this29.errorMessage(error.error.message);
+              _this34.errorMessage(error.error.message);
             });
           }
         }]);
@@ -3108,13 +3345,19 @@
       var _components_modals_modal_edit_prestamo_modal_edit_prestamo_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ./components/modals/modal-edit-prestamo/modal-edit-prestamo.component */
       "UhyH");
+      /* harmony import */
+
+
+      var _components_modals_modal_delete_pago_modal_delete_pago_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! ./components/modals/modal-delete-pago/modal-delete-pago.component */
+      "AcEr");
 
       var PrestamoModule = /*#__PURE__*/_createClass(function PrestamoModule() {
         _classCallCheck(this, PrestamoModule);
       });
 
       PrestamoModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_prestamo_component__WEBPACK_IMPORTED_MODULE_3__["PrestamoComponent"], _components_tabs_tab_prestamo_tab_prestamo_component__WEBPACK_IMPORTED_MODULE_4__["TabPrestamoComponent"], _components_cards_card_prestamos_card_prestamos_component__WEBPACK_IMPORTED_MODULE_5__["CardPrestamosComponent"], _components_cards_card_prestamo_detalle_card_prestamo_detalle_component__WEBPACK_IMPORTED_MODULE_6__["CardPrestamoDetalleComponent"], _components_modals_modal_pago_modal_pago_component__WEBPACK_IMPORTED_MODULE_7__["ModalPagoComponent"], _components_modals_modal_amortiguar_modal_amortiguar_component__WEBPACK_IMPORTED_MODULE_8__["ModalAmortiguarComponent"], _components_modals_modal_impresion_recibo_modal_impresion_recibo_component__WEBPACK_IMPORTED_MODULE_9__["ModalImpresionReciboComponent"], _components_pdfs_pdf_pago_pdf_pago_component__WEBPACK_IMPORTED_MODULE_11__["PdfPagoComponent"], _components_pdfs_pdf_documento_pdf_documento_component__WEBPACK_IMPORTED_MODULE_12__["PdfDocumentoComponent"], _components_modals_modal_impresion_contrato_modal_impresion_contrato_component__WEBPACK_IMPORTED_MODULE_13__["ModalImpresionContratoComponent"], _components_modals_modal_edit_prestamo_modal_edit_prestamo_component__WEBPACK_IMPORTED_MODULE_14__["ModalEditPrestamoComponent"]],
+        declarations: [_prestamo_component__WEBPACK_IMPORTED_MODULE_3__["PrestamoComponent"], _components_tabs_tab_prestamo_tab_prestamo_component__WEBPACK_IMPORTED_MODULE_4__["TabPrestamoComponent"], _components_cards_card_prestamos_card_prestamos_component__WEBPACK_IMPORTED_MODULE_5__["CardPrestamosComponent"], _components_cards_card_prestamo_detalle_card_prestamo_detalle_component__WEBPACK_IMPORTED_MODULE_6__["CardPrestamoDetalleComponent"], _components_modals_modal_pago_modal_pago_component__WEBPACK_IMPORTED_MODULE_7__["ModalPagoComponent"], _components_modals_modal_amortiguar_modal_amortiguar_component__WEBPACK_IMPORTED_MODULE_8__["ModalAmortiguarComponent"], _components_modals_modal_impresion_recibo_modal_impresion_recibo_component__WEBPACK_IMPORTED_MODULE_9__["ModalImpresionReciboComponent"], _components_pdfs_pdf_pago_pdf_pago_component__WEBPACK_IMPORTED_MODULE_11__["PdfPagoComponent"], _components_pdfs_pdf_documento_pdf_documento_component__WEBPACK_IMPORTED_MODULE_12__["PdfDocumentoComponent"], _components_modals_modal_impresion_contrato_modal_impresion_contrato_component__WEBPACK_IMPORTED_MODULE_13__["ModalImpresionContratoComponent"], _components_modals_modal_edit_prestamo_modal_edit_prestamo_component__WEBPACK_IMPORTED_MODULE_14__["ModalEditPrestamoComponent"], _components_modals_modal_delete_pago_modal_delete_pago_component__WEBPACK_IMPORTED_MODULE_15__["ModalDeletePagoComponent"]],
         imports: [_prestamo_routing_module__WEBPACK_IMPORTED_MODULE_2__["PrestamoRoutingModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_10__["SharedModule"]]
       })], PrestamoModule);
       /***/
@@ -3430,7 +3673,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n<div *ngIf=\"modal.visible&&modal.modalName==='prestamoEditModal'\" class=\"justify-center items-center overflow-x-hidden overflow-y-auto fixed right-0 left-0 top-4 inset-0 z-50 grid\">\n  <div class=\"relative px-4 w-full max-w-6xl h-full md:h-auto\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           PRESTAMO Nº {{prestamo.id}}\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n      <div class=\"flex w-full\">\n\n        <form\n          autocomplete=\"off\"\n          [formGroup]=\"prestamoForm\"\n          (ngSubmit)=\"save()\"\n          class=\"w-full md:w-1/2\"\n        >\n          <div class=\"my-4 relative p-6 flex flex-wrap\">\n            <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n              <app-input\n                [inputForm]=\"prestamoForm\"\n                inputLabel=\"INICIO PRESTAMO\"\n                inputType=\"date\"\n                inputFormName=\"fechaInicio\"\n                formControlName=\"fechaInicio\"\n                [inputMax]=\"prestamoForm.value.FechaFinal\"\n                [value]=\"prestamoForm.value.fechaInicio\"\n                (inputEvent)=\"calculateCostoTotal($event)\">\n              </app-input>\n            </div>\n\n            <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n              <app-input\n                [inputForm]=\"prestamoForm\"\n                inputLabel=\"FINAL del PRESTAMO\"\n                inputType=\"date\"\n                inputFormName=\"fechaFinal\"\n                formControlName=\"fechaFinal\"\n                [inputMin]=\"prestamoForm.value.fechaInicio\"\n                (inputEvent)=\"calculateCostoTotal()\"\n                [value]=\"prestamoForm.value.fechaFinal\">\n              </app-input>\n            </div>\n          </div>\n\n        <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n          <button\n            class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n            (click)=\"closeModal()\"\n            type=\"button\"\n          >\n            Cancelar\n          </button>\n          <button\n            [disabled]=\"!prestamoForm.valid || loading\"\n            class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n          </button>\n        </div>\n\n        </form>\n\n        <div class=\"w-full md:w-1/2 my-4 relative p-6\">\n          <div>\n            <p> Cantidad de dias: {{this.diasPrestamo}}</p>\n            <p> Prestamo total: Bol. {{this.prestamo.costoPrestamo}}</p>\n            <p> Interes al finalizar el plazo: Bol. {{(this.costoTotal - this.prestamo.costoPrestamo).toFixed(1)}}</p>\n            <p> Total a pagar al finalizar el plazo: Bol. {{this.costoTotal}}</p>\n          </div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='prestamoEditModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n";
+      __webpack_exports__["default"] = "\n<div *ngIf=\"modal.visible&&modal.modalName==='prestamoEditModal'\" class=\"justify-center items-center overflow-x-hidden overflow-y-auto fixed right-0 left-0 top-4 inset-0 z-50 grid\">\n  <div class=\"relative px-4 w-full max-w-6xl h-full md:h-auto\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           PRESTAMO Nº {{prestamo.id}}\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n      <div class=\"flex w-full\">\n\n        <form\n          autocomplete=\"off\"\n          [formGroup]=\"prestamoForm\"\n          (ngSubmit)=\"save()\"\n          class=\"w-full md:w-1/2\"\n        >\n          <div class=\"my-4 relative p-6 flex flex-wrap\">\n            <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n              <app-input\n                [inputForm]=\"prestamoForm\"\n                inputLabel=\"INICIO PRESTAMO\"\n                inputType=\"date\"\n                inputFormName=\"fechaInicio\"\n                formControlName=\"fechaInicio\"\n                [inputMax]=\"prestamoForm.value.FechaFinal\"\n                (inputEvent)=\"calculateCostoTotal()\"\n                [value]=\"prestamoForm.value.fechaInicio\">\n              </app-input>\n            </div>\n\n            <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n              <app-input\n                [inputForm]=\"prestamoForm\"\n                inputLabel=\"FINAL del PRESTAMO\"\n                inputType=\"date\"\n                inputFormName=\"fechaFinal\"\n                formControlName=\"fechaFinal\"\n                [inputMin]=\"prestamoForm.value.fechaInicio\"\n                (inputEvent)=\"calculateCostoTotal()\"\n                [value]=\"prestamoForm.value.fechaFinal\">\n              </app-input>\n            </div>\n          </div>\n\n        <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n          <button\n            class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n            (click)=\"closeModal()\"\n            type=\"button\"\n          >\n            Cancelar\n          </button>\n          <button\n            [disabled]=\"!prestamoForm.valid || loading\"\n            class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n          </button>\n        </div>\n\n        </form>\n\n        <div class=\"w-full md:w-1/2 my-4 relative p-6\">\n          <div>\n            <p> Cantidad de dias: {{this.diasPrestamo}}</p>\n            <p> Prestamo total: Bol. {{this.prestamo.costoPrestamo}}</p>\n            <p> Interes al finalizar el plazo: Bol. {{(this.costoTotal - this.prestamo.costoPrestamo).toFixed(1)}}</p>\n            <p> Total a pagar al finalizar el plazo: Bol. {{this.costoTotal}}</p>\n          </div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='prestamoEditModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n";
       /***/
     },
 
@@ -3610,28 +3853,28 @@
         }, {
           key: "getPago",
           value: function getPago() {
-            var _this30 = this;
+            var _this35 = this;
 
             this.sub.add(this.pagoService.getById(this.pago.id).subscribe(function (pago) {
-              _this30.pago = pago;
+              _this35.pago = pago;
             }));
           }
         }, {
           key: "subscribePago",
           value: function subscribePago() {
-            var _this31 = this;
+            var _this36 = this;
 
             this.sub.add(this.pagoService.pago.subscribe(function (pago) {
-              _this31.pago = pago;
+              _this36.pago = pago;
             }));
           }
         }, {
           key: "subscribePrestamo",
           value: function subscribePrestamo() {
-            var _this32 = this;
+            var _this37 = this;
 
             this.sub.add(this.prestamoService.prestamo.subscribe(function (prestamo) {
-              _this32.prestamo = prestamo;
+              _this37.prestamo = prestamo;
             }));
           }
         }, {
@@ -3649,7 +3892,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this33 = this;
+            var _this38 = this;
 
             this.loading = true;
             var body = {
@@ -3659,27 +3902,27 @@
             };
             console.log(body);
             this.impresionService.postImpresion(body).subscribe(function (response) {
-              _this33.loading = false;
+              _this38.loading = false;
 
-              _this33.alertService.triggerMessage('Impresión registrada correctamente', 'success');
+              _this38.alertService.triggerMessage('Impresión registrada correctamente', 'success');
 
-              _this33.refreshImpresiones();
+              _this38.refreshImpresiones();
 
-              _this33.closeModal();
+              _this38.closeModal();
             }, function (error) {
-              _this33.loading = false;
+              _this38.loading = false;
 
-              _this33.alertService.triggerMessage(error.error.message, 'error');
+              _this38.alertService.triggerMessage(error.error.message, 'error');
             });
           }
         }, {
           key: "refreshImpresiones",
           value: function refreshImpresiones() {
-            var _this34 = this;
+            var _this39 = this;
 
             this.sub.add(this.impresionService.getByPrestamoId(this.prestamo.id).subscribe(function (impresiones) {
               if (impresiones) {
-                _this34.impresionService.impresiones.emit(impresiones);
+                _this39.impresionService.impresiones.emit(impresiones);
               }
             }));
           }

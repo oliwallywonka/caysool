@@ -18,6 +18,7 @@
         <app-modal-impresion-recibo></app-modal-impresion-recibo>
         <app-modal-impresion-contrato></app-modal-impresion-contrato>
         <app-modal-edit-prestamo></app-modal-edit-prestamo>
+        <app-modal-delete-pago></app-modal-delete-pago>
       </div>
       <div class="w-full ">
         <div class="flex flex-col pt-4 items-baseline w-full">
@@ -169,6 +170,9 @@
                                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                   Amortiguado
                                 </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Acciones
+                                </th>
                             </tr>
                         </thead>
                         <tbody *ngIf="prestamo" >
@@ -198,7 +202,7 @@
                             <tr
                               *ngFor="let historial of historialPagosArray"
                               class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
-                              (click)="showImpresionPagoModal(historial)">
+                              >
                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ historial.fecha }}
                                 </td>
@@ -217,11 +221,21 @@
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                     Bol. {{ historial.amortiguado }}
                                 </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  <a
+                                    (click)="showImpresionPagoModal(historial)"
+                                    class="p-2 text-blue-600 dark:text-blue-500 hover:underline">
+                                    Imprimir</a>
+                                  <a
+                                    (click)="showDeletePagoModal(historial)"
+                                    class="p-2 text-red-600 dark:text-red-500 hover:underline">
+                                    Eliminar</a>
+                                </td>
                             </tr>
                             <tr
                               *ngFor="let historial of historialImpresionesArray"
                               class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
-                              (click)="showImpresionPagoModal(historial)">
+                              >
                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ historial.fecha }}
                                 </td>

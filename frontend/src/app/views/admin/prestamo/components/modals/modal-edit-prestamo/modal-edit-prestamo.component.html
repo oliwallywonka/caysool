@@ -35,8 +35,8 @@
                 inputFormName="fechaInicio"
                 formControlName="fechaInicio"
                 [inputMax]="prestamoForm.value.FechaFinal"
-                [value]="prestamoForm.value.fechaInicio"
-                (inputEvent)="calculateCostoTotal($event)">
+                (inputEvent)="calculateCostoTotal()"
+                [value]="prestamoForm.value.fechaInicio">
               </app-input>
             </div>
 

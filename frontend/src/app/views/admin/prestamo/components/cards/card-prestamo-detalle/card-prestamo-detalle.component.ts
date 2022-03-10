@@ -58,10 +58,10 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
   }
 
   calculateDiasRestantes() {
-    const diaInicio = moment(this.prestamo.fechaInicio);
-    const diaFinal = moment(this.prestamo.fechaFinal);
+    const diaInicio = moment(this.prestamo.fechaInicio).startOf('day');
+    const diaFinal = moment(this.prestamo.fechaFinal).endOf('day');
     this.diasRestantes = moment.duration(diaFinal.diff(diaInicio)).asDays();
-    this.diasRestantes = +this.diasRestantes.toFixed(1);
+    this.diasRestantes = +this.diasRestantes.toFixed(1) ;
   }
 
   getPrestamoById() {
@@ -134,7 +134,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
         operacion: pago.tipoPago === 'PAGO'? 'PAGO' : pago.tipoPago === 'INTERES'? 'PAGO INTERES': 'PAGO AMORTIZACION',
         cargo: pago.tipoPago === 'AMORTIZACION'? 0.00 : pago.costoPago,
         comision: pago.costoAdministracion,
-        cargoExtra: pago.costoAdministracion,
+        cargoExtra: pago.costoPiso,
         amortiguado: pago.tipoPago === 'AMORTIZACION'? pago.costoPago: 0.00,
         costoPorCobrar2 : costoPorCobrar.toFixed(1),
         ...pago
@@ -148,6 +148,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
       this.impresionService.getByPrestamoId(+this.prestamoId).subscribe(
         impresiones => {
           this.impresiones = impresiones;
+          this.setHistorialImpresiones();
         }
       )
     )
@@ -225,6 +226,13 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
       this.pagoService.pago.emit(pago);
       this.prestamoService.prestamo.emit(this.prestamo);
     }
+  }
+
+  showDeletePagoModal(pago) {
+    this.modal.modalName = 'deletePagoModal';
+    this.modal.visible = true;
+    this.pagoService.pago.emit(pago);
+    this.prestamoService.prestamo.emit(this.prestamo);
   }
 
   showImpresionContratoModal() {

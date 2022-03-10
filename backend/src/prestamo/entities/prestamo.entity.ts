@@ -19,6 +19,7 @@ import {
 } from 'typeorm';
 
 import moment = require('moment');
+import { Transform } from 'class-transformer';
 @Entity()
 export class Prestamo extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -33,13 +34,13 @@ export class Prestamo extends BaseEntity {
   @OneToMany(() => Inventario, (inventario) => inventario.prestamo)
   inventario: Inventario[];
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   fechaInicio: string;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   fechaLimite: string;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   fechaFinal: string;
 
   @Index()

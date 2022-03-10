@@ -5,6 +5,7 @@
       <h3 class="text-xl font-bold leading-none text-gray-500 dark:text-white">
         Historial
       </h3>
+      <app-modal-historial-detalle></app-modal-historial-detalle>
     </div>
     <div class="flex flex-col">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -30,17 +31,14 @@
                       </thead>
                       <tbody *ngIf="response" >
                           <tr
+                            class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
                             *ngFor="let historial of response.items"
-                            class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150"
-                            [popper]="hi"
-                            [popperTrigger]="'click'"
-                            [popperPlacement]="'top'"
-                            [popperPositionFixed]="true">
+                            (click)="showHistorialModal(historial)">
                             <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ historial.createdAt | date:'medium' }}
                             </td>
                             <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                              {{ historial.user.ci }}
+                              {{ historial.user.name }}
                             </td>
                             <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                 {{ historial.action }}
@@ -48,10 +46,6 @@
                             <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                 {{ historial.auditTable }}
                             </td>
-                            <popper-content #hi>
-                              <p class="bold">{{ historial.previousData | json }}</p>
-                              <p class="bold">{{ historial.actualData | json }}</p>
-                            </popper-content>
                           </tr>
 
                       </tbody>
@@ -59,7 +53,7 @@
               </div>
           </div>
       </div>
-  </div>
+    </div>
 </div>
 
 <app-pagination

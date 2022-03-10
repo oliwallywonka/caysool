@@ -39,8 +39,9 @@ export class PagoController {
     return this.pagoService.update(+id, updatePagoDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pagoService.remove(+id);
+  remove(@Req() req, @Param('id') id: string) {
+    return this.pagoService.remove(+id, req.user);
   }
 }

@@ -53,7 +53,7 @@ export class InformationFormComponent implements OnInit, OnDestroy {
     direction: ['',
       [
         RxwebValidators.maxLength({
-          value: 45,
+          value: 200,
           message: this.errorMessages.maxLenght,
         }),
       ],

@@ -67,8 +67,8 @@ export class CardHistorialListComponent implements OnInit, OnDestroy {
     this.historialService.historial.emit(historial);
   }
 
-  openCerrarHistorialModal(historial: Historial) {
-    this.modalService.modal.modalName = 'cierreHistorialModal';
+  showHistorialModal(historial: Historial) {
+    this.modalService.modal.modalName = 'historialModal';
     this.modalService.modal.visible = true;
     this.historialService.historial.emit(historial);
   }

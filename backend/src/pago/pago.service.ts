@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { create } from 'domain';
 import { AuditService } from 'src/audit/audit.service';
+import { Audit } from 'src/audit/entities/audit.entity';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 import { CreatePagoDto } from './dto/create-pago.dto';
 import { UpdatePagoDto } from './dto/update-pago.dto';
@@ -48,8 +48,27 @@ export class PagoService {
     return `This action updates a #${id} pago`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pago`;
+  async remove(id: number, user) {
+    const pago = await Pago.createQueryBuilder('pago')
+      .leftJoinAndSelect('pago.prestamo', 'prestamo')
+      .where('pago.id = :id', { id })
+      .getOne();
+    const prevPago = { ...pago };
+    if (!pago) throw new BadRequestException({ message: 'Pago no encontrado' });
+    const prestamo = await Prestamo.findOne(pago.prestamo.id);
+    if (!prestamo)
+      throw new BadRequestException({ message: 'Prestamo no encontrado' });
+    await pago.remove();
+    await prestamo.calculateCostoCancelado();
+    await prestamo.save();
+    await this.auditService.audit({
+      action: `Se eliminó el registro Nº ${prevPago.id}`,
+      auditTable: 'PAGOS',
+      previusData: { ...prevPago, prestamo: prevPago.prestamo.id },
+      actualData: {},
+      user: user,
+    });
+    return { message: 'Pago eliminado exitosamente' };
   }
 
   async getPagosByDate({ from = '', to = '' }) {

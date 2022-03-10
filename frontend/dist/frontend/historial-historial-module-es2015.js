@@ -111,8 +111,8 @@ let CardHistorialListComponent = class CardHistorialListComponent {
         this.router.navigate(['/admin/ingresos-salidas', historial.id]);
         this.historialService.historial.emit(historial);
     }
-    openCerrarHistorialModal(historial) {
-        this.modalService.modal.modalName = 'cierreHistorialModal';
+    showHistorialModal(historial) {
+        this.modalService.modal.modalName = 'historialModal';
         this.modalService.modal.visible = true;
         this.historialService.historial.emit(historial);
     }
@@ -228,6 +228,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _historial_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./historial.component */ "CxYK");
 /* harmony import */ var _components_cards_card_historial_list_card_historial_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/cards/card-historial-list/card-historial-list.component */ "ERfd");
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/shared.module */ "7PmN");
+/* harmony import */ var _components_modals_modal_historial_detalle_modal_historial_detalle_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/modals/modal-historial-detalle/modal-historial-detalle.component */ "k112");
+
 
 
 
@@ -238,7 +240,7 @@ let HistorialModule = class HistorialModule {
 };
 HistorialModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_historial_component__WEBPACK_IMPORTED_MODULE_3__["HistorialComponent"], _components_cards_card_historial_list_card_historial_list_component__WEBPACK_IMPORTED_MODULE_4__["CardHistorialListComponent"]],
+        declarations: [_historial_component__WEBPACK_IMPORTED_MODULE_3__["HistorialComponent"], _components_cards_card_historial_list_card_historial_list_component__WEBPACK_IMPORTED_MODULE_4__["CardHistorialListComponent"], _components_modals_modal_historial_detalle_modal_historial_detalle_component__WEBPACK_IMPORTED_MODULE_6__["ModalHistorialDetalleComponent"]],
         imports: [
             _shared_shared_module__WEBPACK_IMPORTED_MODULE_5__["SharedModule"],
             _historial_routing_module__WEBPACK_IMPORTED_MODULE_2__["HistorialRoutingModule"]
@@ -259,7 +261,7 @@ HistorialModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded\">\n  <div class=\"p-4 w-full \">\n\n    <div class=\"items-center mb-4 ml-2 mt-4 flex justify-between\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-500 dark:text-white\">\n        Historial\n      </h3>\n    </div>\n    <div class=\"flex flex-col\">\n      <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n          <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n              <div class=\"overflow-hidden sm:rounded-lg\">\n                  <table class=\"min-w-full\">\n                      <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                          <tr>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Fecha\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Usuario\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Operación\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Tabla\n                              </th>\n\n                          </tr>\n                      </thead>\n                      <tbody *ngIf=\"response\" >\n                          <tr\n                            *ngFor=\"let historial of response.items\"\n                            class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150\"\n                            [popper]=\"hi\"\n                            [popperTrigger]=\"'click'\"\n                            [popperPlacement]=\"'top'\"\n                            [popperPositionFixed]=\"true\">\n                            <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                {{ historial.createdAt | date:'medium' }}\n                            </td>\n                            <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                              {{ historial.user.ci }}\n                            </td>\n                            <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                {{ historial.action }}\n                            </td>\n                            <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                {{ historial.auditTable }}\n                            </td>\n                            <popper-content #hi>\n                              <p class=\"bold\">{{ historial.previousData | json }}</p>\n                              <p class=\"bold\">{{ historial.actualData | json }}</p>\n                            </popper-content>\n                          </tr>\n\n                      </tbody>\n                  </table>\n              </div>\n          </div>\n      </div>\n  </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponse($event)\"\n></app-pagination>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded\">\n  <div class=\"p-4 w-full \">\n\n    <div class=\"items-center mb-4 ml-2 mt-4 flex justify-between\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-500 dark:text-white\">\n        Historial\n      </h3>\n      <app-modal-historial-detalle></app-modal-historial-detalle>\n    </div>\n    <div class=\"flex flex-col\">\n      <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n          <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n              <div class=\"overflow-hidden sm:rounded-lg\">\n                  <table class=\"min-w-full\">\n                      <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                          <tr>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Fecha\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Usuario\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Operación\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Tabla\n                              </th>\n\n                          </tr>\n                      </thead>\n                      <tbody *ngIf=\"response\" >\n                          <tr\n                            class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                            *ngFor=\"let historial of response.items\"\n                            (click)=\"showHistorialModal(historial)\">\n                            <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                {{ historial.createdAt | date:'medium' }}\n                            </td>\n                            <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                              {{ historial.user.name }}\n                            </td>\n                            <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                {{ historial.action }}\n                            </td>\n                            <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                {{ historial.auditTable }}\n                            </td>\n                          </tr>\n\n                      </tbody>\n                  </table>\n              </div>\n          </div>\n      </div>\n    </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponse($event)\"\n></app-pagination>\n");
 
 /***/ }),
 
@@ -315,6 +317,95 @@ HistorialService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 ], HistorialService);
 
 
+
+/***/ }),
+
+/***/ "k112":
+/*!**********************************************************************************************************************!*\
+  !*** ./src/app/views/admin/historial/components/modals/modal-historial-detalle/modal-historial-detalle.component.ts ***!
+  \**********************************************************************************************************************/
+/*! exports provided: ModalHistorialDetalleComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalHistorialDetalleComponent", function() { return ModalHistorialDetalleComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_modal_historial_detalle_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./modal-historial-detalle.component.html */ "nKK9");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/core/services/modal.service */ "S0jo");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+/* harmony import */ var src_app_core_services_historial_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/historial.service */ "i3MN");
+
+
+
+
+
+
+
+let ModalHistorialDetalleComponent = class ModalHistorialDetalleComponent {
+    constructor(historialService, modalService) {
+        this.historialService = historialService;
+        this.modalService = modalService;
+        this.publicUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].publicUrl;
+        this.loading = false;
+        this.modal = this.modalService.modal;
+    }
+    ngOnInit() {
+        this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subscription"]();
+        this.previousDataKeys = null;
+        this.previusDataValues = null;
+        this.actualDataKeys = null;
+        this.actualDataValues = null;
+        this.historial = null;
+        this.subscribeHistorial();
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+    subscribeHistorial() {
+        this.sub.add(this.historialService.historial.subscribe((historial) => {
+            this.historial = historial;
+            if (historial) {
+                this.previousDataKeys = Object.keys(this.historial.previousData);
+                this.previusDataValues = Object.values(this.historial.previousData);
+                this.actualDataKeys = Object.keys(this.historial.actualData);
+                this.actualDataValues = Object.values(this.historial.actualData);
+            }
+        }));
+    }
+    closeModal() {
+        this.modal.visible = false;
+        this.modal.modalName = '';
+        this.historialService.historial.emit(null);
+    }
+};
+ModalHistorialDetalleComponent.ctorParameters = () => [
+    { type: src_app_core_services_historial_service__WEBPACK_IMPORTED_MODULE_6__["HistorialService"] },
+    { type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_4__["ModalService"] }
+];
+ModalHistorialDetalleComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-modal-historial-detalle',
+        template: _raw_loader_modal_historial_detalle_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
+    })
+], ModalHistorialDetalleComponent);
+
+
+
+/***/ }),
+
+/***/ "nKK9":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/historial/components/modals/modal-historial-detalle/modal-historial-detalle.component.html ***!
+  \**************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"modal.visible&&modal.modalName==='historialModal'\" class=\"justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none\">\n  <div class=\"relative w-auto my-6 mx-auto min-w-580-px max-w-580-px\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           DATOS\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n\n        <div class=\"my-4 relative p-6 flex flex-wrap\">\n          <div class=\"w-full px-4 mb-2\">\n            <p> DATOS INICIALES </p>\n            <div class=\"flex flex-col\">\n              <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n                  <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                      <div class=\"overflow-hidden sm:rounded-lg\">\n                          <table class=\"min-w-full\">\n                              <thead *ngIf=\"previousDataKeys\"  class=\"bg-gray-50 dark:bg-gray-700\">\n                                  <tr>\n                                      <th\n                                        *ngFor=\"let key of previousDataKeys\"\n                                        scope=\"col\"\n                                        class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                        {{ key }}\n                                      </th>\n\n                                  </tr>\n                              </thead>\n                              <tbody *ngIf=\"previusDataValues\" >\n                                  <tr class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \">\n                                    <td\n                                      *ngFor=\"let key of previusDataValues\"\n                                      class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                        {{ key }}\n                                    </td>\n                                  </tr>\n\n                              </tbody>\n                          </table>\n                      </div>\n                  </div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"w-full px-4 mb-2\">\n            <p> DATOS ACTUALES</p>\n            <div class=\"flex flex-col\">\n              <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n                  <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                      <div class=\"overflow-hidden sm:rounded-lg\">\n                          <table class=\"min-w-full\">\n                              <thead *ngIf=\"actualDataKeys\"  class=\"bg-gray-50 dark:bg-gray-700\">\n                                  <tr>\n                                      <th\n                                        *ngFor=\"let key of actualDataKeys\"\n                                        scope=\"col\"\n                                        class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                        {{ key }}\n                                      </th>\n\n                                  </tr>\n                              </thead>\n                              <tbody *ngIf=\"actualDataValues\" >\n                                  <tr class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \">\n                                    <td\n                                      *ngFor=\"let key of actualDataValues\"\n                                      class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                        {{ key }}\n                                    </td>\n                                  </tr>\n\n                              </tbody>\n                          </table>\n                      </div>\n                  </div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n\n      <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n        <button\n          class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          Cerrar\n        </button>\n      </div>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='historialModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n");
 
 /***/ })
 

@@ -30,7 +30,8 @@ services:
       - /backend/node_modules
     restart: always
     environment:
-      - TIME_ZONE="America/La_Paz"
+      - TIME_ZONE=America/La_Paz
+      - TZ=America/La_Paz
     links:
       - mysql
 
@@ -44,6 +45,7 @@ services:
       - MYSQL_DATABASE=cobros
       - TIME_ZONE=America/La_Paz
       - TZ=America/La_Paz
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-time-zone=-04:00']
     ports:
       - 3309:3306
     volumes:

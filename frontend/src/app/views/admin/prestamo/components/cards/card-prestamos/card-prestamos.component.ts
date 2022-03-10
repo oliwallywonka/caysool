@@ -47,6 +47,7 @@ export class CardPrestamosComponent implements OnInit, OnDestroy {
   getPrestamos(force = false) {
     this.prestamoService.getPrestamos({ force, estadoPrestamo: this.estado}).subscribe(
       (response) => {
+        console.log(response);
         this.response = response;
         this.loading = false;
       }

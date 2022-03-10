@@ -10,8 +10,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { InventarioService } from 'src/inventario/inventario.service';
 import moment = require('moment');
 import { Connection } from 'typeorm';
-import { Inventario } from 'src/inventario/entities/inventario.entity';
-import { CreateInventarioDto } from 'src/inventario/dto/create-inventario.dto';
 @Injectable()
 export class PrestamoService {
   constructor(
@@ -55,8 +53,8 @@ export class PrestamoService {
     return await paginate<Prestamo>(prestamos, options);
   }
 
-  findOne(id: number) {
-    const prestamo = Prestamo.createQueryBuilder('prestamo')
+  async findOne(id: number) {
+    const prestamo = await Prestamo.createQueryBuilder('prestamo')
       .leftJoinAndSelect('prestamo.inventario', 'inventario')
       .leftJoinAndSelect('prestamo.user', 'user')
       .leftJoinAndSelect('prestamo.client', 'client')
