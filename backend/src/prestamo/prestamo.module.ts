@@ -5,6 +5,7 @@ import { AuditModule } from 'src/audit/audit.module';
 import { InventarioModule } from 'src/inventario/inventario.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Inventario } from 'src/inventario/entities/inventario.entity';
+import { AperturaModule } from 'src/apertura/apertura.module';
 @Module({
   controllers: [PrestamoController],
   providers: [PrestamoService],
@@ -12,6 +13,7 @@ import { Inventario } from 'src/inventario/entities/inventario.entity';
     TypeOrmModule.forFeature([Inventario]),
     AuditModule,
     InventarioModule,
+    AperturaModule,
   ],
   exports: [PrestamoService],
 })

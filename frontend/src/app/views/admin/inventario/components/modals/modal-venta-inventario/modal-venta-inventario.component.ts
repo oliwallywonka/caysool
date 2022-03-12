@@ -71,7 +71,7 @@ export class ModalVentaInventarioComponent implements OnInit {
       precioVenta: +this.inventarioForm.value.precioVenta
     }
     this.sub.add(
-      this.inventarioService.patchInventario(body, this.inventario.id).subscribe(
+      this.inventarioService.ventaInventario(body, this.inventario.id).subscribe(
         (response) => {
           this.loading = false;
           this.alertService.triggerMessage('Inventario Vendio exitosamente', 'success');

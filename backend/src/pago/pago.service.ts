@@ -1,6 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { AperturaService } from 'src/apertura/apertura.service';
 import { AuditService } from 'src/audit/audit.service';
 import { Audit } from 'src/audit/entities/audit.entity';
+import { Movimiento } from 'src/movimiento/entities/movimiento.entity';
+import { MovimientoService } from 'src/movimiento/movimiento.service';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 import { CreatePagoDto } from './dto/create-pago.dto';
 import { UpdatePagoDto } from './dto/update-pago.dto';
@@ -8,12 +11,30 @@ import { Pago } from './entities/pago.entity';
 
 @Injectable()
 export class PagoService {
-  constructor(private auditService: AuditService) {}
+  constructor(
+    private auditService: AuditService,
+    private readonly movimientoService: MovimientoService,
+    private readonly aperturaService: AperturaService,
+  ) {}
 
   async create(createPagoDto: CreatePagoDto, user) {
     const prestamo = await Prestamo.findOne(createPagoDto.prestamo);
     if (!prestamo)
       throw new BadRequestException({ message: 'Prestamo no encontrado' });
+    const lastApertura = await this.aperturaService.getLastApertura();
+    const movimiento = await this.movimientoService.createWhitOutDto(
+      {
+        tipo: true,
+        concepto: `Ingreso por Pago del Prestamo Nº ${prestamo.id}`,
+        cantidad:
+          +createPagoDto.costoPago +
+          +createPagoDto.costoAdministracion +
+          +createPagoDto.costoPiso,
+        apertura: lastApertura.id,
+      },
+      user,
+    );
+    createPagoDto.movimiento = movimiento;
     const pago = Pago.create(createPagoDto);
     await pago.save();
     await prestamo.calculateCostoCancelado();
@@ -51,6 +72,7 @@ export class PagoService {
   async remove(id: number, user) {
     const pago = await Pago.createQueryBuilder('pago')
       .leftJoinAndSelect('pago.prestamo', 'prestamo')
+      .leftJoinAndSelect('pago.movimiento', 'movimiento')
       .where('pago.id = :id', { id })
       .getOne();
     const prevPago = { ...pago };
@@ -58,13 +80,23 @@ export class PagoService {
     const prestamo = await Prestamo.findOne(pago.prestamo.id);
     if (!prestamo)
       throw new BadRequestException({ message: 'Prestamo no encontrado' });
+    const movimiento = await Movimiento.findOne(pago.movimiento.id);
+    if (!movimiento)
+      throw new BadRequestException({
+        message: 'Movimiento de caja no encontrado',
+      });
     await pago.remove();
     await prestamo.calculateCostoCancelado();
     await prestamo.save();
+    await this.movimientoService.remove(pago.movimiento.id);
     await this.auditService.audit({
       action: `Se eliminó el registro Nº ${prevPago.id}`,
       auditTable: 'PAGOS',
-      previusData: { ...prevPago, prestamo: prevPago.prestamo.id },
+      previusData: {
+        ...prevPago,
+        prestamo: prevPago.prestamo.id,
+        movimiento: prevPago.movimiento.id,
+      },
       actualData: {},
       user: user,
     });

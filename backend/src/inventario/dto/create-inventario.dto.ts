@@ -5,11 +5,16 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { Movimiento } from 'src/movimiento/entities/movimiento.entity';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 export class CreateInventarioDto {
   @IsOptional()
   @IsInt()
   prestamo: Prestamo;
+
+  @IsOptional()
+  @IsInt()
+  movimiento: Movimiento;
 
   @IsOptional()
   @IsString()

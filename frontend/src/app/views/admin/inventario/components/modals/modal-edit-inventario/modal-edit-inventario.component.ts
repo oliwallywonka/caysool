@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormGroupExtension, RxFormBuilder, RxwebValidators } from '@rxweb/reactive-form-validators';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,8 @@ import { InventarioService } from 'src/app/core/services/inventario.service';
   ]
 })
 export class ModalEditInventarioComponent implements OnInit, OnDestroy {
-
+  @Input()
+  isPrestamo: boolean = false;
   sub: Subscription;
   loading: boolean = false;
   inventario: Inventario;
@@ -57,7 +58,12 @@ export class ModalEditInventarioComponent implements OnInit, OnDestroy {
     precioAvaluo: [''],
     costoCompra: ['',
       [
-        RxwebValidators.required({ message: this.errorMessages.required }),
+
+      ]
+    ],
+    costoPrestamo: ['',
+      [
+
       ]
     ],
     descripcion: ['',
@@ -176,16 +182,48 @@ export class ModalEditInventarioComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = new Subscription();
+    this.subscribeInventario();
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
+  subscribeInventario() {
+    this.sub.add(
+      this.inventarioService.inventario.subscribe(
+        (inventario) => {
+          this.inventario = inventario;
+          if (inventario) {
+            this.inventarioForm.controls['estado'].setValue(this.inventario.estado);
+            this.inventarioForm.controls['precioAvaluo'].setValue(this.inventario.precioAvaluo);
+            this.inventarioForm.controls['costoCompra'].setValue(this.inventario.costoCompra);
+            this.inventarioForm.controls['costoPrestamo'].setValue(this.inventario.costoPrestamo);
+            this.inventarioForm.controls['descripcion'].setValue(this.inventario.descripcion);
+            this.inventarioForm.controls['observacion'].setValue(this.inventario.observacion);
+            this.inventarioForm.controls['tipo'].setValue(this.inventario.tipo);
+            this.inventarioForm.controls['marca'].setValue(this.inventario.marca);
+            this.inventarioForm.controls['modelo'].setValue(this.inventario.modelo);
+            this.inventarioForm.controls['linea'].setValue(this.inventario.linea);
+            this.inventarioForm.controls['serie'].setValue(this.inventario.serie);
+            this.inventarioForm.controls['placa'].setValue(this.inventario.placa);
+            this.inventarioForm.controls['chasis'].setValue(this.inventario.chasis);
+            this.inventarioForm.controls['deuda'].setValue(this.inventario.deuda);
+            this.inventarioForm.controls['ruat'].setValue(this.inventario.ruat);
+            this.inventarioForm.controls['metal'].setValue(this.inventario.metal);
+            this.inventarioForm.controls['peso'].setValue(this.inventario.peso);
+            this.inventarioForm.controls['pureza'].setValue(this.inventario.pureza);
+          }
+        }
+      )
+    );
+  }
+
 
   closeModal() {
     this.modal.visible = false;
     this.modal.modalName = '';
+    this.inventarioService.inventario.emit(null);
   }
 
   refreshForm() {
@@ -201,11 +239,25 @@ export class ModalEditInventarioComponent implements OnInit, OnDestroy {
     const body: Inventario = {
       ...this.inventarioForm.value,
       precioAvaluo: +this.inventarioForm.value.precioAvaluo,
-      costoCompra: +this.inventarioForm.value.costoCompra
+      costoCompra: +this.inventarioForm.value.costoCompra,
+      costoPrestamo: +this.inventarioForm.value.costoPrestamo
     }
     console.log(body);
-    if (this.inventario) {
-
+    if (this.inventario && this.isPrestamo) {
+      this.sub.add(
+        this.inventarioService.patchInventario(body, this.inventario.id).subscribe(
+          (response) => {
+            this.alertService.triggerMessage('Inventario Editado Correctamente', 'success');
+            this.refreshInventarioById();
+            this.loading = false;
+            this.closeModal();
+          },
+          (error) => {
+            this.loading = false;
+            this.alertService.triggerMessage(error.error.message, 'error');
+          }
+        )
+      );
     }else {
       this.sub.add(
         this.inventarioService.postInventario(body).subscribe(
@@ -235,26 +287,13 @@ export class ModalEditInventarioComponent implements OnInit, OnDestroy {
     );
   }
 
-
-
-  calculateCostoTotal(event = '') {
-    /*this.costoPrestamo = 0;
-    this.diasPrestamo = 0;
-    this.costoTotal = 0;
-    const diaInicio = moment(this.prestamoForm.value.fechaInicio);
-    const diaFinal = moment(this.prestamoForm.value.fechaFinal);
-    const dias = moment.duration(diaFinal.diff(diaInicio)).asDays() + 1;
-    this.diasPrestamo = dias < 5 ? 5 : dias;
-    if (this.inventarioArray.length > 0) {
-      for (const inventario of this.inventarioArray) {
-        inventario.costoPrestamo = +inventario.costoPrestamo;
-        inventario.precioAvaluo = +inventario.precioAvaluo;
-        this.costoPrestamo += inventario.costoPrestamo;
-      }
-      this.costoTotal = +(this.costoPrestamo * (1 + 0.15 / 30) ** (dias < 5 ? 5 : dias)).toFixed(1);
-    }*/
+  refreshInventarioById() {
+    this.sub.add(
+      this.inventarioService.getInventarioById(this.inventario.id).subscribe(
+        (inventario) => {
+          this.inventarioService.inventario.emit(inventario);
+        }
+      )
+    );
   }
-
-
-
 }

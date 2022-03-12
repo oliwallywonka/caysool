@@ -72,6 +72,7 @@ export class NewPrestamoModalComponent implements OnInit, OnDestroy {
   });
 
   inventarioForm: FormGroup = this.fb.group({
+    estado: ['EMPENADO'],
     tipo: ['',
       [
         RxwebValidators.required({ message: this.errorMessages.required }),

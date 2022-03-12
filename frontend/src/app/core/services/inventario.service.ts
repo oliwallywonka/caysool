@@ -80,4 +80,10 @@ export class InventarioService {
       .set('x-access-token',sessionStorage.getItem('token')||'');
     return this.http.patch(`${this.baseUrl}/inventario/${id}`,body,{headers});
   }
+
+  ventaInventario(body,id):Observable<any>{
+    const headers = new HttpHeaders()
+      .set('x-access-token',sessionStorage.getItem('token')||'');
+    return this.http.patch(`${this.baseUrl}/inventario/venta/${id}`,body,{headers});
+  }
 }

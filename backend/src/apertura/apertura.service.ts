@@ -28,8 +28,8 @@ export class AperturaService {
       actualData: aperturaSaved,
       user: user,
     });
-    const movimiento: CreateMovimientoDto = {
-      apertura,
+    const movimiento = {
+      apertura: apertura.id,
       tipo: true,
       concepto: 'Apertura de caja',
       cantidad: aperturaSaved.montoApertura,
@@ -67,6 +67,16 @@ export class AperturaService {
       throw new BadRequestException({
         message: 'Apertura de caja no encontrada',
       });
+    return apertura;
+  }
+
+  async getLastApertura() {
+    const apertura = await Apertura.createQueryBuilder('apertura')
+      .where('apertura.estado = :estado', { estado: true })
+      .orderBy('apertura.id', 'DESC')
+      .getOne();
+    if (!apertura)
+      throw new BadRequestException({ message: 'La caja no esta aperturada ' });
     return apertura;
   }
 

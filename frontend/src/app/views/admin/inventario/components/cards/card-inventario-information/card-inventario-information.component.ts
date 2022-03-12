@@ -177,4 +177,10 @@ export class CardInventarioInformationComponent implements OnInit, OnDestroy {
     this.inventarioService.inventario.emit(this.inventario);
   }
 
+  openEditModal() {
+    this.modal.modalName = 'inventarioModal';
+    this.modal.visible = true;
+    this.inventarioService.inventario.emit(this.inventario);
+  }
+
 }

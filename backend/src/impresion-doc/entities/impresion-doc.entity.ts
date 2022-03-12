@@ -1,4 +1,5 @@
 import { Client } from 'src/client/entities/client.entity';
+import { Movimiento } from 'src/movimiento/entities/movimiento.entity';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
@@ -9,12 +10,18 @@ import {
   UpdateDateColumn,
   BaseEntity,
   ManyToOne,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
 export class ImpresionDoc extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToOne(() => Movimiento)
+  @JoinColumn()
+  movimiento: Movimiento;
 
   @ManyToOne(() => Prestamo, (prestamo) => prestamo.id)
   prestamo: Prestamo;

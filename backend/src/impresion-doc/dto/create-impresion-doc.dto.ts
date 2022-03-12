@@ -1,4 +1,11 @@
-import { IsInt, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { Movimiento } from 'src/movimiento/entities/movimiento.entity';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 
 export class CreateImpresionDocDto {
@@ -9,6 +16,10 @@ export class CreateImpresionDocDto {
   @IsNotEmpty()
   @IsString()
   tipoDocumento: string;
+
+  @IsOptional()
+  @IsInt()
+  movimiento: Movimiento;
 
   @IsNotEmpty()
   @IsNumber()

@@ -1,3 +1,4 @@
+import { Movimiento } from 'src/movimiento/entities/movimiento.entity';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 import {
   Entity,
@@ -9,14 +10,18 @@ import {
   ManyToOne,
   BeforeUpdate,
   BeforeInsert,
-  AfterUpdate,
-  AfterInsert,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
 export class Pago extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToOne(() => Movimiento)
+  @JoinColumn()
+  movimiento: Movimiento;
 
   @ManyToOne(() => Prestamo, (prestamo) => prestamo.id)
   prestamo: Prestamo;

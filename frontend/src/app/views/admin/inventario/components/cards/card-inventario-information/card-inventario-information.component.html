@@ -16,6 +16,7 @@
         <app-modal-delete-picture></app-modal-delete-picture>
         <app-modal-venta-inventario></app-modal-venta-inventario>
         <app-modal-devolver-inventario></app-modal-devolver-inventario>
+        <app-modal-edit-inventario [isPrestamo]="true"></app-modal-edit-inventario>
       </div>
       <div class="w-full ">
         <div class="flex flex-col pt-4 items-baseline w-full">
@@ -78,6 +79,19 @@
               *ngIf="inventario.estado==='DEVUELTO'"
               [inventario]="inventario"
             ></app-pdf-devolucion>
+            <button
+              [popper]="editarItem"
+              [popperTrigger]="'hover'"
+              [popperPlacement]="'top'"
+              [popperPositionFixed]="true"
+              class="text-green-600 text-3xl rounded-full p-1 shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              (click)="openEditModal()"
+              >
+              <i class="fas fa-edit"></i>
+            </button>
+            <popper-content #editarItem>
+              <p class="bold">Editar Item</p>
+            </popper-content>
         </div>
 
         <div class="flex items-center space-x-4 px-4 ">

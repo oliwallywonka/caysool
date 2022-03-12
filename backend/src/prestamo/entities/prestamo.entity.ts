@@ -47,6 +47,9 @@ export class Prestamo extends BaseEntity {
   @Column({ type: 'varchar', length: 10, default: 'ACTIVO' })
   estado: string;
 
+  @Column({ type: 'int', default: 0 })
+  inventarioCantidad: number;
+
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   costoImpresion: number;
 
@@ -67,6 +70,9 @@ export class Prestamo extends BaseEntity {
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   costoTotal: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
+  costoVenta: number;
 
   @Column({ default: true })
   isActive: boolean;
@@ -160,5 +166,34 @@ export class Prestamo extends BaseEntity {
       .where('impresion.prestamo = :prestamo', { prestamo: this.id })
       .getRawOne();
     this.costoImpresion = +costoImpresion.costo;
+  }
+
+  async calculateCostoVenta() {
+    const inventarioPrecioVenta = await Inventario.createQueryBuilder(
+      'inventario',
+    )
+      .select('SUM(inventario.precioVenta)', 'precio')
+      .where('inventario.prestamo = :prestamo', { prestamo: this.id })
+      .getRawOne();
+    const inventarioCantidadVendida = await Inventario.createQueryBuilder(
+      'inventario',
+    )
+      .select('COUNT(inventario.id)', 'cantidad')
+      .where('inventario.prestamo = :prestamo', { prestamo: this.id })
+      .andWhere('inventario.estado = :estado', { estado: 'VENDIDO' })
+      .getRawOne();
+
+    this.costoVenta = +inventarioPrecioVenta.precio;
+    if (+inventarioCantidadVendida.cantidad === +this.inventarioCantidad) {
+      this.estado = 'REMATADO';
+    }
+  }
+
+  async calculateCantidadInventario() {
+    const inventarioCantidad = await Inventario.createQueryBuilder('inventario')
+      .select('COUNT(inventario.id)', 'cantidad')
+      .where('inventario.prestamo = :prestamo', { prestamo: this.id })
+      .getRawOne();
+    this.inventarioCantidad = +inventarioCantidad.cantidad;
   }
 }

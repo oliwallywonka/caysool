@@ -73,6 +73,20 @@ export class InventarioController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Patch('venta/:id')
+  ventaInventario(
+    @Req() req,
+    @Param('id') id: string,
+    @Body() updateInventarioDto: UpdateInventarioDto,
+  ) {
+    return this.inventarioService.ventaInventario(
+      +id,
+      updateInventarioDto,
+      req.user,
+    );
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.inventarioService.remove(+id);

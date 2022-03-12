@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 
 import moment = require('moment');
+import { BadRequestException } from '@nestjs/common';
 @Entity()
 export class Apertura extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -30,6 +31,9 @@ export class Apertura extends BaseEntity {
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   montoApertura: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
+  montoActual: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   montoCierre: number;
@@ -65,5 +69,23 @@ export class Apertura extends BaseEntity {
     this.montoCierre = montoCierre;
     this.fechaCierre = today;
     this.estado = false;
+  }
+
+  async calculateMontoActual() {
+    let montoActual = 0;
+    const ingresos = await Movimiento.createQueryBuilder('movimiento')
+      .select('SUM(movimiento.cantidad)', 'cantidad')
+      .where('movimiento.apertura = :aperturaId', { aperturaId: this.id })
+      .andWhere('movimiento.tipo = :tipo', { tipo: true })
+      .getRawOne();
+    const salidas = await Movimiento.createQueryBuilder('movimiento')
+      .select('SUM(movimiento.cantidad)', 'cantidad')
+      .where('movimiento.apertura = :aperturaId', { aperturaId: this.id })
+      .andWhere('movimiento.tipo = :tipo', { tipo: false })
+      .getRawOne();
+
+    montoActual += +ingresos.cantidad;
+    montoActual -= +salidas.cantidad;
+    this.montoActual = montoActual;
   }
 }

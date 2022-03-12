@@ -8,5 +8,6 @@ import { MovimientoModule } from 'src/movimiento/movimiento.module';
   controllers: [AperturaController],
   providers: [AperturaService],
   imports: [AuditModule, MovimientoModule],
+  exports: [AperturaService],
 })
 export class AperturaModule {}

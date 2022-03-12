@@ -139,6 +139,14 @@
               headers: headers
             });
           }
+        }, {
+          key: "ventaInventario",
+          value: function ventaInventario(body, id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.http.patch("".concat(this.baseUrl, "/inventario/venta/").concat(id), body, {
+              headers: headers
+            });
+          }
         }]);
 
         return InventarioService;

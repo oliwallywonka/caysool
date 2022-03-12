@@ -1,5 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { AperturaService } from 'src/apertura/apertura.service';
 import { AuditService } from 'src/audit/audit.service';
+import { MovimientoService } from 'src/movimiento/movimiento.service';
 import { Prestamo } from 'src/prestamo/entities/prestamo.entity';
 import { CreateImpresionDocDto } from './dto/create-impresion-doc.dto';
 import { UpdateImpresionDocDto } from './dto/update-impresion-doc.dto';
@@ -7,16 +9,32 @@ import { ImpresionDoc } from './entities/impresion-doc.entity';
 
 @Injectable()
 export class ImpresionDocService {
-  constructor(private readonly auditService: AuditService) {}
+  constructor(
+    private readonly auditService: AuditService,
+    private readonly movimientoService: MovimientoService,
+    private readonly aperturaService: AperturaService,
+  ) {}
 
   async create(createImpresionDocDto: CreateImpresionDocDto, user) {
     const prestamo = await this.findPrestamoById(
       createImpresionDocDto.prestamo,
     );
+    const lastApertura = await this.aperturaService.getLastApertura();
+    const movimiento = await this.movimientoService.createWhitOutDto(
+      {
+        tipo: true,
+        concepto: `Ingreso por Reimpresíon del prestamo Nº ${prestamo.id}`,
+        cantidad: createImpresionDocDto.costoImpresion,
+        apertura: lastApertura.id,
+      },
+      user,
+    );
+    createImpresionDocDto.movimiento = movimiento;
     const impresion = ImpresionDoc.create(createImpresionDocDto);
     await impresion.save();
     await prestamo.calculateCostoImpresion();
     await prestamo.save();
+
     this.auditService.audit({
       action: 'Se creo un nuevo registro',
       auditTable: 'IMPRESIONES',

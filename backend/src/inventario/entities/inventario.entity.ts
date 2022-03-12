@@ -11,14 +11,21 @@ import {
   OneToMany,
   BeforeInsert,
   BeforeUpdate,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import moment = require('moment');
+import { Movimiento } from 'src/movimiento/entities/movimiento.entity';
 
 @Entity()
 export class Inventario extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToOne(() => Movimiento)
+  @JoinColumn()
+  movimiento: Movimiento;
 
   @ManyToOne(() => Prestamo, (prestamo) => prestamo.id)
   prestamo: Prestamo;

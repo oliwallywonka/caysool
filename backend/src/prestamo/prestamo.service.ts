@@ -10,12 +10,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { InventarioService } from 'src/inventario/inventario.service';
 import moment = require('moment');
 import { Connection } from 'typeorm';
+import { AperturaService } from 'src/apertura/apertura.service';
 @Injectable()
 export class PrestamoService {
   constructor(
     private connection: Connection,
     private readonly auditService: AuditService,
     private readonly inventarioService: InventarioService,
+    private readonly aperturaService: AperturaService,
     private sheduleRegistry: SchedulerRegistry,
   ) {
     //this.addCronJob('fas', '12');
@@ -23,7 +25,18 @@ export class PrestamoService {
   }
 
   async create(createPrestamoDto: CreatePrestamoDto, user) {
+    const apertura = await this.aperturaService.getLastApertura();
     const inventario = [...createPrestamoDto.inventario];
+    let costoInventario = 0;
+    for (const i of inventario) {
+      costoInventario += +i.costoPrestamo;
+    }
+    console.log(costoInventario);
+    if (+apertura.montoActual < +costoInventario) {
+      throw new BadRequestException({
+        message: 'La cantidad ingresada exede a la cantidad actual en caja',
+      });
+    }
     createPrestamoDto.inventario = null;
     const prestamo = Prestamo.create(createPrestamoDto);
     const prestamoSaved = await Prestamo.save(prestamo);

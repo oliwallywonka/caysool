@@ -68,6 +68,11 @@ let InventarioService = class InventarioService {
             .set('x-access-token', sessionStorage.getItem('token') || '');
         return this.http.patch(`${this.baseUrl}/inventario/${id}`, body, { headers });
     }
+    ventaInventario(body, id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]()
+            .set('x-access-token', sessionStorage.getItem('token') || '');
+        return this.http.patch(`${this.baseUrl}/inventario/venta/${id}`, body, { headers });
+    }
 };
 InventarioService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

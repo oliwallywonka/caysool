@@ -164,6 +164,7 @@ let NewPrestamoModalComponent = class NewPrestamoModalComponent {
             inventario: [''],
         });
         this.inventarioForm = this.fb.group({
+            estado: ['EMPENADO'],
             tipo: ['',
                 [
                     _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),

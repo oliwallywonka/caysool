@@ -44,20 +44,24 @@ export class MovimientoController {
     return this.movimientoService.findByAperturaId(+aperturaId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   updateEstadoApertura(
+    @Req() req,
     @Param('id') id: string,
     @Body() updateMovimientoDto: UpdateMovimientoDto,
   ) {
-    return this.movimientoService.update(+id, updateMovimientoDto);
+    return this.movimientoService.update(+id, updateMovimientoDto, req.user);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(
+    @Req() req,
     @Param('id') id: string,
     @Body() updateMovimientoDto: UpdateMovimientoDto,
   ) {
-    return this.movimientoService.update(+id, updateMovimientoDto);
+    return this.movimientoService.update(+id, updateMovimientoDto, req.user);
   }
 
   @Delete(':id')
