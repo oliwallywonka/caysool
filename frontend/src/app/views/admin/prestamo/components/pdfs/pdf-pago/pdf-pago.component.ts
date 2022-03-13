@@ -183,11 +183,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${
-                    this.pago.tipoPago === 'INTERES'
-                      ? "0.00"
-                      : this.pago.costoPago
-                  }`,
+                  text: `Bol. ${this.pago.costoPago}`,
                   alignment: "right",
                 },
               ],
@@ -201,11 +197,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${
-                    this.pago.tipoPago === "INTERES"
-                      ? this.pago.costoPago
-                      : this.prestamo.costoInteres
-                  }`,
+                  text: `Bol. ${this.pago.costoInteres}`,
                   alignment: "right",
                 },
               ],
@@ -415,11 +407,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${
-                    this.pago.tipoPago === 'INTERES'
-                      ? "0.00"
-                      : this.pago.costoPago
-                  }`,
+                  text: `Bol. ${this.pago.costoPago}`,
                   alignment: "right",
                 },
               ],
@@ -433,11 +421,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${
-                    this.pago.tipoPago === "INTERES"
-                      ? this.pago.costoPago
-                      : this.prestamo.costoInteres
-                  }`,
+                  text: `Bol. ${this.pago.costoInteres}`,
                   alignment: "right",
                 },
               ],

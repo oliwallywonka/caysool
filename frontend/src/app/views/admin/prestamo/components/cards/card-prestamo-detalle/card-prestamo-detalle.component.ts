@@ -31,7 +31,6 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
   amorizaciones: Amortizacion[] = [];
   modal = this.modalService.modal;
   constructor(
-    private amortizacionService: AmortizacionService,
     private impresionService: ImpresionService,
     private pagoService: PagoService,
     private prestamoService: PrestamoService,
@@ -128,11 +127,10 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     this.pagos.map(pago => {
       costoPago += +pago.costoPago;
       const costoPorCobrar = this.prestamo.costoTotal - costoPago;
-      console.log(costoPorCobrar);
       const historialItem = {
         fecha: this.datePipe.transform(pago.createdAt, 'medium'),
-        operacion: pago.tipoPago === 'PAGO'? 'PAGO' : pago.tipoPago === 'INTERES'? 'PAGO INTERES': 'PAGO AMORTIZACION',
-        cargo: pago.tipoPago === 'AMORTIZACION'? 0.00 : pago.costoPago,
+        operacion: pago.tipoPago === 'PAGO'? 'PAGO' : pago.tipoPago === 'LIQUIDACION'? 'PAGO LIQUIDACIÓN': 'PAGO AMORTIZACION',
+        cargo: pago.tipoPago === 'AMORTIZACION'? 0.00 : (+pago.costoInteres + +pago.costoPago).toFixed(1) ,
         comision: pago.costoAdministracion,
         cargoExtra: pago.costoPiso,
         amortiguado: pago.tipoPago === 'AMORTIZACION'? pago.costoPago: 0.00,
@@ -220,12 +218,10 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
   }
 
   showImpresionPagoModal(pago) {
-    if (pago.operacion === 'PAGO' || pago.operacion === 'PAGO INTERES' || pago.operacion === 'PAGO AMORTIZACION'){
-      this.modal.modalName = 'impresionContratoModal';
-      this.modal.visible = true;
-      this.pagoService.pago.emit(pago);
-      this.prestamoService.prestamo.emit(this.prestamo);
-    }
+    this.modal.modalName = 'impresionContratoModal';
+    this.modal.visible = true;
+    this.pagoService.pago.emit(pago);
+    this.prestamoService.prestamo.emit(this.prestamo);
   }
 
   showDeletePagoModal(pago) {

@@ -26,7 +26,7 @@ export class Pago extends BaseEntity {
   @ManyToOne(() => Prestamo, (prestamo) => prestamo.id)
   prestamo: Prestamo;
 
-  //INTERES o PRESTAMO
+  //INTERES o PRESTAMO AMORTIZACION
   @Column({ type: 'varchar', length: 12, default: 'PRESTAMO' })
   tipoPago: string;
 
@@ -35,6 +35,9 @@ export class Pago extends BaseEntity {
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   costoPiso: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
+  costoInteres: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   costoPago: number;
@@ -52,6 +55,9 @@ export class Pago extends BaseEntity {
   @BeforeInsert()
   calculateCostoTotal() {
     this.costoTotal =
-      this.costoAdministracion + this.costoPiso + this.costoPago;
+      +this.costoAdministracion +
+      +this.costoPiso +
+      +this.costoPago +
+      +this.costoInteres;
   }
 }

@@ -6,6 +6,7 @@ export interface Pago {
   costoPiso?: number;
   costoPago?: number;
   costoTotal?: number;
+  costoInteres?: number;
   costoPorCobrar?: number;
   createdAt?: string;
   updatedAt?: string;

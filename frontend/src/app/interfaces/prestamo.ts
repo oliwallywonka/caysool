@@ -16,6 +16,7 @@ export interface Prestamo {
   costoDoc?: string;
   costoImpresion?: number;
   costoPiso?: number;
+  cobroInteres?: number;
   costoAdministracion?: number;
   inventario?: Inventario []
   isActive?: string;

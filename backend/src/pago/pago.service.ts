@@ -29,7 +29,8 @@ export class PagoService {
         cantidad:
           +createPagoDto.costoPago +
           +createPagoDto.costoAdministracion +
-          +createPagoDto.costoPiso,
+          +createPagoDto.costoPiso +
+          +createPagoDto.costoInteres,
         apertura: lastApertura.id,
       },
       user,

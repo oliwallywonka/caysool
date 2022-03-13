@@ -69,6 +69,9 @@ export class Prestamo extends BaseEntity {
   costoInteres: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
+  cobroInteres: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
   costoTotal: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 1, default: 0.0 })
@@ -131,19 +134,22 @@ export class Prestamo extends BaseEntity {
 
   async calculateCostoCancelado() {
     const costoPago = await Pago.createQueryBuilder('pago')
-      .select('SUM(pago.costoPago)', 'costoCancelado')
+      .select('SUM(pago.costoPago + pago.costoInteres)', 'costoCancelado')
       .addSelect('SUM(pago.costoPiso)', 'costoPiso')
       .addSelect('SUM(pago.costoAdministracion)', 'costoAdministracion')
+      .addSelect('SUM(pago.costoInteres)', 'costoInteres')
       .where('pago.prestamo = :prestamo', { prestamo: this.id })
       .getRawOne();
     if (!costoPago) {
       this.costoCancelado = 0.0;
       this.costoPiso = 0.0;
       this.costoAdministracion = 0.0;
+      this.cobroInteres = 0.0;
     } else {
       this.costoCancelado = +costoPago.costoCancelado;
       this.costoPiso = +costoPago.costoPiso;
       this.costoAdministracion = +costoPago.costoAdministracion;
+      this.cobroInteres = +costoPago.costoInteres;
     }
     const diaFinal = moment(this.fechaFinal);
     const day = moment(Date.now()).startOf('day');

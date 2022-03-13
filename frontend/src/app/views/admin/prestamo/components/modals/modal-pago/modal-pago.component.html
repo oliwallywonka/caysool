@@ -24,7 +24,7 @@
         (ngSubmit)="save()"
       >
         <div class="my-4 relative p-6 flex flex-wrap">
-          <div class="w-full lg:w-6/12 px-4 mb-2">
+          <div class="w-full px-4 mb-2">
             <app-select
               [inputForm]="pagoForm"
               [options]="tipoPagoOptions"
@@ -61,12 +61,23 @@
           <div class="w-full lg:w-6/12 px-4 mb-2">
             <app-input
                 [inputForm]="pagoForm"
+                inputLabel="INTERÉS GENERADO"
+                inputType="number"
+                inputFormName="costoInteres"
+                formControlName="costoInteres"
+                (selectEvent)="calculateInteresPago()"
+                [isDisabled]="true"
+                [value]="pagoForm.value.costoInteres">
+            </app-input>
+          </div>
+          <div class="w-full lg:w-6/12 px-4 mb-2">
+            <app-input
+                [inputForm]="pagoForm"
                 inputLabel="CANTIDAD A PAGAR"
                 inputType="number"
                 inputFormName="costoPago"
                 formControlName="costoPago"
                 (selectEvent)="calculateInteresPago()"
-                [isDisabled]="pagoForm.value.tipoPago==='INTERES'"
                 [value]="pagoForm.value.costoPago">
             </app-input>
           </div>
@@ -74,7 +85,7 @@
         </div>
 
         <div class="flex flex-col items-start justify-between px-4 border-b border-solid border-blueGray-200 rounded-t">
-          <h4 *ngIf="pagoForm.value.tipoPago==='INTERES'" class="text-xl text-gray-400 font-semibold">
+          <h4 *ngIf="pagoForm.value.tipoPago==='PAGO'" class="text-xl text-gray-400 font-semibold">
             Interes generado de {{ diasInteres }} dias: Bol. {{ costoInteres.toFixed(1) }}
           </h4>
           <h4 class="text-xl text-gray-400 font-semibold">
@@ -90,7 +101,7 @@
             Por Cobrar: Bol. {{ (+prestamo.costoTotal - +prestamo.costoCancelado).toFixed(1) }}
           </h4>
           <h4 class="text-2xl font-semibold">
-            TOTAL Pago: Bol. {{ (+pagoForm.value.costoAdministracion + +pagoForm.value.costoPiso + +pagoForm.value.costoPago).toFixed(1) }}
+            TOTAL Pago: Bol. {{ (+pagoForm.value.costoAdministracion + +pagoForm.value.costoPiso + +pagoForm.value.costoPago + +pagoForm.value.costoInteres).toFixed(1) }}
           </h4>
         </div>
 

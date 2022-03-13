@@ -26,6 +26,10 @@ export class CreatePagoDto {
 
   @IsNotEmpty()
   @IsNumber()
+  costoInteres: number;
+
+  @IsNotEmpty()
+  @IsNumber()
   costoPiso: number;
 
   @IsNotEmpty()

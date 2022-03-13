@@ -49,12 +49,12 @@ export class PdfPrestamoCanceladoComponent implements OnInit {
           alignment: "center",
         },
         {
-          text: "Interes generado",
+          text: "Interes cobrados",
           style: "tableHeader",
           alignment: "center",
         },
         {
-          text: "Total pagos",
+          text: "Pagos cobrados",
           style: "tableHeader",
           alignment: "center",
         },
@@ -65,8 +65,8 @@ export class PdfPrestamoCanceladoComponent implements OnInit {
       totalCostoPrestamos += +prestamo.costoPrestamo;
       totalImpresiones += +prestamo.costoImpresion + +prestamo.costoAdministracion;
       totalcargosExtra += +prestamo.costoPiso;
-      totalInteres += +prestamo.costoInteres;
-      totalPagos += +prestamo.costoCancelado;
+      totalInteres += +prestamo.cobroInteres;
+      totalPagos += +prestamo.costoCancelado - +prestamo.cobroInteres;
       bodyPrestamo.push(
         [
           { text: `${this.datePipe.transform(prestamo.fechaInicio, 'mediumDate')}`, fontSize: 10, alignment: "center" },
@@ -81,15 +81,15 @@ export class PdfPrestamoCanceladoComponent implements OnInit {
             alignment: "center",
           },
           {
-            text: `${prestamo.inventario.map(i => (i.descripcion+ ', '))}`,
+            text: `${prestamo.inventario.map(i => (i.descripcion+ ' '))}`,
             fontSize: 10,
             alignment: "center",
           },
           { text: `Bol. ${prestamo.costoPrestamo}`, fontSize: 10, alignment: "center" },
           { text: `Bol. ${(+prestamo.costoImpresion + +prestamo.costoAdministracion).toFixed(1)}`, alignment: "center", fontSize: 10 },
           { text: `Bol. ${prestamo.costoPiso}`, alignment: "center", fontSize: 10 },
-          { text: `Bol. ${prestamo.costoInteres}`, alignment: "center", fontSize: 10 },
-          { text: `Bol. ${prestamo.costoCancelado}`, fontSize: 10, alignment: "center" },
+          { text: `Bol. ${prestamo.cobroInteres}`, alignment: "center", fontSize: 10 },
+          { text: `Bol. ${(+prestamo.costoCancelado - +prestamo.cobroInteres).toFixed(1)}`, fontSize: 10, alignment: "center" },
         ]
       );
     };
@@ -168,7 +168,7 @@ export class PdfPrestamoCanceladoComponent implements OnInit {
                 { text: "Total", fontSize: 14, style: "tableHeader" },
                 {},
                 {},
-                { text: `Bol. ${totalInventario.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                { text: `${totalInventario} unidades`, alignment: "center", style: "tableHeader" },
                 { text: `Bol. ${totalCostoPrestamos.toFixed(1)}`, alignment: "center", style: "tableHeader" },
                 { text: `Bol. ${totalImpresiones.toFixed(1)}`, alignment: "center", style: "tableHeader" },
                 { text: `Bol. ${totalcargosExtra.toFixed(1)}`, alignment: "center", style: "tableHeader" },

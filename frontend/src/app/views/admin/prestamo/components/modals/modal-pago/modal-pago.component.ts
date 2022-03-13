@@ -55,8 +55,8 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
       name: 'PAGO'
     },
     {
-      value: 'INTERES',
-      name: 'INTERÉS'
+      value: 'LIQUIDACION',
+      name: 'LIQUIDACIÓN'
     },
     {
       value: 'AMORTIZACION',
@@ -75,6 +75,11 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
       ],
     ],
     costoPiso: [0,
+      [
+        RxwebValidators.required({ message: this.errorMessages.required }),
+      ],
+    ],
+    costoInteres: [0,
       [
         RxwebValidators.required({ message: this.errorMessages.required }),
       ],
@@ -99,6 +104,7 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
     this.subscribePrestamo();
     this.subscribePagos();
     this.calculateInteresPago();
+    console.log('modal call my name');
   }
 
   ngOnDestroy() {
@@ -110,6 +116,7 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
       this.pagoService.pagos.subscribe(
         (pagos) => {
           this.pagos = pagos;
+          this.calculateInteresPago();
         }
       )
     );
@@ -121,12 +128,11 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
       this.prestamoService.prestamo.subscribe(
         (prestamo) => {
           this.prestamo = prestamo;
+          this.calculateInteresPago();
         }
       )
     );
   }
-
-
   closeModal() {
     this.modal.visible = false;
     this.modal.modalName = '';
@@ -158,9 +164,9 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
       tipoPago: this.pagoForm.value.tipoPago,
       costoAdministracion: +this.pagoForm.value.costoAdministracion,
       costoPiso: +this.pagoForm.value.costoPiso,
-      costoPago: +this.pagoForm.value.costoPago
+      costoPago: +this.pagoForm.value.costoPago,
+      costoInteres: +this.pagoForm.value.costoInteres
     };
-    console.log(body);
     this.pagoService.postPago(body).subscribe(
       response => {
         this.loading = false;
@@ -201,19 +207,19 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
   }
 
   calculateInteresPago() {
+    this.pagoForm.controls['costoInteres'].patchValue(0);
+    this.pagoForm.controls['costoPago'].patchValue(0);
     this.diasInteres = 0;
     this.costoInteres = 0;
     let costoPagoInteres = 0;
     this.pagosInteres = [];
-    if (this.pagoForm.value.tipoPago === 'INTERES') {
+    if (this.pagoForm.value.tipoPago === 'PAGO' && this.prestamo) {
       for (const pago  of this.pagos) {
-        if (pago.tipoPago === 'INTERES') {
+        if (pago.tipoPago === 'PAGO') {
           costoPagoInteres += pago.costoPago;
           this.pagosInteres.push(pago);
-
         }
       };
-      console.log(this.pagosInteres);
       if ( this.pagosInteres.length > 0){
         const ultimoPagoInteres = this.pagosInteres[this.pagosInteres.length -1];
         const diaInicio = moment(ultimoPagoInteres.createdAt).startOf('day');
@@ -221,15 +227,19 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
         const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
         this.diasInteres = +dias.toFixed(1) - 1;
         this.costoInteres = +(this.prestamo.costoPrestamo * (1 + 0.15 / 30) ** (this.diasInteres)).toFixed(1) - +this.prestamo.costoPrestamo;
-        this.pagoForm.value.costoPago = +this.costoInteres.toFixed(1);
+        this.pagoForm.controls['costoInteres'].patchValue(+this.costoInteres.toFixed(1));
       } else {
         const diaInicio = moment(this.prestamo.fechaInicio).startOf('day');
         const diaFinal = moment(Date.now()).endOf('day');
         const dias = moment.duration(diaFinal.diff(diaInicio)).asDays();
         this.diasInteres = +(dias).toFixed(0);
         this.costoInteres = +(this.prestamo.costoPrestamo * (1 + 0.15 / 30) ** (dias)).toFixed(1) - +this.prestamo.costoPrestamo;
-        this.pagoForm.value.costoPago = +this.costoInteres.toFixed(1);
+        this.pagoForm.controls['costoInteres'].patchValue(+this.costoInteres.toFixed(1));
       }
+    }
+    if (this.pagoForm.value.tipoPago === 'LIQUIDACION') {
+      this.pagoForm.controls['costoInteres'].patchValue(+this.prestamo.costoInteres - +this.prestamo.cobroInteres);
+      this.pagoForm.controls['costoPago'].patchValue((+this.prestamo.costoTotal - +this.prestamo.costoCancelado - +this.pagoForm.value.costoInteres).toFixed(1));
     }
   }
 

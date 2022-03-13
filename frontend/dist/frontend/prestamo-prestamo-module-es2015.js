@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"modal.visible&&modal.modalName==='deletePagoModal'\" class=\"justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none\">\n  <div class=\"relative w-auto my-6 mx-auto max-w-580-px\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           ELIMINAR PAGO\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n\n        <div class=\"my-4 relative p-6 flex flex-wrap\">\n          <div class=\"w-full px-4 mb-2\">\n            <p> ¿ Desea eliminar el pago Nº {{ pago.id }} permanentemente? </p>\n            <p> Monto del Pago: Bol. {{ pago.costoPago }} </p>\n            <p> Monto Administración: Bol. {{ pago.costoAdministracion }} </p>\n            <p> Monto Piso (extras): Bol. {{ pago.costoPiso }} </p>\n            <p> Monto Total : Bol. {{ pago.costoTotal }} </p>\n            <p> Esta acción no puede revertirse </p>\n          </div>\n\n        </div>\n\n      <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n        <button\n          class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          Cancelar\n        </button>\n        <button\n          [disabled]=\"loading\"\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"button\"\n          (click)=\"save()\"\n        >\n        <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n        </button>\n      </div>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='deletePagoModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"modal.visible&&modal.modalName==='deletePagoModal'\" class=\"justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none\">\n  <div class=\"relative w-auto my-6 mx-auto max-w-580-px\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           ELIMINAR PAGO\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n\n        <div class=\"my-4 relative p-6 flex flex-wrap\">\n          <div class=\"w-full px-4 mb-2\">\n            <p> ¿ Desea eliminar el pago Nº {{ pago.id }} permanentemente? </p>\n            <p> Monto del Pago: Bol. {{ pago.costoPago }} </p>\n            <p> Monto de Interés: Bol. {{ pago.costoInteres }} </p>\n            <p> Monto Administración: Bol. {{ pago.costoAdministracion }} </p>\n            <p> Monto Piso (extras): Bol. {{ pago.costoPiso }} </p>\n            <p> Monto Total : Bol. {{ pago.costoTotal }} </p>\n            <p> Esta acción no puede revertirse </p>\n          </div>\n\n        </div>\n\n      <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n        <button\n          class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          Cancelar\n        </button>\n        <button\n          [disabled]=\"loading\"\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"button\"\n          (click)=\"save()\"\n        >\n        <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n        </button>\n      </div>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='deletePagoModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n");
 
 /***/ }),
 
@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"modal.visible&&modal.modalName==='pagoModal'\" class=\"justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none\">\n  <div class=\"relative w-auto my-6 mx-auto max-w-580-px\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           Pago del prestamo {{ prestamo?.id }}\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n\n      <form\n        autocomplete=\"off\"\n        [formGroup]=\"pagoForm\"\n        (ngSubmit)=\"save()\"\n      >\n        <div class=\"my-4 relative p-6 flex flex-wrap\">\n          <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n            <app-select\n              [inputForm]=\"pagoForm\"\n              [options]=\"tipoPagoOptions\"\n              inputLabel=\"TIPO DE PAGO\"\n              inputFormName=\"tipoPago\"\n              formControlName=\"tipoPago\"\n              (selectEvent)=\"calculateInteresPago()\"\n              [value]=\"pagoForm.value.tipoPago\">\n            </app-select>\n          </div>\n          <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n            <app-select\n              [inputForm]=\"pagoForm\"\n              [options]=\"administracionOptions\"\n              inputLabel=\"COMISION ADMINISTRATIVA (cargos extra)\"\n              inputFormName=\"costoAdministracion\"\n              formControlName=\"costoAdministracion\"\n              (selectEvent)=\"calculateInteresPago()\"\n              [value]=\"pagoForm.value.costoAdministracion\">\n            </app-select>\n          </div>\n          <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n            <app-input\n              [inputForm]=\"pagoForm\"\n              inputLabel=\"COMISION PISO (cargos extra)\"\n              inputType=\"number\"\n              inputPlaceholder=\"Ingrese su nombre...\"\n              inputFormName=\"costoPiso\"\n              formControlName=\"costoPiso\"\n              (inputEvent)=\"calculateInteresPago()\"\n              [value]=\"pagoForm.value.costoPiso\">\n            </app-input>\n          </div>\n          <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n            <app-input\n                [inputForm]=\"pagoForm\"\n                inputLabel=\"CANTIDAD A PAGAR\"\n                inputType=\"number\"\n                inputFormName=\"costoPago\"\n                formControlName=\"costoPago\"\n                (selectEvent)=\"calculateInteresPago()\"\n                [isDisabled]=\"pagoForm.value.tipoPago==='INTERES'\"\n                [value]=\"pagoForm.value.costoPago\">\n            </app-input>\n          </div>\n\n        </div>\n\n        <div class=\"flex flex-col items-start justify-between px-4 border-b border-solid border-blueGray-200 rounded-t\">\n          <h4 *ngIf=\"pagoForm.value.tipoPago==='INTERES'\" class=\"text-xl text-gray-400 font-semibold\">\n            Interes generado de {{ diasInteres }} dias: Bol. {{ costoInteres.toFixed(1) }}\n          </h4>\n          <h4 class=\"text-xl text-gray-400 font-semibold\">\n            Interes al final al plazo: Bol. {{ prestamo.costoInteres }}\n          </h4>\n          <h4 class=\"text-xl text-gray-400 font-semibold\">\n            Costo Prestamo: Bol. {{ prestamo.costoPrestamo }}\n          </h4>\n          <h4 class=\"text-xl text-gray-400 font-semibold\">\n            Costo Total: Bol. {{ prestamo.costoTotal }}\n          </h4>\n          <h4 class=\"text-xl text-green-600 font-semibold\">\n            Por Cobrar: Bol. {{ (+prestamo.costoTotal - +prestamo.costoCancelado).toFixed(1) }}\n          </h4>\n          <h4 class=\"text-2xl font-semibold\">\n            TOTAL Pago: Bol. {{ (+pagoForm.value.costoAdministracion + +pagoForm.value.costoPiso + +pagoForm.value.costoPago).toFixed(1) }}\n          </h4>\n        </div>\n\n      <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n        <button\n          class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          Cancelar\n        </button>\n        <button\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"button\"\n          (click)=\"refreshForm()\"\n        >\n          Limpiar\n        </button>\n        <button\n          [disabled]=\"!pagoForm.valid || loading\"\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"submit\"\n        >\n        <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n        </button>\n      </div>\n\n    </form>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='pagoModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"modal.visible&&modal.modalName==='pagoModal'\" class=\"justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none\">\n  <div class=\"relative w-auto my-6 mx-auto max-w-580-px\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           Pago del prestamo {{ prestamo?.id }}\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n\n      <form\n        autocomplete=\"off\"\n        [formGroup]=\"pagoForm\"\n        (ngSubmit)=\"save()\"\n      >\n        <div class=\"my-4 relative p-6 flex flex-wrap\">\n          <div class=\"w-full px-4 mb-2\">\n            <app-select\n              [inputForm]=\"pagoForm\"\n              [options]=\"tipoPagoOptions\"\n              inputLabel=\"TIPO DE PAGO\"\n              inputFormName=\"tipoPago\"\n              formControlName=\"tipoPago\"\n              (selectEvent)=\"calculateInteresPago()\"\n              [value]=\"pagoForm.value.tipoPago\">\n            </app-select>\n          </div>\n          <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n            <app-select\n              [inputForm]=\"pagoForm\"\n              [options]=\"administracionOptions\"\n              inputLabel=\"COMISION ADMINISTRATIVA (cargos extra)\"\n              inputFormName=\"costoAdministracion\"\n              formControlName=\"costoAdministracion\"\n              (selectEvent)=\"calculateInteresPago()\"\n              [value]=\"pagoForm.value.costoAdministracion\">\n            </app-select>\n          </div>\n          <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n            <app-input\n              [inputForm]=\"pagoForm\"\n              inputLabel=\"COMISION PISO (cargos extra)\"\n              inputType=\"number\"\n              inputPlaceholder=\"Ingrese su nombre...\"\n              inputFormName=\"costoPiso\"\n              formControlName=\"costoPiso\"\n              (inputEvent)=\"calculateInteresPago()\"\n              [value]=\"pagoForm.value.costoPiso\">\n            </app-input>\n          </div>\n          <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n            <app-input\n                [inputForm]=\"pagoForm\"\n                inputLabel=\"INTERÉS GENERADO\"\n                inputType=\"number\"\n                inputFormName=\"costoInteres\"\n                formControlName=\"costoInteres\"\n                (selectEvent)=\"calculateInteresPago()\"\n                [isDisabled]=\"true\"\n                [value]=\"pagoForm.value.costoInteres\">\n            </app-input>\n          </div>\n          <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n            <app-input\n                [inputForm]=\"pagoForm\"\n                inputLabel=\"CANTIDAD A PAGAR\"\n                inputType=\"number\"\n                inputFormName=\"costoPago\"\n                formControlName=\"costoPago\"\n                (selectEvent)=\"calculateInteresPago()\"\n                [value]=\"pagoForm.value.costoPago\">\n            </app-input>\n          </div>\n\n        </div>\n\n        <div class=\"flex flex-col items-start justify-between px-4 border-b border-solid border-blueGray-200 rounded-t\">\n          <h4 *ngIf=\"pagoForm.value.tipoPago==='PAGO'\" class=\"text-xl text-gray-400 font-semibold\">\n            Interes generado de {{ diasInteres }} dias: Bol. {{ costoInteres.toFixed(1) }}\n          </h4>\n          <h4 class=\"text-xl text-gray-400 font-semibold\">\n            Interes al final al plazo: Bol. {{ prestamo.costoInteres }}\n          </h4>\n          <h4 class=\"text-xl text-gray-400 font-semibold\">\n            Costo Prestamo: Bol. {{ prestamo.costoPrestamo }}\n          </h4>\n          <h4 class=\"text-xl text-gray-400 font-semibold\">\n            Costo Total: Bol. {{ prestamo.costoTotal }}\n          </h4>\n          <h4 class=\"text-xl text-green-600 font-semibold\">\n            Por Cobrar: Bol. {{ (+prestamo.costoTotal - +prestamo.costoCancelado).toFixed(1) }}\n          </h4>\n          <h4 class=\"text-2xl font-semibold\">\n            TOTAL Pago: Bol. {{ (+pagoForm.value.costoAdministracion + +pagoForm.value.costoPiso + +pagoForm.value.costoPago + +pagoForm.value.costoInteres).toFixed(1) }}\n          </h4>\n        </div>\n\n      <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n        <button\n          class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          Cancelar\n        </button>\n        <button\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"button\"\n          (click)=\"refreshForm()\"\n        >\n          Limpiar\n        </button>\n        <button\n          [disabled]=\"!pagoForm.valid || loading\"\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"submit\"\n        >\n        <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n        </button>\n      </div>\n\n    </form>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='pagoModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n");
 
 /***/ }),
 
@@ -221,9 +221,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                                 },
                                 {},
                                 {
-                                    text: `Bol. ${this.pago.tipoPago === 'INTERES'
-                                        ? "0.00"
-                                        : this.pago.costoPago}`,
+                                    text: `Bol. ${this.pago.costoPago}`,
                                     alignment: "right",
                                 },
                             ],
@@ -237,9 +235,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                                 },
                                 {},
                                 {
-                                    text: `Bol. ${this.pago.tipoPago === "INTERES"
-                                        ? this.pago.costoPago
-                                        : this.prestamo.costoInteres}`,
+                                    text: `Bol. ${this.pago.costoInteres}`,
                                     alignment: "right",
                                 },
                             ],
@@ -438,9 +434,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                                 },
                                 {},
                                 {
-                                    text: `Bol. ${this.pago.tipoPago === 'INTERES'
-                                        ? "0.00"
-                                        : this.pago.costoPago}`,
+                                    text: `Bol. ${this.pago.costoPago}`,
                                     alignment: "right",
                                 },
                             ],
@@ -454,9 +448,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                                 },
                                 {},
                                 {
-                                    text: `Bol. ${this.pago.tipoPago === "INTERES"
-                                        ? this.pago.costoPago
-                                        : this.prestamo.costoInteres}`,
+                                    text: `Bol. ${this.pago.costoInteres}`,
                                     alignment: "right",
                                 },
                             ],
@@ -790,14 +782,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var src_app_core_services_amortizacion_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/amortizacion.service */ "Y5OH");
-/* harmony import */ var src_app_core_services_impresion_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/core/services/impresion.service */ "KujF");
-/* harmony import */ var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/core/services/modal.service */ "S0jo");
-/* harmony import */ var src_app_core_services_pago_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/core/services/pago.service */ "AntR");
-/* harmony import */ var src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/core/services/prestamo.service */ "U31Y");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! moment */ "wd/R");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_11__);
-
+/* harmony import */ var src_app_core_services_impresion_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/impresion.service */ "KujF");
+/* harmony import */ var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/core/services/modal.service */ "S0jo");
+/* harmony import */ var src_app_core_services_pago_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/core/services/pago.service */ "AntR");
+/* harmony import */ var src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/core/services/prestamo.service */ "U31Y");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "wd/R");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
 
 
 
@@ -810,8 +800,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CardPrestamoDetalleComponent = class CardPrestamoDetalleComponent {
-    constructor(amortizacionService, impresionService, pagoService, prestamoService, modalService, route, location, datePipe) {
-        this.amortizacionService = amortizacionService;
+    constructor(impresionService, pagoService, prestamoService, modalService, route, location, datePipe) {
         this.impresionService = impresionService;
         this.pagoService = pagoService;
         this.prestamoService = prestamoService;
@@ -842,9 +831,9 @@ let CardPrestamoDetalleComponent = class CardPrestamoDetalleComponent {
         this.sub.unsubscribe();
     }
     calculateDiasRestantes() {
-        const diaInicio = moment__WEBPACK_IMPORTED_MODULE_11__(this.prestamo.fechaInicio).startOf('day');
-        const diaFinal = moment__WEBPACK_IMPORTED_MODULE_11__(this.prestamo.fechaFinal).endOf('day');
-        this.diasRestantes = moment__WEBPACK_IMPORTED_MODULE_11__["duration"](diaFinal.diff(diaInicio)).asDays();
+        const diaInicio = moment__WEBPACK_IMPORTED_MODULE_10__(this.prestamo.fechaInicio).startOf('day');
+        const diaFinal = moment__WEBPACK_IMPORTED_MODULE_10__(this.prestamo.fechaFinal).endOf('day');
+        this.diasRestantes = moment__WEBPACK_IMPORTED_MODULE_10__["duration"](diaFinal.diff(diaInicio)).asDays();
         this.diasRestantes = +this.diasRestantes.toFixed(1);
     }
     getPrestamoById() {
@@ -895,8 +884,7 @@ let CardPrestamoDetalleComponent = class CardPrestamoDetalleComponent {
         this.pagos.map(pago => {
             costoPago += +pago.costoPago;
             const costoPorCobrar = this.prestamo.costoTotal - costoPago;
-            console.log(costoPorCobrar);
-            const historialItem = Object.assign({ fecha: this.datePipe.transform(pago.createdAt, 'medium'), operacion: pago.tipoPago === 'PAGO' ? 'PAGO' : pago.tipoPago === 'INTERES' ? 'PAGO INTERES' : 'PAGO AMORTIZACION', cargo: pago.tipoPago === 'AMORTIZACION' ? 0.00 : pago.costoPago, comision: pago.costoAdministracion, cargoExtra: pago.costoPiso, amortiguado: pago.tipoPago === 'AMORTIZACION' ? pago.costoPago : 0.00, costoPorCobrar2: costoPorCobrar.toFixed(1) }, pago);
+            const historialItem = Object.assign({ fecha: this.datePipe.transform(pago.createdAt, 'medium'), operacion: pago.tipoPago === 'PAGO' ? 'PAGO' : pago.tipoPago === 'LIQUIDACION' ? 'PAGO LIQUIDACIÓN' : 'PAGO AMORTIZACION', cargo: pago.tipoPago === 'AMORTIZACION' ? 0.00 : (+pago.costoInteres + +pago.costoPago).toFixed(1), comision: pago.costoAdministracion, cargoExtra: pago.costoPiso, amortiguado: pago.tipoPago === 'AMORTIZACION' ? pago.costoPago : 0.00, costoPorCobrar2: costoPorCobrar.toFixed(1) }, pago);
             this.historialPagosArray.push(historialItem);
         });
     }
@@ -957,12 +945,10 @@ let CardPrestamoDetalleComponent = class CardPrestamoDetalleComponent {
         this.prestamoService.prestamo.emit(this.prestamo);
     }
     showImpresionPagoModal(pago) {
-        if (pago.operacion === 'PAGO' || pago.operacion === 'PAGO INTERES' || pago.operacion === 'PAGO AMORTIZACION') {
-            this.modal.modalName = 'impresionContratoModal';
-            this.modal.visible = true;
-            this.pagoService.pago.emit(pago);
-            this.prestamoService.prestamo.emit(this.prestamo);
-        }
+        this.modal.modalName = 'impresionContratoModal';
+        this.modal.visible = true;
+        this.pagoService.pago.emit(pago);
+        this.prestamoService.prestamo.emit(this.prestamo);
     }
     showDeletePagoModal(pago) {
         this.modal.modalName = 'deletePagoModal';
@@ -977,11 +963,10 @@ let CardPrestamoDetalleComponent = class CardPrestamoDetalleComponent {
     }
 };
 CardPrestamoDetalleComponent.ctorParameters = () => [
-    { type: src_app_core_services_amortizacion_service__WEBPACK_IMPORTED_MODULE_6__["AmortizacionService"] },
-    { type: src_app_core_services_impresion_service__WEBPACK_IMPORTED_MODULE_7__["ImpresionService"] },
-    { type: src_app_core_services_pago_service__WEBPACK_IMPORTED_MODULE_9__["PagoService"] },
-    { type: src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_10__["PrestamoService"] },
-    { type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_8__["ModalService"] },
+    { type: src_app_core_services_impresion_service__WEBPACK_IMPORTED_MODULE_6__["ImpresionService"] },
+    { type: src_app_core_services_pago_service__WEBPACK_IMPORTED_MODULE_8__["PagoService"] },
+    { type: src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_9__["PrestamoService"] },
+    { type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_7__["ModalService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"] },
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["DatePipe"] }
@@ -1092,8 +1077,8 @@ let ModalPagoComponent = class ModalPagoComponent {
                 name: 'PAGO'
             },
             {
-                value: 'INTERES',
-                name: 'INTERÉS'
+                value: 'LIQUIDACION',
+                name: 'LIQUIDACIÓN'
             },
             {
                 value: 'AMORTIZACION',
@@ -1116,6 +1101,11 @@ let ModalPagoComponent = class ModalPagoComponent {
                     _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),
                 ],
             ],
+            costoInteres: [0,
+                [
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),
+                ],
+            ],
             costoPago: [0,
                 [
                     _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),
@@ -1128,6 +1118,7 @@ let ModalPagoComponent = class ModalPagoComponent {
         this.subscribePrestamo();
         this.subscribePagos();
         this.calculateInteresPago();
+        console.log('modal call my name');
     }
     ngOnDestroy() {
         this.sub.unsubscribe();
@@ -1135,11 +1126,13 @@ let ModalPagoComponent = class ModalPagoComponent {
     subscribePagos() {
         this.sub.add(this.pagoService.pagos.subscribe((pagos) => {
             this.pagos = pagos;
+            this.calculateInteresPago();
         }));
     }
     subscribePrestamo() {
         this.sub.add(this.prestamoService.prestamo.subscribe((prestamo) => {
             this.prestamo = prestamo;
+            this.calculateInteresPago();
         }));
     }
     closeModal() {
@@ -1169,9 +1162,9 @@ let ModalPagoComponent = class ModalPagoComponent {
             tipoPago: this.pagoForm.value.tipoPago,
             costoAdministracion: +this.pagoForm.value.costoAdministracion,
             costoPiso: +this.pagoForm.value.costoPiso,
-            costoPago: +this.pagoForm.value.costoPago
+            costoPago: +this.pagoForm.value.costoPago,
+            costoInteres: +this.pagoForm.value.costoInteres
         };
-        console.log(body);
         this.pagoService.postPago(body).subscribe(response => {
             this.loading = false;
             this.successMessage();
@@ -1198,19 +1191,20 @@ let ModalPagoComponent = class ModalPagoComponent {
         }));
     }
     calculateInteresPago() {
+        this.pagoForm.controls['costoInteres'].patchValue(0);
+        this.pagoForm.controls['costoPago'].patchValue(0);
         this.diasInteres = 0;
         this.costoInteres = 0;
         let costoPagoInteres = 0;
         this.pagosInteres = [];
-        if (this.pagoForm.value.tipoPago === 'INTERES') {
+        if (this.pagoForm.value.tipoPago === 'PAGO' && this.prestamo) {
             for (const pago of this.pagos) {
-                if (pago.tipoPago === 'INTERES') {
+                if (pago.tipoPago === 'PAGO') {
                     costoPagoInteres += pago.costoPago;
                     this.pagosInteres.push(pago);
                 }
             }
             ;
-            console.log(this.pagosInteres);
             if (this.pagosInteres.length > 0) {
                 const ultimoPagoInteres = this.pagosInteres[this.pagosInteres.length - 1];
                 const diaInicio = moment__WEBPACK_IMPORTED_MODULE_9__(ultimoPagoInteres.createdAt).startOf('day');
@@ -1218,7 +1212,7 @@ let ModalPagoComponent = class ModalPagoComponent {
                 const dias = moment__WEBPACK_IMPORTED_MODULE_9__["duration"](diaFinal.diff(diaInicio)).asDays();
                 this.diasInteres = +dias.toFixed(1) - 1;
                 this.costoInteres = +(this.prestamo.costoPrestamo * Math.pow((1 + 0.15 / 30), (this.diasInteres))).toFixed(1) - +this.prestamo.costoPrestamo;
-                this.pagoForm.value.costoPago = +this.costoInteres.toFixed(1);
+                this.pagoForm.controls['costoInteres'].patchValue(+this.costoInteres.toFixed(1));
             }
             else {
                 const diaInicio = moment__WEBPACK_IMPORTED_MODULE_9__(this.prestamo.fechaInicio).startOf('day');
@@ -1226,8 +1220,12 @@ let ModalPagoComponent = class ModalPagoComponent {
                 const dias = moment__WEBPACK_IMPORTED_MODULE_9__["duration"](diaFinal.diff(diaInicio)).asDays();
                 this.diasInteres = +(dias).toFixed(0);
                 this.costoInteres = +(this.prestamo.costoPrestamo * Math.pow((1 + 0.15 / 30), (dias))).toFixed(1) - +this.prestamo.costoPrestamo;
-                this.pagoForm.value.costoPago = +this.costoInteres.toFixed(1);
+                this.pagoForm.controls['costoInteres'].patchValue(+this.costoInteres.toFixed(1));
             }
+        }
+        if (this.pagoForm.value.tipoPago === 'LIQUIDACION') {
+            this.pagoForm.controls['costoInteres'].patchValue(+this.prestamo.costoInteres - +this.prestamo.cobroInteres);
+            this.pagoForm.controls['costoPago'].patchValue((+this.prestamo.costoTotal - +this.prestamo.costoCancelado - +this.pagoForm.value.costoInteres).toFixed(1));
         }
     }
 };
