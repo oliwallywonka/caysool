@@ -2980,9 +2980,9 @@
                 totalInventario = this.inventario.length;
                 totalCostoCompras += +i.costoCompra + +i.costoPrestamo;
                 totalCostoVenta += +i.precioVenta;
-                totalDiferencia += +i.precioVenta - (+i.costoCompra + +i.costoCompra);
+                totalDiferencia += +i.precioVenta - (+i.costoCompra + +i.costoPrestamo);
                 bodyInventario.push([{
-                  text: "".concat(this.datePipe.transform(i.fechaCompra, 'mediumDate')),
+                  text: "".concat(this.datePipe.transform(i.fechaCompra ? i.fechaCompra : i.createdAt, 'mediumDate')),
                   alignment: "center",
                   fontSize: 9
                 }, {
@@ -3002,7 +3002,7 @@
                   alignment: "right",
                   fontSize: 9
                 }, {
-                  text: "Bol. ".concat((+i.precioVenta - (+i.costoCompra + +i.costoCompra)).toFixed(1)),
+                  text: "Bol. ".concat((+i.precioVenta - (+i.costoCompra + +i.costoPrestamo)).toFixed(1)),
                   alignment: "right",
                   fontSize: 9
                 }]);

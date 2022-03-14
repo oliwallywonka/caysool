@@ -368,7 +368,7 @@
                 text: ["FIRMA CLIENTE	                                                                         FIRMA ASESOR DE CREDITO"],
                 fontSize: 12,
                 alignment: "center"
-              }, "\n\n\n\n\n", //aca segunda
+              }, "\n\n\n", //aca segunda
               {
                 columns: [{
                   width: 90,

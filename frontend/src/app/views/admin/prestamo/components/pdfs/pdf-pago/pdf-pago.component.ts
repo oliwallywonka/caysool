@@ -278,7 +278,7 @@ export class PdfPagoComponent implements OnInit {
           fontSize: 12,
           alignment: "center",
         },
-        "\n\n\n\n\n",
+        "\n\n\n",
         //aca segunda
         {
           columns: [

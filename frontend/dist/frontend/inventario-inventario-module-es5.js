@@ -1318,7 +1318,7 @@
                     }, {
                       text: "".concat(this.inventario.prestamo.client.name),
                       style: "tableHeader"
-                    }], ["Prenda(s)", "".concat(this.inventario.descripcion)], ["Marca:", "".concat(this.inventario.marca)], ["Moldelo:", "".concat(this.inventario.modelo)], ["Observaciones:", "".concat(this.inventario.observacion)], ["Placa:", "".concat(this.inventario.placa)], ["Linea:", "".concat(this.inventario.linea)], ["Deudas:", "".concat(this.inventario.deuda)]],
+                    }], ["Prenda(s)", "".concat(this.inventario.descripcion)], ["Marca:", "".concat(this.inventario.marca)], ["Moldelo:", "".concat(this.inventario.modelo)], ["Metal:", "".concat(this.inventario.metal)], ["Peso (gr.):", "".concat(this.inventario.peso)], ["Observaciones:", "".concat(this.inventario.observacion)], ["Placa:", "".concat(this.inventario.placa)], ["Linea:", "".concat(this.inventario.linea)], ["Deudas:", "".concat(this.inventario.deuda)]],
                     alignment: "center"
                   }
                 }, {

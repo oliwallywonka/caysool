@@ -66,6 +66,8 @@ export class PdfDevolucionComponent implements OnInit {
                   ["Prenda(s)",`${this.inventario.descripcion}` ],
                   ["Marca:", `${this.inventario.marca}`],
                   ["Moldelo:", `${this.inventario.modelo}`],
+                  ["Metal:", `${this.inventario.metal}`],
+                  ["Peso (gr.):", `${this.inventario.peso}`],
                   ["Observaciones:", `${this.inventario.observacion}`],
                   ["Placa:", `${this.inventario.placa}`],
                   ["Linea:", `${this.inventario.linea}`],

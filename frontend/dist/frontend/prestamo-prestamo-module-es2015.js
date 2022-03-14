@@ -314,7 +314,7 @@ let PdfPagoComponent = class PdfPagoComponent {
                     fontSize: 12,
                     alignment: "center",
                 },
-                "\n\n\n\n\n",
+                "\n\n\n",
                 //aca segunda
                 {
                     columns: [
