@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PdfPrestamoActivoComponent } from './pdf-prestamo-activo.component';
+import { PdfPrestamoGeneralComponent } from './pdf-prestamo-general.component';
 
-describe('PdfPrestamoActivoComponent', () => {
-  let component: PdfPrestamoActivoComponent;
-  let fixture: ComponentFixture<PdfPrestamoActivoComponent>;
+describe('PdfPrestamoGeneralComponent', () => {
+  let component: PdfPrestamoGeneralComponent;
+  let fixture: ComponentFixture<PdfPrestamoGeneralComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PdfPrestamoActivoComponent ]
+      declarations: [ PdfPrestamoGeneralComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PdfPrestamoActivoComponent);
+    fixture = TestBed.createComponent(PdfPrestamoGeneralComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

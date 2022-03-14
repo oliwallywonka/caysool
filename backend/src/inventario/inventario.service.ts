@@ -225,9 +225,12 @@ export class InventarioService {
 
   async getInventarioByDate({ from = '', to = '' }) {
     const inventario = await Inventario.createQueryBuilder('inventario')
-      .where('inventario.createdAt >= :from', { from })
-      .andWhere('inventario.createdAt <= :to', { to })
-      .andWhere('inventario.estado = :estado', { estado: 'VENDIDO' })
+      .where('inventario.fechaCompra >= :from', { from })
+      .orWhere('inventario.fechaCompra <= :fechaCompra', { fechaCompra: from })
+      .orWhere('inventario.fechaVenta <= :to', { to })
+      .orWhere('inventario.fechaVenta <= :fechVenta', { fechVenta: from })
+      .andWhere('inventario.estado != :estado', { estado: 'EMPENADO' })
+      .andWhere('inventario.estado != :estado2', { estado2: 'DEVUELTO' })
       .getMany();
     return inventario;
   }

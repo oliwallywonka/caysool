@@ -662,11 +662,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_client_modal_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./client-modal.component.html */ "tXJa");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @rxweb/reactive-form-validators */ "XKlN");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/core/services/alert.service */ "jKJn");
-/* harmony import */ var src_app_core_services_client_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/client.service */ "y6ow");
-/* harmony import */ var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/core/services/modal.service */ "S0jo");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @rxweb/reactive-form-validators */ "XKlN");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/alert.service */ "jKJn");
+/* harmony import */ var src_app_core_services_client_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/core/services/client.service */ "y6ow");
+/* harmony import */ var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/core/services/modal.service */ "S0jo");
+
 
 
 
@@ -676,10 +678,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ClientModalComponent = class ClientModalComponent {
-    constructor(clientService, alertService, modalService, fb) {
+    constructor(clientService, alertService, modalService, router, fb) {
         this.clientService = clientService;
         this.alertService = alertService;
         this.modalService = modalService;
+        this.router = router;
         this.fb = fb;
         this.modalButton = true;
         this.loading = false;
@@ -695,12 +698,12 @@ let ClientModalComponent = class ClientModalComponent {
         this.clientForm = this.fb.group({
             name: ['',
                 [
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({ message: this.errorMessages.required }),
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
                         value: 2,
                         message: this.errorMessages.minLength,
                     }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
                         value: 50,
                         message: this.errorMessages.maxLenght,
                     }),
@@ -708,17 +711,17 @@ let ClientModalComponent = class ClientModalComponent {
             ],
             birthDate: ['',
                 [
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required })
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({ message: this.errorMessages.required })
                 ]
             ],
             phone: ['',
                 [
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({ message: this.errorMessages.required }),
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
                         value: 2,
                         message: this.errorMessages.minLength,
                     }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
                         value: 20,
                         message: this.errorMessages.maxLenght,
                     }),
@@ -726,12 +729,12 @@ let ClientModalComponent = class ClientModalComponent {
             ],
             direction: ['',
                 [
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({ message: this.errorMessages.required }),
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
                         value: 2,
                         message: this.errorMessages.minLength,
                     }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
                         value: 50,
                         message: this.errorMessages.maxLenght,
                     }),
@@ -739,12 +742,12 @@ let ClientModalComponent = class ClientModalComponent {
             ],
             email: ['',
                 [
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].email(),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].email(),
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
                         value: 2,
                         message: this.errorMessages.minLength,
                     }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
                         value: 30,
                         message: this.errorMessages.maxLenght,
                     }),
@@ -752,12 +755,12 @@ let ClientModalComponent = class ClientModalComponent {
             ],
             ci: ['',
                 [
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({ message: this.errorMessages.required }),
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
                         value: 2,
                         message: this.errorMessages.minLength,
                     }),
-                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+                    _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
                         value: 10,
                         message: this.errorMessages.maxLenght,
                     }),
@@ -766,7 +769,7 @@ let ClientModalComponent = class ClientModalComponent {
         });
     }
     ngOnInit() {
-        this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subscription"]();
+        this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subscription"]();
         this.subscribeClient();
     }
     ngOnDestroy() {
@@ -834,6 +837,7 @@ let ClientModalComponent = class ClientModalComponent {
                 this.successMessage();
                 this.refreshClients();
                 this.closeModal();
+                this.router.navigate(['/admin/clientes', response.id]);
             }, error => {
                 this.loading = false;
                 this.errorMessage(error.error.message);
@@ -842,10 +846,11 @@ let ClientModalComponent = class ClientModalComponent {
     }
 };
 ClientModalComponent.ctorParameters = () => [
-    { type: src_app_core_services_client_service__WEBPACK_IMPORTED_MODULE_6__["ClientService"] },
-    { type: src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_5__["AlertService"] },
-    { type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_7__["ModalService"] },
-    { type: _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxFormBuilder"] }
+    { type: src_app_core_services_client_service__WEBPACK_IMPORTED_MODULE_7__["ClientService"] },
+    { type: src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_6__["AlertService"] },
+    { type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_8__["ModalService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxFormBuilder"] }
 ];
 ClientModalComponent.propDecorators = {
     modalButton: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }]

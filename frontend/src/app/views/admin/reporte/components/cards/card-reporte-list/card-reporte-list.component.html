@@ -15,6 +15,28 @@
               Prestamos
             </h3>
             <div class="relative flex flex-wrap m-3">
+              <button
+                type="button"
+                class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                (click)="goToAnotherPage('pagos')">
+                <div class="flex flex-col">
+                  <p class="p-3">
+                    Pagos
+                  </p>
+                  <i class="text-4xl fas fa-calendar"></i>
+                </div>
+              </button>
+              <button
+                type="button"
+                class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                (click)="goToAnotherPageEstado('prestamos', '')">
+                <div class="flex flex-col">
+                  <p class="p-3">
+                    Prestamos (todos)
+                  </p>
+                  <i class="text-4xl fas fa-calendar"></i>
+                </div>
+              </button>
 
               <button
                 type="button"
@@ -68,13 +90,12 @@
                 </div>
               </button>
               <button
-                *ngIf="false"
                 type="button"
                 class="w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                (click)="goToAnotherPage('venta')">
+                (click)="goToAnotherPage('inventario')">
                 <div class="flex flex-col">
                   <p class="p-3">
-                    Ventas
+                    Ventas inventario
                   </p>
                   <i class="text-4xl fas fa-calendar"></i>
                 </div>

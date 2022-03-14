@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormGroupExtension, RxFormBuilder, RxwebValidators } from '@rxweb/reactive-form-validators';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
@@ -104,6 +105,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
     private clientService: ClientService,
     private alertService: AlertService,
     private modalService: ModalService,
+    private router: Router,
     private fb: RxFormBuilder
   ) { }
 
@@ -196,6 +198,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
           this.successMessage();
           this.refreshClients();
           this.closeModal();
+          this.router.navigate(['/admin/clientes', response.id]);
         },
         error => {
           this.loading = false;

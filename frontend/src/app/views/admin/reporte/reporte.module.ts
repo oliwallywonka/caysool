@@ -17,8 +17,8 @@ import { PdfReportePrestamoComponent } from './components/pdfs/pdf-reporte-prest
 import { SharedModule } from "../../shared/shared.module";
 import { CardReporteIngresoSalidaComponent } from './components/cards/card-reporte-ingreso-salida/card-reporte-ingreso-salida.component';
 import { PdfReporteIngresoSalidaComponent } from './components/pdfs/pdf-reporte-ingreso-salida/pdf-reporte-ingreso-salida.component';
-import { PdfPrestamoActivoComponent } from './components/pdfs/pdf-prestamo-activo/pdf-prestamo-activo.component';
-import { PdfPrestamoCanceladoComponent } from './components/pdfs/pdf-prestamo-cancelado/pdf-prestamo-cancelado.component';
+import { PdfPrestamoEstadoComponent } from './components/pdfs/pdf-prestamo-estado/pdf-prestamo-estado.component';
+import { PdfPrestamoGeneralComponent } from './components/pdfs/pdf-prestamo-general/pdf-prestamo-general.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +36,8 @@ import { PdfPrestamoCanceladoComponent } from './components/pdfs/pdf-prestamo-ca
     PdfReportePrestamoComponent,
     CardReporteIngresoSalidaComponent,
     PdfReporteIngresoSalidaComponent,
-    PdfPrestamoActivoComponent,
-    PdfPrestamoCanceladoComponent,
+    PdfPrestamoEstadoComponent,
+    PdfPrestamoGeneralComponent,
   ],
   imports: [SharedModule, ReporteRoutingModule],
 })

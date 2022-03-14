@@ -16,9 +16,107 @@
       </div>
       <div class="w-full ">
         <div class="flex flex-col pt-4 items-baseline w-full">
+          <form
+            autocomplete="off"
+            [formGroup]="reporteForm"
+            (ngSubmit)="save()"
+          >
+            <div class="my-4 relative p-6 flex flex-wrap">
+              <div class="w-full lg:w-6/12 px-4 mb-2">
+                <app-input
+                  [inputForm]="reporteForm"
+                  inputLabel="DESDE"
+                  inputType="date"
+                  inputFormName="from"
+                  formControlName="from"
+                  [value]="reporteForm.value.from">
+                </app-input>
+              </div>
 
+              <div class="w-full lg:w-6/12 px-4 mb-2">
+                <app-input
+                  [inputForm]="reporteForm"
+                  inputLabel="HASTA"
+                  inputType="date"
+                  inputFormName="to"
+                  formControlName="to"
+                  [value]="reporteForm.value.to">
+                </app-input>
+              </div>
+              <div class="flex items-center justify-end ">
+                <button
+                  class="mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="submit"
+                >
+                  <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
+                </button>
+                <app-pdf-reporte-inventario [inventario]="inventarios" [from]="reporteForm.value.from" [to]="reporteForm.value.to" ></app-pdf-reporte-inventario>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
+
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Fecha de compra
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Fecha de venta
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Prenda
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Costo de compra
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Costo de venta
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Diferencia
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="inventarios" >
+                            <tr
+                              *ngFor="let inventario of inventarios"
+                              class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
+                              >
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                  {{inventario.fechaCompra | date:'medium'}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  {{inventario.fechaVenta | date:'medium'}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    {{inventario.descripcion}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{inventario.costoCompra === '0.0' ? inventario.costoPrestamo : inventario.costoCompra}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{inventario.precioVenta}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{(+inventario.precioVenta - +inventario.costoCompra - +inventario.costoPrestamo).toFixed(1)}}
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

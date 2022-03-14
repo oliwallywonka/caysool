@@ -5,12 +5,13 @@ import { Prestamo } from "src/app/interfaces/prestamo";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
-  selector: "app-pdf-prestamo-cancelado",
-  templateUrl: "./pdf-prestamo-cancelado.component.html",
-  styles: [],
+  selector: "app-pdf-prestamo-general",
+  templateUrl: "./pdf-prestamo-general.component.html",
+  styleUrls: ["./pdf-prestamo-general.component.css"],
 })
-export class PdfPrestamoCanceladoComponent implements OnInit {
+export class PdfPrestamoGeneralComponent implements OnInit {
   @Input() prestamos: Prestamo[];
   @Input()
   from: string;
@@ -39,12 +40,12 @@ export class PdfPrestamoCanceladoComponent implements OnInit {
           style: "tableHeader",
         },
         {
-          text: "Comision/Reimpresiones",
+          text: "Cargos Extra(piso)/Reimpresiones",
           style: "tableHeader",
           alignment: "center",
         },
         {
-          text: "Cargos extra",
+          text: "Comision Administrativa",
           style: "tableHeader",
           alignment: "center",
         },
@@ -120,7 +121,7 @@ export class PdfPrestamoCanceladoComponent implements OnInit {
             [
               // REPORTE DE PRESTAMOS
               {
-                text: `Reporte de "PRESTAMOS ${this.prestamos[0].estado}S"`,
+                text: `Reporte de "PRESTAMOS GENERAL"`,
 
                 color: "#333333",
                 width: 800,
@@ -137,7 +138,7 @@ export class PdfPrestamoCanceladoComponent implements OnInit {
           columns: [
             {
               width: 250,
-              text: `Prestamos cancelados Desde ${this.datePipe.transform(
+              text: `Prestamos Desde ${this.datePipe.transform(
                 this.from,
                 "mediumDate"
               )}`,

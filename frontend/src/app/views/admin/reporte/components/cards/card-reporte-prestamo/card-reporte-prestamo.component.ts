@@ -39,7 +39,6 @@ export class CardReportePrestamoComponent implements OnInit, OnDestroy {
 
   getPrestamos() {
     this.loading = true;
-    console.log(this.reporteForm.value);
     this.sub.add(
       this.reporteService.getPrestamosByDate({
         from: this.reporteForm.value.from,
@@ -47,7 +46,6 @@ export class CardReportePrestamoComponent implements OnInit, OnDestroy {
         estado: this.estado
       }).subscribe(
         (prestamos) => {
-          console.log(prestamos);
           if (prestamos) {
             this.prestamos = prestamos;
           }

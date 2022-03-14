@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Inventario\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Inventario\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n          <form\n            autocomplete=\"off\"\n            [formGroup]=\"reporteForm\"\n            (ngSubmit)=\"save()\"\n          >\n            <div class=\"my-4 relative p-6 flex flex-wrap\">\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n                <app-input\n                  [inputForm]=\"reporteForm\"\n                  inputLabel=\"DESDE\"\n                  inputType=\"date\"\n                  inputFormName=\"from\"\n                  formControlName=\"from\"\n                  [value]=\"reporteForm.value.from\">\n                </app-input>\n              </div>\n\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n                <app-input\n                  [inputForm]=\"reporteForm\"\n                  inputLabel=\"HASTA\"\n                  inputType=\"date\"\n                  inputFormName=\"to\"\n                  formControlName=\"to\"\n                  [value]=\"reporteForm.value.to\">\n                </app-input>\n              </div>\n              <div class=\"flex items-center justify-end \">\n                <button\n                  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                  type=\"submit\"\n                >\n                  <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n                </button>\n                <app-pdf-reporte-inventario [inventario]=\"inventarios\" [from]=\"reporteForm.value.from\" [to]=\"reporteForm.value.to\" ></app-pdf-reporte-inventario>\n              </div>\n            </div>\n          </form>\n        </div>\n      </div>\n\n      <div class=\"flex flex-col\">\n        <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n            <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                <div class=\"overflow-hidden shadow-md sm:rounded-lg\">\n                    <table class=\"min-w-full\">\n                        <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                            <tr>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha de compra\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha de venta\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Prenda\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Costo de compra\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Costo de venta\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Diferencia\n                                </th>\n                            </tr>\n                        </thead>\n                        <tbody *ngIf=\"inventarios\" >\n                            <tr\n                              *ngFor=\"let inventario of inventarios\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              >\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                  {{inventario.fechaCompra | date:'medium'}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  {{inventario.fechaVenta | date:'medium'}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{inventario.descripcion}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{inventario.costoCompra === '0.0' ? inventario.costoPrestamo : inventario.costoCompra}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{inventario.precioVenta}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{(+inventario.precioVenta - +inventario.costoCompra - +inventario.costoPrestamo).toFixed(1)}}\n                                </td>\n                            </tr>\n\n\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n</div>\n");
 
 /***/ }),
 
@@ -92,39 +92,6 @@ CardReporteTransaccionComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__d
 
 /***/ }),
 
-/***/ "76eo":
-/*!**********************************************************************************************************!*\
-  !*** ./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-activo/pdf-prestamo-activo.component.ts ***!
-  \**********************************************************************************************************/
-/*! exports provided: PdfPrestamoActivoComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PdfPrestamoActivoComponent", function() { return PdfPrestamoActivoComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _raw_loader_pdf_prestamo_activo_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./pdf-prestamo-activo.component.html */ "pGCz");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
-
-
-
-let PdfPrestamoActivoComponent = class PdfPrestamoActivoComponent {
-    constructor() { }
-    ngOnInit() {
-    }
-};
-PdfPrestamoActivoComponent.ctorParameters = () => [];
-PdfPrestamoActivoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        selector: 'app-pdf-prestamo-activo',
-        template: _raw_loader_pdf_prestamo_activo_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
-    })
-], PdfPrestamoActivoComponent);
-
-
-
-/***/ }),
-
 /***/ "7LO/":
 /*!*********************************************************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/reporte/components/cards/card-reporte-impresion/card-reporte-impresion.component.html ***!
@@ -135,6 +102,239 @@ PdfPrestamoActivoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decora
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Reimpresiones\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"items-center mb-4 ml-2 mt-4\">\n          <form\n            autocomplete=\"off\"\n          >\n            <div class=\"my-4 relative p-6 flex flex-wrap\">\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n              </div>\n\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n              </div>\n              <div class=\"flex items-center justify-end \">\n                <button\n                  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                  type=\"submit\"\n                >\n                <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n                </button>\n              </div>\n            </div>\n          </form>\n        </div>\n\n        <div class=\"flex flex-col\">\n          <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n              <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                  <div class=\"overflow-hidden shadow-md sm:rounded-lg\">\n                      <table class=\"min-w-full\">\n                          <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                              <tr>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Fecha\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Operación\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Cargo\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Comisión\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Cargos Generados\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Amortiguado\n                                  </th>\n                              </tr>\n                          </thead>\n                          <tbody  >\n                              <tr\n\n                                class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                                >\n                                  <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      Bol.\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      Bol.\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      Bol.\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      Bol.\n                                  </td>\n                              </tr>\n\n\n                          </tbody>\n                      </table>\n                  </div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n");
+
+/***/ }),
+
+/***/ "848s":
+/*!************************************************************************************************************!*\
+  !*** ./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-general/pdf-prestamo-general.component.ts ***!
+  \************************************************************************************************************/
+/*! exports provided: PdfPrestamoGeneralComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PdfPrestamoGeneralComponent", function() { return PdfPrestamoGeneralComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_pdf_prestamo_general_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./pdf-prestamo-general.component.html */ "DzLx");
+/* harmony import */ var _pdf_prestamo_general_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pdf-prestamo-general.component.css */ "8afg");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/helpers/base64Images */ "5Y+O");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "5JmO");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ "TruH");
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
+pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_7___default.a.pdfMake.vfs;
+let PdfPrestamoGeneralComponent = class PdfPrestamoGeneralComponent {
+    constructor(datePipe) {
+        this.datePipe = datePipe;
+    }
+    ngOnInit() { }
+    exportToPdf() {
+        let totalInventario = 0;
+        let totalCostoPrestamos = 0;
+        let totalImpresiones = 0;
+        let totalcargosExtra = 0;
+        let totalInteres = 0;
+        let totalPagos = 0;
+        const bodyPrestamo = [
+            [
+                { text: "Fecha de Prestamo", style: "tableHeader" },
+                { text: "Fecha de final", style: "tableHeader" },
+                { text: "Cliente", alignment: "center", style: "tableHeader" },
+                { text: "Prenda", alignment: "center", style: "tableHeader" },
+                {
+                    text: "Monto de prestamo",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Cargos Extra(piso)/Reimpresiones",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Comision Administrativa",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Interes cobrados",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Pagos cobrados",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+            ],
+        ];
+        for (const prestamo of this.prestamos) {
+            totalInventario += +prestamo.inventario.length;
+            totalCostoPrestamos += +prestamo.costoPrestamo;
+            totalImpresiones += +prestamo.costoImpresion + +prestamo.costoAdministracion;
+            totalcargosExtra += +prestamo.costoPiso;
+            totalInteres += +prestamo.cobroInteres;
+            totalPagos += +prestamo.costoCancelado - +prestamo.cobroInteres;
+            bodyPrestamo.push([
+                { text: `${this.datePipe.transform(prestamo.fechaInicio, 'mediumDate')}`, fontSize: 10, alignment: "center" },
+                {
+                    text: `${this.datePipe.transform(prestamo.fechaFinal, 'mediumDate')}`,
+                    fontSize: 10,
+                    alignment: "center",
+                },
+                {
+                    text: `${prestamo.client.name}`,
+                    fontSize: 10,
+                    alignment: "center",
+                },
+                {
+                    text: `${prestamo.inventario.map(i => (i.descripcion + ' '))}`,
+                    fontSize: 10,
+                    alignment: "center",
+                },
+                { text: `Bol. ${prestamo.costoPrestamo}`, fontSize: 10, alignment: "center" },
+                { text: `Bol. ${(+prestamo.costoImpresion + +prestamo.costoAdministracion).toFixed(1)}`, alignment: "center", fontSize: 10 },
+                { text: `Bol. ${prestamo.costoPiso}`, alignment: "center", fontSize: 10 },
+                { text: `Bol. ${prestamo.cobroInteres}`, alignment: "center", fontSize: 10 },
+                { text: `Bol. ${(+prestamo.costoCancelado - +prestamo.cobroInteres).toFixed(1)}`, fontSize: 10, alignment: "center" },
+            ]);
+        }
+        ;
+        const reporte = {
+            // a string or { width: number, height: number }
+            pageSize: "LETTER",
+            // by default we use portrait, you can change it to landscape if you wish
+            pageOrientation: "landscape",
+            // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+            pageMargins: [20, 15, 15, 20],
+            content: [
+                //FECHA Y HORA ACTUAL AL IMPRIMIR
+                {
+                    text: `${this.datePipe.transform(Date.now(), "medium")}`,
+                    fontSize: 8,
+                },
+                {
+                    columns: [
+                        {
+                            width: 90,
+                            height: 40,
+                            fontSize: 9,
+                            margin: [22, 10, 0, 0],
+                            image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_5__["logoCaysool"],
+                        },
+                        [
+                            // REPORTE DE PRESTAMOS
+                            {
+                                text: `Reporte de "PRESTAMOS GENERAL"`,
+                                color: "#333333",
+                                width: 800,
+                                fontSize: 20,
+                                bold: true,
+                                alignment: "center",
+                                margin: [0, 0, 0, 0],
+                            },
+                        ],
+                    ],
+                },
+                "\n",
+                {
+                    columns: [
+                        {
+                            width: 250,
+                            text: `Prestamos Desde ${this.datePipe.transform(this.from, "mediumDate")}`,
+                        },
+                        {
+                            width: "*",
+                            text: `Hasta ${this.datePipe.transform(this.to, "mediumDate")}`,
+                        },
+                    ],
+                },
+                {
+                    style: "tableExample",
+                    table: {
+                        widths: [60, 60, 120, 100, 60, 60, 55, 55, 55],
+                        headerRows: 1,
+                        body: bodyPrestamo,
+                    },
+                    layout: "lightHorizontalLines",
+                },
+                {
+                    style: "tableExample",
+                    table: {
+                        widths: [60, 100, 120, 100, 60, 60, 70, 60, 60],
+                        headerRows: 1,
+                        body: [
+                            [
+                                { text: "Total", fontSize: 14, style: "tableHeader" },
+                                {},
+                                {},
+                                { text: `${totalInventario} unidades`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalCostoPrestamos.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalImpresiones.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalcargosExtra.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalInteres.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalPagos.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                            ],
+                        ],
+                    },
+                    layout: "noBorders",
+                },
+            ],
+            styles: {
+                tableHeader: {
+                    bold: true,
+                    fontSize: 10,
+                    color: "black",
+                },
+                tableExample: {
+                    margin: [0, 10, 0, 5],
+                },
+            },
+        };
+        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6___default.a.createPdf(reporte).open();
+    }
+};
+PdfPrestamoGeneralComponent.ctorParameters = () => [
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["DatePipe"] }
+];
+PdfPrestamoGeneralComponent.propDecorators = {
+    prestamos: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__["Input"] }],
+    from: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__["Input"] }],
+    to: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__["Input"] }]
+};
+PdfPrestamoGeneralComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
+        selector: "app-pdf-prestamo-general",
+        template: _raw_loader_pdf_prestamo_general_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_pdf_prestamo_general_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], PdfPrestamoGeneralComponent);
+
+
+
+/***/ }),
+
+/***/ "8afg":
+/*!*************************************************************************************************************!*\
+  !*** ./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-general/pdf-prestamo-general.component.css ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwZGYtcHJlc3RhbW8tZ2VuZXJhbC5jb21wb25lbnQuY3NzIn0= */");
 
 /***/ }),
 
@@ -150,18 +350,256 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PdfReportePagoComponent", function() { return PdfReportePagoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_pdf_reporte_pago_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./pdf-reporte-pago.component.html */ "PX1f");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/helpers/base64Images */ "5Y+O");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "5JmO");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
 
 
 
 let PdfReportePagoComponent = class PdfReportePagoComponent {
-    constructor() { }
-    ngOnInit() {
+    constructor(datePipe) {
+        this.datePipe = datePipe;
+    }
+    ngOnInit() { }
+    exportToPdf() {
+        let totalCantidadPagos = 0;
+        let totalCostoReimpresiones = 0;
+        let totalCostoPagos = 0;
+        let totalCostoAmortiguado = 0;
+        let totalComisionAdministrativa = 0;
+        let totalCargosExtra = 0;
+        let totalInteresesCobrados = 0;
+        let totalCobrado = 0;
+        const bodyPagos = [
+            [
+                { text: "Fecha de pago", style: "tableHeader" },
+                {
+                    text: "Tipo de pago",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Reimpreciones",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Pago (cancelacion)",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Amortiguado",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Comision Administrativa",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Cargos extra",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Interes cobrado",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Total cobrado",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+            ],
+        ];
+        totalCantidadPagos = this.pagos.length + this.impresiones.length;
+        for (const pago of this.pagos) {
+            totalCostoPagos += +pago.costoPago + +pago.costoInteres;
+            totalCostoAmortiguado += +pago.costoPago;
+            totalComisionAdministrativa += +pago.costoAdministracion;
+            totalCargosExtra += +pago.costoPiso;
+            totalInteresesCobrados += +pago.costoInteres;
+            totalCobrado += +pago.costoTotal;
+            bodyPagos.push([
+                { text: `${this.datePipe.transform(pago.createdAt, 'mediumDate')}`, fontSize: 9, alignment: "center" },
+                { text: `${pago.tipoPago === 'AMORTIZACION' ? 'AMORTIZACIÓN' : pago.tipoPago === 'LIQUIDACION' ? 'LIQUIDACIÓN' : pago.tipoPago}`, fontSize: 9, alignment: "center" },
+                { text: `Bol. 0.0`, fontSize: 9, alignment: "center" },
+                { text: `Bol. ${(+pago.costoPago + +pago.costoInteres).toFixed(1)}`, fontSize: 9, alignment: "center" },
+                { text: `Bol. ${pago.costoPago}`, fontSize: 9, alignment: "center" },
+                { text: `Bol. ${pago.costoAdministracion}`, alignment: "center", fontSize: 9 },
+                { text: `Bol. ${pago.costoPiso}`, alignment: "center", fontSize: 9 },
+                { text: `Bol. ${pago.costoInteres}`, alignment: "center", fontSize: 9 },
+                { text: `Bol. ${pago.costoTotal}`, fontSize: 9, alignment: "center" },
+            ]);
+        }
+        for (const impresion of this.impresiones) {
+            totalCostoReimpresiones += +impresion.costoImpresion;
+            totalCobrado += +impresion.costoImpresion;
+            bodyPagos.push([
+                { text: `${this.datePipe.transform(impresion.createdAt, 'mediumDate')}`, fontSize: 9, alignment: "center" },
+                { text: `${impresion.tipoDocumento === 'PAGO' ? 'REIMPRESIÓN' : 'REIMPRESIÓN'}`, fontSize: 9, alignment: "center" },
+                { text: `Bol. ${impresion.costoImpresion}`, fontSize: 9, alignment: "center" },
+                { text: `Bol. 0.0`, fontSize: 9, alignment: "center" },
+                { text: `Bol. 0.0`, fontSize: 9, alignment: "center" },
+                { text: `Bol. 0.0`, alignment: "center", fontSize: 9 },
+                { text: `Bol. 0.0`, alignment: "center", fontSize: 9 },
+                { text: `Bol. 0.0`, alignment: "center", fontSize: 9 },
+                { text: `Bol. ${impresion.costoImpresion}`, fontSize: 9, alignment: "center" },
+            ]);
+        }
+        const reporte = {
+            // a string or { width: number, height: number }
+            pageSize: "LETTER",
+            // by default we use portrait, you can change it to landscape if you wish
+            pageOrientation: "landscape",
+            // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+            pageMargins: [20, 15, 15, 20],
+            content: [
+                //FECHA Y HORA ACTUAL AL IMPRIMIR
+                {
+                    text: `${this.datePipe.transform(Date.now(), "medium")}`,
+                    fontSize: 8,
+                },
+                {
+                    columns: [
+                        {
+                            width: 90,
+                            height: 40,
+                            fontSize: 9,
+                            margin: [22, 10, 0, 0],
+                            image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__["logoCaysool"],
+                        },
+                        [
+                            // REPORTE DE PRESTAMOS
+                            {
+                                text: 'Reporte de "Resumen pagos por pagos"',
+                                color: "#333333",
+                                width: 800,
+                                fontSize: 20,
+                                bold: true,
+                                alignment: "center",
+                                margin: [0, 0, 0, 0],
+                            },
+                        ],
+                    ],
+                },
+                "\n",
+                {
+                    columns: [
+                        { width: 250, text: `Pagos por pagos Desde ${this.datePipe.transform(this.from, "mediumDate")}` },
+                        { width: "*", text: `Hasta ${this.datePipe.transform(this.to, "mediumDate")}` },
+                    ],
+                },
+                {
+                    style: "tableExample",
+                    table: {
+                        widths: [70, 60, 100, 90, 60, 80, 55, 55, 55],
+                        headerRows: 1,
+                        body: bodyPagos,
+                    },
+                    layout: "lightHorizontalLines",
+                },
+                //EN TIPO DE PAGO CONTAR LAS FILAS EN EL TOTAL
+                {
+                    style: "tableExample",
+                    table: {
+                        widths: [70, 80, 100, 110, 60, 80, 70, 60, 60],
+                        headerRows: 1,
+                        body: [
+                            [
+                                {
+                                    text: "Total",
+                                    alignment: "center",
+                                    fontSize: 11,
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `${totalCantidadPagos}`,
+                                    fontSize: 11,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `Bol. ${totalCostoReimpresiones.toFixed(1)}`,
+                                    fontSize: 11,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `Bol. ${totalCostoPagos.toFixed(1)}`,
+                                    fontSize: 11,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `Bol. ${totalCostoAmortiguado.toFixed(1)}`,
+                                    fontSize: 11,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `Bol. ${totalComisionAdministrativa.toFixed(1)}`,
+                                    fontSize: 11,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `Bol. ${totalCargosExtra.toFixed(1)}`,
+                                    fontSize: 11,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `Bol. ${totalInteresesCobrados.toFixed(1)}`,
+                                    fontSize: 11,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `Bol. ${totalCobrado.toFixed(1)}`,
+                                    fontSize: 11,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                            ],
+                        ],
+                    },
+                    layout: "noBorders",
+                },
+            ],
+            styles: {
+                tableHeader: {
+                    bold: true,
+                    fontSize: 10,
+                    color: "black",
+                },
+                tableExample: {
+                    margin: [0, 10, 0, 5],
+                },
+            },
+        };
+        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.createPdf(reporte).open();
     }
 };
-PdfReportePagoComponent.ctorParameters = () => [];
+PdfReportePagoComponent.ctorParameters = () => [
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"] }
+];
+PdfReportePagoComponent.propDecorators = {
+    pagos: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    impresiones: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    from: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    to: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
+};
 PdfReportePagoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-pdf-reporte-pago',
         template: _raw_loader_pdf_reporte_pago_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
     })
@@ -340,6 +778,236 @@ PdfReportePrestamoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decor
 ], PdfReportePrestamoComponent);
 
 
+
+/***/ }),
+
+/***/ "DUqt":
+/*!**********************************************************************************************************!*\
+  !*** ./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-estado/pdf-prestamo-estado.component.ts ***!
+  \**********************************************************************************************************/
+/*! exports provided: PdfPrestamoEstadoComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PdfPrestamoEstadoComponent", function() { return PdfPrestamoEstadoComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_pdf_prestamo_estado_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./pdf-prestamo-estado.component.html */ "av7v");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/helpers/base64Images */ "5Y+O");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "5JmO");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ "TruH");
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default.a.pdfMake.vfs;
+let PdfPrestamoEstadoComponent = class PdfPrestamoEstadoComponent {
+    constructor(datePipe) {
+        this.datePipe = datePipe;
+    }
+    ngOnInit() { }
+    exportToPdf() {
+        let totalInventario = 0;
+        let totalCostoPrestamos = 0;
+        let totalImpresiones = 0;
+        let totalcargosExtra = 0;
+        let totalInteres = 0;
+        let totalPagos = 0;
+        const bodyPrestamo = [
+            [
+                { text: "Fecha de Prestamo", style: "tableHeader" },
+                { text: "Fecha de final", style: "tableHeader" },
+                { text: "Cliente", alignment: "center", style: "tableHeader" },
+                { text: "Prenda", alignment: "center", style: "tableHeader" },
+                {
+                    text: "Monto de prestamo",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Cargos Extra(piso)/Reimpresiones",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Comision Administrativa",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Interes cobrados",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+                {
+                    text: "Pagos cobrados",
+                    style: "tableHeader",
+                    alignment: "center",
+                },
+            ],
+        ];
+        for (const prestamo of this.prestamos) {
+            totalInventario += +prestamo.inventario.length;
+            totalCostoPrestamos += +prestamo.costoPrestamo;
+            totalImpresiones += +prestamo.costoImpresion + +prestamo.costoAdministracion;
+            totalcargosExtra += +prestamo.costoPiso;
+            totalInteres += +prestamo.cobroInteres;
+            totalPagos += +prestamo.costoCancelado - +prestamo.cobroInteres;
+            bodyPrestamo.push([
+                { text: `${this.datePipe.transform(prestamo.fechaInicio, 'mediumDate')}`, fontSize: 10, alignment: "center" },
+                {
+                    text: `${this.datePipe.transform(prestamo.fechaFinal, 'mediumDate')}`,
+                    fontSize: 10,
+                    alignment: "center",
+                },
+                {
+                    text: `${prestamo.client.name}`,
+                    fontSize: 10,
+                    alignment: "center",
+                },
+                {
+                    text: `${prestamo.inventario.map(i => (i.descripcion + ' '))}`,
+                    fontSize: 10,
+                    alignment: "center",
+                },
+                { text: `Bol. ${prestamo.costoPrestamo}`, fontSize: 10, alignment: "center" },
+                { text: `Bol. ${(+prestamo.costoImpresion + +prestamo.costoAdministracion).toFixed(1)}`, alignment: "center", fontSize: 10 },
+                { text: `Bol. ${prestamo.costoPiso}`, alignment: "center", fontSize: 10 },
+                { text: `Bol. ${prestamo.cobroInteres}`, alignment: "center", fontSize: 10 },
+                { text: `Bol. ${(+prestamo.costoCancelado - +prestamo.cobroInteres).toFixed(1)}`, fontSize: 10, alignment: "center" },
+            ]);
+        }
+        ;
+        const reporte = {
+            // a string or { width: number, height: number }
+            pageSize: "LETTER",
+            // by default we use portrait, you can change it to landscape if you wish
+            pageOrientation: "landscape",
+            // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+            pageMargins: [20, 15, 15, 20],
+            content: [
+                //FECHA Y HORA ACTUAL AL IMPRIMIR
+                {
+                    text: `${this.datePipe.transform(Date.now(), "medium")}`,
+                    fontSize: 8,
+                },
+                {
+                    columns: [
+                        {
+                            width: 90,
+                            height: 40,
+                            fontSize: 9,
+                            margin: [22, 10, 0, 0],
+                            image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__["logoCaysool"],
+                        },
+                        [
+                            // REPORTE DE PRESTAMOS
+                            {
+                                text: `Reporte de "PRESTAMOS ${this.prestamos[0].estado}S"`,
+                                color: "#333333",
+                                width: 800,
+                                fontSize: 20,
+                                bold: true,
+                                alignment: "center",
+                                margin: [0, 0, 0, 0],
+                            },
+                        ],
+                    ],
+                },
+                "\n",
+                {
+                    columns: [
+                        {
+                            width: 250,
+                            text: `Prestamos ${this.prestamos[0].estado}S Desde ${this.datePipe.transform(this.from, "mediumDate")}`,
+                        },
+                        {
+                            width: "*",
+                            text: `Hasta ${this.datePipe.transform(this.to, "mediumDate")}`,
+                        },
+                    ],
+                },
+                {
+                    style: "tableExample",
+                    table: {
+                        widths: [60, 60, 120, 100, 60, 60, 55, 55, 55],
+                        headerRows: 1,
+                        body: bodyPrestamo,
+                    },
+                    layout: "lightHorizontalLines",
+                },
+                {
+                    style: "tableExample",
+                    table: {
+                        widths: [60, 100, 120, 100, 60, 60, 70, 60, 60],
+                        headerRows: 1,
+                        body: [
+                            [
+                                { text: "Total", fontSize: 14, style: "tableHeader" },
+                                {},
+                                {},
+                                { text: `${totalInventario} unidades`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalCostoPrestamos.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalImpresiones.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalcargosExtra.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalInteres.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                                { text: `Bol. ${totalPagos.toFixed(1)}`, alignment: "center", style: "tableHeader" },
+                            ],
+                        ],
+                    },
+                    layout: "noBorders",
+                },
+            ],
+            styles: {
+                tableHeader: {
+                    bold: true,
+                    fontSize: 10,
+                    color: "black",
+                },
+                tableExample: {
+                    margin: [0, 10, 0, 5],
+                },
+            },
+        };
+        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.createPdf(reporte).open();
+    }
+};
+PdfPrestamoEstadoComponent.ctorParameters = () => [
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"] }
+];
+PdfPrestamoEstadoComponent.propDecorators = {
+    prestamos: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    from: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    to: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
+};
+PdfPrestamoEstadoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: "app-pdf-prestamo-estado",
+        template: _raw_loader_pdf_prestamo_estado_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+    })
+], PdfPrestamoEstadoComponent);
+
+
+
+/***/ }),
+
+/***/ "DzLx":
+/*!****************************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-general/pdf-prestamo-general.component.html ***!
+  \****************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<button\n  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n  type=\"button\"\n  (click)=\"exportToPdf()\"\n>\n  <i class=\"fas fa-pdf\"></i> Imprimir 2\n</button>\n");
 
 /***/ }),
 
@@ -763,7 +1431,7 @@ CardReporteListComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>pdf-reporte-pago works!</p>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<button\n  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n  type=\"button\"\n  (click)=\"exportToPdf()\"\n>\n  <i class=\"fas fa-pdf\"></i> Imprimir\n</button>\n");
 
 /***/ }),
 
@@ -781,22 +1449,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_card_reporte_inventario_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./card-reporte-inventario.component.html */ "+Zr/");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/core/services/reporte.service */ "Tutu");
+/* harmony import */ var _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @rxweb/reactive-form-validators */ "XKlN");
+/* harmony import */ var rxjs_internal_Subscription__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/internal/Subscription */ "zB/H");
+/* harmony import */ var rxjs_internal_Subscription__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_Subscription__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
 
 
 
 
 let CardReporteInventarioComponent = class CardReporteInventarioComponent {
-    constructor(location) {
+    constructor(reporteService, location, fb) {
+        this.reporteService = reporteService;
         this.location = location;
+        this.fb = fb;
+        this.loading = false;
+        this.inventarios = [];
+        this.reporteForm = this.fb.group({
+            from: [new Date().toISOString().substring(0, 10),],
+            to: [new Date().toISOString().substring(0, 10),]
+        });
     }
     ngOnInit() {
+        this.sub = new rxjs_internal_Subscription__WEBPACK_IMPORTED_MODULE_6__["Subscription"]();
+        this.getInventarios();
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+    getInventarios() {
+        this.loading = true;
+        this.sub.add(this.reporteService.getInventarioByDate({
+            from: this.reporteForm.value.from,
+            to: this.reporteForm.value.to
+        }).subscribe((inventarios) => {
+            if (inventarios) {
+                this.inventarios = inventarios;
+            }
+            this.loading = false;
+        }));
     }
     goToBackPage() {
         this.location.back();
     }
+    save() {
+        this.getInventarios();
+    }
 };
 CardReporteInventarioComponent.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"] }
+    { type: src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_4__["ReporteService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"] },
+    { type: _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_5__["RxFormBuilder"] }
 ];
 CardReporteInventarioComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -818,7 +1523,7 @@ CardReporteInventarioComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__de
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Pagos\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Pagos\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n          <form\n            autocomplete=\"off\"\n            [formGroup]=\"reporteForm\"\n            (ngSubmit)=\"save()\"\n          >\n            <div class=\"my-4 relative p-6 flex flex-wrap\">\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n                <app-input\n                  [inputForm]=\"reporteForm\"\n                  inputLabel=\"DESDE\"\n                  inputType=\"date\"\n                  inputFormName=\"from\"\n                  formControlName=\"from\"\n                  [value]=\"reporteForm.value.from\">\n                </app-input>\n              </div>\n\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n                <app-input\n                  [inputForm]=\"reporteForm\"\n                  inputLabel=\"HASTA\"\n                  inputType=\"date\"\n                  inputFormName=\"to\"\n                  formControlName=\"to\"\n                  [value]=\"reporteForm.value.to\">\n                </app-input>\n              </div>\n              <div class=\"flex items-center justify-end \">\n                <button\n                  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                  type=\"submit\"\n                >\n                  <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n                </button>\n                <app-pdf-reporte-pago\n                  [pagos]=\"pagos\"\n                  [impresiones]=\"impresiones\"\n                  [from]=\"reporteForm.value.from\"\n                  [to]=\"reporteForm.value.to\">\n                </app-pdf-reporte-pago>\n\n              </div>\n            </div>\n          </form>\n        </div>\n      </div>\n\n      <div class=\"flex flex-col\">\n        <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n            <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                <div class=\"overflow-hidden shadow-md sm:rounded-lg\">\n                    <table class=\"min-w-full\">\n                        <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                            <tr>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha de Pago\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Tipo de Pago\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Reimpresiones\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Pago (cancelación)\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Amortiguado\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Comisión Administrativa\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Cargos extra\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Cargos Interes Cobrado\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Total cobrado\n                                </th>\n                            </tr>\n                        </thead>\n                        <tbody *ngIf=\"pagos\" >\n                            <tr\n                              *ngFor=\"let pago of pagos\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              >\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                  {{pago.createdAt | date:'medium'}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  {{ pago.tipoPago === 'AMORTIZACION' ? 'AMORTIZACIÓN' : pago.tipoPago === 'LIQUIDACION' ? 'LIQUIDACIÓN' : pago.tipoPago }}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. 0.0\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{(+pago.costoPago + +pago.costoInteres).toFixed(1)}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{pago.costoPago}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{pago.costoAdministracion}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{pago.costoPiso}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{pago.costoInteres}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{pago.costoTotal}}\n                              </td>\n                            </tr>\n\n\n                        </tbody>\n                        <tbody *ngIf=\"pagos\" >\n                          <tr\n                            *ngFor=\"let impresion of impresiones\"\n                            class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                            >\n                              <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                {{impresion.createdAt | date:'medium'}}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                REIMPRESIÓN\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ impresion.costoImpresion }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. 0.0\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. 0.0\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. 0.0\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                Bol. 0.0\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                Bol. 0.0\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                Bol. {{ impresion.costoImpresion }}\n                            </td>\n                          </tr>\n                      </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n</div>\n");
 
 /***/ }),
 
@@ -983,7 +1688,7 @@ ReporteService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>pdf-reporte-inventario works!</p>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<button\n  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n  type=\"button\"\n  (click)=\"exportToPdf()\"\n>\n  <i class=\"fas fa-pdf\"></i> Imprimir\n</button>\n");
 
 /***/ }),
 
@@ -1002,23 +1707,74 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _card_reporte_pago_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./card-reporte-pago.component.css */ "MyL/");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/core/services/reporte.service */ "Tutu");
+/* harmony import */ var _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @rxweb/reactive-form-validators */ "XKlN");
+/* harmony import */ var rxjs_internal_Subscription__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/internal/Subscription */ "zB/H");
+/* harmony import */ var rxjs_internal_Subscription__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_Subscription__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
 
 
 
 
 
 let CardReportePagoComponent = class CardReportePagoComponent {
-    constructor(location) {
+    constructor(reporteService, location, fb) {
+        this.reporteService = reporteService;
         this.location = location;
+        this.fb = fb;
+        this.loading = false;
+        this.pagos = [];
+        this.impresiones = [];
+        this.reporteForm = this.fb.group({
+            from: [new Date().toISOString().substring(0, 10),],
+            to: [new Date().toISOString().substring(0, 10),]
+        });
     }
     ngOnInit() {
+        this.sub = new rxjs_internal_Subscription__WEBPACK_IMPORTED_MODULE_7__["Subscription"]();
+        this.getPagos();
+        this.getImpresiones();
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+    getImpresiones() {
+        this.loading = true;
+        this.sub.add(this.reporteService.getImpresionesByDate({
+            from: this.reporteForm.value.from,
+            to: this.reporteForm.value.to,
+        }).subscribe((impresiones) => {
+            if (impresiones) {
+                this.impresiones = impresiones;
+            }
+            this.loading = false;
+        }));
+    }
+    getPagos() {
+        this.loading = true;
+        this.sub.add(this.reporteService.getPagosByDate({
+            from: this.reporteForm.value.from,
+            to: this.reporteForm.value.to,
+        }).subscribe((pagos) => {
+            if (pagos) {
+                this.pagos = pagos;
+            }
+            this.loading = false;
+        }));
     }
     goToBackPage() {
         this.location.back();
     }
+    save() {
+        this.getPagos();
+    }
 };
 CardReportePagoComponent.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"] }
+    { type: src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_5__["ReporteService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"] },
+    { type: _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_6__["RxFormBuilder"] }
 ];
 CardReportePagoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -1032,220 +1788,16 @@ CardReportePagoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate
 
 /***/ }),
 
-/***/ "auY5":
-/*!****************************************************************************************************************!*\
-  !*** ./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-cancelado/pdf-prestamo-cancelado.component.ts ***!
-  \****************************************************************************************************************/
-/*! exports provided: PdfPrestamoCanceladoComponent */
+/***/ "av7v":
+/*!**************************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-estado/pdf-prestamo-estado.component.html ***!
+  \**************************************************************************************************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PdfPrestamoCanceladoComponent", function() { return PdfPrestamoCanceladoComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _raw_loader_pdf_prestamo_cancelado_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./pdf-prestamo-cancelado.component.html */ "nLhP");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/helpers/base64Images */ "5Y+O");
-/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "5JmO");
-/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ "TruH");
-/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__);
-
-
-
-
-
-
-
-pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default.a.pdfMake.vfs;
-let PdfPrestamoCanceladoComponent = class PdfPrestamoCanceladoComponent {
-    constructor(datePipe) {
-        this.datePipe = datePipe;
-    }
-    ngOnInit() { }
-    exportToPdf() {
-        let totalInventario = 0;
-        let totalCostoPrestamos = 0;
-        let totalImpresiones = 0;
-        let totalcargosExtra = 0;
-        let totalInteres = 0;
-        let totalPagos = 0;
-        const bodyPrestamo = [
-            [
-                { text: "Fecha de Prestamo", style: "tableHeader" },
-                { text: "Fecha de final", style: "tableHeader" },
-                { text: "Cliente", alignment: "center", style: "tableHeader" },
-                { text: "Prenda", alignment: "center", style: "tableHeader" },
-                {
-                    text: "Monto de prestamo",
-                    alignment: "center",
-                    style: "tableHeader",
-                },
-                {
-                    text: "Comision/Reimpresiones",
-                    style: "tableHeader",
-                    alignment: "center",
-                },
-                {
-                    text: "Cargos extra",
-                    style: "tableHeader",
-                    alignment: "center",
-                },
-                {
-                    text: "Interes cobrados",
-                    style: "tableHeader",
-                    alignment: "center",
-                },
-                {
-                    text: "Pagos cobrados",
-                    style: "tableHeader",
-                    alignment: "center",
-                },
-            ],
-        ];
-        for (const prestamo of this.prestamos) {
-            totalInventario += +prestamo.inventario.length;
-            totalCostoPrestamos += +prestamo.costoPrestamo;
-            totalImpresiones += +prestamo.costoImpresion + +prestamo.costoAdministracion;
-            totalcargosExtra += +prestamo.costoPiso;
-            totalInteres += +prestamo.cobroInteres;
-            totalPagos += +prestamo.costoCancelado - +prestamo.cobroInteres;
-            bodyPrestamo.push([
-                { text: `${this.datePipe.transform(prestamo.fechaInicio, 'mediumDate')}`, fontSize: 10, alignment: "center" },
-                {
-                    text: `${this.datePipe.transform(prestamo.fechaFinal, 'mediumDate')}`,
-                    fontSize: 10,
-                    alignment: "center",
-                },
-                {
-                    text: `${prestamo.client.name}`,
-                    fontSize: 10,
-                    alignment: "center",
-                },
-                {
-                    text: `${prestamo.inventario.map(i => (i.descripcion + ' '))}`,
-                    fontSize: 10,
-                    alignment: "center",
-                },
-                { text: `Bol. ${prestamo.costoPrestamo}`, fontSize: 10, alignment: "center" },
-                { text: `Bol. ${(+prestamo.costoImpresion + +prestamo.costoAdministracion).toFixed(1)}`, alignment: "center", fontSize: 10 },
-                { text: `Bol. ${prestamo.costoPiso}`, alignment: "center", fontSize: 10 },
-                { text: `Bol. ${prestamo.cobroInteres}`, alignment: "center", fontSize: 10 },
-                { text: `Bol. ${(+prestamo.costoCancelado - +prestamo.cobroInteres).toFixed(1)}`, fontSize: 10, alignment: "center" },
-            ]);
-        }
-        ;
-        const reporte = {
-            // a string or { width: number, height: number }
-            pageSize: "LETTER",
-            // by default we use portrait, you can change it to landscape if you wish
-            pageOrientation: "landscape",
-            // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-            pageMargins: [20, 15, 15, 20],
-            content: [
-                //FECHA Y HORA ACTUAL AL IMPRIMIR
-                {
-                    text: `${this.datePipe.transform(Date.now(), "medium")}`,
-                    fontSize: 8,
-                },
-                {
-                    columns: [
-                        {
-                            width: 90,
-                            height: 40,
-                            fontSize: 9,
-                            margin: [22, 10, 0, 0],
-                            image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__["logoCaysool"],
-                        },
-                        [
-                            // REPORTE DE PRESTAMOS
-                            {
-                                text: `Reporte de "PRESTAMOS ${this.prestamos[0].estado}S"`,
-                                color: "#333333",
-                                width: 800,
-                                fontSize: 20,
-                                bold: true,
-                                alignment: "center",
-                                margin: [0, 0, 0, 0],
-                            },
-                        ],
-                    ],
-                },
-                "\n",
-                {
-                    columns: [
-                        {
-                            width: 250,
-                            text: `Prestamos cancelados Desde ${this.datePipe.transform(this.from, "mediumDate")}`,
-                        },
-                        {
-                            width: "*",
-                            text: `Hasta ${this.datePipe.transform(this.to, "mediumDate")}`,
-                        },
-                    ],
-                },
-                {
-                    style: "tableExample",
-                    table: {
-                        widths: [60, 60, 120, 100, 60, 60, 55, 55, 55],
-                        headerRows: 1,
-                        body: bodyPrestamo,
-                    },
-                    layout: "lightHorizontalLines",
-                },
-                {
-                    style: "tableExample",
-                    table: {
-                        widths: [60, 100, 120, 100, 60, 60, 70, 60, 60],
-                        headerRows: 1,
-                        body: [
-                            [
-                                { text: "Total", fontSize: 14, style: "tableHeader" },
-                                {},
-                                {},
-                                { text: `${totalInventario} unidades`, alignment: "center", style: "tableHeader" },
-                                { text: `Bol. ${totalCostoPrestamos.toFixed(1)}`, alignment: "center", style: "tableHeader" },
-                                { text: `Bol. ${totalImpresiones.toFixed(1)}`, alignment: "center", style: "tableHeader" },
-                                { text: `Bol. ${totalcargosExtra.toFixed(1)}`, alignment: "center", style: "tableHeader" },
-                                { text: `Bol. ${totalInteres.toFixed(1)}`, alignment: "center", style: "tableHeader" },
-                                { text: `Bol. ${totalPagos.toFixed(1)}`, alignment: "center", style: "tableHeader" },
-                            ],
-                        ],
-                    },
-                    layout: "noBorders",
-                },
-            ],
-            styles: {
-                tableHeader: {
-                    bold: true,
-                    fontSize: 10,
-                    color: "black",
-                },
-                tableExample: {
-                    margin: [0, 10, 0, 5],
-                },
-            },
-        };
-        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.createPdf(reporte).open();
-    }
-};
-PdfPrestamoCanceladoComponent.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"] }
-];
-PdfPrestamoCanceladoComponent.propDecorators = {
-    prestamos: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
-    from: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
-    to: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
-};
-PdfPrestamoCanceladoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: "app-pdf-prestamo-cancelado",
-        template: _raw_loader_pdf_prestamo_cancelado_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
-    })
-], PdfPrestamoCanceladoComponent);
-
-
+/* harmony default export */ __webpack_exports__["default"] = ("<button\n  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n  type=\"button\"\n  (click)=\"exportToPdf()\"\n>\n  <i class=\"fas fa-pdf\"></i> Imprimir\n</button>\n");
 
 /***/ }),
 
@@ -1294,20 +1846,203 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PdfReporteInventarioComponent", function() { return PdfReporteInventarioComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_pdf_reporte_inventario_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./pdf-reporte-inventario.component.html */ "ZhH5");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/helpers/base64Images */ "5Y+O");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "5JmO");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ "TruH");
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
+
+
+
+
+pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default.a.pdfMake.vfs;
 let PdfReporteInventarioComponent = class PdfReporteInventarioComponent {
-    constructor() { }
-    ngOnInit() {
+    constructor(datePipe) {
+        this.datePipe = datePipe;
+    }
+    ngOnInit() { }
+    exportToPdf() {
+        let totalInventario = 0;
+        let totalCostoCompras = 0;
+        let totalCostoVenta = 0;
+        let totalDiferencia = 0;
+        const bodyInventario = [
+            [
+                {
+                    text: "Fecha de compra",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Fecha de venta",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                { text: "Prenda", alignment: "center", style: "tableHeader" },
+                {
+                    text: "Costo de compra",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Costo de venta",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+                {
+                    text: "Diferencia",
+                    alignment: "center",
+                    style: "tableHeader",
+                },
+            ],
+        ];
+        for (const i of this.inventario) {
+            totalInventario = this.inventario.length;
+            totalCostoCompras += +i.costoCompra + +i.costoPrestamo;
+            totalCostoVenta += +i.precioVenta;
+            totalDiferencia += +i.precioVenta - (+i.costoCompra + +i.costoCompra);
+            bodyInventario.push([
+                { text: `${this.datePipe.transform(i.fechaCompra, 'mediumDate')}`, alignment: "center", fontSize: 9 },
+                { text: `${this.datePipe.transform(i.fechaVenta, 'mediumDate')}`, alignment: "center", fontSize: 9 },
+                { text: `${i.descripcion}`, alignment: "center", fontSize: 9 },
+                { text: `Bol. ${+i.costoCompra === 0.0 ? i.costoPrestamo : i.costoCompra}`, alignment: "right", fontSize: 9 },
+                { text: `Bol. ${i.precioVenta}`, alignment: "right", fontSize: 9 },
+                { text: `Bol. ${(+i.precioVenta - (+i.costoCompra + +i.costoCompra)).toFixed(1)}`, alignment: "right", fontSize: 9 },
+            ]);
+        }
+        const reporte = {
+            // a string or { width: number, height: number }
+            pageSize: "LETTER",
+            // by default we use portrait, you can change it to landscape if you wish
+            pageOrientation: "landscape",
+            // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+            pageMargins: [20, 15, 15, 20],
+            content: [
+                //FECHA Y HORA ACTUAL AL IMPRIMIR
+                {
+                    text: `${this.datePipe.transform(Date.now())}`,
+                    fontSize: 8,
+                },
+                {
+                    columns: [
+                        {
+                            width: 90,
+                            height: 40,
+                            fontSize: 9,
+                            margin: [22, 10, 0, 0],
+                            image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__["logoCaysool"],
+                        },
+                        [
+                            // REPORTE DE VENTAS
+                            {
+                                text: 'Reporte de "Ventas"',
+                                color: "#333333",
+                                width: 800,
+                                fontSize: 20,
+                                bold: true,
+                                alignment: "center",
+                                margin: [0, 0, 0, 0],
+                            },
+                        ],
+                    ],
+                },
+                "\n",
+                {
+                    columns: [
+                        { width: 10, text: "", bold: true, fontSize: 14 },
+                        {
+                            columns: [
+                                {
+                                    width: 250,
+                                    text: `Ventas desde ${this.datePipe.transform(this.from, "mediumDate")}`,
+                                    bold: false,
+                                    fontSize: 12,
+                                },
+                                { width: "*", text: `Hasta ${this.datePipe.transform(this.to, "mediumDate")}` },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    style: "tableExample",
+                    table: {
+                        widths: [70, 70, 210, 100, 100, 100],
+                        headerRows: 1,
+                        body: bodyInventario,
+                    },
+                    layout: "lightHorizontalLines",
+                },
+                //suma total ventas y tambien de la diferencia COSTO DE VENTA, COSTO DE COMPRA
+                {
+                    table: {
+                        widths: [70, 70, 210, 100, 100, 100],
+                        headerRows: 1,
+                        body: [
+                            [
+                                { text: "Total", alignment: "center", style: "tableHeader" },
+                                {
+                                    text: "",
+                                    fontSize: 10,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `${totalInventario} U.`,
+                                    fontSize: 10,
+                                    alignment: "center",
+                                    style: "tableHeader",
+                                },
+                                {
+                                    text: `Bol. ${totalCostoCompras.toFixed(1)}`,
+                                    fontSize: 10,
+                                    alignment: "right",
+                                    style: "tableHeader",
+                                },
+                                { text: `Bol. ${totalCostoVenta.toFixed(1)}`, alignment: "right", style: "tableHeader" },
+                                {
+                                    text: `Bol. ${totalDiferencia.toFixed(1)}`,
+                                    fontSize: 10,
+                                    alignment: "right",
+                                    style: "tableHeader",
+                                },
+                            ],
+                        ],
+                    },
+                    // layout: 'noBorders'
+                    layout: "lightHorizontalLines",
+                },
+            ],
+            styles: {
+                tableHeader: {
+                    bold: true,
+                    fontSize: 10,
+                    color: "black",
+                },
+                tableExample: {
+                    margin: [0, 10, 0, 5],
+                },
+            },
+        };
+        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.createPdf(reporte).open();
     }
 };
-PdfReporteInventarioComponent.ctorParameters = () => [];
+PdfReporteInventarioComponent.ctorParameters = () => [
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"] }
+];
+PdfReporteInventarioComponent.propDecorators = {
+    inventario: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    from: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+    to: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
+};
 PdfReporteInventarioComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        selector: 'app-pdf-reporte-inventario',
-        template: _raw_loader_pdf_reporte_inventario_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: "app-pdf-reporte-inventario",
+        template: _raw_loader_pdf_reporte_inventario_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
     })
 ], PdfReporteInventarioComponent);
 
@@ -1337,7 +2072,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Prestamos {{ estado }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n          <form\n            autocomplete=\"off\"\n            [formGroup]=\"reporteForm\"\n            (ngSubmit)=\"save()\"\n          >\n            <div class=\"my-4 relative p-6 flex flex-wrap\">\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n                <app-input\n                  [inputForm]=\"reporteForm\"\n                  inputLabel=\"DESDE\"\n                  inputType=\"date\"\n                  inputFormName=\"from\"\n                  formControlName=\"from\"\n                  [value]=\"reporteForm.value.from\">\n                </app-input>\n              </div>\n\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n                <app-input\n                  [inputForm]=\"reporteForm\"\n                  inputLabel=\"HASTA\"\n                  inputType=\"date\"\n                  inputFormName=\"to\"\n                  formControlName=\"to\"\n                  [value]=\"reporteForm.value.to\">\n                </app-input>\n              </div>\n              <div class=\"flex items-center justify-end \">\n                <button\n                  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                  type=\"submit\"\n                >\n                  <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n                </button>\n                <!--<app-pdf-reporte-prestamo-activo *ngIf=\"estado==='ACTIVO'\" [prestamos]=\"prestamos\" [from]=\"reporteForm.value.from\" [to]=\"reporteForm.value.to\"></app-pdf-reporte-prestamo-activo>-->\n                <app-pdf-prestamo-cancelado [prestamos]=\"prestamos\" [from]=\"reporteForm.value.from\" [to]=\"reporteForm.value.to\"></app-pdf-prestamo-cancelado>\n              </div>\n            </div>\n          </form>\n        </div>\n      </div>\n\n      <div class=\"flex flex-col\">\n        <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n            <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                <div class=\"overflow-hidden shadow-md sm:rounded-lg\">\n                    <table class=\"min-w-full\">\n                        <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                            <tr>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha de Prestamo\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha de Vencimiento\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Cliente\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Monto de Prestamo\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Interés a Pagar\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Total\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Por Cobrar\n                                </th>\n                            </tr>\n                        </thead>\n                        <tbody *ngIf=\"prestamos\" >\n                            <tr\n                              *ngFor=\"let prestamo of prestamos\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              >\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                  {{prestamo.fechaInicio | date:'medium'}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  {{prestamo.fechaFinal | date:'medium'}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{prestamo.client.name}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{prestamo.costoPrestamo}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{prestamo.costoInteres}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{prestamo.costoTotal}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{(+prestamo.costoTotal - +prestamo.costoCancelado).toFixed(1)}}\n                              </td>\n                            </tr>\n\n\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Prestamos {{ !estado? 'GENERAL': estado }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n          <form\n            autocomplete=\"off\"\n            [formGroup]=\"reporteForm\"\n            (ngSubmit)=\"save()\"\n          >\n            <div class=\"my-4 relative p-6 flex flex-wrap\">\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n                <app-input\n                  [inputForm]=\"reporteForm\"\n                  inputLabel=\"DESDE\"\n                  inputType=\"date\"\n                  inputFormName=\"from\"\n                  formControlName=\"from\"\n                  [value]=\"reporteForm.value.from\">\n                </app-input>\n              </div>\n\n              <div class=\"w-full lg:w-6/12 px-4 mb-2\">\n                <app-input\n                  [inputForm]=\"reporteForm\"\n                  inputLabel=\"HASTA\"\n                  inputType=\"date\"\n                  inputFormName=\"to\"\n                  formControlName=\"to\"\n                  [value]=\"reporteForm.value.to\">\n                </app-input>\n              </div>\n              <div class=\"flex items-center justify-end \">\n                <button\n                  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                  type=\"submit\"\n                >\n                  <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n                </button>\n                <!--<app-pdf-reporte-prestamo-activo *ngIf=\"estado==='ACTIVO'\" [prestamos]=\"prestamos\" [from]=\"reporteForm.value.from\" [to]=\"reporteForm.value.to\"></app-pdf-reporte-prestamo-activo>-->\n                <app-pdf-prestamo-estado *ngIf=\"estado==='ACTIVO'||estado==='CANCELADO'||estado==='VENCIDO'\" [prestamos]=\"prestamos\" [from]=\"reporteForm.value.from\" [to]=\"reporteForm.value.to\"></app-pdf-prestamo-estado>\n                <app-pdf-prestamo-general *ngIf=\"!estado\" [prestamos]=\"prestamos\" [from]=\"reporteForm.value.from\" [to]=\"reporteForm.value.to\"></app-pdf-prestamo-general>\n              </div>\n            </div>\n          </form>\n        </div>\n      </div>\n\n      <div class=\"flex flex-col\">\n        <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n            <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                <div class=\"overflow-hidden shadow-md sm:rounded-lg\">\n                    <table class=\"min-w-full\">\n                        <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                            <tr>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha de Prestamo\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Fecha de Vencimiento\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Cliente\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Monto de Prestamo\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Interés cobrado\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Total\n                                </th>\n                                <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                  Por Cobrar\n                                </th>\n                            </tr>\n                        </thead>\n                        <tbody *ngIf=\"prestamos\" >\n                            <tr\n                              *ngFor=\"let prestamo of prestamos\"\n                              class=\"bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 \"\n                              >\n                                <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                  {{prestamo.fechaInicio | date:'medium'}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  {{prestamo.fechaFinal | date:'medium'}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    {{prestamo.client.name}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{prestamo.costoPrestamo}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{prestamo.cobroInteres}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    Bol. {{prestamo.costoTotal}}\n                                </td>\n                                <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{(+prestamo.costoTotal - +prestamo.costoCancelado).toFixed(1)}}\n                              </td>\n                            </tr>\n\n\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n</div>\n");
 
 /***/ }),
 
@@ -1369,8 +2104,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../shared/shared.module */ "7PmN");
 /* harmony import */ var _components_cards_card_reporte_ingreso_salida_card_reporte_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/cards/card-reporte-ingreso-salida/card-reporte-ingreso-salida.component */ "pGE7");
 /* harmony import */ var _components_pdfs_pdf_reporte_ingreso_salida_pdf_reporte_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/pdfs/pdf-reporte-ingreso-salida/pdf-reporte-ingreso-salida.component */ "tkTM");
-/* harmony import */ var _components_pdfs_pdf_prestamo_activo_pdf_prestamo_activo_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/pdfs/pdf-prestamo-activo/pdf-prestamo-activo.component */ "76eo");
-/* harmony import */ var _components_pdfs_pdf_prestamo_cancelado_pdf_prestamo_cancelado_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/pdfs/pdf-prestamo-cancelado/pdf-prestamo-cancelado.component */ "auY5");
+/* harmony import */ var _components_pdfs_pdf_prestamo_estado_pdf_prestamo_estado_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/pdfs/pdf-prestamo-estado/pdf-prestamo-estado.component */ "DUqt");
+/* harmony import */ var _components_pdfs_pdf_prestamo_general_pdf_prestamo_general_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/pdfs/pdf-prestamo-general/pdf-prestamo-general.component */ "848s");
 
 
 
@@ -1410,8 +2145,8 @@ ReporteModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _components_pdfs_pdf_reporte_prestamo_pdf_reporte_prestamo_component__WEBPACK_IMPORTED_MODULE_14__["PdfReportePrestamoComponent"],
             _components_cards_card_reporte_ingreso_salida_card_reporte_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_16__["CardReporteIngresoSalidaComponent"],
             _components_pdfs_pdf_reporte_ingreso_salida_pdf_reporte_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_17__["PdfReporteIngresoSalidaComponent"],
-            _components_pdfs_pdf_prestamo_activo_pdf_prestamo_activo_component__WEBPACK_IMPORTED_MODULE_18__["PdfPrestamoActivoComponent"],
-            _components_pdfs_pdf_prestamo_cancelado_pdf_prestamo_cancelado_component__WEBPACK_IMPORTED_MODULE_19__["PdfPrestamoCanceladoComponent"],
+            _components_pdfs_pdf_prestamo_estado_pdf_prestamo_estado_component__WEBPACK_IMPORTED_MODULE_18__["PdfPrestamoEstadoComponent"],
+            _components_pdfs_pdf_prestamo_general_pdf_prestamo_general_component__WEBPACK_IMPORTED_MODULE_19__["PdfPrestamoGeneralComponent"],
         ],
         imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_15__["SharedModule"], _reporte_routing_module__WEBPACK_IMPORTED_MODULE_2__["ReporteRoutingModule"]],
     })
@@ -1430,7 +2165,7 @@ ReporteModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        Reportes\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n          <div class=\"w-full my-2 relative p-2 flex flex-col\">\n            <h3 class=\"text-xl font-bold leading-none text-gray-600 dark:text-white\">\n              Prestamos\n            </h3>\n            <div class=\"relative flex flex-wrap m-3\">\n\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPageEstado('prestamos', 'CANCELADO')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Prestamos cancelados\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPageEstado('prestamos', 'ACTIVO')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Prestamos vigentes\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n              <button\n              type=\"button\"\n              class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n              (click)=\"goToAnotherPageEstado('prestamos', 'VENCIDO')\">\n              <div class=\"flex flex-col\">\n                <p class=\"p-3\">\n                  Prestamos vencidos\n                </p>\n                <i class=\"text-4xl fas fa-calendar\"></i>\n              </div>\n            </button>\n            </div>\n            <h3 class=\"text-xl font-bold leading-none text-gray-600 dark:text-white\">\n              Compras y ventas\n            </h3>\n            <div class=\"relative flex flex-wrap m-3\">\n\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPage('compra-venta-dolar')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Compra y venta de dolar\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n              <button\n                *ngIf=\"false\"\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPage('venta')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Ventas\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n            </div>\n\n            <h3 class=\"text-xl font-bold leading-none text-gray-600 dark:text-white\">\n              Ingresos y Salidas\n            </h3>\n            <div class=\"relative flex flex-wrap m-3\">\n\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPage('ingreso-salida')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Ingresos y salidas\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n            </div>\n          </div>\n\n\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        Reportes\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col pt-4 items-baseline w-full\">\n          <div class=\"w-full my-2 relative p-2 flex flex-col\">\n            <h3 class=\"text-xl font-bold leading-none text-gray-600 dark:text-white\">\n              Prestamos\n            </h3>\n            <div class=\"relative flex flex-wrap m-3\">\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPage('pagos')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Pagos\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPageEstado('prestamos', '')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Prestamos (todos)\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPageEstado('prestamos', 'CANCELADO')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Prestamos cancelados\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPageEstado('prestamos', 'ACTIVO')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Prestamos vigentes\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n              <button\n              type=\"button\"\n              class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n              (click)=\"goToAnotherPageEstado('prestamos', 'VENCIDO')\">\n              <div class=\"flex flex-col\">\n                <p class=\"p-3\">\n                  Prestamos vencidos\n                </p>\n                <i class=\"text-4xl fas fa-calendar\"></i>\n              </div>\n            </button>\n            </div>\n            <h3 class=\"text-xl font-bold leading-none text-gray-600 dark:text-white\">\n              Compras y ventas\n            </h3>\n            <div class=\"relative flex flex-wrap m-3\">\n\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPage('compra-venta-dolar')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Compra y venta de dolar\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPage('inventario')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Ventas inventario\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n            </div>\n\n            <h3 class=\"text-xl font-bold leading-none text-gray-600 dark:text-white\">\n              Ingresos y Salidas\n            </h3>\n            <div class=\"relative flex flex-wrap m-3\">\n\n              <button\n                type=\"button\"\n                class=\"w-2/12 mx-2 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n                (click)=\"goToAnotherPage('ingreso-salida')\">\n                <div class=\"flex flex-col\">\n                  <p class=\"p-3\">\n                    Ingresos y salidas\n                  </p>\n                  <i class=\"text-4xl fas fa-calendar\"></i>\n                </div>\n              </button>\n            </div>\n          </div>\n\n\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n");
 
 /***/ }),
 
@@ -1485,13 +2220,11 @@ let CardReportePrestamoComponent = class CardReportePrestamoComponent {
     }
     getPrestamos() {
         this.loading = true;
-        console.log(this.reporteForm.value);
         this.sub.add(this.reporteService.getPrestamosByDate({
             from: this.reporteForm.value.from,
             to: this.reporteForm.value.to,
             estado: this.estado
         }).subscribe((prestamos) => {
-            console.log(prestamos);
             if (prestamos) {
                 this.prestamos = prestamos;
             }
@@ -1547,32 +2280,6 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isArray = (function () { return Array.isArray || (function (x) { return x && typeof x.length === 'number'; }); })();
 //# sourceMappingURL=isArray.js.map
-
-/***/ }),
-
-/***/ "nLhP":
-/*!********************************************************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-cancelado/pdf-prestamo-cancelado.component.html ***!
-  \********************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<button\n  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n  type=\"button\"\n  (click)=\"exportToPdf()\"\n>\n  <i class=\"fas fa-pdf\"></i> Imprimir\n</button>\n");
-
-/***/ }),
-
-/***/ "pGCz":
-/*!**************************************************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/reporte/components/pdfs/pdf-prestamo-activo/pdf-prestamo-activo.component.html ***!
-  \**************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<button\n  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n  type=\"button\"\n>\n  <i class=\"fas fa-pdf\"></i> Imprimir\n</button>\n");
 
 /***/ }),
 
@@ -1717,8 +2424,7 @@ let PdfReporteIngresoSalidaComponent = class PdfReporteIngresoSalidaComponent {
     constructor(datePipe) {
         this.datePipe = datePipe;
     }
-    ngOnInit() {
-    }
+    ngOnInit() { }
     exportToPdf() {
         let totalGastos = 0;
         let totalIngresos = 0;
@@ -1740,7 +2446,7 @@ let PdfReporteIngresoSalidaComponent = class PdfReporteIngresoSalidaComponent {
                     style: "tableHeader",
                     alignment: "center",
                 },
-            ],
+            ]
         ];
         for (let movimiento of this.movimientos) {
             if (movimiento.tipo) {
@@ -1750,10 +2456,10 @@ let PdfReporteIngresoSalidaComponent = class PdfReporteIngresoSalidaComponent {
                 totalGastos += +movimiento.cantidad;
             }
             bodyMovimiento.push([
-                { text: `${this.datePipe.transform(movimiento.createdAt, 'medium')}`, alignment: "center" },
-                { text: `${movimiento.tipo ? 'INGRESO' : 'SALIDA'}`, alignment: "center" },
-                { text: `${movimiento.concepto}`, alignment: "center" },
-                { text: `Bol. ${movimiento.cantidad}`, alignment: "center" },
+                { text: `${this.datePipe.transform(movimiento.createdAt, 'medium')}`, fontSize: 9, alignment: "center" },
+                { text: `${movimiento ? 'INGRESO' : 'GASTO'}`, fontSize: 9, alignment: "center" },
+                { text: `${movimiento.concepto}`, fontSize: 9, alignment: "center" },
+                { text: `Bol. ${movimiento.cantidad}`, fontSize: 9, alignment: "center" },
             ]);
         }
         const reporte = {
@@ -1766,7 +2472,7 @@ let PdfReporteIngresoSalidaComponent = class PdfReporteIngresoSalidaComponent {
             content: [
                 //FECHA Y HORA ACTUAL AL IMPRIMIR
                 {
-                    text: `${this.datePipe.transform(Date.now(), 'medium')}`,
+                    text: `${this.datePipe.transform(Date.now(), "medium")}`,
                     fontSize: 8,
                 },
                 {
@@ -1797,17 +2503,17 @@ let PdfReporteIngresoSalidaComponent = class PdfReporteIngresoSalidaComponent {
                     columns: [
                         {
                             width: 250,
-                            text: `Ingresos y salidas Desde ${this.datePipe.transform(this.from, 'mediumDate')}`,
+                            text: `Apertura y cierre ${this.datePipe.transform(this.from, "mediumDate")}`,
                             bold: false,
                             fontSize: 12,
                         },
-                        { width: "*", text: `Hasta ${this.datePipe.transform(this.to, 'mediumDate')}` },
+                        { width: "*", text: `Hasta ${this.datePipe.transform(this.to, "mediumDate")}` },
                     ],
                 },
                 {
                     style: "tableExample",
                     table: {
-                        widths: [60, 100, "*", "*"],
+                        widths: [70, 100, 280, 250],
                         headerRows: 1,
                         body: bodyMovimiento,
                     },
@@ -1816,18 +2522,23 @@ let PdfReporteIngresoSalidaComponent = class PdfReporteIngresoSalidaComponent {
                 {
                     style: "tableExample",
                     table: {
-                        widths: [150, 100, 30],
+                        widths: [150, 200, 30],
                         headerRows: 1,
                         body: [
                             [
-                                { text: "Total ingresos", fontSize: 13, style: "tableHeader" },
-                                { text: `${totalIngresos}`, alignment: "right", fontSize: 13 },
-                                { text: "Bol.", alignment: "left", fontSize: 16 },
+                                { text: "Total ingresos", fontSize: 11, style: "tableHeader" },
+                                { text: `${totalIngresos.toFixed(1)}`, alignment: "right", fontSize: 11 },
+                                { text: "Bol.", alignment: "left", fontSize: 10 },
                             ],
                             [
-                                { text: "Total gastos", fontSize: 13, style: "tableHeader" },
-                                { text: `${totalGastos}`, alignment: "right", fontSize: 13 },
-                                { text: "Bol.", alignment: "left", fontSize: 16 },
+                                { text: "Total gastos", fontSize: 11, style: "tableHeader" },
+                                { text: `${totalGastos.toFixed(1)}`, alignment: "right", fontSize: 11 },
+                                { text: "Bol.", alignment: "left", fontSize: 10 },
+                            ],
+                            [
+                                { text: "Total en caja", fontSize: 11, style: "tableHeader" },
+                                { text: `${(totalIngresos - totalGastos).toFixed(1)}`, alignment: "right", fontSize: 11 },
+                                { text: "Bol.", alignment: "left", fontSize: 10 },
                             ],
                         ],
                     },
@@ -1858,8 +2569,8 @@ PdfReporteIngresoSalidaComponent.propDecorators = {
 };
 PdfReporteIngresoSalidaComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        selector: 'app-pdf-reporte-ingreso-salida',
-        template: _raw_loader_pdf_reporte_ingreso_salida_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
+        selector: "app-pdf-reporte-ingreso-salida",
+        template: _raw_loader_pdf_reporte_ingreso_salida_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
     })
 ], PdfReporteIngresoSalidaComponent);
 

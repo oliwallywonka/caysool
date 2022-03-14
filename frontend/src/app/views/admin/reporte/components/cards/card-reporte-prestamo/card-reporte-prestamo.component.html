@@ -9,7 +9,7 @@
           >
           <i class="fas fa-arrow-left"></i>
         </button>
-        Prestamos {{ estado }}
+        Prestamos {{ !estado? 'GENERAL': estado }}
       </h3>
       <div class="flex items-center justify-start pt-2">
 
@@ -51,7 +51,8 @@
                   <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
                 </button>
                 <!--<app-pdf-reporte-prestamo-activo *ngIf="estado==='ACTIVO'" [prestamos]="prestamos" [from]="reporteForm.value.from" [to]="reporteForm.value.to"></app-pdf-reporte-prestamo-activo>-->
-                <app-pdf-prestamo-cancelado [prestamos]="prestamos" [from]="reporteForm.value.from" [to]="reporteForm.value.to"></app-pdf-prestamo-cancelado>
+                <app-pdf-prestamo-estado *ngIf="estado==='ACTIVO'||estado==='CANCELADO'||estado==='VENCIDO'" [prestamos]="prestamos" [from]="reporteForm.value.from" [to]="reporteForm.value.to"></app-pdf-prestamo-estado>
+                <app-pdf-prestamo-general *ngIf="!estado" [prestamos]="prestamos" [from]="reporteForm.value.from" [to]="reporteForm.value.to"></app-pdf-prestamo-general>
               </div>
             </div>
           </form>
@@ -78,7 +79,7 @@
                                   Monto de Prestamo
                                 </th>
                                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                  Interés a Pagar
+                                  Interés cobrado
                                 </th>
                                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                   Total
@@ -106,7 +107,7 @@
                                     Bol. {{prestamo.costoPrestamo}}
                                 </td>
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    Bol. {{prestamo.costoInteres}}
+                                    Bol. {{prestamo.cobroInteres}}
                                 </td>
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                     Bol. {{prestamo.costoTotal}}

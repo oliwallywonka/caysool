@@ -16,9 +16,165 @@
       </div>
       <div class="w-full ">
         <div class="flex flex-col pt-4 items-baseline w-full">
+          <form
+            autocomplete="off"
+            [formGroup]="reporteForm"
+            (ngSubmit)="save()"
+          >
+            <div class="my-4 relative p-6 flex flex-wrap">
+              <div class="w-full lg:w-6/12 px-4 mb-2">
+                <app-input
+                  [inputForm]="reporteForm"
+                  inputLabel="DESDE"
+                  inputType="date"
+                  inputFormName="from"
+                  formControlName="from"
+                  [value]="reporteForm.value.from">
+                </app-input>
+              </div>
 
+              <div class="w-full lg:w-6/12 px-4 mb-2">
+                <app-input
+                  [inputForm]="reporteForm"
+                  inputLabel="HASTA"
+                  inputType="date"
+                  inputFormName="to"
+                  formControlName="to"
+                  [value]="reporteForm.value.to">
+                </app-input>
+              </div>
+              <div class="flex items-center justify-end ">
+                <button
+                  class="mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="submit"
+                >
+                  <i class="fas fa-spinner" [ngClass]="loading? 'animate-spin': 'hidden'"></i> Guardar cambios
+                </button>
+                <app-pdf-reporte-pago
+                  [pagos]="pagos"
+                  [impresiones]="impresiones"
+                  [from]="reporteForm.value.from"
+                  [to]="reporteForm.value.to">
+                </app-pdf-reporte-pago>
+
+              </div>
+            </div>
+          </form>
         </div>
       </div>
+
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Fecha de Pago
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Tipo de Pago
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Reimpresiones
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Pago (cancelación)
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Amortiguado
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Comisión Administrativa
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Cargos extra
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Cargos Interes Cobrado
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  Total cobrado
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="pagos" >
+                            <tr
+                              *ngFor="let pago of pagos"
+                              class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
+                              >
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                  {{pago.createdAt | date:'medium'}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  {{ pago.tipoPago === 'AMORTIZACION' ? 'AMORTIZACIÓN' : pago.tipoPago === 'LIQUIDACION' ? 'LIQUIDACIÓN' : pago.tipoPago }}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. 0.0
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{(+pago.costoPago + +pago.costoInteres).toFixed(1)}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{pago.costoPago}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    Bol. {{pago.costoAdministracion}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  Bol. {{pago.costoPiso}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  Bol. {{pago.costoInteres}}
+                                </td>
+                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  Bol. {{pago.costoTotal}}
+                              </td>
+                            </tr>
+
+
+                        </tbody>
+                        <tbody *ngIf="pagos" >
+                          <tr
+                            *ngFor="let impresion of impresiones"
+                            class="bg-white border-b cursor-pointer m-2 transform hover:-translate-y-1 ease-linear transition-all duration-150 "
+                            >
+                              <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{impresion.createdAt | date:'medium'}}
+                              </td>
+                              <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                REIMPRESIÓN
+                              </td>
+                              <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  Bol. {{ impresion.costoImpresion }}
+                              </td>
+                              <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  Bol. 0.0
+                              </td>
+                              <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  Bol. 0.0
+                              </td>
+                              <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                  Bol. 0.0
+                              </td>
+                              <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                Bol. 0.0
+                              </td>
+                              <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                Bol. 0.0
+                              </td>
+                              <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                Bol. {{ impresion.costoImpresion }}
+                            </td>
+                          </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

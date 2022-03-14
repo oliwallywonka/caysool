@@ -997,41 +997,48 @@
       /* harmony import */
 
 
-      var _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @rxweb/reactive-form-validators */
       "XKlN");
       /* harmony import */
 
 
-      var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! rxjs */
       "qCKp");
       /* harmony import */
 
 
-      var src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! src/app/core/services/alert.service */
       "jKJn");
       /* harmony import */
 
 
-      var src_app_core_services_client_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var src_app_core_services_client_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! src/app/core/services/client.service */
       "y6ow");
       /* harmony import */
 
 
-      var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! src/app/core/services/modal.service */
       "S0jo");
 
       var ClientModalComponent = /*#__PURE__*/function () {
-        function ClientModalComponent(clientService, alertService, modalService, fb) {
+        function ClientModalComponent(clientService, alertService, modalService, router, fb) {
           _classCallCheck(this, ClientModalComponent);
 
           this.clientService = clientService;
           this.alertService = alertService;
           this.modalService = modalService;
+          this.router = router;
           this.fb = fb;
           this.modalButton = true;
           this.loading = false;
@@ -1045,49 +1052,49 @@
             email: 'El email introducido no es valido'
           };
           this.clientForm = this.fb.group({
-            name: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
+            name: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({
               message: this.errorMessages.required
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
               value: 2,
               message: this.errorMessages.minLength
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
               value: 50,
               message: this.errorMessages.maxLenght
             })]],
-            birthDate: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
+            birthDate: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({
               message: this.errorMessages.required
             })]],
-            phone: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
+            phone: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({
               message: this.errorMessages.required
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
               value: 2,
               message: this.errorMessages.minLength
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
               value: 20,
               message: this.errorMessages.maxLenght
             })]],
-            direction: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
+            direction: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({
               message: this.errorMessages.required
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
               value: 2,
               message: this.errorMessages.minLength
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
               value: 50,
               message: this.errorMessages.maxLenght
             })]],
-            email: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].email(), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+            email: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].email(), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
               value: 2,
               message: this.errorMessages.minLength
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
               value: 30,
               message: this.errorMessages.maxLenght
             })]],
-            ci: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
+            ci: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].required({
               message: this.errorMessages.required
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].minLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].minLength({
               value: 2,
               message: this.errorMessages.minLength
-            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
+            }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxwebValidators"].maxLength({
               value: 10,
               message: this.errorMessages.maxLenght
             })]]
@@ -1097,7 +1104,7 @@
         _createClass(ClientModalComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subscription"]();
+            this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subscription"]();
             this.subscribeClient();
           }
         }, {
@@ -1206,6 +1213,8 @@
                 _this9.refreshClients();
 
                 _this9.closeModal();
+
+                _this9.router.navigate(['/admin/clientes', response.id]);
               }, function (error) {
                 _this9.loading = false;
 
@@ -1220,13 +1229,15 @@
 
       ClientModalComponent.ctorParameters = function () {
         return [{
-          type: src_app_core_services_client_service__WEBPACK_IMPORTED_MODULE_6__["ClientService"]
+          type: src_app_core_services_client_service__WEBPACK_IMPORTED_MODULE_7__["ClientService"]
         }, {
-          type: src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_5__["AlertService"]
+          type: src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_6__["AlertService"]
         }, {
-          type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_7__["ModalService"]
+          type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_8__["ModalService"]
         }, {
-          type: _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxFormBuilder"]
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+        }, {
+          type: _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_4__["RxFormBuilder"]
         }];
       };
 
