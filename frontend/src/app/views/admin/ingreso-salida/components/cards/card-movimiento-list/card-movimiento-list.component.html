@@ -12,8 +12,9 @@
         </button>
         Ingresos y salidas De La Apertura Nº {{ aperturaId }}
       </h3>
-      <div class="flex items-center justify-start pt-2">
+      <div class="flex items-center justify-start pt-2 pl-3">
         <app-modal-ingreso-salida *ngIf="apertura && apertura.estado" [aperturaId]="aperturaId"></app-modal-ingreso-salida>
+        <app-pdf-movimientos [movimientos]="movimientos" [from]="apertura.fechaApertura" [to]="apertura.fechaCierre"></app-pdf-movimientos>
       </div>
       <div class="w-full ">
         <div class="flex flex-col">

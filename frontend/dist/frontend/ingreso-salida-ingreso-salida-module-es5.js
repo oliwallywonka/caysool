@@ -935,7 +935,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Ingresos y salidas De La Apertura Nº {{ aperturaId }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2\">\n        <app-modal-ingreso-salida *ngIf=\"apertura && apertura.estado\" [aperturaId]=\"aperturaId\"></app-modal-ingreso-salida>\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col\">\n          <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n              <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                  <div class=\"overflow-hidden sm:rounded-lg\">\n                      <table class=\"min-w-full\">\n                          <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                              <tr >\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Fecha Movimiento\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Ingreso/Gasto\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Concepto\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Bol. cantidad\n                                  </th>\n                              </tr>\n                          </thead>\n                          <tbody *ngIf=\"movimientos\" >\n                              <tr *ngFor=\"let movimiento of movimientos \" class=\"bg-white border-b\">\n                                  <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                      {{ movimiento.createdAt | date:'medium' }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      {{ movimiento.tipo? 'INGRESO' : 'GASTO' }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      {{ movimiento.concepto }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      Bol. {{ movimiento.cantidad }}\n                                  </td>\n                              </tr>\n\n                          </tbody>\n                      </table>\n                  </div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"flow-root w-auto flex flex-col justify-center\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-400 dark:text-white\">\n        Total Ingresos: Bol. {{ totalIngresos }}\n      </h3>\n      <h3 class=\"text-xl font-bold leading-none text-gray-400 dark:text-white\">\n        Total Gastos: Bol. {{ totalGastos }}\n      </h3>\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        Total: Bol. {{ totalMovimiento }}\n      </h3>\n   </div>\n  </div>\n\n\n</div>\n";
+      __webpack_exports__["default"] = "\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Ingresos y salidas De La Apertura Nº {{ aperturaId }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2 pl-3\">\n        <app-modal-ingreso-salida *ngIf=\"apertura && apertura.estado\" [aperturaId]=\"aperturaId\"></app-modal-ingreso-salida>\n        <app-pdf-movimientos [movimientos]=\"movimientos\" [from]=\"apertura.fechaApertura\" [to]=\"apertura.fechaCierre\"></app-pdf-movimientos>\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col\">\n          <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n              <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                  <div class=\"overflow-hidden sm:rounded-lg\">\n                      <table class=\"min-w-full\">\n                          <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                              <tr >\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Fecha Movimiento\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Ingreso/Gasto\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Concepto\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Bol. cantidad\n                                  </th>\n                              </tr>\n                          </thead>\n                          <tbody *ngIf=\"movimientos\" >\n                              <tr *ngFor=\"let movimiento of movimientos \" class=\"bg-white border-b\">\n                                  <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                      {{ movimiento.createdAt | date:'medium' }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      {{ movimiento.tipo? 'INGRESO' : 'GASTO' }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      {{ movimiento.concepto }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      Bol. {{ movimiento.cantidad }}\n                                  </td>\n                              </tr>\n\n                          </tbody>\n                      </table>\n                  </div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"flow-root w-auto flex flex-col justify-center\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-400 dark:text-white\">\n        Total Ingresos: Bol. {{ totalIngresos }}\n      </h3>\n      <h3 class=\"text-xl font-bold leading-none text-gray-400 dark:text-white\">\n        Total Gastos: Bol. {{ totalGastos }}\n      </h3>\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        Total: Bol. {{ totalMovimiento }}\n      </h3>\n   </div>\n  </div>\n\n\n</div>\n";
       /***/
     },
 
@@ -1221,6 +1221,26 @@
         selector: 'app-modal-ingreso-salida',
         template: _raw_loader_modal_ingreso_salida_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       })], ModalIngresoSalidaComponent);
+      /***/
+    },
+
+    /***/
+    "X7FW":
+    /*!*************************************************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/ingreso-salida/components/pdfs/pdf-movimientos/pdf-movimientos.component.html ***!
+      \*************************************************************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function X7FW(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<button\n  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n  type=\"button\"\n  (click)=\"exportToPdf()\"\n>\n  <i class=\"fas fa-pdf\"></i> Imprimir\n</button>\n";
       /***/
     },
 
@@ -1529,6 +1549,14 @@
           value: function getAperturaById(id) {
             var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
             return this.cacheResponse$ = this.http.get("".concat(this.baseUrl, "/apertura/").concat(id), {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getAperturaDetailById",
+          value: function getAperturaDetailById(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.cacheResponse$ = this.http.get("".concat(this.baseUrl, "/apertura/apertura/").concat(id), {
               headers: headers
             });
           }
@@ -2151,6 +2179,281 @@
     },
 
     /***/
+    "wJNA":
+    /*!*********************************************************************************************************!*\
+      !*** ./src/app/views/admin/ingreso-salida/components/pdfs/pdf-movimientos/pdf-movimientos.component.ts ***!
+      \*********************************************************************************************************/
+
+    /*! exports provided: PdfMovimientosComponent */
+
+    /***/
+    function wJNA(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "PdfMovimientosComponent", function () {
+        return PdfMovimientosComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_pdf_movimientos_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./pdf-movimientos.component.html */
+      "X7FW");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! src/app/helpers/base64Images */
+      "5Y+O");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/common */
+      "ofXK");
+      /* harmony import */
+
+
+      var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! pdfmake/build/pdfmake */
+      "5JmO");
+      /* harmony import */
+
+
+      var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__);
+      /* harmony import */
+
+
+      var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! pdfmake/build/vfs_fonts */
+      "TruH");
+      /* harmony import */
+
+
+      var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__);
+
+      pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default.a.pdfMake.vfs;
+
+      var PdfMovimientosComponent = /*#__PURE__*/function () {
+        function PdfMovimientosComponent(datePipe) {
+          _classCallCheck(this, PdfMovimientosComponent);
+
+          this.datePipe = datePipe;
+        }
+
+        _createClass(PdfMovimientosComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {}
+        }, {
+          key: "exportToPdf",
+          value: function exportToPdf() {
+            var totalGastos = 0;
+            var totalIngresos = 0;
+            var bodyMovimiento = [[{
+              text: "Fecha de movimiento",
+              alignment: "center",
+              style: "tableHeader"
+            }, {
+              text: "Ingreso/Gasto",
+              alignment: "center",
+              style: "tableHeader"
+            }, {
+              text: "Concepto",
+              alignment: "center",
+              style: "tableHeader"
+            }, {
+              text: "Cantidad en Bol.",
+              style: "tableHeader",
+              alignment: "center"
+            }]];
+
+            var _iterator2 = _createForOfIteratorHelper(this.movimientos),
+                _step2;
+
+            try {
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var movimiento = _step2.value;
+
+                if (movimiento.tipo) {
+                  totalIngresos += +movimiento.cantidad;
+                } else {
+                  totalGastos += +movimiento.cantidad;
+                }
+
+                bodyMovimiento.push([{
+                  text: "".concat(this.datePipe.transform(movimiento.createdAt, 'medium')),
+                  fontSize: 9,
+                  alignment: "center"
+                }, {
+                  text: "".concat(movimiento.tipo ? 'INGRESO' : 'GASTO'),
+                  fontSize: 9,
+                  alignment: "center"
+                }, {
+                  text: "".concat(movimiento.concepto),
+                  fontSize: 9,
+                  alignment: "center"
+                }, {
+                  text: "Bol. ".concat(movimiento.cantidad),
+                  fontSize: 9,
+                  alignment: "center"
+                }]);
+              }
+            } catch (err) {
+              _iterator2.e(err);
+            } finally {
+              _iterator2.f();
+            }
+
+            var reporte = {
+              // a string or { width: number, height: number }
+              pageSize: "LETTER",
+              // by default we use portrait, you can change it to landscape if you wish
+              pageOrientation: "landscape",
+              // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+              pageMargins: [20, 15, 15, 20],
+              content: [//FECHA Y HORA ACTUAL AL IMPRIMIR
+              {
+                text: "".concat(this.datePipe.transform(Date.now(), "medium")),
+                fontSize: 8
+              }, {
+                columns: [{
+                  width: 90,
+                  height: 40,
+                  fontSize: 9,
+                  margin: [22, 10, 0, 0],
+                  image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_3__["logoCaysool"]
+                }, [// REPORTE DE PRESTAMOS
+                {
+                  text: 'Reporte de "Ingresos y Salidas"',
+                  color: "#333333",
+                  width: 800,
+                  fontSize: 20,
+                  bold: true,
+                  alignment: "center",
+                  margin: [0, 0, 0, 0]
+                }]]
+              }, "\n", {
+                columns: [{
+                  width: 250,
+                  text: "Apertura y cierre: ".concat(this.datePipe.transform(this.from, "mediumDate")),
+                  bold: false,
+                  fontSize: 12
+                }, {
+                  width: "*",
+                  text: "Hasta: ".concat(this.to ? this.datePipe.transform(this.to, "mediumDate") : 'Caja aun no cerrada')
+                }]
+              }, {
+                style: "tableExample",
+                table: {
+                  widths: [70, 100, 280, 250],
+                  headerRows: 1,
+                  body: bodyMovimiento
+                },
+                layout: "lightHorizontalLines"
+              }, {
+                style: "tableExample",
+                table: {
+                  widths: [150, 200, 30],
+                  headerRows: 1,
+                  body: [[{
+                    text: "Total ingresos",
+                    fontSize: 11,
+                    style: "tableHeader"
+                  }, {
+                    text: "".concat(totalIngresos.toFixed(1)),
+                    alignment: "right",
+                    fontSize: 11
+                  }, {
+                    text: "Bol.",
+                    alignment: "left",
+                    fontSize: 10
+                  }], [{
+                    text: "Total gastos",
+                    fontSize: 11,
+                    style: "tableHeader"
+                  }, {
+                    text: "".concat(totalGastos.toFixed(1)),
+                    alignment: "right",
+                    fontSize: 11
+                  }, {
+                    text: "Bol.",
+                    alignment: "left",
+                    fontSize: 10
+                  }], [{
+                    text: "Total en caja",
+                    fontSize: 11,
+                    style: "tableHeader"
+                  }, {
+                    text: "".concat((totalIngresos - totalGastos).toFixed(1)),
+                    alignment: "right",
+                    fontSize: 11
+                  }, {
+                    text: "Bol.",
+                    alignment: "left",
+                    fontSize: 10
+                  }]]
+                },
+                layout: "noBorders"
+              }],
+              styles: {
+                tableHeader: {
+                  bold: true,
+                  fontSize: 10,
+                  color: "black"
+                },
+                tableExample: {
+                  margin: [0, 10, 0, 5]
+                }
+              }
+            };
+            pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default.a.createPdf(reporte).open();
+          }
+        }]);
+
+        return PdfMovimientosComponent;
+      }();
+
+      PdfMovimientosComponent.ctorParameters = function () {
+        return [{
+          type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"]
+        }];
+      };
+
+      PdfMovimientosComponent.propDecorators = {
+        movimientos: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"]
+        }],
+        from: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"]
+        }],
+        to: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"]
+        }]
+      };
+      PdfMovimientosComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-pdf-movimientos',
+        template: _raw_loader_pdf_movimientos_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
+      })], PdfMovimientosComponent);
+      /***/
+    },
+
+    /***/
     "zQ3R":
     /*!*********************************************************************!*\
       !*** ./src/app/views/admin/ingreso-salida/ingreso-salida.module.ts ***!
@@ -2253,13 +2556,19 @@
       var _components_modals_modal_cierre_apertura_modal_cierre_apertura_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ./components/modals/modal-cierre-apertura/modal-cierre-apertura.component */
       "9tfk");
+      /* harmony import */
+
+
+      var _components_pdfs_pdf_movimientos_pdf_movimientos_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      /*! ./components/pdfs/pdf-movimientos/pdf-movimientos.component */
+      "wJNA");
 
       var IngresoSalidaModule = /*#__PURE__*/_createClass(function IngresoSalidaModule() {
         _classCallCheck(this, IngresoSalidaModule);
       });
 
       IngresoSalidaModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_3__["IngresoSalidaComponent"], _components_tabs_tab_ingreso_salida_tab_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_4__["TabIngresoSalidaComponent"], _components_cards_card_dolar_list_card_dolar_list_component__WEBPACK_IMPORTED_MODULE_5__["CardDolarListComponent"], _components_cards_card_apertura_list_card_apertura_list_component__WEBPACK_IMPORTED_MODULE_6__["CardAperturaListComponent"], _components_cards_card_movimiento_card_movimiento_component__WEBPACK_IMPORTED_MODULE_7__["CardMovimientoComponent"], _components_modals_modal_compra_venta_dolar_modal_compra_venta_dolar_component__WEBPACK_IMPORTED_MODULE_9__["ModalCompraVentaDolarComponent"], _components_modals_modal_ingreso_salida_modal_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_10__["ModalIngresoSalidaComponent"], _components_modals_modal_apertura_modal_apertura_component__WEBPACK_IMPORTED_MODULE_11__["ModalAperturaComponent"], _components_cards_card_movimiento_list_card_movimiento_list_component__WEBPACK_IMPORTED_MODULE_12__["CardMovimientoListComponent"], _components_modals_modal_cierre_apertura_modal_cierre_apertura_component__WEBPACK_IMPORTED_MODULE_13__["ModalCierreAperturaComponent"]],
+        declarations: [_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_3__["IngresoSalidaComponent"], _components_tabs_tab_ingreso_salida_tab_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_4__["TabIngresoSalidaComponent"], _components_cards_card_dolar_list_card_dolar_list_component__WEBPACK_IMPORTED_MODULE_5__["CardDolarListComponent"], _components_cards_card_apertura_list_card_apertura_list_component__WEBPACK_IMPORTED_MODULE_6__["CardAperturaListComponent"], _components_cards_card_movimiento_card_movimiento_component__WEBPACK_IMPORTED_MODULE_7__["CardMovimientoComponent"], _components_modals_modal_compra_venta_dolar_modal_compra_venta_dolar_component__WEBPACK_IMPORTED_MODULE_9__["ModalCompraVentaDolarComponent"], _components_modals_modal_ingreso_salida_modal_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_10__["ModalIngresoSalidaComponent"], _components_modals_modal_apertura_modal_apertura_component__WEBPACK_IMPORTED_MODULE_11__["ModalAperturaComponent"], _components_cards_card_movimiento_list_card_movimiento_list_component__WEBPACK_IMPORTED_MODULE_12__["CardMovimientoListComponent"], _components_modals_modal_cierre_apertura_modal_cierre_apertura_component__WEBPACK_IMPORTED_MODULE_13__["ModalCierreAperturaComponent"], _components_pdfs_pdf_movimientos_pdf_movimientos_component__WEBPACK_IMPORTED_MODULE_14__["PdfMovimientosComponent"]],
         imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_8__["SharedModule"], _ingreso_salida_routing_module__WEBPACK_IMPORTED_MODULE_2__["IngresoSalidaRoutingModule"]]
       })], IngresoSalidaModule);
       /***/

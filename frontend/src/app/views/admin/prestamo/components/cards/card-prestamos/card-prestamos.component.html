@@ -21,46 +21,48 @@
     </div>
   </div>
   <div class="flow-root w-auto">
-    <ul *ngIf="response" role="list" class="relative">
-      <li *ngFor="let prestamo of response.items; let i=index;"
-          class="cursor-pointer m-2 w-1/2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150"
-          (click)="goToPrestamoInformation(prestamo)">
-          <div class="flex items-center">
-              <div class="text-3xl p-4 bg-green-600">
-                {{prestamo.id}}
-              </div>
-              <div  class="flex-1 min-w-0 mx-6 flex flex-col">
-                <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
-                   {{ prestamo.client.name }}
-                </p>
-                <div
-                  *ngFor="let inv of prestamo.inventario"
-                  class="text-xl font-medium text-gray-500 truncate dark:text-white">
+    <ul *ngIf="response" role="list" class="relative flex flex-wrap">
+      <div  *ngFor="let prestamo of response.items; let i=index;" class="w-full lg:w-6/12">
+        <li
+            class="cursor-pointer m-2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150"
+            (click)="goToPrestamoInformation(prestamo)">
+            <div class="flex items-center">
+                <div class="text-3xl p-4 bg-green-600">
+                  {{prestamo.id}}
+                </div>
+                <div  class="flex-1 min-w-0 mx-6 flex flex-col">
+                  <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
+                     {{ prestamo.client.name }}
+                  </p>
+                  <div
+                    *ngFor="let inv of prestamo.inventario"
+                    class="text-xl font-medium text-gray-500 truncate dark:text-white">
 
-                  <p *ngIf="inv.tipo === 'JOYA'">
-                      {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
-                  </p>
-                  <p *ngIf="inv.tipo === 'ARTICULO'">
-                      {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
-                  </p>
-                  <p *ngIf="inv.tipo === 'VEHICULO'">
-                      {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                    <p *ngIf="inv.tipo === 'JOYA'">
+                        {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}
+                    </p>
+                    <p *ngIf="inv.tipo === 'ARTICULO'">
+                        {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}
+                    </p>
+                    <p *ngIf="inv.tipo === 'VEHICULO'">
+                        {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
+                    </p>
+                  </div>
+                  <p class="text-xl font-medium text-gray-500 truncate dark:text-white">
+                    {{ prestamo.fechaInicio | date:'mediumDate' }} - {{ prestamo.fechaFinal | date:'mediumDate' }}
                   </p>
                 </div>
-                <p class="text-xl font-medium text-gray-500 truncate dark:text-white">
-                  {{ prestamo.fechaInicio | date:'mediumDate' }} - {{ prestamo.fechaFinal | date:'mediumDate' }}
-                </p>
-              </div>
-              <div class="text-gray-500 text-xl font-bold mr-8">
-                <p>
-                  BOL. {{ prestamo.costoTotal }}
-                </p>
-                <p class="text-sm">
-                  {{ prestamo.estado }}
-                </p>
-              </div>
-          </div>
-      </li>
+                <div class="text-gray-500 text-xl font-bold mr-8">
+                  <p>
+                    BOL. {{ prestamo.costoTotal }}
+                  </p>
+                  <p class="text-sm">
+                    {{ prestamo.estado }}
+                  </p>
+                </div>
+            </div>
+        </li>
+      </div>
   </ul>
   </div>
 </div>

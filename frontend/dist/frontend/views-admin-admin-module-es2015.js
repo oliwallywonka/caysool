@@ -98,19 +98,19 @@ const routes = [{
             },
             {
                 path: 'prestamos',
-                loadChildren: () => Promise.all(/*! import() | prestamo-prestamo-module */[__webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module~reporte-reporte-module"), __webpack_require__.e("default~clients-clients-module~ingreso-salida-ingreso-salida-module~prestamo-prestamo-module"), __webpack_require__.e("common"), __webpack_require__.e("prestamo-prestamo-module")]).then(__webpack_require__.bind(null, /*! ./prestamo/prestamo.module */ "itTI")).then(m => m.PrestamoModule)
+                loadChildren: () => Promise.all(/*! import() | prestamo-prestamo-module */[__webpack_require__.e("default~ingreso-salida-ingreso-salida-module~inventario-inventario-module~prestamo-prestamo-module~r~f049b1a3"), __webpack_require__.e("default~clients-clients-module~ingreso-salida-ingreso-salida-module~prestamo-prestamo-module"), __webpack_require__.e("common"), __webpack_require__.e("prestamo-prestamo-module")]).then(__webpack_require__.bind(null, /*! ./prestamo/prestamo.module */ "itTI")).then(m => m.PrestamoModule)
             },
             {
                 path: 'inventario',
-                loadChildren: () => Promise.all(/*! import() | inventario-inventario-module */[__webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module~reporte-reporte-module"), __webpack_require__.e("default~inventario-inventario-module~users-users-module"), __webpack_require__.e("common"), __webpack_require__.e("inventario-inventario-module")]).then(__webpack_require__.bind(null, /*! ./inventario/inventario.module */ "jz+1")).then(m => m.InventarioModule)
+                loadChildren: () => Promise.all(/*! import() | inventario-inventario-module */[__webpack_require__.e("default~ingreso-salida-ingreso-salida-module~inventario-inventario-module~prestamo-prestamo-module~r~f049b1a3"), __webpack_require__.e("default~inventario-inventario-module~users-users-module"), __webpack_require__.e("common"), __webpack_require__.e("inventario-inventario-module")]).then(__webpack_require__.bind(null, /*! ./inventario/inventario.module */ "jz+1")).then(m => m.InventarioModule)
             },
             {
                 path: 'ingresos-salidas',
-                loadChildren: () => Promise.all(/*! import() | ingreso-salida-ingreso-salida-module */[__webpack_require__.e("default~clients-clients-module~ingreso-salida-ingreso-salida-module~prestamo-prestamo-module"), __webpack_require__.e("ingreso-salida-ingreso-salida-module")]).then(__webpack_require__.bind(null, /*! ./ingreso-salida/ingreso-salida.module */ "zQ3R")).then(m => m.IngresoSalidaModule)
+                loadChildren: () => Promise.all(/*! import() | ingreso-salida-ingreso-salida-module */[__webpack_require__.e("default~ingreso-salida-ingreso-salida-module~inventario-inventario-module~prestamo-prestamo-module~r~f049b1a3"), __webpack_require__.e("default~clients-clients-module~ingreso-salida-ingreso-salida-module~prestamo-prestamo-module"), __webpack_require__.e("ingreso-salida-ingreso-salida-module")]).then(__webpack_require__.bind(null, /*! ./ingreso-salida/ingreso-salida.module */ "zQ3R")).then(m => m.IngresoSalidaModule)
             },
             {
                 path: 'reportes',
-                loadChildren: () => Promise.all(/*! import() | reporte-reporte-module */[__webpack_require__.e("default~inventario-inventario-module~prestamo-prestamo-module~reporte-reporte-module"), __webpack_require__.e("reporte-reporte-module")]).then(__webpack_require__.bind(null, /*! ./reporte/reporte.module */ "gBSj")).then(m => m.ReporteModule)
+                loadChildren: () => Promise.all(/*! import() | reporte-reporte-module */[__webpack_require__.e("default~ingreso-salida-ingreso-salida-module~inventario-inventario-module~prestamo-prestamo-module~r~f049b1a3"), __webpack_require__.e("reporte-reporte-module")]).then(__webpack_require__.bind(null, /*! ./reporte/reporte.module */ "gBSj")).then(m => m.ReporteModule)
             },
             {
                 path: 'historial',

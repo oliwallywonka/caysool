@@ -53,7 +53,7 @@ export class PdfReporteIngresoSalidaComponent implements OnInit {
       bodyMovimiento.push(
         [
           { text: `${this.datePipe.transform(movimiento.createdAt, 'medium')}`, fontSize: 9, alignment: "center" },
-          { text: `${movimiento?'INGRESO':'GASTO'}`, fontSize: 9, alignment: "center" },
+          { text: `${movimiento.tipo?'INGRESO':'GASTO'}`, fontSize: 9, alignment: "center" },
           { text: `${movimiento.concepto}`, fontSize: 9, alignment: "center" },
           { text: `Bol. ${movimiento.cantidad}`, fontSize: 9, alignment: "center" },
         ],

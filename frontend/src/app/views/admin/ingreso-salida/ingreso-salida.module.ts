@@ -12,6 +12,7 @@ import { ModalIngresoSalidaComponent } from './components/modals/modal-ingreso-s
 import { ModalAperturaComponent } from './components/modals/modal-apertura/modal-apertura.component';
 import { CardMovimientoListComponent } from './components/cards/card-movimiento-list/card-movimiento-list.component';
 import { ModalCierreAperturaComponent } from './components/modals/modal-cierre-apertura/modal-cierre-apertura.component';
+import { PdfMovimientosComponent } from './components/pdfs/pdf-movimientos/pdf-movimientos.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ModalCierreAperturaComponent } from './components/modals/modal-cierre-a
     ModalAperturaComponent,
     CardMovimientoListComponent,
     ModalCierreAperturaComponent,
+    PdfMovimientosComponent,
   ],
   imports: [SharedModule, IngresoSalidaRoutingModule],
 })

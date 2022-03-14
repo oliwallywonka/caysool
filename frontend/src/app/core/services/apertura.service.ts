@@ -42,6 +42,13 @@ export class AperturaService {
 
   }
 
+  getAperturaDetailById(id: number):Observable<any>{
+    const headers = new HttpHeaders()
+      .set('x-access-token',sessionStorage.getItem('token')||'');
+    return this.cacheResponse$ = this.http.get(`${this.baseUrl}/apertura/apertura/${id}`,{ headers });
+
+  }
+
   postApertura(body):Observable<any>{
     const headers = new HttpHeaders()
       .set('x-access-token',sessionStorage.getItem('token')||'');

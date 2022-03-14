@@ -40,6 +40,11 @@ export class AperturaController {
     return this.aperturaService.findOne(+id);
   }
 
+  @Get('apertura/:id')
+  getAperturaDetail(@Param('id') id: string) {
+    return this.aperturaService.getAperturaDetail(+id);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Delete('cerrar/:aperturaId')
   updateEstadoApertura(@Req() req, @Param('aperturaId') aperturaId: string) {

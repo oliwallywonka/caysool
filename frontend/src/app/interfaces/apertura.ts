@@ -1,3 +1,4 @@
+import { Movimiento } from "./movimiento";
 
 export interface Apertura {
   id?: number;
@@ -5,6 +6,7 @@ export interface Apertura {
   nomtoCierre?: number;
   fechaApertura?: string;
   fechaCierre?: string;
+  movimientos?: Movimiento[];
   estado?: boolean;
   createdAt?: string;
   updatedAt?: string;

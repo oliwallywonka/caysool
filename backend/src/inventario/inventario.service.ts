@@ -193,6 +193,7 @@ export class InventarioService {
         throw new BadRequestException({ message: 'Prestamo no encontrado' });
       await prestamo.calculateCostoPrestamo();
       await prestamo.calculateCostoTotal();
+      await prestamo.calculateCostoVenta();
       await prestamo.save();
     }
 

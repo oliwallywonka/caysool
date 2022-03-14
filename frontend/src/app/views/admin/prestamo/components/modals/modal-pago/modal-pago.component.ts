@@ -237,8 +237,8 @@ export class ModalPagoComponent implements OnInit, OnDestroy {
         this.pagoForm.controls['costoInteres'].patchValue(+this.costoInteres.toFixed(1));
       }
     }
-    if (this.pagoForm.value.tipoPago === 'LIQUIDACION') {
-      this.pagoForm.controls['costoInteres'].patchValue(+this.prestamo.costoInteres - +this.prestamo.cobroInteres);
+    if (this.pagoForm.value.tipoPago === 'LIQUIDACION' && this.prestamo) {
+      this.pagoForm.controls['costoInteres'].patchValue((+this.prestamo.costoInteres - +this.prestamo.cobroInteres).toFixed(1));
       this.pagoForm.controls['costoPago'].patchValue((+this.prestamo.costoTotal - +this.prestamo.costoCancelado - +this.pagoForm.value.costoInteres).toFixed(1));
     }
   }

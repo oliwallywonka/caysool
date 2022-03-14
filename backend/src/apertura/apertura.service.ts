@@ -80,6 +80,14 @@ export class AperturaService {
     return apertura;
   }
 
+  async getAperturaDetail(id: number) {
+    const apertura = await Apertura.createQueryBuilder('apertura')
+      .leftJoinAndSelect('apertura.movimiento', 'movimientos')
+      .where('apertura.id = :id', { id })
+      .getOne();
+    return apertura;
+  }
+
   update(id: number, updateAperturaDto: UpdateAperturaDto) {
     return `This action updates a #${id} apertura`;
   }
