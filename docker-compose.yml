@@ -1,20 +1,20 @@
 version: "3.9"
 services:
   
-  frontend:
-    env_file:
-      - ./.env
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - 4200:80
-      - 49153:49153
-    container_name: frontend
-    volumes:
-      - ./frontend:/frontend
-      - /frontend/node_modules
-    restart: always
+  # frontend:
+  #   env_file:
+  #     - ./.env
+  #   build: 
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 4200:80
+  #     - 49153:49153
+  #   container_name: frontend
+  #   volumes:
+  #     - ./frontend:/frontend
+  #     - /frontend/node_modules
+  #   restart: always
 
   backend:
     env_file:
@@ -28,7 +28,7 @@ services:
     volumes:
       - ./backend:/backend
       - /backend/node_modules
-    restart: always
+    #restart: always
     environment:
       - TIME_ZONE=America/La_Paz
       - TZ=America/La_Paz

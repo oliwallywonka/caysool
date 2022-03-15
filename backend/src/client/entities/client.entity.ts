@@ -15,7 +15,7 @@ export class Client extends BaseEntity {
   @Column({ type: 'varchar', length: 10, unique: true })
   ci: string;
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: 'varchar', length: 100 })
   name: string;
 
   @Column({ type: 'date', nullable: true })

@@ -196,7 +196,7 @@ let ModalUserComponent = class ModalUserComponent {
                         message: this.errorMessages.minLength,
                     }),
                     _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
-                        value: 20,
+                        value: 100,
                         message: this.errorMessages.maxLenght,
                     }),
                 ],

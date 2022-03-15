@@ -6,7 +6,7 @@
           class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
           (click)="toggleTabs(1)"
           [ngClass]="{'text-sky-700 bg-white': openTab !== 1, 'text-white bg-sky-700': openTab === 1}">
-          Dolares
+          Apertura y Cierre de Caja
         </a>
       </li>
 
@@ -15,7 +15,7 @@
           class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
           (click)="toggleTabs(2)"
           [ngClass]="{'text-sky-700 bg-white': openTab !== 2, 'text-white bg-sky-700': openTab === 2}">
-          Apertura y Cierre de Caja
+          Dólares
         </a>
       </li>
 
@@ -24,10 +24,11 @@
       <div class="px-4 py-5 flex-auto">
         <div class="tab-content tab-space">
           <div *ngIf="openTab === 1">
+            <app-card-apertura-list></app-card-apertura-list>
             <app-card-dolar-list></app-card-dolar-list>
           </div>
           <div *ngIf="openTab === 2">
-            <app-card-apertura-list></app-card-apertura-list>
+            <app-card-dolar-list></app-card-dolar-list>
           </div>
         </div>
       </div>

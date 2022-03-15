@@ -57,7 +57,7 @@ export class ModalUserComponent implements OnInit {
           message: this.errorMessages.minLength,
         }),
         RxwebValidators.maxLength({
-          value: 20,
+          value: 100,
           message: this.errorMessages.maxLenght,
         }),
       ],

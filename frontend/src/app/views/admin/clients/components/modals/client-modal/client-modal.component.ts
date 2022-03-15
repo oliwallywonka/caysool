@@ -37,7 +37,7 @@ export class ClientModalComponent implements OnInit, OnDestroy {
           message: this.errorMessages.minLength,
         }),
         RxwebValidators.maxLength({
-          value: 50,
+          value: 100,
           message: this.errorMessages.maxLenght,
         }),
       ],
