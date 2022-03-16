@@ -13,6 +13,8 @@ import { ModalAperturaComponent } from './components/modals/modal-apertura/modal
 import { CardMovimientoListComponent } from './components/cards/card-movimiento-list/card-movimiento-list.component';
 import { ModalCierreAperturaComponent } from './components/modals/modal-cierre-apertura/modal-cierre-apertura.component';
 import { PdfMovimientosComponent } from './components/pdfs/pdf-movimientos/pdf-movimientos.component';
+import { PdfCompraVentaDolarComponent } from './components/pdfs/pdf-compra-venta-dolar/pdf-compra-venta-dolar.component';
+import { PdfBoletaSalidaComponent } from './components/pdfs/pdf-boleta-salida/pdf-boleta-salida.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { PdfMovimientosComponent } from './components/pdfs/pdf-movimientos/pdf-m
     CardMovimientoListComponent,
     ModalCierreAperturaComponent,
     PdfMovimientosComponent,
+    PdfCompraVentaDolarComponent,
+    PdfBoletaSalidaComponent,
   ],
   imports: [SharedModule, IngresoSalidaRoutingModule],
 })

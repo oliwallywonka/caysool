@@ -6,6 +6,7 @@
         Cambio oficial: {{ business?.cambioDolar }}
       </h3>
       <app-modal-compra-venta-dolar></app-modal-compra-venta-dolar>
+      <app-pdf-compra-venta-dolar *ngIf="transacciones" [transacciones]="transacciones" [from]="today" [to]="today"></app-pdf-compra-venta-dolar>
     </div>
     <div class="flex flex-col">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">

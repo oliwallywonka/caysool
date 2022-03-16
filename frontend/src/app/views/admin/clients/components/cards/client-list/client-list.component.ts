@@ -31,7 +31,7 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions = new Subscription();
-    this.getClients();
+    this.getClients(true);
     this.subscriptionClients();
   }
 

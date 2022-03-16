@@ -9,11 +9,14 @@ import { Prestamo } from './entities/prestamo.entity';
 import { v4 as uuidv4 } from 'uuid';
 import { InventarioService } from 'src/inventario/inventario.service';
 import moment = require('moment');
-import { Connection } from 'typeorm';
+import { Connection, Like, Repository } from 'typeorm';
 import { AperturaService } from 'src/apertura/apertura.service';
+import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class PrestamoService {
   constructor(
+    @InjectRepository(Prestamo)
+    private readonly repository: Repository<Prestamo>,
     private connection: Connection,
     private readonly auditService: AuditService,
     private readonly inventarioService: InventarioService,
@@ -57,13 +60,25 @@ export class PrestamoService {
   }
 
   async findAll(options: IPaginationOptions, clientCi: string, estado: string) {
-    const prestamos = Prestamo.createQueryBuilder('prestamo')
+    /*const prestamos = Prestamo.createQueryBuilder('prestamo')
       .leftJoinAndSelect('prestamo.client', 'client')
-      .leftJoinAndSelect('prestamo.inventario', 'inventario')
       .where(`client.ci LIKE '%${clientCi ? clientCi : ''}%'`)
       .andWhere(`prestamo.estado LIKE '%${estado ? estado : ''}%'`)
-      .orderBy('prestamo.id', 'DESC');
-    return await paginate<Prestamo>(prestamos, options);
+      .orderBy('prestamo.id', 'DESC');*/
+    //Como las relaciones del createQueryBuilder se apilan en leftJoin inventario pasamos a las opciones de busqueda al repository de prestamo
+    const pag = await paginate<Prestamo>(this.repository, options, {
+      relations: ['inventario', 'client'],
+      where: {
+        estado: Like(`%${estado ? estado : ''}%`),
+        client: {
+          ci: Like(`%${clientCi ? clientCi : ''}%`),
+        },
+      },
+      order: {
+        createdAt: 'DESC',
+      },
+    });
+    return pag;
   }
 
   async findOne(id: number) {

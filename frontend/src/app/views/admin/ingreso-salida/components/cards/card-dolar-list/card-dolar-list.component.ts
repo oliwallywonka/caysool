@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BusinessService } from 'src/app/core/services/business.service';
+import { ReporteService } from 'src/app/core/services/reporte.service';
 import { TransaccionMonedaService } from 'src/app/core/services/transaccionMoneda.service';
 import { Business } from 'src/app/interfaces/business';
-import { TransaccionMonedaResponse } from 'src/app/interfaces/transaccionMoneda';
+import { TransaccionMoneda, TransaccionMonedaResponse } from 'src/app/interfaces/transaccionMoneda';
 
 @Component({
   selector: 'app-card-dolar-list',
@@ -12,11 +13,15 @@ import { TransaccionMonedaResponse } from 'src/app/interfaces/transaccionMoneda'
   ]
 })
 export class CardDolarListComponent implements OnInit, OnDestroy {
+  loading = false;
+  transacciones: TransaccionMoneda[] = [];
+  today = new Date().toISOString().substring(0, 10);
   sub: Subscription;
   response: TransaccionMonedaResponse;
   business: Business = this.businessService.businessInformation;
   constructor(
     private transaccionService: TransaccionMonedaService,
+    private reporteService: ReporteService,
     private businessService: BusinessService
   ) { }
 
@@ -25,6 +30,7 @@ export class CardDolarListComponent implements OnInit, OnDestroy {
     this.getTransacciones();
     this.subcriptionTransacciones();
     this.subcriptionBusiness();
+    this.getTansaccioness();
   }
 
   ngOnDestroy(): void {
@@ -59,6 +65,7 @@ export class CardDolarListComponent implements OnInit, OnDestroy {
         response => {
           if (response) {
             this.response = response;
+            this.getTansaccioness();
           }
         }
       )
@@ -75,5 +82,22 @@ export class CardDolarListComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.transaccionService.response.emit(response);
       });
+  }
+
+  getTansaccioness() {
+    this.loading = true;
+    this.sub.add(
+      this.reporteService.getTransaccionByDate({
+        from: this.today,
+        to: this.today
+      }).subscribe(
+        (transacciones) => {
+          if (transacciones) {
+            this.transacciones = transacciones;
+          }
+          this.loading = false;
+        }
+      )
+    );
   }
 }

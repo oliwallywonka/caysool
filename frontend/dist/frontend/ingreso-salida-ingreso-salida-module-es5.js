@@ -157,6 +157,359 @@
     },
 
     /***/
+    "/nvB":
+    /*!***********************************************************************************************************************!*\
+      !*** ./src/app/views/admin/ingreso-salida/components/pdfs/pdf-compra-venta-dolar/pdf-compra-venta-dolar.component.ts ***!
+      \***********************************************************************************************************************/
+
+    /*! exports provided: PdfCompraVentaDolarComponent */
+
+    /***/
+    function nvB(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "PdfCompraVentaDolarComponent", function () {
+        return PdfCompraVentaDolarComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_pdf_compra_venta_dolar_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./pdf-compra-venta-dolar.component.html */
+      "6UQX");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! src/app/core/services/business.service */
+      "cwzI");
+      /* harmony import */
+
+
+      var src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/helpers/base64Images */
+      "5Y+O");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @angular/common */
+      "ofXK");
+      /* harmony import */
+
+
+      var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! pdfmake/build/pdfmake */
+      "5JmO");
+      /* harmony import */
+
+
+      var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6__);
+      /* harmony import */
+
+
+      var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! pdfmake/build/vfs_fonts */
+      "TruH");
+      /* harmony import */
+
+
+      var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_7__);
+
+      pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_7___default.a.pdfMake.vfs;
+
+      var PdfCompraVentaDolarComponent = /*#__PURE__*/function () {
+        function PdfCompraVentaDolarComponent(businessService, datePipe) {
+          _classCallCheck(this, PdfCompraVentaDolarComponent);
+
+          this.businessService = businessService;
+          this.datePipe = datePipe;
+          this.transacciones = [];
+          this.business = this.businessService.businessInformation;
+        }
+
+        _createClass(PdfCompraVentaDolarComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {}
+        }, {
+          key: "subscribeBusiness",
+          value: function subscribeBusiness() {
+            var _this = this;
+
+            this.businessService.business.subscribe(function (business) {
+              if (business) {
+                _this.business = business;
+              }
+            });
+          }
+        }, {
+          key: "exportToPdf",
+          value: function exportToPdf() {
+            var dolaresDisponibles = 0;
+            var totalCompras = 0;
+            var totalVentas = 0;
+            var totalDiferencia = 0;
+            var bodyDolar = [[{
+              text: "Fecha",
+              alignment: "center",
+              style: "tableHeader"
+            }, {
+              text: "Operacion",
+              style: "tableHeader"
+            }, {
+              text: "Cantidad en dolares",
+              style: "tableHeader"
+            }, {
+              text: "Precio dolar",
+              style: "tableHeader"
+            }, {
+              text: "Cantidad total",
+              style: "tableHeader"
+            }, {
+              text: "Precio dolar oficial",
+              style: "tableHeader"
+            }, {
+              text: "Cantidad real",
+              style: "tableHeader"
+            }, {
+              text: "Diferencia",
+              style: "tableHeader"
+            }]];
+
+            var _iterator = _createForOfIteratorHelper(this.transacciones),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var transaccion = _step.value;
+
+                if (transaccion.operacion === 'VENTA') {
+                  dolaresDisponibles -= +transaccion.cantidad;
+                  totalVentas += +transaccion.cantidad;
+                } else {
+                  dolaresDisponibles += +transaccion.cantidad;
+                  totalCompras += +transaccion.cantidad;
+                }
+
+                totalDiferencia += +transaccion.diferencia;
+                bodyDolar.push([{
+                  text: "".concat(this.datePipe.transform(transaccion.createdAt, 'medium')),
+                  alignment: "center",
+                  fontSize: 10
+                }, {
+                  text: "".concat(transaccion.operacion),
+                  alignment: "center",
+                  fontSize: 10
+                }, {
+                  text: "$. ".concat(transaccion.cantidad),
+                  alignment: "center",
+                  fontSize: 10
+                }, {
+                  text: "Bol. ".concat(transaccion.tipoCambio),
+                  alignment: "center",
+                  fontSize: 10
+                }, {
+                  text: "Bol. ".concat((transaccion.cantidad * transaccion.tipoCambio).toFixed(1)),
+                  alignment: "center",
+                  fontSize: 10
+                }, {
+                  text: "Bol. ".concat(transaccion.tipoCambioOficial),
+                  alignment: "center",
+                  fontSize: 10
+                }, {
+                  text: "Bol. ".concat((transaccion.cantidad * transaccion.tipoCambioOficial).toFixed(1)),
+                  alignment: "center",
+                  fontSize: 10
+                }, {
+                  text: "Bol. ".concat(transaccion.diferencia),
+                  alignment: "center",
+                  fontSize: 10
+                }]);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+
+            var reporte = {
+              // a string or { width: number, height: number }
+              pageSize: "LETTER",
+              // by default we use portrait, you can change it to landscape if you wish
+              pageOrientation: "landscape",
+              // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+              pageMargins: [20, 15, 15, 20],
+              content: [//FECHA Y HORA ACTUAL AL IMPRIMIR
+              {
+                text: "".concat(this.datePipe.transform(Date.now(), 'medium')),
+                fontSize: 8
+              }, {
+                columns: [{
+                  width: 90,
+                  height: 40,
+                  fontSize: 9,
+                  margin: [22, 10, 0, 0],
+                  image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_4__["logoCaysool"]
+                }, [// REPORTE DE PRESTAMOS
+                {
+                  text: 'Reporte de "COMPRA VENTA DE DOLARES"',
+                  color: "#333333",
+                  width: 800,
+                  fontSize: 20,
+                  bold: true,
+                  alignment: "center",
+                  margin: [0, 0, 0, 0]
+                }]]
+              }, "\n", {
+                columns: [{
+                  width: 250,
+                  text: "Cambio Oficial del Dolar ".concat(this.business.cambioDolar),
+                  bold: true,
+                  fontSize: 14
+                }, {
+                  columns: [{
+                    width: 250,
+                    text: "Compra venta desde ".concat(this.datePipe.transform(this.from, 'mediumDate')),
+                    bold: false,
+                    fontSize: 12
+                  }, {
+                    width: "*",
+                    text: "hasta ".concat(this.datePipe.transform(this.to, 'mediumDate'))
+                  }]
+                }]
+              }, {
+                style: "tableExample",
+                table: {
+                  widths: [60, 60, 120, "*", "*", "*", "*", "*"],
+                  headerRows: 1,
+                  body: bodyDolar
+                },
+                layout: "lightHorizontalLines"
+              }, //suma de la diferencia
+              {
+                table: {
+                  widths: [60, 60, 120, "*", "*", "*", "*", "*"],
+                  headerRows: 1,
+                  body: [[{
+                    text: "Total",
+                    alignment: "center",
+                    style: "tableHeader"
+                  }, "", "", "", "", "", {
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "Bol. ".concat(totalDiferencia.toFixed(1)),
+                    alignment: "center",
+                    style: "tableHeader"
+                  }]]
+                },
+                layout: "noBorders"
+              }, {
+                style: "tableExample",
+                table: {
+                  widths: [300, 130, 150],
+                  headerRows: 1,
+                  body: [[{
+                    text: "Total de Dolares disponibles",
+                    fontSize: 13,
+                    style: "tableHeader"
+                  }, {
+                    text: "$. ".concat(dolaresDisponibles),
+                    alignment: "right",
+                    fontSize: 13
+                  }, {
+                    text: "",
+                    alignment: "right",
+                    fontSize: 12
+                  }], [{
+                    text: "Total compras",
+                    fontSize: 13,
+                    style: "tableHeader"
+                  }, {
+                    text: "$. ".concat(totalCompras),
+                    alignment: "right",
+                    fontSize: 13
+                  }, {
+                    text: "",
+                    alignment: "right",
+                    fontSize: 12
+                  }], [{
+                    text: "Total ventas",
+                    fontSize: 13,
+                    style: "tableHeader"
+                  }, {
+                    text: "$. ".concat(totalVentas),
+                    alignment: "right",
+                    fontSize: 13
+                  }, {
+                    text: "",
+                    alignment: "right",
+                    fontSize: 12
+                  }]]
+                },
+                layout: "noBorders"
+              }],
+              styles: {
+                tableHeader: {
+                  bold: true,
+                  fontSize: 10,
+                  color: "black"
+                },
+                tableExample: {
+                  margin: [0, 10, 0, 5]
+                }
+              }
+            };
+            pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_6___default.a.createPdf(reporte).open();
+          }
+        }]);
+
+        return PdfCompraVentaDolarComponent;
+      }();
+
+      PdfCompraVentaDolarComponent.ctorParameters = function () {
+        return [{
+          type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_3__["BusinessService"]
+        }, {
+          type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"]
+        }];
+      };
+
+      PdfCompraVentaDolarComponent.propDecorators = {
+        transacciones: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"]
+        }],
+        from: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"]
+        }],
+        to: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"]
+        }]
+      };
+      PdfCompraVentaDolarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-pdf-compra-venta-dolar',
+        template: _raw_loader_pdf_compra_venta_dolar_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
+      })], PdfCompraVentaDolarComponent);
+      /***/
+    },
+
+    /***/
     "01vk":
     /*!**********************************************************************************************************!*\
       !*** ./src/app/views/admin/ingreso-salida/components/cards/card-movimiento/card-movimiento.component.ts ***!
@@ -242,6 +595,46 @@
 
 
       __webpack_exports__["default"] = "<div *ngIf=\"modal.visible&&modal.modalName==='cierreAperturaModal'\" class=\"justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none\">\n  <div class=\"relative w-auto my-6 mx-auto max-w-580-px\">\n\n    <div class=\"border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none\">\n\n      <div class=\"flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t\">\n        <h4 class=\"text-2xl font-semibold\">\n           Cerrar Apertura\n        </h4>\n        <button\n          class=\"p-1 ml-auto border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          <span class=\"opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none\">\n            x\n          </span>\n        </button>\n      </div>\n\n        <div class=\"my-4 relative p-6 flex flex-wrap\">\n          <div class=\"w-full  px-4 mb-2\">\n            <p> ¿ Desea cerrar la apertura Nº {{ apertura.id }} permanentemente?</p>\n          </div>\n\n        </div>\n\n      <div class=\"flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b\">\n        <button\n          class=\"text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          (click)=\"closeModal()\"\n          type=\"button\"\n        >\n          Cancelar\n        </button>\n        <button\n          [disabled]=\"loading\"\n          class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n          type=\"button\"\n          (click)=\"save()\"\n        >\n        <i class=\"fas fa-spinner\" [ngClass]=\"loading? 'animate-spin': 'hidden'\"></i> Guardar cambios\n        </button>\n      </div>\n\n    </div>\n  </div>\n</div>\n<div *ngIf=\"modal.visible&&modal.modalName==='cierreAperturaModal'\" class=\"opacity-25 fixed inset-0 z-40 bg-black\"></div>\n";
+      /***/
+    },
+
+    /***/
+    "6UQX":
+    /*!***************************************************************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/ingreso-salida/components/pdfs/pdf-compra-venta-dolar/pdf-compra-venta-dolar.component.html ***!
+      \***************************************************************************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function UQX(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<button\n  class=\"mx-4 bg-sky-700 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150\"\n  type=\"button\"\n  (click)=\"exportToPdf()\"\n>\n  <i class=\"fas fa-pdf\"></i> Imprimir Lista de Hoy\n</button>\n";
+      /***/
+    },
+
+    /***/
+    "6nSp":
+    /*!*****************************************************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/admin/ingreso-salida/components/pdfs/pdf-boleta-salida/pdf-boleta-salida.component.html ***!
+      \*****************************************************************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function nSp(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<a\n  (click)=\"exportToPdf()\"\n  class=\"cursor-pointer p-2 text-blue-600 dark:text-blue-500 hover:underline\">\n  Imprimir</a>\n";
       /***/
     },
 
@@ -339,21 +732,21 @@
         }, {
           key: "refreshAperturas",
           value: function refreshAperturas() {
-            var _this = this;
+            var _this2 = this;
 
             this.sub.add(this.aperturaService.getAperturas({
               force: true
             }).subscribe(function (response) {
-              _this.aperturaService.response.emit(response);
+              _this2.aperturaService.response.emit(response);
             }));
           }
         }, {
           key: "subscribeApertura",
           value: function subscribeApertura() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.sub.add(this.aperturaService.apertura.subscribe(function (apertura) {
-              _this2.apertura = apertura;
+              _this3.apertura = apertura;
             }));
           }
         }, {
@@ -365,23 +758,23 @@
         }, {
           key: "save",
           value: function save() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.loading = true;
             this.aperturaService.cerrarApertura(this.apertura.id).subscribe(function (response) {
-              _this3.loading = false;
+              _this4.loading = false;
 
-              _this3.alertService.triggerMessage('Caja cerrada exitosamente', 'success');
+              _this4.alertService.triggerMessage('Caja cerrada exitosamente', 'success');
 
-              _this3.refreshAperturas();
+              _this4.refreshAperturas();
 
-              _this3.closeModal();
+              _this4.closeModal();
             }, function (error) {
-              _this3.loading = false;
+              _this4.loading = false;
 
-              _this3.alertService.triggerMessage(error.error.message, 'error');
+              _this4.alertService.triggerMessage(error.error.message, 'error');
 
-              _this3.closeModal();
+              _this4.closeModal();
             });
           }
         }]);
@@ -403,6 +796,516 @@
         selector: 'app-modal-cierre-apertura',
         template: _raw_loader_modal_cierre_apertura_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       })], ModalCierreAperturaComponent);
+      /***/
+    },
+
+    /***/
+    "Ag/x":
+    /*!*************************************************************************************************************!*\
+      !*** ./src/app/views/admin/ingreso-salida/components/pdfs/pdf-boleta-salida/pdf-boleta-salida.component.ts ***!
+      \*************************************************************************************************************/
+
+    /*! exports provided: PdfBoletaSalidaComponent */
+
+    /***/
+    function AgX(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "PdfBoletaSalidaComponent", function () {
+        return PdfBoletaSalidaComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_pdf_boleta_salida_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./pdf-boleta-salida.component.html */
+      "6nSp");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/common */
+      "ofXK");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/core/services/business.service */
+      "cwzI");
+      /* harmony import */
+
+
+      var src_app_helpers_numberToLetter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/helpers/numberToLetter */
+      "mHh0");
+      /* harmony import */
+
+
+      var src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/helpers/base64Images */
+      "5Y+O");
+      /* harmony import */
+
+
+      var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! pdfmake/build/pdfmake */
+      "5JmO");
+      /* harmony import */
+
+
+      var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7__);
+      /* harmony import */
+
+
+      var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! pdfmake/build/vfs_fonts */
+      "TruH");
+      /* harmony import */
+
+
+      var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_8__);
+
+      pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7___default.a.vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_8___default.a.pdfMake.vfs;
+
+      var PdfBoletaSalidaComponent = /*#__PURE__*/function () {
+        function PdfBoletaSalidaComponent(businessService, datePipe) {
+          _classCallCheck(this, PdfBoletaSalidaComponent);
+
+          this.businessService = businessService;
+          this.datePipe = datePipe;
+          this.business = this.businessService.businessInformation;
+        }
+
+        _createClass(PdfBoletaSalidaComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            var _this5 = this;
+
+            this.businessService.business.subscribe(function (business) {
+              _this5.business = business;
+            });
+            this.numeroALiteral();
+          }
+        }, {
+          key: "numeroALiteral",
+          value: function numeroALiteral() {
+            this.literal = "";
+            var decimal = ((+this.movimiento.cantidad - Math.trunc(+this.movimiento.cantidad)) * 10).toFixed(0);
+            var litera = Object(src_app_helpers_numberToLetter__WEBPACK_IMPORTED_MODULE_5__["numeroALetras"])(this.movimiento.cantidad, {
+              plural: "BOLIVIANOS",
+              singular: "BOLIVIANO",
+              centPlural: "CENTAVOS",
+              centSingular: "CENTAVO"
+            });
+            this.literal = "SON: ".concat(litera, " ").concat(decimal, "0/100");
+          }
+        }, {
+          key: "exportToPdf",
+          value: function exportToPdf() {
+            var movimiento = {
+              // a string or { width: number, height: number }
+              pageSize: "LETTER",
+              // by default we use portrait, you can change it to landscape if you wish
+              pageOrientation: "portrait",
+              // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+              pageMargins: [40, 30, 40, 30],
+              content: [{
+                columns: [{
+                  width: 90,
+                  height: 40,
+                  fontSize: 9,
+                  margin: [22, 0, 0, 0],
+                  image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_6__["logoCaysool"]
+                }, [{
+                  text: "COMPROBANTE DE PAGO",
+                  color: "#333333",
+                  width: 800,
+                  fontSize: 20,
+                  bold: true,
+                  alignment: "center",
+                  margin: [0, 0, 0, 0]
+                }]]
+              }, {
+                columns: [{
+                  width: 150,
+                  text: ["CEL:78857480 - 78857480\n", 'Urb. 21 de octubre "A" Dist. 7 Ex Tranca San Roque Av. Panamericana Nro 3174 Entre calle Gral. juan Jose Torrez\n', "El Alto-La Paz-Bolivia\n"],
+                  fontSize: 8,
+                  alignment: "center",
+                  margin: [0, 0, 0, 0]
+                }, ["\n", {
+                  text: "Fecha: ".concat(this.datePipe.transform(this.movimiento.createdAt, "medium")),
+                  color: "#333333",
+                  width: "*",
+                  fontSize: 11,
+                  bold: true,
+                  alignment: "rigth",
+                  margin: [19, 0, 0, 0]
+                }], ["\n", {
+                  text: "Nro de Recibo: ".concat(this.movimiento.id),
+                  color: "#333333",
+                  width: "*",
+                  fontSize: 11,
+                  bold: true,
+                  alignment: "rigth",
+                  margin: [19, 0, 0, 0]
+                }]]
+              }, {
+                alignment: "justify",
+                columns: [{
+                  width: 400,
+                  //nombre del cliente
+                  text: ["Nombre: "],
+                  fontSize: 11,
+                  alignment: "center",
+                  margin: [0, 18, 0, 0]
+                }, [{
+                  text: "CI: ",
+                  color: "#333333",
+                  width: "*",
+                  fontSize: 11,
+                  bold: true,
+                  alignment: "rigth",
+                  margin: [0, 18, 0, 5]
+                }]]
+              }, {
+                canvas: [{
+                  type: "line",
+                  x1: 0,
+                  y1: 0,
+                  x2: 530,
+                  y2: 0,
+                  lineWidth: 3
+                }]
+              }, {
+                style: "tableExample",
+                table: {
+                  widths: [48, 200, 150, 80],
+                  headerRows: 7,
+                  body: [[{
+                    text: ""
+                  }, {
+                    text: "DETALLE",
+                    alignment: "center",
+                    style: "tableHeader",
+                    bold: true,
+                    colSpan: 2
+                  }, {}, {
+                    text: "TOTAL",
+                    alignment: "center",
+                    bold: true
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "AMORTIZACION",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "INTERES",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "COMISION ADMINISTRATIVA",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "CARGOS GENERADOS",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "CAPITAL PRESTADO",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "Concepto",
+                    fontSize: 10,
+                    alignment: "center"
+                  }, {
+                    text: "".concat(this.movimiento.concepto),
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "",
+                    alignment: "right"
+                  }], [{
+                    text: "TOTAL A PAGAR ".concat(this.literal),
+                    alignment: "left",
+                    fontSize: 9,
+                    bold: true,
+                    colSpan: 3
+                  }, {}, {}, {
+                    text: "Bol. ".concat(this.movimiento.cantidad),
+                    alignment: "right",
+                    bold: true
+                  }]]
+                },
+                layout: "lightHorizontalLines"
+              }, " \n\n\n", {
+                text: ["FIRMA CLIENTE	                                                                         FIRMA ASESOR DE CREDITO"],
+                fontSize: 12,
+                alignment: "center"
+              }, "\n\n", //aca segunda
+              {
+                columns: [{
+                  width: 90,
+                  height: 40,
+                  fontSize: 9,
+                  margin: [22, 0, 0, 0],
+                  image: src_app_helpers_base64Images__WEBPACK_IMPORTED_MODULE_6__["logoCaysool"]
+                }, [{
+                  text: "COMPROBANTE DE PAGO",
+                  color: "#333333",
+                  width: 800,
+                  fontSize: 20,
+                  bold: true,
+                  alignment: "center",
+                  margin: [0, 0, 0, 0]
+                }]]
+              }, {
+                columns: [{
+                  width: 150,
+                  text: ["CEL:78857480 - 78857480\n", 'Urb. 21 de octubre "A" Dist. 7 Ex Tranca San Roque Av. Panamericana Nro 3174 Entre calle Gral. juan Jose Torrez\n', "El Alto-La Paz-Bolivia\n"],
+                  fontSize: 8,
+                  alignment: "center",
+                  margin: [0, 0, 0, 0]
+                }, ["\n", {
+                  text: "Fecha: ".concat(this.datePipe.transform(this.movimiento.createdAt, "medium")),
+                  color: "#333333",
+                  width: "*",
+                  fontSize: 11,
+                  bold: true,
+                  alignment: "rigth",
+                  margin: [19, 0, 0, 0]
+                }], ["\n", {
+                  text: "Nro de Recibo: ".concat(this.movimiento.id),
+                  color: "#333333",
+                  width: "*",
+                  fontSize: 11,
+                  bold: true,
+                  alignment: "rigth",
+                  margin: [19, 0, 0, 0]
+                }]]
+              }, {
+                alignment: "justify",
+                columns: [{
+                  width: 400,
+                  //nombre del cliente
+                  text: ["Nombre: "],
+                  fontSize: 11,
+                  alignment: "center",
+                  margin: [0, 18, 0, 0]
+                }, [{
+                  text: "CI: ",
+                  color: "#333333",
+                  width: "*",
+                  fontSize: 11,
+                  bold: true,
+                  alignment: "rigth",
+                  margin: [0, 18, 0, 5]
+                }]]
+              }, {
+                canvas: [{
+                  type: "line",
+                  x1: 0,
+                  y1: 0,
+                  x2: 530,
+                  y2: 0,
+                  lineWidth: 3
+                }]
+              }, {
+                style: "tableExample",
+                table: {
+                  widths: [48, 200, 150, 80],
+                  headerRows: 7,
+                  body: [[{
+                    text: ""
+                  }, {
+                    text: "DETALLE",
+                    alignment: "center",
+                    style: "tableHeader",
+                    bold: true,
+                    colSpan: 2
+                  }, {}, {
+                    text: "TOTAL",
+                    alignment: "center",
+                    bold: true
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "AMORTIZACION",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "INTERES",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "COMISION ADMINISTRATIVA",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "CARGOS GENERADOS",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "",
+                    alignment: "center"
+                  }, {
+                    text: "CAPITAL PRESTADO",
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "Bol. 0.0",
+                    alignment: "right"
+                  }], [{
+                    text: "Concepto",
+                    fontSize: 10,
+                    alignment: "center"
+                  }, {
+                    text: "".concat(this.movimiento.concepto),
+                    fontSize: 10,
+                    alignment: "left",
+                    colSpan: 2
+                  }, {}, {
+                    text: "",
+                    alignment: "right"
+                  }], [{
+                    text: "TOTAL A PAGAR ".concat(this.literal),
+                    alignment: "left",
+                    fontSize: 9,
+                    bold: true,
+                    colSpan: 3
+                  }, {}, {}, {
+                    text: "Bol. ".concat(this.movimiento.cantidad),
+                    alignment: "right",
+                    bold: true
+                  }]]
+                },
+                layout: "lightHorizontalLines"
+              }, " \n\n\n", {
+                text: ["FIRMA CLIENTE	                                                                         FIRMA ASESOR DE CREDITO"],
+                fontSize: 12,
+                alignment: "center"
+              }],
+              styles: {
+                notesTitle: {
+                  fontSize: 8,
+                  bold: true,
+                  margin: [0, 50, 0, 3]
+                },
+                notesText: {
+                  fontSize: 8
+                }
+              },
+              tableHeader: {
+                bold: true,
+                fontSize: 12,
+                color: "black"
+              },
+              defaultStyle: {
+                columnGap: 20
+              }
+            };
+            pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7___default.a.createPdf(movimiento).open();
+          }
+        }]);
+
+        return PdfBoletaSalidaComponent;
+      }();
+
+      PdfBoletaSalidaComponent.ctorParameters = function () {
+        return [{
+          type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_4__["BusinessService"]
+        }, {
+          type: _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]
+        }];
+      };
+
+      PdfBoletaSalidaComponent.propDecorators = {
+        movimiento: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"]
+        }]
+      };
+      PdfBoletaSalidaComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-pdf-boleta-salida',
+        template: _raw_loader_pdf_boleta_salida_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
+      })], PdfBoletaSalidaComponent);
       /***/
     },
 
@@ -512,36 +1415,36 @@
         }, {
           key: "getAperturas",
           value: function getAperturas() {
-            var _this4 = this;
+            var _this6 = this;
 
             this.sub.add(this.aperturaService.getAperturas({
               force: true
             }).subscribe(function (response) {
-              _this4.response = response;
+              _this6.response = response;
             }));
           }
         }, {
           key: "subcriptionAperturas",
           value: function subcriptionAperturas() {
-            var _this5 = this;
+            var _this7 = this;
 
             this.sub.add(this.aperturaService.response.subscribe(function (response) {
               if (response) {
-                _this5.response = response;
+                _this7.response = response;
               }
             }));
           }
         }, {
           key: "getOnPageResponse",
           value: function getOnPageResponse(page) {
-            var _this6 = this;
+            var _this8 = this;
 
             this.response = null;
             this.aperturaService.getAperturas({
               page: page,
               force: true
             }).subscribe(function (response) {
-              _this6.aperturaService.response.emit(response);
+              _this8.aperturaService.response.emit(response);
             });
           }
         }, {
@@ -714,22 +1617,22 @@
         }, {
           key: "refreshAperturas",
           value: function refreshAperturas() {
-            var _this7 = this;
+            var _this9 = this;
 
             this.sub.add(this.aperturaService.getAperturas({
               force: true
             }).subscribe(function (response) {
-              _this7.aperturaService.response.emit(response);
+              _this9.aperturaService.response.emit(response);
             }));
           }
         }, {
           key: "subcriptionBusiness",
           value: function subcriptionBusiness() {
-            var _this8 = this;
+            var _this10 = this;
 
             this.sub.add(this.businessService.business.subscribe(function (business) {
               if (business) {
-                _this8.business = business;
+                _this10.business = business;
               }
             }));
           }
@@ -754,7 +1657,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this9 = this;
+            var _this11 = this;
 
             this.loading = true;
             var body = {
@@ -763,17 +1666,17 @@
             };
             console.log(body);
             this.aperturaService.postApertura(body).subscribe(function (response) {
-              _this9.loading = false;
+              _this11.loading = false;
 
-              _this9.alertService.triggerMessage('Cambio Ingresada Correctamente', 'success');
+              _this11.alertService.triggerMessage('Cambio Ingresada Correctamente', 'success');
 
-              _this9.refreshAperturas();
+              _this11.refreshAperturas();
 
-              _this9.closeModal();
+              _this11.closeModal();
             }, function (error) {
-              _this9.loading = false;
+              _this11.loading = false;
 
-              _this9.alertService.triggerMessage(error.error.message, 'error');
+              _this11.alertService.triggerMessage(error.error.message, 'error');
             });
           }
         }]);
@@ -935,7 +1838,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Ingresos y salidas De La Apertura Nº {{ aperturaId }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2 pl-3\">\n        <app-modal-ingreso-salida *ngIf=\"apertura && apertura.estado\" [aperturaId]=\"aperturaId\"></app-modal-ingreso-salida>\n        <app-pdf-movimientos [movimientos]=\"movimientos\" [from]=\"apertura.fechaApertura\" [to]=\"apertura.fechaCierre\"></app-pdf-movimientos>\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col\">\n          <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n              <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                  <div class=\"overflow-hidden sm:rounded-lg\">\n                      <table class=\"min-w-full\">\n                          <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                              <tr >\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Fecha Movimiento\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Ingreso/Gasto\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Concepto\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Bol. cantidad\n                                  </th>\n                              </tr>\n                          </thead>\n                          <tbody *ngIf=\"movimientos\" >\n                              <tr *ngFor=\"let movimiento of movimientos \" class=\"bg-white border-b\">\n                                  <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                      {{ movimiento.createdAt | date:'medium' }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      {{ movimiento.tipo? 'INGRESO' : 'GASTO' }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      {{ movimiento.concepto }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      Bol. {{ movimiento.cantidad }}\n                                  </td>\n                              </tr>\n\n                          </tbody>\n                      </table>\n                  </div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"flow-root w-auto flex flex-col justify-center\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-400 dark:text-white\">\n        Total Ingresos: Bol. {{ totalIngresos.toFixed(1) }}\n      </h3>\n      <h3 class=\"text-xl font-bold leading-none text-gray-400 dark:text-white\">\n        Total Gastos: Bol. {{ totalGastos.toFixed(1) }}\n      </h3>\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        Total: Bol. {{ totalMovimiento.toFixed(1) }}\n      </h3>\n   </div>\n  </div>\n\n\n</div>\n";
+      __webpack_exports__["default"] = "\n<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded\">\n  <div class=\"p-4 w-full \">\n    <div class=\"items-center mb-4\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        <button\n            (click)=\"goToBackPage()\"\n            class=\"mx-4 bg-white text-gray-600 active:text-gray-800 font-bold text-xl px-4 py-2 outline-none focus:outline-none mr-1 mb-1\"\n            type=\"submit\"\n          >\n          <i class=\"fas fa-arrow-left\"></i>\n        </button>\n        Ingresos y salidas De La Apertura Nº {{ aperturaId }}\n      </h3>\n      <div class=\"flex items-center justify-start pt-2 pl-3\">\n        <app-modal-ingreso-salida *ngIf=\"apertura && apertura.estado\" [aperturaId]=\"aperturaId\"></app-modal-ingreso-salida>\n        <app-pdf-movimientos [movimientos]=\"movimientos\" [from]=\"apertura.fechaApertura\" [to]=\"apertura.fechaCierre\"></app-pdf-movimientos>\n      </div>\n      <div class=\"w-full \">\n        <div class=\"flex flex-col\">\n          <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n              <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n                  <div class=\"overflow-hidden sm:rounded-lg\">\n                      <table class=\"min-w-full\">\n                          <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                              <tr >\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Fecha Movimiento\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Ingreso/Gasto\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Concepto\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Bol. cantidad\n                                  </th>\n                                  <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                    Acciones\n                                  </th>\n                              </tr>\n                          </thead>\n                          <tbody *ngIf=\"movimientos\" >\n                              <tr *ngFor=\"let movimiento of movimientos \" class=\"bg-white border-b\">\n                                  <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                      {{ movimiento.createdAt | date:'medium' }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      {{ movimiento.tipo? 'INGRESO' : 'GASTO' }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      {{ movimiento.concepto }}\n                                  </td>\n                                  <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                      Bol. {{ movimiento.cantidad }}\n                                  </td>\n                                  <td *ngIf=\"!movimiento.tipo && !movimiento.relaciones\" class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                    <app-pdf-boleta-salida [movimiento]=\"movimiento\"></app-pdf-boleta-salida>\n                                  </td>\n                              </tr>\n                          </tbody>\n                      </table>\n                  </div>\n              </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"flow-root w-auto flex flex-col justify-center\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-400 dark:text-white\">\n        Total Ingresos: Bol. {{ totalIngresos.toFixed(1) }}\n      </h3>\n      <h3 class=\"text-xl font-bold leading-none text-gray-400 dark:text-white\">\n        Total Gastos: Bol. {{ totalGastos.toFixed(1) }}\n      </h3>\n      <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">\n        Total: Bol. {{ totalMovimiento.toFixed(1) }}\n      </h3>\n   </div>\n  </div>\n\n\n</div>\n";
       /***/
     },
 
@@ -1141,10 +2044,10 @@
         }, {
           key: "refreshMovimientos",
           value: function refreshMovimientos() {
-            var _this10 = this;
+            var _this12 = this;
 
             this.sub.add(this.movimientoService.getMovimientosByAperturaId(+this.aperturaId).subscribe(function (movimientos) {
-              _this10.movimientoService.movimientos.emit(movimientos);
+              _this12.movimientoService.movimientos.emit(movimientos);
             }));
           }
         }, {
@@ -1168,7 +2071,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this11 = this;
+            var _this13 = this;
 
             this.loading = true;
             console.log(this.aperturaId);
@@ -1176,21 +2079,22 @@
               apertura: +this.aperturaId,
               tipo: this.tipo,
               concepto: this.movimientoForm.value.concepto,
-              cantidad: +this.movimientoForm.value.cantidad
+              cantidad: +this.movimientoForm.value.cantidad,
+              relaciones: false
             };
             console.log(body);
             this.movimientoService.postMovimiento(body).subscribe(function (response) {
-              _this11.loading = false;
+              _this13.loading = false;
 
-              _this11.alertService.triggerMessage('Movimiento ingresado exitosamente.', 'success');
+              _this13.alertService.triggerMessage('Movimiento ingresado exitosamente.', 'success');
 
-              _this11.refreshMovimientos();
+              _this13.refreshMovimientos();
 
-              _this11.closeModal();
+              _this13.closeModal();
             }, function (error) {
-              _this11.loading = false;
+              _this13.loading = false;
 
-              _this11.alertService.triggerMessage(error.error.message, 'error');
+              _this13.alertService.triggerMessage(error.error.message, 'error');
             });
           }
         }]);
@@ -1375,16 +2279,26 @@
       /* harmony import */
 
 
-      var src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/core/services/reporte.service */
+      "Tutu");
+      /* harmony import */
+
+
+      var src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! src/app/core/services/transaccionMoneda.service */
       "/lIq");
 
       var CardDolarListComponent = /*#__PURE__*/function () {
-        function CardDolarListComponent(transaccionService, businessService) {
+        function CardDolarListComponent(transaccionService, reporteService, businessService) {
           _classCallCheck(this, CardDolarListComponent);
 
           this.transaccionService = transaccionService;
+          this.reporteService = reporteService;
           this.businessService = businessService;
+          this.loading = false;
+          this.transacciones = [];
+          this.today = new Date().toISOString().substring(0, 10);
           this.business = this.businessService.businessInformation;
         }
 
@@ -1395,6 +2309,7 @@
             this.getTransacciones();
             this.subcriptionTransacciones();
             this.subcriptionBusiness();
+            this.getTansaccioness();
           }
         }, {
           key: "ngOnDestroy",
@@ -1404,48 +2319,67 @@
         }, {
           key: "getTransacciones",
           value: function getTransacciones() {
-            var _this12 = this;
+            var _this14 = this;
 
             this.sub.add(this.transaccionService.getTransaccionMonedas({
               force: true
             }).subscribe(function (response) {
-              _this12.response = response;
+              _this14.response = response;
             }));
           }
         }, {
           key: "subcriptionBusiness",
           value: function subcriptionBusiness() {
-            var _this13 = this;
+            var _this15 = this;
 
             this.sub.add(this.businessService.business.subscribe(function (business) {
               if (business) {
-                _this13.business = business;
+                _this15.business = business;
               }
             }));
           }
         }, {
           key: "subcriptionTransacciones",
           value: function subcriptionTransacciones() {
-            var _this14 = this;
+            var _this16 = this;
 
             this.sub.add(this.transaccionService.response.subscribe(function (response) {
               if (response) {
-                _this14.response = response;
+                _this16.response = response;
+
+                _this16.getTansaccioness();
               }
             }));
           }
         }, {
           key: "getOnPageResponse",
           value: function getOnPageResponse(page) {
-            var _this15 = this;
+            var _this17 = this;
 
             this.response = null;
             this.transaccionService.getTransaccionMonedas({
               page: page,
               force: true
             }).subscribe(function (response) {
-              _this15.transaccionService.response.emit(response);
+              _this17.transaccionService.response.emit(response);
             });
+          }
+        }, {
+          key: "getTansaccioness",
+          value: function getTansaccioness() {
+            var _this18 = this;
+
+            this.loading = true;
+            this.sub.add(this.reporteService.getTransaccionByDate({
+              from: this.today,
+              to: this.today
+            }).subscribe(function (transacciones) {
+              if (transacciones) {
+                _this18.transacciones = transacciones;
+              }
+
+              _this18.loading = false;
+            }));
           }
         }]);
 
@@ -1454,7 +2388,9 @@
 
       CardDolarListComponent.ctorParameters = function () {
         return [{
-          type: src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_5__["TransaccionMonedaService"]
+          type: src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_6__["TransaccionMonedaService"]
+        }, {
+          type: src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_5__["ReporteService"]
         }, {
           type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_4__["BusinessService"]
         }];
@@ -1752,22 +2688,22 @@
         }, {
           key: "refreshTransaccionMonedas",
           value: function refreshTransaccionMonedas() {
-            var _this16 = this;
+            var _this19 = this;
 
             this.sub.add(this.transaccionService.getTransaccionMonedas({
               force: true
             }).subscribe(function (response) {
-              _this16.transaccionService.response.emit(response);
+              _this19.transaccionService.response.emit(response);
             }));
           }
         }, {
           key: "subcriptionBusiness",
           value: function subcriptionBusiness() {
-            var _this17 = this;
+            var _this20 = this;
 
             this.sub.add(this.businessService.business.subscribe(function (business) {
               if (business) {
-                _this17.business = business;
+                _this20.business = business;
               }
             }));
           }
@@ -1792,7 +2728,7 @@
         }, {
           key: "save",
           value: function save() {
-            var _this18 = this;
+            var _this21 = this;
 
             this.loading = true;
             var body = {
@@ -1804,17 +2740,17 @@
             };
             console.log(body);
             this.transaccionService.postTransaccionMoneda(body).subscribe(function (response) {
-              _this18.loading = false;
+              _this21.loading = false;
 
-              _this18.alertService.triggerMessage('Cambio Ingresada Correctamente', 'success');
+              _this21.alertService.triggerMessage('Cambio Ingresada Correctamente', 'success');
 
-              _this18.refreshTransaccionMonedas();
+              _this21.refreshTransaccionMonedas();
 
-              _this18.closeModal();
+              _this21.closeModal();
             }, function (error) {
-              _this18.loading = false;
+              _this21.loading = false;
 
-              _this18.alertService.triggerMessage(error.error.message, 'error');
+              _this21.alertService.triggerMessage(error.error.message, 'error');
             });
           }
         }]);
@@ -2033,12 +2969,12 @@
             this.totalGastos = 0;
             this.totalIngresos = 0;
 
-            var _iterator = _createForOfIteratorHelper(movimientos),
-                _step;
+            var _iterator2 = _createForOfIteratorHelper(movimientos),
+                _step2;
 
             try {
-              for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                var movimiento = _step.value;
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var movimiento = _step2.value;
 
                 if (movimiento.tipo) {
                   this.totalMovimiento += +movimiento.cantidad;
@@ -2049,9 +2985,9 @@
                 }
               }
             } catch (err) {
-              _iterator.e(err);
+              _iterator2.e(err);
             } finally {
-              _iterator.f();
+              _iterator2.f();
             }
 
             this.totalMovimiento.toFixed(1);
@@ -2059,33 +2995,33 @@
         }, {
           key: "getMovimientosByAperturaId",
           value: function getMovimientosByAperturaId() {
-            var _this19 = this;
+            var _this22 = this;
 
             this.sub.add(this.movimientoService.getMovimientosByAperturaId(+this.aperturaId).subscribe(function (movimientos) {
-              _this19.movimientos = movimientos;
+              _this22.movimientos = movimientos;
 
-              _this19.calculateTotalMovimientos(_this19.movimientos);
+              _this22.calculateTotalMovimientos(_this22.movimientos);
             }));
           }
         }, {
           key: "getApertura",
           value: function getApertura() {
-            var _this20 = this;
+            var _this23 = this;
 
             this.sub.add(this.aperturaService.getAperturaById(+this.aperturaId).subscribe(function (apertura) {
-              _this20.apertura = apertura;
+              _this23.apertura = apertura;
             }));
           }
         }, {
           key: "subscribeMovimientos",
           value: function subscribeMovimientos() {
-            var _this21 = this;
+            var _this24 = this;
 
             this.sub.add(this.movimientoService.movimientos.subscribe(function (movimientos) {
               if (movimientos) {
-                _this21.movimientos = movimientos;
+                _this24.movimientos = movimientos;
 
-                _this21.calculateTotalMovimientos(_this21.movimientos);
+                _this24.calculateTotalMovimientos(_this24.movimientos);
               }
             }));
           }
@@ -2134,7 +3070,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded\">\n  <div class=\"p-4 w-full \">\n\n    <div class=\"items-center mb-4 ml-2 mt-4 flex justify-between\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-500 dark:text-white\">\n        Cambio oficial: {{ business?.cambioDolar }}\n      </h3>\n      <app-modal-compra-venta-dolar></app-modal-compra-venta-dolar>\n    </div>\n    <div class=\"flex flex-col\">\n      <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n          <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n              <div class=\"overflow-hidden sm:rounded-lg\">\n                  <table class=\"min-w-full\">\n                      <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                          <tr>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Fecha\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Operación\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Cantidad\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Precio dolar\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Cantidad Total\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Precio dolar Oficial\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Cantidad Real\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Diferencia\n                              </th>\n                          </tr>\n                      </thead>\n                      <tbody *ngIf=\"response\" >\n                          <tr *ngFor=\"let dolar of response.items \" class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\">\n                              <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                  {{ dolar.createdAt | date:'short' }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  {{ dolar.operacion }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  $ {{ dolar.cantidad }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ dolar.tipoCambio }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ (dolar.cantidad * dolar.tipoCambio).toFixed(1) }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ dolar.tipoCambioOficial }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ (dolar.cantidad * dolar.tipoCambioOficial).toFixed(1) }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ dolar.diferencia }}\n                              </td>\n                          </tr>\n\n                      </tbody>\n                  </table>\n              </div>\n          </div>\n      </div>\n  </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponse($event)\"\n></app-pagination>\n";
+      __webpack_exports__["default"] = "<div class=\"relative flex flex-col min-w-0 break-words bg-white w-full mb-6  rounded\">\n  <div class=\"p-4 w-full \">\n\n    <div class=\"items-center mb-4 ml-2 mt-4 flex justify-between\">\n      <h3 class=\"text-xl font-bold leading-none text-gray-500 dark:text-white\">\n        Cambio oficial: {{ business?.cambioDolar }}\n      </h3>\n      <app-modal-compra-venta-dolar></app-modal-compra-venta-dolar>\n      <app-pdf-compra-venta-dolar *ngIf=\"transacciones\" [transacciones]=\"transacciones\" [from]=\"today\" [to]=\"today\"></app-pdf-compra-venta-dolar>\n    </div>\n    <div class=\"flex flex-col\">\n      <div class=\"overflow-x-auto sm:-mx-6 lg:-mx-8\">\n          <div class=\"inline-block py-2 min-w-full sm:px-6 lg:px-8\">\n              <div class=\"overflow-hidden sm:rounded-lg\">\n                  <table class=\"min-w-full\">\n                      <thead class=\"bg-gray-50 dark:bg-gray-700\">\n                          <tr>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Fecha\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Operación\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Cantidad\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Precio dolar\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Cantidad Total\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Precio dolar Oficial\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Cantidad Real\n                              </th>\n                              <th scope=\"col\" class=\"py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400\">\n                                Diferencia\n                              </th>\n                          </tr>\n                      </thead>\n                      <tbody *ngIf=\"response\" >\n                          <tr *ngFor=\"let dolar of response.items \" class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\">\n                              <td class=\"py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white\">\n                                  {{ dolar.createdAt | date:'short' }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  {{ dolar.operacion }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  $ {{ dolar.cantidad }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ dolar.tipoCambio }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ (dolar.cantidad * dolar.tipoCambio).toFixed(1) }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ dolar.tipoCambioOficial }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ (dolar.cantidad * dolar.tipoCambioOficial).toFixed(1) }}\n                              </td>\n                              <td class=\"py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400\">\n                                  Bol. {{ dolar.diferencia }}\n                              </td>\n                          </tr>\n\n                      </tbody>\n                  </table>\n              </div>\n          </div>\n      </div>\n  </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponse($event)\"\n></app-pagination>\n";
       /***/
     },
 
@@ -2283,12 +3219,12 @@
               alignment: "center"
             }]];
 
-            var _iterator2 = _createForOfIteratorHelper(this.movimientos),
-                _step2;
+            var _iterator3 = _createForOfIteratorHelper(this.movimientos),
+                _step3;
 
             try {
-              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                var movimiento = _step2.value;
+              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                var movimiento = _step3.value;
 
                 if (movimiento.tipo) {
                   totalIngresos += +movimiento.cantidad;
@@ -2315,9 +3251,9 @@
                 }]);
               }
             } catch (err) {
-              _iterator2.e(err);
+              _iterator3.e(err);
             } finally {
-              _iterator2.f();
+              _iterator3.f();
             }
 
             var reporte = {
@@ -2562,13 +3498,25 @@
       var _components_pdfs_pdf_movimientos_pdf_movimientos_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ./components/pdfs/pdf-movimientos/pdf-movimientos.component */
       "wJNA");
+      /* harmony import */
+
+
+      var _components_pdfs_pdf_compra_venta_dolar_pdf_compra_venta_dolar_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! ./components/pdfs/pdf-compra-venta-dolar/pdf-compra-venta-dolar.component */
+      "/nvB");
+      /* harmony import */
+
+
+      var _components_pdfs_pdf_boleta_salida_pdf_boleta_salida_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      /*! ./components/pdfs/pdf-boleta-salida/pdf-boleta-salida.component */
+      "Ag/x");
 
       var IngresoSalidaModule = /*#__PURE__*/_createClass(function IngresoSalidaModule() {
         _classCallCheck(this, IngresoSalidaModule);
       });
 
       IngresoSalidaModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_3__["IngresoSalidaComponent"], _components_tabs_tab_ingreso_salida_tab_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_4__["TabIngresoSalidaComponent"], _components_cards_card_dolar_list_card_dolar_list_component__WEBPACK_IMPORTED_MODULE_5__["CardDolarListComponent"], _components_cards_card_apertura_list_card_apertura_list_component__WEBPACK_IMPORTED_MODULE_6__["CardAperturaListComponent"], _components_cards_card_movimiento_card_movimiento_component__WEBPACK_IMPORTED_MODULE_7__["CardMovimientoComponent"], _components_modals_modal_compra_venta_dolar_modal_compra_venta_dolar_component__WEBPACK_IMPORTED_MODULE_9__["ModalCompraVentaDolarComponent"], _components_modals_modal_ingreso_salida_modal_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_10__["ModalIngresoSalidaComponent"], _components_modals_modal_apertura_modal_apertura_component__WEBPACK_IMPORTED_MODULE_11__["ModalAperturaComponent"], _components_cards_card_movimiento_list_card_movimiento_list_component__WEBPACK_IMPORTED_MODULE_12__["CardMovimientoListComponent"], _components_modals_modal_cierre_apertura_modal_cierre_apertura_component__WEBPACK_IMPORTED_MODULE_13__["ModalCierreAperturaComponent"], _components_pdfs_pdf_movimientos_pdf_movimientos_component__WEBPACK_IMPORTED_MODULE_14__["PdfMovimientosComponent"]],
+        declarations: [_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_3__["IngresoSalidaComponent"], _components_tabs_tab_ingreso_salida_tab_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_4__["TabIngresoSalidaComponent"], _components_cards_card_dolar_list_card_dolar_list_component__WEBPACK_IMPORTED_MODULE_5__["CardDolarListComponent"], _components_cards_card_apertura_list_card_apertura_list_component__WEBPACK_IMPORTED_MODULE_6__["CardAperturaListComponent"], _components_cards_card_movimiento_card_movimiento_component__WEBPACK_IMPORTED_MODULE_7__["CardMovimientoComponent"], _components_modals_modal_compra_venta_dolar_modal_compra_venta_dolar_component__WEBPACK_IMPORTED_MODULE_9__["ModalCompraVentaDolarComponent"], _components_modals_modal_ingreso_salida_modal_ingreso_salida_component__WEBPACK_IMPORTED_MODULE_10__["ModalIngresoSalidaComponent"], _components_modals_modal_apertura_modal_apertura_component__WEBPACK_IMPORTED_MODULE_11__["ModalAperturaComponent"], _components_cards_card_movimiento_list_card_movimiento_list_component__WEBPACK_IMPORTED_MODULE_12__["CardMovimientoListComponent"], _components_modals_modal_cierre_apertura_modal_cierre_apertura_component__WEBPACK_IMPORTED_MODULE_13__["ModalCierreAperturaComponent"], _components_pdfs_pdf_movimientos_pdf_movimientos_component__WEBPACK_IMPORTED_MODULE_14__["PdfMovimientosComponent"], _components_pdfs_pdf_compra_venta_dolar_pdf_compra_venta_dolar_component__WEBPACK_IMPORTED_MODULE_15__["PdfCompraVentaDolarComponent"], _components_pdfs_pdf_boleta_salida_pdf_boleta_salida_component__WEBPACK_IMPORTED_MODULE_16__["PdfBoletaSalidaComponent"]],
         imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_8__["SharedModule"], _ingreso_salida_routing_module__WEBPACK_IMPORTED_MODULE_2__["IngresoSalidaRoutingModule"]]
       })], IngresoSalidaModule);
       /***/

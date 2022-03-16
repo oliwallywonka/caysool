@@ -6,6 +6,7 @@ export interface Movimiento {
   tipo: boolean;
   concepto: string;
   cantidad: number;
+  relaciones: boolean;
   createdAt?: string;
   updatedAt?: string;
 }

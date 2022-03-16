@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { RxFormBuilder } from '@rxweb/reactive-form-validators';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { ModalService } from 'src/app/core/services/modal.service';
 import { PrestamoService } from 'src/app/core/services/prestamo.service';
 import { Prestamo, PrestamoResponse } from 'src/app/interfaces/prestamo';
 
@@ -18,17 +17,15 @@ export class CardPrestamosComponent implements OnInit, OnDestroy {
 
   @Input()
   estado: string = '';
-
   sub: Subscription;
   loading: boolean = false;
   response: PrestamoResponse;
-
+  inventarioLengh = 0;
   ciForm: FormGroup = this.fb.group({
     ci: [''],
   });
   constructor(
     private prestamoService: PrestamoService,
-    private modalService: ModalService,
     private alertService: AlertService,
     private router: Router,
     private fb: RxFormBuilder
@@ -44,11 +41,19 @@ export class CardPrestamosComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  limitInventory(){
+    for(const prestamo of this.response.items) {
+      if (prestamo.inventario.length > 3){
+        prestamo.inventario.length = 3;
+      }
+    }
+  }
+
   getPrestamos(force = false) {
     this.prestamoService.getPrestamos({ force, estadoPrestamo: this.estado}).subscribe(
       (response) => {
-        console.log(response);
         this.response = response;
+        this.limitInventory();
         this.loading = false;
       }
     )
@@ -60,6 +65,7 @@ export class CardPrestamosComponent implements OnInit, OnDestroy {
         (response) => {
           if (response.items.length > 0) {
             this.response = response;
+            this.limitInventory();
             this.loading = false;
           }
         }
@@ -86,6 +92,7 @@ export class CardPrestamosComponent implements OnInit, OnDestroy {
               });
             } else {
               this.response = response;
+              this.limitInventory();
             }
         })
     );

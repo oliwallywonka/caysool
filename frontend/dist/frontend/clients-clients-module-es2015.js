@@ -180,7 +180,7 @@ let NewPrestamoModalComponent = class NewPrestamoModalComponent {
                 [
                     _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({ message: this.errorMessages.required }),
                     _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
-                        value: 70,
+                        value: 200,
                         message: this.errorMessages.maxLenght,
                     }),
                 ],
@@ -922,7 +922,7 @@ let ClientListComponent = class ClientListComponent {
     }
     ngOnInit() {
         this.subscriptions = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subscription"]();
-        this.getClients();
+        this.getClients(true);
         this.subscriptionClients();
     }
     ngOnDestroy() {

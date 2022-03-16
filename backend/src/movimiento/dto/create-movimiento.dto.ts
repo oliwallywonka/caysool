@@ -18,6 +18,10 @@ export class CreateMovimientoDto {
   @IsBoolean()
   tipo: boolean;
 
+  @IsOptional()
+  @IsBoolean()
+  relaciones: boolean;
+
   @IsNotEmpty()
   @IsString()
   concepto: string;

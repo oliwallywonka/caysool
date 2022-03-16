@@ -21,6 +21,10 @@ export class Movimiento extends BaseEntity {
   @Column({ type: 'boolean', default: true })
   tipo: boolean;
 
+  //estado: 1 = con entidades relacionadas 0 = sin entidades Realcionadas
+  @Column({ type: 'boolean', default: true })
+  relaciones: boolean;
+
   @Column({ type: 'varchar', length: 80, default: 'INGRESO DINERO' })
   concepto: string;
 

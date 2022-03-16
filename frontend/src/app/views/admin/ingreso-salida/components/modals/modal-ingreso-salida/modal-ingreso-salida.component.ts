@@ -95,6 +95,7 @@ export class ModalIngresoSalidaComponent implements OnInit, OnDestroy {
       tipo: this.tipo,
       concepto: this.movimientoForm.value.concepto,
       cantidad: +this.movimientoForm.value.cantidad,
+      relaciones: false
     }
     console.log(body);
     this.movimientoService.postMovimiento(body).subscribe(

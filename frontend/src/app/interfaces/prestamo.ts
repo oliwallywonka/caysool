@@ -19,6 +19,7 @@ export interface Prestamo {
   cobroInteres?: number;
   costoAdministracion?: number;
   inventario?: Inventario []
+  inventarioCantidad?: number;
   isActive?: string;
   createdAt?: string;
   updatedAt?: string;

@@ -268,7 +268,7 @@
               }, {
                 style: "tableExample",
                 table: {
-                  widths: [48, "*", "*", 80],
+                  widths: [48, 200, 150, 80],
                   headerRows: 7,
                   body: [[{
                     text: ""
@@ -343,7 +343,7 @@
                     alignment: "center"
                   }, {
                     text: "".concat(this.prestamo.inventario.map(function (i) {
-                      return i.descripcion + ", ";
+                      return i.descripcion + " ";
                     })),
                     fontSize: 10,
                     alignment: "left",
@@ -368,7 +368,7 @@
                 text: ["FIRMA CLIENTE	                                                                         FIRMA ASESOR DE CREDITO"],
                 fontSize: 12,
                 alignment: "center"
-              }, "\n\n\n", //aca segunda
+              }, "\n\n", //aca segunda
               {
                 columns: [{
                   width: 90,
@@ -439,7 +439,7 @@
               }, {
                 style: "tableExample",
                 table: {
-                  widths: [48, "*", "*", 80],
+                  widths: [48, 200, 150, 80],
                   headerRows: 7,
                   body: [[{
                     text: ""
@@ -514,7 +514,7 @@
                     alignment: "center"
                   }, {
                     text: "".concat(this.prestamo.inventario.map(function (i) {
-                      return i.descripcion + ", ";
+                      return i.descripcion + " ";
                     })),
                     fontSize: 10,
                     alignment: "left",
@@ -1864,27 +1864,21 @@
       /* harmony import */
 
 
-      var src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! src/app/core/services/modal.service */
-      "S0jo");
-      /* harmony import */
-
-
-      var src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! src/app/core/services/prestamo.service */
       "U31Y");
 
       var CardPrestamosComponent = /*#__PURE__*/function () {
-        function CardPrestamosComponent(prestamoService, modalService, alertService, router, fb) {
+        function CardPrestamosComponent(prestamoService, alertService, router, fb) {
           _classCallCheck(this, CardPrestamosComponent);
 
           this.prestamoService = prestamoService;
-          this.modalService = modalService;
           this.alertService = alertService;
           this.router = router;
           this.fb = fb;
           this.estado = '';
           this.loading = false;
+          this.inventarioLengh = 0;
           this.ciForm = this.fb.group({
             ci: ['']
           });
@@ -1903,6 +1897,26 @@
             this.sub.unsubscribe();
           }
         }, {
+          key: "limitInventory",
+          value: function limitInventory() {
+            var _iterator2 = _createForOfIteratorHelper(this.response.items),
+                _step2;
+
+            try {
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var prestamo = _step2.value;
+
+                if (prestamo.inventario.length > 3) {
+                  prestamo.inventario.length = 3;
+                }
+              }
+            } catch (err) {
+              _iterator2.e(err);
+            } finally {
+              _iterator2.f();
+            }
+          }
+        }, {
           key: "getPrestamos",
           value: function getPrestamos() {
             var _this20 = this;
@@ -1912,8 +1926,10 @@
               force: force,
               estadoPrestamo: this.estado
             }).subscribe(function (response) {
-              console.log(response);
               _this20.response = response;
+
+              _this20.limitInventory();
+
               _this20.loading = false;
             });
           }
@@ -1925,6 +1941,9 @@
             this.sub.add(this.prestamoService.response.subscribe(function (response) {
               if (response.items.length > 0) {
                 _this21.response = response;
+
+                _this21.limitInventory();
+
                 _this21.loading = false;
               }
             }));
@@ -1949,6 +1968,8 @@
                 });
               } else {
                 _this22.response = response;
+
+                _this22.limitInventory();
               }
             }));
           }
@@ -1980,9 +2001,7 @@
 
       CardPrestamosComponent.ctorParameters = function () {
         return [{
-          type: src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_8__["PrestamoService"]
-        }, {
-          type: src_app_core_services_modal_service__WEBPACK_IMPORTED_MODULE_7__["ModalService"]
+          type: src_app_core_services_prestamo_service__WEBPACK_IMPORTED_MODULE_7__["PrestamoService"]
         }, {
           type: src_app_core_services_alert_service__WEBPACK_IMPORTED_MODULE_6__["AlertService"]
         }, {
@@ -2422,40 +2441,40 @@
               },
               content: [{
                 text: "DOCUMENTO DE COMPRA VENTA CON PACTO DE RESCATE\n\n",
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "center"
               }, {
                 text: "Conste por el presente documento privado de compra y venta con pacto de rescate el cual puede ser elevado a instrumento público a simple reconocimiento de firmas y a solo requerimiento de las partes al tenor de las siguientes clausulas.\n\n",
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, {
                 text: "PRIMERO. - El presente documento privado de compra y venta con pacto de rescate se suscribe al amparo del Art. 405, 452, 454, 483, 519, 584, 590, 593, 614, 636, 641, 644 y 645 del Código Civil.\n\n",
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, //DATOS DE PANEL DE CONTROL NOMBRE DE LA EMPRESA, NIT,UBICACION
               {
                 text: "SEGUNDO. - (DE LAS PARTES). Intervienen en la SUSCRIPCION DE ESTE DOCUMENTO \n",
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, {
                 text: "Por una parte, La Empresa Unipersonal \u201C".concat(this.business.name, "\u201D legal mente constituida con NIT: ").concat(this.business.nit, " ubicada en ").concat(this.business.direction, " de la ciudad de EL Alto - La Paz. Titular y/o representante por el Sr. Sergio Gonzalo Mamani Rojas con CI: 7041391 LP. mayor de edad, h\xE1bil por derecho, quien en lo sucesivo y para fines propios del presente documento se denominar\xE1 \u201CCOMPRADOR\u201D. \n\n"),
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, //Nombre del cliente , CI , celular
               {
                 text: "Por otra parte, ".concat(this.prestamo.client.name, " con C.I ").concat(this.prestamo.client.ci, " Cel.").concat(this.prestamo.client.phone, "  Mayor de edad h\xE1bil por derecho en completo uso de mis facultades, de forma libre y voluntaria, sin que medie vicio alguno en el consentimiento, doy en calidad de venta bajo modalidad de pacto de rescate, quien en lo sucesivo y para fines propios del presente documento se denominara \u201CVENDEDOR\u201D.\n\n"),
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, //nombre del objeto de prenda y valor numerico y literal
               {
                 text: "TERCERO. - (DE LA COMPRA Y VENTA)  ".concat(this.prestamo.inventario.map(function (i) {
-                  return i.descripcion + ', ';
+                  return i.descripcion + '';
                 }), " con un valor de ").concat(this.prestamo.costoPrestamo, "0 ").concat(this.literal, " que el \u201CCOMPRADOR\u201D ENTREGA A FAVOR \u201CVENDEDOR\u201D en forma efectiva al momento de realizar la   transacci\xF3n al momento de suscribir el presente documento en el modo y condiciones que se estipulan en caso de que el vendedor quisiera hacer uso del derecho de rescate deber\xE1 conocer las siguientes clausulas.\n\n"),
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, {
                 text: "CUARTO. - (PACTO DE RESCATE). “EL VENDEDOR” tiene la opción de rescate de la mercadería vendida siempre y cuando devuelva la suma de dinero a la cual fue vendida la mercadería más los intereses y comisiones establecidos entre comprador y vendedor en el presente documento a detallarse:\n\n",
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, //monto de prestamo
               {
@@ -2467,11 +2486,21 @@
                   table: {
                     body: [[{
                       text: "Monto de compra en:",
-                      style: "tableHeader"
+                      style: "tableHeader",
+                      fontSize: 8
                     }, {
                       text: "Bs.- ".concat(this.prestamo.costoPrestamo, "0"),
+                      fontSize: 8,
                       style: "tableHeader"
-                    }], ["COMISION POR CUSTODIA", "Gastos generados"]],
+                    }], [{
+                      text: "Comision por custodia:",
+                      fontSize: 8,
+                      style: "tableHeader"
+                    }, {
+                      text: "Gastos generados",
+                      fontSize: 8,
+                      style: "tableHeader"
+                    }]],
                     alignment: "center"
                   }
                 }, {
@@ -2481,33 +2510,38 @@
               }, "  \n  ", // interes del panel de control
               {
                 text: "QUINTO. - (DEL INTERES). Si el VENDEDOR opta por el rescate de la mercader\xEDa, el inter\xE9s pactado que debe pagar al \u201CVENDEDOR\u201D al \u201CCOMPRADOR\u201D por el rescate de la mercader\xEDa es el ".concat(this.business.interest, "% mensual respecto al monto de dinero entregado por el comprador al vendedor.\n\n"),
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, {
                 text: ["SEXTO. - (DE LA COMISION). Si el “VENDEDOR” opta por el rescate de la mercadería vendida, entonces se compromete libremente a pagar al “COMPRADOR” por concepto de comisión (COMISION POR CUSTODIA, CONSERVACIONES, GASTOS ADMINISTRATIVOS Y RIESGOS DE LA GARANTIA COMPRADA). El “COMPRADOR” garantiza al “VENDEDOR” la custodia y cuidado de la mercadería vendida, en concordancia con el Art. 645 del Código Civil.\n", "EL/LA VENDEDOR(A), reconoce voluntariamente, que el cobro de los gastos establecidos en el presente contrato, constituyen un legítimo rembolso a favor de EL COMPRADOR. Puesto que este incurra en dichos gastos para viabilizar la transacción, determinar y conservar el estado actual del bien objeto de la compra y venta.\n"],
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, {
                 text: "SEPTIMO. - (DEVOLUCION DE LA GARANTIA VENDIDA). El “VENDEDOR” deberá rescatar la cosa vendida en forma personal previa acreditación de su cedula identidad (original vigente) más las copias del documento. La entrega se realizará en el plazo no mayor a 5 días hábiles. Una vez haya realizado la cancelación total de la venta más los intereses legales aplicables y demás comisiones por custodia, conservación, gastos administrativos y riesgos de la cosa vendida.\n\n",
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, {
                 text: ["OCTAVO. - El vendedor da propia voluntad y sin que medie vicio del consentimiento alguno DECLARA de forma pura y simple que el bien entregado en calidad de COMPRA Y VENTA CON PACTO DE RESCATE, es de su exclusiva, legal y legítima propiedad, siendo el único responsable de la titularidad de derecho propietario, por lo que se hace responsable de forma directa de reclamos por terceros.\n", "EL “VENDEDOR” excluye de responsabilidad civil y penal al “COMPRADOR”, quien recibe de buena fe el bien entregado en VENTA también el “VENDEDOR” asume responsabilidad directa en caso de existir denuncias y/o acusaciones particulares de terceros por hechos vinculados a los delitos de robo, hurto, apropiación indebida o abuso de confianza sobre el bien entregado en VENTA, o que indicado bien este comprometido en la comisión de otros delitos por el VENDEDOR o por terceros.\n\n"],
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
               }, {
                 text: "NOVENO. - (DE LA CLAUSULA ARBITRAL). En caso de conflicto o discrepancias sobre el cumplimiento del presente contrato de compra y venta con pacto de rescate. Las partes convenimos resolver el conflicto a través del arbitraje con aceptación del árbitro único constituido por el centro de arbitraje según lo estipulado en el Art. 39 y siguientes de la Ley 708 de 25 de junio del 2015.\n\n\n",
-                fontSize: 12,
+                fontSize: 8,
                 alignment: "justify"
+              }, {
+                text: "Fecha de la compra y venta: La Paz \u2013 El Alto ".concat(this.datePipe.transform(this.prestamo.fechaInicio, 'mediumDate'), " \n\n\n\n"),
+                fontSize: 9
               }, //fecha del dia de prestamo
-              "Fecha de la compra y venta: La Paz \u2013 El Alto ".concat(this.datePipe.transform(this.prestamo.fechaInicio, 'mediumDate'), " \n\n\n\n\n\n\n\n\n\n"), //numero del CI vendedor y comprador
+              //numero del CI vendedor y comprador
               {
                 alignment: "center",
                 columns: [{
-                  text: "\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\nCI: ".concat(this.prestamo.client.ci, "\nVENDEDOR")
+                  text: "\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\nCI: ".concat(this.prestamo.client.ci, "\nVENDEDOR"),
+                  fontSize: 10
                 }, //aqui se debe poner el ci del administrador
                 {
-                  text: "……………………………………………\nCI: 7041391\nCOMPRADOR"
+                  text: "……………………………………………\nCI: 7041391\nCOMPRADOR",
+                  fontSize: 10
                 }]
               }],
               styles: {
@@ -3214,7 +3248,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"p-4 w-full \">\n  <div class=\"items-center mb-4\">\n    <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">Lista de Prestamos {{ estado==='VENCIDO'? 'con inventario aun no vendido': ''}}</h3>\n    <div class=\"flex items-center justify-start pt-2\">.\n\n    </div>\n    <div class=\"w-full \">\n      <div class=\"flex flex-col pt-4 items-baseline w-full \">\n        <form\n          [formGroup]=\"ciForm\"\n        >\n          <input\n            type=\"text\"\n            placeholder=\"Buscar por CI Ej: 836378...\"\n            class=\"border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150\"\n            formControlName=\"ci\"\n            (ngModelChange)=\"search($event)\"\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n  <div class=\"flow-root w-auto\">\n    <ul *ngIf=\"response\" role=\"list\" class=\"relative flex flex-wrap\">\n      <div  *ngFor=\"let prestamo of response.items; let i=index;\" class=\"w-full lg:w-6/12\">\n        <li\n            class=\"cursor-pointer m-2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150\"\n            (click)=\"goToPrestamoInformation(prestamo)\">\n            <div class=\"flex items-center\">\n                <div class=\"text-3xl p-4 bg-green-600\">\n                  {{prestamo.id}}\n                </div>\n                <div  class=\"flex-1 min-w-0 mx-6 flex flex-col\">\n                  <p class=\"text-xl font-medium text-gray-900 truncate dark:text-white\">\n                     {{ prestamo.client.name }}\n                  </p>\n                  <div\n                    *ngFor=\"let inv of prestamo.inventario\"\n                    class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n\n                    <p *ngIf=\"inv.tipo === 'JOYA'\">\n                        {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}\n                    </p>\n                    <p *ngIf=\"inv.tipo === 'ARTICULO'\">\n                        {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}\n                    </p>\n                    <p *ngIf=\"inv.tipo === 'VEHICULO'\">\n                        {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}\n                    </p>\n                  </div>\n                  <p class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                    {{ prestamo.fechaInicio | date:'mediumDate' }} - {{ prestamo.fechaFinal | date:'mediumDate' }}\n                  </p>\n                </div>\n                <div class=\"text-gray-500 text-xl font-bold mr-8\">\n                  <p>\n                    BOL. {{ prestamo.costoTotal }}\n                  </p>\n                  <p class=\"text-sm\">\n                    {{ prestamo.estado }}\n                  </p>\n                </div>\n            </div>\n        </li>\n      </div>\n  </ul>\n  </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponse($event)\"\n></app-pagination>\n";
+      __webpack_exports__["default"] = "<div class=\"p-4 w-full \">\n  <div class=\"items-center mb-4\">\n    <h3 class=\"text-xl font-bold leading-none text-gray-900 dark:text-white\">Lista de Prestamos {{ estado==='VENCIDO'? 'con inventario aun no vendido': ''}}</h3>\n    <div class=\"flex items-center justify-start pt-2\">.\n\n    </div>\n    <div class=\"w-full \">\n      <div class=\"flex flex-col pt-4 items-baseline w-full \">\n        <form\n          [formGroup]=\"ciForm\"\n        >\n          <input\n            type=\"text\"\n            placeholder=\"Buscar por CI Ej: 836378...\"\n            class=\"border-0 px-3 py-3 placeholder-black-300 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-green-600  w-full ease-linear transition-all duration-150\"\n            formControlName=\"ci\"\n            (ngModelChange)=\"search($event)\"\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n  <div class=\"flow-root w-auto\">\n    <ul *ngIf=\"response\" role=\"list\" class=\"relative flex flex-wrap\">\n      <div  *ngFor=\"let prestamo of response.items; let i=index;\" class=\"w-full lg:w-6/12\">\n        <li\n            class=\"cursor-pointer m-2 border-2 border-green-600 hover:border-green-700 transform hover:-translate-y-1 ease-linear transition-all duration-150\"\n            (click)=\"goToPrestamoInformation(prestamo)\">\n            <div class=\"flex items-center\">\n                <div class=\"text-3xl p-4 bg-green-600\">\n                  {{prestamo.id}}\n                </div>\n                <div  class=\"flex-1 min-w-0 mx-6 flex flex-col\">\n                  <p class=\"text-xl font-medium text-gray-900 truncate dark:text-white\">\n                     {{ prestamo.client.name }}\n                  </p>\n                  <div\n                    *ngFor=\"let inv of prestamo.inventario\"\n                    class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n\n                    <p *ngIf=\"inv.tipo === 'JOYA'\">\n                        {{ inv.descripcion }} {{ inv.metal }} {{ inv.peso }} {{ inv.pureza }}\n                    </p>\n                    <p *ngIf=\"inv.tipo === 'ARTICULO'\">\n                        {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.linea }}\n                    </p>\n                    <p *ngIf=\"inv.tipo === 'VEHICULO'\">\n                        {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}\n                    </p>\n                  </div>\n                  <p class=\"text-xl font-medium text-gray-500 truncate dark:text-white\"\n                    *ngIf=\"+prestamo.inventarioCantidad > 3\"> +({{ +prestamo.inventarioCantidad - 3 }}) </p>\n                  <p class=\"text-xl font-medium text-gray-500 truncate dark:text-white\">\n                    {{ prestamo.fechaInicio | date:'mediumDate' }} - {{ prestamo.fechaFinal | date:'mediumDate' }}\n                  </p>\n                </div>\n                <div class=\"text-gray-500 text-xl font-bold mr-8\">\n                  <p>\n                    BOL. {{ prestamo.costoTotal }}\n                  </p>\n                  <p class=\"text-sm\">\n                    {{ prestamo.estado }}\n                  </p>\n                </div>\n            </div>\n        </li>\n      </div>\n  </ul>\n  </div>\n</div>\n\n<app-pagination\n  *ngIf=\"response\"\n  [response]=\"response.meta\"\n  (pageEvent)=\"getOnPageResponse($event)\"\n></app-pagination>\n";
       /***/
     },
 
@@ -3432,231 +3466,6 @@
         template: _raw_loader_tab_prestamo_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       })], TabPrestamoComponent);
       /***/
-    },
-
-    /***/
-    "mHh0":
-    /*!*******************************************!*\
-      !*** ./src/app/helpers/numberToLetter.ts ***!
-      \*******************************************/
-
-    /*! exports provided: numeroALetras */
-
-    /***/
-    function mHh0(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "numeroALetras", function () {
-        return numeroALetras;
-      });
-
-      var numeroALetras = function () {
-        // Código basado en https://gist.github.com/alfchee/e563340276f89b22042a
-        function Unidades(num) {
-          switch (num) {
-            case 1:
-              return 'UN';
-
-            case 2:
-              return 'DOS';
-
-            case 3:
-              return 'TRES';
-
-            case 4:
-              return 'CUATRO';
-
-            case 5:
-              return 'CINCO';
-
-            case 6:
-              return 'SEIS';
-
-            case 7:
-              return 'SIETE';
-
-            case 8:
-              return 'OCHO';
-
-            case 9:
-              return 'NUEVE';
-          }
-
-          return '';
-        } //Unidades()
-
-
-        function Decenas(num) {
-          var decena = Math.floor(num / 10);
-          var unidad = num - decena * 10;
-
-          switch (decena) {
-            case 1:
-              switch (unidad) {
-                case 0:
-                  return 'DIEZ';
-
-                case 1:
-                  return 'ONCE';
-
-                case 2:
-                  return 'DOCE';
-
-                case 3:
-                  return 'TRECE';
-
-                case 4:
-                  return 'CATORCE';
-
-                case 5:
-                  return 'QUINCE';
-
-                default:
-                  return 'DIECI' + Unidades(unidad);
-              }
-
-            case 2:
-              switch (unidad) {
-                case 0:
-                  return 'VEINTE';
-
-                default:
-                  return 'VEINTI' + Unidades(unidad);
-              }
-
-            case 3:
-              return DecenasY('TREINTA', unidad);
-
-            case 4:
-              return DecenasY('CUARENTA', unidad);
-
-            case 5:
-              return DecenasY('CINCUENTA', unidad);
-
-            case 6:
-              return DecenasY('SESENTA', unidad);
-
-            case 7:
-              return DecenasY('SETENTA', unidad);
-
-            case 8:
-              return DecenasY('OCHENTA', unidad);
-
-            case 9:
-              return DecenasY('NOVENTA', unidad);
-
-            case 0:
-              return Unidades(unidad);
-          }
-        } //Unidades()
-
-
-        function DecenasY(strSin, numUnidades) {
-          if (numUnidades > 0) return strSin + ' Y ' + Unidades(numUnidades);
-          return strSin;
-        } //DecenasY()
-
-
-        function Centenas(num) {
-          var centenas = Math.floor(num / 100);
-          var decenas = num - centenas * 100;
-
-          switch (centenas) {
-            case 1:
-              if (decenas > 0) return 'CIENTO ' + Decenas(decenas);
-              return 'CIEN';
-
-            case 2:
-              return 'DOSCIENTOS ' + Decenas(decenas);
-
-            case 3:
-              return 'TRESCIENTOS ' + Decenas(decenas);
-
-            case 4:
-              return 'CUATROCIENTOS ' + Decenas(decenas);
-
-            case 5:
-              return 'QUINIENTOS ' + Decenas(decenas);
-
-            case 6:
-              return 'SEISCIENTOS ' + Decenas(decenas);
-
-            case 7:
-              return 'SETECIENTOS ' + Decenas(decenas);
-
-            case 8:
-              return 'OCHOCIENTOS ' + Decenas(decenas);
-
-            case 9:
-              return 'NOVECIENTOS ' + Decenas(decenas);
-          }
-
-          return Decenas(decenas);
-        } //Centenas()
-
-
-        function Seccion(num, divisor, strSingular, strPlural) {
-          var cientos = Math.floor(num / divisor);
-          var resto = num - cientos * divisor;
-          var letras = '';
-          if (cientos > 0) if (cientos > 1) letras = Centenas(cientos) + ' ' + strPlural;else letras = strSingular;
-          if (resto > 0) letras += '';
-          return letras;
-        } //Seccion()
-
-
-        function Miles(num) {
-          var divisor = 1000;
-          var cientos = Math.floor(num / divisor);
-          var resto = num - cientos * divisor;
-          var strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
-          var strCentenas = Centenas(resto);
-          if (strMiles == '') return strCentenas;
-          return strMiles + ' ' + strCentenas;
-        } //Miles()
-
-
-        function Millones(num) {
-          var divisor = 1000000;
-          var cientos = Math.floor(num / divisor);
-          var resto = num - cientos * divisor;
-          var strMillones = Seccion(num, divisor, 'UN MILLON DE', 'MILLONES DE');
-          var strMiles = Miles(resto);
-          if (strMillones == '') return strMiles;
-          return strMillones + ' ' + strMiles;
-        } //Millones()
-
-
-        return function NumeroALetras(num, currency) {
-          currency = currency || {};
-          var data = {
-            numero: num,
-            enteros: Math.floor(num),
-            centavos: Math.round(num * 100) - Math.floor(num) * 100,
-            letrasCentavos: '',
-            letrasMonedaPlural: currency.plural || 'PESOS CHILENOS',
-            letrasMonedaSingular: currency.singular || 'PESO CHILENO',
-            letrasMonedaCentavoPlural: currency.centPlural || 'CHIQUI PESOS CHILENOS',
-            letrasMonedaCentavoSingular: currency.centSingular || 'CHIQUI PESO CHILENO'
-          };
-
-          if (data.centavos > 0) {
-            data.letrasCentavos = 'CON ' + function () {
-              if (data.centavos == 1) return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;else return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
-            }();
-          }
-
-          ;
-          if (data.enteros == 0) return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
-          if (data.enteros == 1) return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;else return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
-        };
-      }();
-      /***/
-
     },
 
     /***/

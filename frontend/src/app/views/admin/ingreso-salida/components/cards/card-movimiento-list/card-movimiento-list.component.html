@@ -36,6 +36,9 @@
                                   <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                     Bol. cantidad
                                   </th>
+                                  <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Acciones
+                                  </th>
                               </tr>
                           </thead>
                           <tbody *ngIf="movimientos" >
@@ -52,8 +55,10 @@
                                   <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                       Bol. {{ movimiento.cantidad }}
                                   </td>
+                                  <td *ngIf="!movimiento.tipo && !movimiento.relaciones" class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    <app-pdf-boleta-salida [movimiento]="movimiento"></app-pdf-boleta-salida>
+                                  </td>
                               </tr>
-
                           </tbody>
                       </table>
                   </div>

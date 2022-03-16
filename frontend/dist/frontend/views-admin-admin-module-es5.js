@@ -228,7 +228,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | ingreso-salida-ingreso-salida-module */
-            [__webpack_require__.e("default~ingreso-salida-ingreso-salida-module~inventario-inventario-module~prestamo-prestamo-module~r~f049b1a3"), __webpack_require__.e("default~clients-clients-module~ingreso-salida-ingreso-salida-module~prestamo-prestamo-module"), __webpack_require__.e("ingreso-salida-ingreso-salida-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~ingreso-salida-ingreso-salida-module~inventario-inventario-module~prestamo-prestamo-module~r~f049b1a3"), __webpack_require__.e("default~clients-clients-module~ingreso-salida-ingreso-salida-module~prestamo-prestamo-module"), __webpack_require__.e("common"), __webpack_require__.e("ingreso-salida-ingreso-salida-module")]).then(__webpack_require__.bind(null,
             /*! ./ingreso-salida/ingreso-salida.module */
             "zQ3R")).then(function (m) {
               return m.IngresoSalidaModule;
@@ -239,7 +239,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | reporte-reporte-module */
-            [__webpack_require__.e("default~ingreso-salida-ingreso-salida-module~inventario-inventario-module~prestamo-prestamo-module~r~f049b1a3"), __webpack_require__.e("reporte-reporte-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~ingreso-salida-ingreso-salida-module~inventario-inventario-module~prestamo-prestamo-module~r~f049b1a3"), __webpack_require__.e("common"), __webpack_require__.e("reporte-reporte-module")]).then(__webpack_require__.bind(null,
             /*! ./reporte/reporte.module */
             "gBSj")).then(function (m) {
               return m.ReporteModule;

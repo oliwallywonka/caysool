@@ -70,7 +70,7 @@ export class ModalEditInventarioComponent implements OnInit, OnDestroy {
       [
         RxwebValidators.required({ message: this.errorMessages.required }),
         RxwebValidators.maxLength({
-          value: 70,
+          value: 200,
           message: this.errorMessages.maxLenght,
         }),
       ],

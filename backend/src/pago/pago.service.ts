@@ -44,7 +44,11 @@ export class PagoService {
       action: 'Se creó un nuevo registro ',
       auditTable: 'PAGOS',
       previusData: {},
-      actualData: pago,
+      actualData: {
+        ...pago,
+        movimiento: pago.movimiento.id,
+        prestamo: pago.prestamo.id,
+      },
       user: user,
     });
     return pago;

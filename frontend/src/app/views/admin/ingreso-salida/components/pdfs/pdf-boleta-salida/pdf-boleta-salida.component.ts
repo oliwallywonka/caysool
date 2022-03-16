@@ -6,15 +6,16 @@ import { numeroALetras } from "src/app/helpers/numberToLetter";
 import { logoCaysool } from "src/app/helpers/base64Images";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { Movimiento } from "src/app/interfaces/movimiento";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
-  selector: "app-pdf-pago",
-  templateUrl: "./pdf-pago.component.html",
-  styles: [],
+  selector: 'app-pdf-boleta-salida',
+  templateUrl: './pdf-boleta-salida.component.html',
+  styles: [
+  ]
 })
-export class PdfPagoComponent implements OnInit {
-  @Input() pago;
-  @Input() prestamo;
+export class PdfBoletaSalidaComponent implements OnInit {
+  @Input() movimiento: Movimiento;
 
   literal: string;
   business: Business = this.businessService.businessInformation;
@@ -33,10 +34,10 @@ export class PdfPagoComponent implements OnInit {
   numeroALiteral() {
     this.literal = "";
     const decimal = (
-      (+this.pago.costoTotal - Math.trunc(+this.pago.costoTotal)) *
+      (+this.movimiento.cantidad - Math.trunc(+this.movimiento.cantidad)) *
       10
     ).toFixed(0);
-    const litera = numeroALetras(this.pago.costoTotal, {
+    const litera = numeroALetras(this.movimiento.cantidad, {
       plural: "BOLIVIANOS",
       singular: "BOLIVIANO",
       centPlural: "CENTAVOS",
@@ -46,7 +47,7 @@ export class PdfPagoComponent implements OnInit {
   }
 
   exportToPdf() {
-    const pago = {
+    const movimiento = {
       // a string or { width: number, height: number }
       pageSize: "LETTER",
 
@@ -97,7 +98,7 @@ export class PdfPagoComponent implements OnInit {
               "\n",
               {
                 text: `Fecha: ${this.datePipe.transform(
-                  this.pago.createdAt,
+                  this.movimiento.createdAt,
                   "medium"
                 )}`,
 
@@ -112,7 +113,7 @@ export class PdfPagoComponent implements OnInit {
             [
               "\n",
               {
-                text: `Nro de Recibo: ${this.pago.id}`,
+                text: `Nro de Recibo: ${this.movimiento.id}`,
 
                 color: "#333333",
                 width: "*",
@@ -131,14 +132,14 @@ export class PdfPagoComponent implements OnInit {
               width: 400,
 
               //nombre del cliente
-              text: [`Nombre: ${this.prestamo.client.name}\n`],
+              text: [`Nombre: `],
               fontSize: 11,
               alignment: "center",
               margin: [0, 18, 0, 0],
             },
             [
               {
-                text: `CI: ${this.prestamo.client.ci}`,
+                text: `CI: `,
 
                 color: "#333333",
                 width: "*",
@@ -183,7 +184,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${this.pago.costoPago}`,
+                  text: `Bol. 0.0`,
                   alignment: "right",
                 },
               ],
@@ -197,7 +198,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${this.pago.costoInteres}`,
+                  text: `Bol. 0.0`,
                   alignment: "right",
                 },
               ],
@@ -211,7 +212,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${this.pago.costoAdministracion}`,
+                  text: `Bol. 0.0`,
                   alignment: "right",
                 },
               ],
@@ -224,7 +225,7 @@ export class PdfPagoComponent implements OnInit {
                   colSpan: 2,
                 },
                 {},
-                { text: `Bol. ${this.pago.costoPiso}`, alignment: "right" },
+                { text: `Bol. 0.0`, alignment: "right" },
               ],
               [
                 { text: "", alignment: "center" },
@@ -235,14 +236,12 @@ export class PdfPagoComponent implements OnInit {
                   colSpan: 2,
                 },
                 {},
-                { text: `Bol. ${this.prestamo.costoPrestamo}`, alignment: "right" },
+                { text: `Bol. 0.0`, alignment: "right" },
               ],
               [
-                { text: "Prenda", fontSize: 10, alignment: "center" },
+                { text: "Concepto", fontSize: 10, alignment: "center" },
                 {
-                  text: `${this.prestamo.inventario.map(
-                    (i) => i.descripcion + " "
-                  )}`,
+                  text: `${this.movimiento.concepto}`,
                   fontSize: 10,
                   alignment: "left",
                   colSpan: 2,
@@ -261,7 +260,7 @@ export class PdfPagoComponent implements OnInit {
                 {},
                 {},
                 {
-                  text: `Bol. ${this.pago.costoTotal}`,
+                  text: `Bol. ${this.movimiento.cantidad}`,
                   alignment: "right",
                   bold: true,
                 },
@@ -321,7 +320,7 @@ export class PdfPagoComponent implements OnInit {
               "\n",
               {
                 text: `Fecha: ${this.datePipe.transform(
-                  this.pago.createdAt,
+                  this.movimiento.createdAt,
                   "medium"
                 )}`,
 
@@ -336,7 +335,7 @@ export class PdfPagoComponent implements OnInit {
             [
               "\n",
               {
-                text: `Nro de Recibo: ${this.pago.id}`,
+                text: `Nro de Recibo: ${this.movimiento.id}`,
 
                 color: "#333333",
                 width: "*",
@@ -355,14 +354,14 @@ export class PdfPagoComponent implements OnInit {
               width: 400,
 
               //nombre del cliente
-              text: [`Nombre: ${this.prestamo.client.name}\n`],
+              text: [`Nombre: `],
               fontSize: 11,
               alignment: "center",
               margin: [0, 18, 0, 0],
             },
             [
               {
-                text: `CI: ${this.prestamo.client.ci}`,
+                text: `CI: `,
 
                 color: "#333333",
                 width: "*",
@@ -407,7 +406,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${this.pago.costoPago}`,
+                  text: `Bol. 0.0`,
                   alignment: "right",
                 },
               ],
@@ -421,7 +420,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${this.pago.costoInteres}`,
+                  text: `Bol. 0.0`,
                   alignment: "right",
                 },
               ],
@@ -435,7 +434,7 @@ export class PdfPagoComponent implements OnInit {
                 },
                 {},
                 {
-                  text: `Bol. ${this.pago.costoAdministracion}`,
+                  text: `Bol. 0.0`,
                   alignment: "right",
                 },
               ],
@@ -448,7 +447,7 @@ export class PdfPagoComponent implements OnInit {
                   colSpan: 2,
                 },
                 {},
-                { text: `Bol. ${this.pago.costoPiso}`, alignment: "right" },
+                { text: `Bol. 0.0`, alignment: "right" },
               ],
               [
                 { text: "", alignment: "center" },
@@ -459,14 +458,12 @@ export class PdfPagoComponent implements OnInit {
                   colSpan: 2,
                 },
                 {},
-                { text: `Bol. ${this.prestamo.costoPrestamo}`, alignment: "right" },
+                { text: `Bol. 0.0`, alignment: "right" },
               ],
               [
-                { text: "Prenda", fontSize: 10, alignment: "center" },
+                { text: "Concepto", fontSize: 10, alignment: "center" },
                 {
-                  text: `${this.prestamo.inventario.map(
-                    (i) => i.descripcion + " "
-                  )}`,
+                  text: `${this.movimiento.concepto}`,
                   fontSize: 10,
                   alignment: "left",
                   colSpan: 2,
@@ -485,7 +482,7 @@ export class PdfPagoComponent implements OnInit {
                 {},
                 {},
                 {
-                  text: `Bol. ${this.pago.costoTotal}`,
+                  text: `Bol. ${this.movimiento.cantidad}`,
                   alignment: "right",
                   bold: true,
                 },
@@ -525,6 +522,6 @@ export class PdfPagoComponent implements OnInit {
       },
     };
 
-    pdfMake.createPdf(pago).open();
+    pdfMake.createPdf(movimiento).open();
   }
 }

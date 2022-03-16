@@ -48,6 +48,8 @@
                         {{ inv.descripcion }} {{ inv.marca }} {{ inv.modelo }} {{ inv.placa }}
                     </p>
                   </div>
+                  <p class="text-xl font-medium text-gray-500 truncate dark:text-white"
+                    *ngIf="+prestamo.inventarioCantidad > 3"> +({{ +prestamo.inventarioCantidad - 3 }}) </p>
                   <p class="text-xl font-medium text-gray-500 truncate dark:text-white">
                     {{ prestamo.fechaInicio | date:'mediumDate' }} - {{ prestamo.fechaFinal | date:'mediumDate' }}
                   </p>

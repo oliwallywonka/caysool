@@ -2052,7 +2052,7 @@
             descripcion: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].required({
               message: this.errorMessages.required
             }), _rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({
-              value: 70,
+              value: 200,
               message: this.errorMessages.maxLenght
             })]],
             observacion: ['', [_rxweb_reactive_form_validators__WEBPACK_IMPORTED_MODULE_3__["RxwebValidators"].maxLength({

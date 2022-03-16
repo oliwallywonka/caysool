@@ -176,6 +176,136 @@
     },
 
     /***/
+    "Tutu":
+    /*!**************************************************!*\
+      !*** ./src/app/core/services/reporte.service.ts ***!
+      \**************************************************/
+
+    /*! exports provided: ReporteService */
+
+    /***/
+    function Tutu(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ReporteService", function () {
+        return ReporteService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ../../../environments/environment */
+      "AytR");
+
+      var ReporteService = /*#__PURE__*/function () {
+        function ReporteService(http) {
+          _classCallCheck(this, ReporteService);
+
+          this.http = http;
+          this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].baseUrl;
+        }
+
+        _createClass(ReporteService, [{
+          key: "getPrestamosByDate",
+          value: function getPrestamosByDate(_ref3) {
+            var from = _ref3.from,
+                to = _ref3.to,
+                estado = _ref3.estado;
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.http.get("".concat(this.baseUrl, "/reporte/prestamo?from=").concat(from, "&to=").concat(to, "&estado=").concat(estado), {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getPagosByDate",
+          value: function getPagosByDate(_ref4) {
+            var from = _ref4.from,
+                to = _ref4.to;
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.http.get("".concat(this.baseUrl, "/reporte/pago?from=").concat(from, "&to=").concat(to), {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getImpresionesByDate",
+          value: function getImpresionesByDate(_ref5) {
+            var from = _ref5.from,
+                to = _ref5.to;
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.http.get("".concat(this.baseUrl, "/reporte/impresion?from=").concat(from, "&to=").concat(to), {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getInventarioByDate",
+          value: function getInventarioByDate(_ref6) {
+            var from = _ref6.from,
+                to = _ref6.to;
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.http.get("".concat(this.baseUrl, "/reporte/inventario?from=").concat(from, "&to=").concat(to), {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getTransaccionByDate",
+          value: function getTransaccionByDate(_ref7) {
+            var from = _ref7.from,
+                to = _ref7.to;
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.http.get("".concat(this.baseUrl, "/reporte/transaccion?from=").concat(from, "&to=").concat(to), {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getIngresoSalidaByDate",
+          value: function getIngresoSalidaByDate(_ref8) {
+            var from = _ref8.from,
+                to = _ref8.to;
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
+            return this.http.get("".concat(this.baseUrl, "/reporte/movimiento?from=").concat(from, "&to=").concat(to), {
+              headers: headers
+            });
+          }
+        }]);
+
+        return ReporteService;
+      }();
+
+      ReporteService.ctorParameters = function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+        }];
+      };
+
+      ReporteService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], ReporteService);
+      /***/
+    },
+
+    /***/
     "U31Y":
     /*!***************************************************!*\
       !*** ./src/app/core/services/prestamo.service.ts ***!
@@ -239,15 +369,15 @@
 
         _createClass(PrestamoService, [{
           key: "getPrestamos",
-          value: function getPrestamos(_ref3) {
-            var _ref3$clientCi = _ref3.clientCi,
-                clientCi = _ref3$clientCi === void 0 ? '' : _ref3$clientCi,
-                _ref3$estadoPrestamo = _ref3.estadoPrestamo,
-                estadoPrestamo = _ref3$estadoPrestamo === void 0 ? '' : _ref3$estadoPrestamo,
-                _ref3$page = _ref3.page,
-                page = _ref3$page === void 0 ? 1 : _ref3$page,
-                _ref3$force = _ref3.force,
-                force = _ref3$force === void 0 ? false : _ref3$force;
+          value: function getPrestamos(_ref9) {
+            var _ref9$clientCi = _ref9.clientCi,
+                clientCi = _ref9$clientCi === void 0 ? '' : _ref9$clientCi,
+                _ref9$estadoPrestamo = _ref9.estadoPrestamo,
+                estadoPrestamo = _ref9$estadoPrestamo === void 0 ? '' : _ref9$estadoPrestamo,
+                _ref9$page = _ref9.page,
+                page = _ref9$page === void 0 ? 1 : _ref9$page,
+                _ref9$force = _ref9.force,
+                force = _ref9$force === void 0 ? false : _ref9$force;
             var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('x-access-token', sessionStorage.getItem('token') || '');
 
             if (force || !this.cacheResponse$) {
@@ -319,6 +449,231 @@
         providedIn: 'root'
       })], PrestamoService);
       /***/
+    },
+
+    /***/
+    "mHh0":
+    /*!*******************************************!*\
+      !*** ./src/app/helpers/numberToLetter.ts ***!
+      \*******************************************/
+
+    /*! exports provided: numeroALetras */
+
+    /***/
+    function mHh0(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "numeroALetras", function () {
+        return numeroALetras;
+      });
+
+      var numeroALetras = function () {
+        // Código basado en https://gist.github.com/alfchee/e563340276f89b22042a
+        function Unidades(num) {
+          switch (num) {
+            case 1:
+              return 'UN';
+
+            case 2:
+              return 'DOS';
+
+            case 3:
+              return 'TRES';
+
+            case 4:
+              return 'CUATRO';
+
+            case 5:
+              return 'CINCO';
+
+            case 6:
+              return 'SEIS';
+
+            case 7:
+              return 'SIETE';
+
+            case 8:
+              return 'OCHO';
+
+            case 9:
+              return 'NUEVE';
+          }
+
+          return '';
+        } //Unidades()
+
+
+        function Decenas(num) {
+          var decena = Math.floor(num / 10);
+          var unidad = num - decena * 10;
+
+          switch (decena) {
+            case 1:
+              switch (unidad) {
+                case 0:
+                  return 'DIEZ';
+
+                case 1:
+                  return 'ONCE';
+
+                case 2:
+                  return 'DOCE';
+
+                case 3:
+                  return 'TRECE';
+
+                case 4:
+                  return 'CATORCE';
+
+                case 5:
+                  return 'QUINCE';
+
+                default:
+                  return 'DIECI' + Unidades(unidad);
+              }
+
+            case 2:
+              switch (unidad) {
+                case 0:
+                  return 'VEINTE';
+
+                default:
+                  return 'VEINTI' + Unidades(unidad);
+              }
+
+            case 3:
+              return DecenasY('TREINTA', unidad);
+
+            case 4:
+              return DecenasY('CUARENTA', unidad);
+
+            case 5:
+              return DecenasY('CINCUENTA', unidad);
+
+            case 6:
+              return DecenasY('SESENTA', unidad);
+
+            case 7:
+              return DecenasY('SETENTA', unidad);
+
+            case 8:
+              return DecenasY('OCHENTA', unidad);
+
+            case 9:
+              return DecenasY('NOVENTA', unidad);
+
+            case 0:
+              return Unidades(unidad);
+          }
+        } //Unidades()
+
+
+        function DecenasY(strSin, numUnidades) {
+          if (numUnidades > 0) return strSin + ' Y ' + Unidades(numUnidades);
+          return strSin;
+        } //DecenasY()
+
+
+        function Centenas(num) {
+          var centenas = Math.floor(num / 100);
+          var decenas = num - centenas * 100;
+
+          switch (centenas) {
+            case 1:
+              if (decenas > 0) return 'CIENTO ' + Decenas(decenas);
+              return 'CIEN';
+
+            case 2:
+              return 'DOSCIENTOS ' + Decenas(decenas);
+
+            case 3:
+              return 'TRESCIENTOS ' + Decenas(decenas);
+
+            case 4:
+              return 'CUATROCIENTOS ' + Decenas(decenas);
+
+            case 5:
+              return 'QUINIENTOS ' + Decenas(decenas);
+
+            case 6:
+              return 'SEISCIENTOS ' + Decenas(decenas);
+
+            case 7:
+              return 'SETECIENTOS ' + Decenas(decenas);
+
+            case 8:
+              return 'OCHOCIENTOS ' + Decenas(decenas);
+
+            case 9:
+              return 'NOVECIENTOS ' + Decenas(decenas);
+          }
+
+          return Decenas(decenas);
+        } //Centenas()
+
+
+        function Seccion(num, divisor, strSingular, strPlural) {
+          var cientos = Math.floor(num / divisor);
+          var resto = num - cientos * divisor;
+          var letras = '';
+          if (cientos > 0) if (cientos > 1) letras = Centenas(cientos) + ' ' + strPlural;else letras = strSingular;
+          if (resto > 0) letras += '';
+          return letras;
+        } //Seccion()
+
+
+        function Miles(num) {
+          var divisor = 1000;
+          var cientos = Math.floor(num / divisor);
+          var resto = num - cientos * divisor;
+          var strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
+          var strCentenas = Centenas(resto);
+          if (strMiles == '') return strCentenas;
+          return strMiles + ' ' + strCentenas;
+        } //Miles()
+
+
+        function Millones(num) {
+          var divisor = 1000000;
+          var cientos = Math.floor(num / divisor);
+          var resto = num - cientos * divisor;
+          var strMillones = Seccion(num, divisor, 'UN MILLON DE', 'MILLONES DE');
+          var strMiles = Miles(resto);
+          if (strMillones == '') return strMiles;
+          return strMillones + ' ' + strMiles;
+        } //Millones()
+
+
+        return function NumeroALetras(num, currency) {
+          currency = currency || {};
+          var data = {
+            numero: num,
+            enteros: Math.floor(num),
+            centavos: Math.round(num * 100) - Math.floor(num) * 100,
+            letrasCentavos: '',
+            letrasMonedaPlural: currency.plural || 'PESOS CHILENOS',
+            letrasMonedaSingular: currency.singular || 'PESO CHILENO',
+            letrasMonedaCentavoPlural: currency.centPlural || 'CHIQUI PESOS CHILENOS',
+            letrasMonedaCentavoSingular: currency.centSingular || 'CHIQUI PESO CHILENO'
+          };
+
+          if (data.centavos > 0) {
+            data.letrasCentavos = 'CON ' + function () {
+              if (data.centavos == 1) return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;else return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+            }();
+          }
+
+          ;
+          if (data.enteros == 0) return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+          if (data.enteros == 1) return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;else return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+        };
+      }();
+      /***/
+
     }
   }]);
 })();
