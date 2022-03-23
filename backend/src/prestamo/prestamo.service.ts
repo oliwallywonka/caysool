@@ -78,6 +78,7 @@ export class PrestamoService {
         createdAt: 'DESC',
       },
     });
+    console.log(new Date().toLocaleTimeString());
     return pag;
   }
 

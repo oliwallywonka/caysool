@@ -31,7 +31,8 @@ export class PdfCompraVentaDolarComponent implements OnInit {
     private datePipe: DatePipe
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   subscribeBusiness() {
     this.businessService.business.subscribe(
@@ -44,6 +45,7 @@ export class PdfCompraVentaDolarComponent implements OnInit {
   }
 
   exportToPdf() {
+    console.log(this.from, this.to);
     let dolaresDisponibles = 0;
     let totalCompras = 0;
     let totalVentas = 0;

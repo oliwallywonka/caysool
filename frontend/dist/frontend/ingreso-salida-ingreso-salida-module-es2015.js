@@ -118,7 +118,8 @@ let PdfCompraVentaDolarComponent = class PdfCompraVentaDolarComponent {
         this.transacciones = [];
         this.business = this.businessService.businessInformation;
     }
-    ngOnInit() { }
+    ngOnInit() {
+    }
     subscribeBusiness() {
         this.businessService.business.subscribe((business) => {
             if (business) {
@@ -127,6 +128,7 @@ let PdfCompraVentaDolarComponent = class PdfCompraVentaDolarComponent {
         });
     }
     exportToPdf() {
+        console.log(this.from, this.to);
         let dolaresDisponibles = 0;
         let totalCompras = 0;
         let totalVentas = 0;
@@ -1567,10 +1569,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_card_dolar_list_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./card-dolar-list.component.html */ "liSi");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/core/services/business.service */ "cwzI");
-/* harmony import */ var src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/core/services/reporte.service */ "Tutu");
-/* harmony import */ var src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/transaccionMoneda.service */ "/lIq");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "wd/R");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/core/services/business.service */ "cwzI");
+/* harmony import */ var src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/reporte.service */ "Tutu");
+/* harmony import */ var src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/core/services/transaccionMoneda.service */ "/lIq");
+
 
 
 
@@ -1585,11 +1590,11 @@ let CardDolarListComponent = class CardDolarListComponent {
         this.businessService = businessService;
         this.loading = false;
         this.transacciones = [];
-        this.today = new Date().toISOString().substring(0, 10);
+        this.today = new Date(moment__WEBPACK_IMPORTED_MODULE_3__(Date.now()).subtract(4, 'hours').toISOString()).toISOString().substring(0, 10);
         this.business = this.businessService.businessInformation;
     }
     ngOnInit() {
-        this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subscription"]();
+        this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subscription"]();
         this.getTransacciones();
         this.subcriptionTransacciones();
         this.subcriptionBusiness();
@@ -1643,9 +1648,9 @@ let CardDolarListComponent = class CardDolarListComponent {
     }
 };
 CardDolarListComponent.ctorParameters = () => [
-    { type: src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_6__["TransaccionMonedaService"] },
-    { type: src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_5__["ReporteService"] },
-    { type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_4__["BusinessService"] }
+    { type: src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_7__["TransaccionMonedaService"] },
+    { type: src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_6__["ReporteService"] },
+    { type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_5__["BusinessService"] }
 ];
 CardDolarListComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { BusinessService } from 'src/app/core/services/business.service';
 import { ReporteService } from 'src/app/core/services/reporte.service';
@@ -15,7 +16,7 @@ import { TransaccionMoneda, TransaccionMonedaResponse } from 'src/app/interfaces
 export class CardDolarListComponent implements OnInit, OnDestroy {
   loading = false;
   transacciones: TransaccionMoneda[] = [];
-  today = new Date().toISOString().substring(0, 10);
+  today = new Date(moment(Date.now()).subtract(4, 'hours').toISOString()).toISOString().substring(0, 10);
   sub: Subscription;
   response: TransaccionMonedaResponse;
   business: Business = this.businessService.businessInformation;

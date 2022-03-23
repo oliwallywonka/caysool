@@ -45,7 +45,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
     this.prestamoId = this.route.snapshot.paramMap.get('prestamoId');
     this.historialArray = [];
     this.getPrestamoById();
-    this.getPagosByPrestamoId();
+    //this.getPagosByPrestamoId();
     this.getImpresionByPrestamoId();
     this.subscribePagos();
     this.subscribeImpresiones();
@@ -70,6 +70,7 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
           this.prestamo = prestamo;
           this.calculateDiasRestantes();
           this.setHistorialPrestamo();
+          this.getPagosByPrestamoId();
         }
       )
     );
@@ -102,7 +103,9 @@ export class CardPrestamoDetalleComponent implements OnInit, OnDestroy {
       this.pagoService.getByPrestamoId(+this.prestamoId).subscribe(
         pagos => {
           this.pagos = pagos;
-          this.setHistorialPago();
+          if (this.pagos) {
+            this.setHistorialPago();
+          }
         }
       )
     );

@@ -1069,8 +1069,8 @@
             this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subscription"]();
             this.prestamoId = this.route.snapshot.paramMap.get('prestamoId');
             this.historialArray = [];
-            this.getPrestamoById();
-            this.getPagosByPrestamoId();
+            this.getPrestamoById(); //this.getPagosByPrestamoId();
+
             this.getImpresionByPrestamoId();
             this.subscribePagos();
             this.subscribeImpresiones();
@@ -1100,6 +1100,8 @@
               _this7.calculateDiasRestantes();
 
               _this7.setHistorialPrestamo();
+
+              _this7.getPagosByPrestamoId();
             }));
           }
         }, {
@@ -1133,7 +1135,9 @@
             this.sub.add(this.pagoService.getByPrestamoId(+this.prestamoId).subscribe(function (pagos) {
               _this8.pagos = pagos;
 
-              _this8.setHistorialPago();
+              if (_this8.pagos) {
+                _this8.setHistorialPago();
+              }
             }));
           }
         }, {

@@ -261,6 +261,7 @@
         }, {
           key: "exportToPdf",
           value: function exportToPdf() {
+            console.log(this.from, this.to);
             var dolaresDisponibles = 0;
             var totalCompras = 0;
             var totalVentas = 0;
@@ -2267,25 +2268,35 @@
       /* harmony import */
 
 
-      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! moment */
+      "wd/R");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! rxjs */
       "qCKp");
       /* harmony import */
 
 
-      var src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! src/app/core/services/business.service */
       "cwzI");
       /* harmony import */
 
 
-      var src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! src/app/core/services/reporte.service */
       "Tutu");
       /* harmony import */
 
 
-      var src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! src/app/core/services/transaccionMoneda.service */
       "/lIq");
 
@@ -2298,14 +2309,14 @@
           this.businessService = businessService;
           this.loading = false;
           this.transacciones = [];
-          this.today = new Date().toISOString().substring(0, 10);
+          this.today = new Date(moment__WEBPACK_IMPORTED_MODULE_3__(Date.now()).subtract(4, 'hours').toISOString()).toISOString().substring(0, 10);
           this.business = this.businessService.businessInformation;
         }
 
         _createClass(CardDolarListComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subscription"]();
+            this.sub = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subscription"]();
             this.getTransacciones();
             this.subcriptionTransacciones();
             this.subcriptionBusiness();
@@ -2388,11 +2399,11 @@
 
       CardDolarListComponent.ctorParameters = function () {
         return [{
-          type: src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_6__["TransaccionMonedaService"]
+          type: src_app_core_services_transaccionMoneda_service__WEBPACK_IMPORTED_MODULE_7__["TransaccionMonedaService"]
         }, {
-          type: src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_5__["ReporteService"]
+          type: src_app_core_services_reporte_service__WEBPACK_IMPORTED_MODULE_6__["ReporteService"]
         }, {
-          type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_4__["BusinessService"]
+          type: src_app_core_services_business_service__WEBPACK_IMPORTED_MODULE_5__["BusinessService"]
         }];
       };
 

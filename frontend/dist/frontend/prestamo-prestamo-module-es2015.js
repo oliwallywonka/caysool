@@ -821,7 +821,7 @@ let CardPrestamoDetalleComponent = class CardPrestamoDetalleComponent {
         this.prestamoId = this.route.snapshot.paramMap.get('prestamoId');
         this.historialArray = [];
         this.getPrestamoById();
-        this.getPagosByPrestamoId();
+        //this.getPagosByPrestamoId();
         this.getImpresionByPrestamoId();
         this.subscribePagos();
         this.subscribeImpresiones();
@@ -841,6 +841,7 @@ let CardPrestamoDetalleComponent = class CardPrestamoDetalleComponent {
             this.prestamo = prestamo;
             this.calculateDiasRestantes();
             this.setHistorialPrestamo();
+            this.getPagosByPrestamoId();
         }));
     }
     setHistorialPrestamo() {
@@ -867,7 +868,9 @@ let CardPrestamoDetalleComponent = class CardPrestamoDetalleComponent {
     getPagosByPrestamoId() {
         this.sub.add(this.pagoService.getByPrestamoId(+this.prestamoId).subscribe(pagos => {
             this.pagos = pagos;
-            this.setHistorialPago();
+            if (this.pagos) {
+                this.setHistorialPago();
+            }
         }));
     }
     subscribePagos() {
