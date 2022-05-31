@@ -217,7 +217,7 @@
               }, {
                 columns: [{
                   width: 150,
-                  text: ["CEL:78857480 - 78857480\n", 'Urb. 21 de octubre "A" Dist. 7 Ex Tranca San Roque Av. Panamericana Nro 3174 Entre calle Gral. juan Jose Torrez\n', "El Alto-La Paz-Bolivia\n"],
+                  text: ["CEL: ".concat(this.business.phone, "\n"), "".concat(this.business.direction, "\n"), "El Alto-La Paz-Bolivia\n"],
                   fontSize: 8,
                   alignment: "center",
                   margin: [0, 0, 0, 0]
