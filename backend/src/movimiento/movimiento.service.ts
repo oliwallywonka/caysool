@@ -2,7 +2,6 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 import { Apertura } from 'src/apertura/entities/apertura.entity';
 import { AuditService } from 'src/audit/audit.service';
-import { Inventario } from 'src/inventario/entities/inventario.entity';
 import { CreateMovimientoDto } from './dto/create-movimiento.dto';
 import { UpdateMovimientoDto } from './dto/update-movimiento.dto';
 import { Movimiento } from './entities/movimiento.entity';
@@ -20,6 +19,7 @@ export class MovimientoService {
     const movimiento = Movimiento.create(createMovimientoDto);
     const movimientoSaved = await movimiento.save();
     await apertura.calculateMontoActual();
+    await apertura.save();
     this.auditService.audit({
       action: 'Se Creo un nuevo registro',
       auditTable: 'MOVIMIENTOCAJA',
