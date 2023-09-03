@@ -12,11 +12,12 @@ services:
       - 49153:49153
 
     container_name: frontend
-    volumes:
-      - ./frontend:/frontend
-      - /frontend/node_modules
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+    # volumes:
+    #   - ./frontend:/frontend
+    #   - /frontend/node_modules
+    #   - /etc/timezone:/etc/timezone:ro
+    #   - /etc/localtime:/etc/localtime:ro
+    image: caysool_backend:latest
     restart: always
 
   backend:
@@ -28,11 +29,12 @@ services:
     ports:
       - 3000:3000
     container_name: backend
-    volumes:
-      - ./backend:/backend
-      - /backend/node_modules
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+    # volumes:
+    #   - ./backend:/backend
+    #   - /backend/node_modules
+    #   - /etc/timezone:/etc/timezone:ro
+    #   - /etc/localtime:/etc/localtime:ro
+    image: caysool_frontend:latest
     restart: always
     environment:
       - TIME_ZONE=America/La_Paz
