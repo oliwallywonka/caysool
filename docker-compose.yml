@@ -2,11 +2,11 @@ version: "3.9"
 services:
   
   frontend:
-    env_file:
-      - ./.env
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
+    # env_file:
+    #   - ./.env
+    # build: 
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
     ports:
       - 4200:80
       - 49153:49153
@@ -17,15 +17,15 @@ services:
     #   - /frontend/node_modules
     #   - /etc/timezone:/etc/timezone:ro
     #   - /etc/localtime:/etc/localtime:ro
-    image: caysool_backend:latest
+    image: wonka56/caysool_frontend:latest
     restart: always
 
   backend:
-    env_file:
-      - ./.env
+    # env_file:
+    #   - ./.env
     depends_on:
       - mysql
-    build: backend
+    # build: backend
     ports:
       - 3000:3000
     container_name: backend
@@ -34,7 +34,7 @@ services:
     #   - /backend/node_modules
     #   - /etc/timezone:/etc/timezone:ro
     #   - /etc/localtime:/etc/localtime:ro
-    image: caysool_frontend:latest
+    image: wonka56/caysool_backend:latest
     restart: always
     environment:
       - TIME_ZONE=America/La_Paz
